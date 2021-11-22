@@ -83,6 +83,12 @@ export const Typography14SemiBold = css`
   line-height: 1.14;
 `;
 
+export const Typography14Regular = css`
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.14;
+`;
+
 export const Typography12SemiBold = css`
   font-size: 0.75rem;
   font-weight: 600;

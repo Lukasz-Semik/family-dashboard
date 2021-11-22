@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import {
   dsStyles,
+  Typography14Regular,
   Typography14SemiBold,
   Typography16Regular,
   Typography16SemiBold,
-  Typography20Regular,
   Typography24Black,
   Typography32Black,
   Typography40Black,
@@ -74,7 +74,7 @@ export const StyledInnerWrapper = styled.div`
   animation: ${animation} 1s ease-in-out forwards;
 
   @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
-    width: 32rem;
+    width: 30rem;
     padding: 0;
   }
 `;
@@ -106,8 +106,9 @@ export const StyledSignUpLink = styled(Link)`
   ${Typography14SemiBold};
   color: ${dsStyles.colors.violet2};
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 1.25rem;
+  outline: none;
 
   &:hover,
   &:focus {
@@ -122,13 +123,15 @@ export const StyledSignUpLink = styled(Link)`
 `;
 
 export const StyledDescription = styled.p`
-  ${Typography16Regular};
+  ${Typography14Regular};
   color: ${dsStyles.colors.violet3};
   margin-bottom: 2rem;
   text-align: center;
 
   @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
-    ${Typography20Regular};
+    ${Typography16Regular};
+    top: 1rem;
+    right: 1rem;
   }
 `;
 
@@ -170,6 +173,7 @@ export const StyledForgotPasswordLink = styled(Link)`
   ${Typography16Regular}
   color: ${dsStyles.colors.blue1};
   text-align: center;
+  outline: none;
 
   &:hover,
   &:focus {
