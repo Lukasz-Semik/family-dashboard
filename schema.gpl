@@ -1,0 +1,88 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type FamilyDto {
+  id: ID!
+  name: String!
+}
+
+type VerifyEmailDto {
+  status: CTCTVerifyEmailResponseStatus!
+  inviterName: String
+}
+
+"""
+Status information according to existence of invitation or user during sing up
+"""
+enum CTCTVerifyEmailResponseStatus {
+  Success
+  Invited
+  Deprecated
+  SignUpNotFinished
+  AlreadyCreated
+}
+
+type LoginDto {
+  accessToken: String!
+}
+
+type CurrentUserDto {
+  id: ID!
+  email: String!
+  firstName: String!
+  middleName: String!
+  lastName: String!
+  dob: DateTime!
+  gender: CTGender!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""User's gender"""
+enum CTGender {
+  Male
+  Female
+  Other
+}
+
+type InitialAppStateDto {
+  currentUser: CurrentUserDto!
+  family: FamilyDto!
+}
+
+type Query {
+  verifySignUpEmail(email: String!): VerifyEmailDto!
+  getUserInitialAppState: InitialAppStateDto!
+}
+
+type Mutation {
+  createSignUpInvitation(input: CreateInvitationInput!): Boolean!
+  confirmSignUpInvitation(input: CTConfirmInvitationInput!): Boolean!
+  login(password: String!, email: String!): LoginDto!
+}
+
+input CreateInvitationInput {
+  email: String!
+  inviterName: String!
+  firstName: String
+  middleName: String
+  lastName: String
+  dob: DateTime
+  gender: CTGender
+}
+
+input CTConfirmInvitationInput {
+  email: String!
+  password: String!
+  firstName: String!
+  middleName: String
+  lastName: String!
+  dob: DateTime!
+  gender: CTGender!
+  code: String!
+  familyName: String!
+}

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "projects": {
+    "common-types": "libs/common-types",
+    "dashboard-client": "apps/dashboard-client",
+    "dashboard-client-e2e": "apps/dashboard-client-e2e",
+    "dashboard-server": "apps/dashboard-server",
+    "design-system": "libs/design-system"
+  }
+}

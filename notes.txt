@@ -1,0 +1,6 @@
+User SignUp:
+- check e-mail
+- fill form
+- send mail with code (create invitation) (invitation has nullable values from user except first name and email + validTo)
+- confirm invitation by code - send request to create user and remove invitation
+- can login

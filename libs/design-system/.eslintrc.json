@@ -1,0 +1,35 @@
+{
+  "extends": ["plugin:@nrwl/nx/react", "../../.eslintrc.json"],
+  "ignorePatterns": ["!**/*"],
+  "plugins": ["simple-import-sort", "family-dashboard"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "family-dashboard/styled-prefix": 2,
+    "simple-import-sort/imports": [
+      1,
+      {
+        "groups": [
+          ["^\\u0000"],
+          ["^react", "^@?\\w"],
+          ["^(src/components)(/.*|$)"],
+          ["^\\."]
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "rules": {}
+    }
+  ]
+}
