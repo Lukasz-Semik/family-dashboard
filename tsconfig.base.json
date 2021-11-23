@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dashboard-client/*": [
+        "apps/dashboard-client/src/*"
+      ],
+      "@dashboard-server/*": [
+        "apps/dashboard-server/src/*"
+      ],
       "@family-dashboard/common-types": ["libs/common-types/src/index.ts"],
       "@family-dashboard/design-system": ["libs/design-system/src/index.ts"]
     }

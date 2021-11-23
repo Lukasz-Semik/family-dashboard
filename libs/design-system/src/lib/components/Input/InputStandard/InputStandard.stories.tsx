@@ -50,8 +50,7 @@ InputStandardWithIconAndError.args = {
       <IconEmail />
     </WrapperIconFormControl>
   ),
-  renderError: (renderProps) => {
-    console.log(renderProps);
-    return <ErrorMessage isVisible={renderProps.hasError}>Error</ErrorMessage>;
-  },
+  renderError: (renderProps) => (
+    <ErrorMessage isVisible={renderProps.hasError}>Error</ErrorMessage>
+  ),
 };

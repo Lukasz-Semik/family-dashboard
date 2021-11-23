@@ -1,8 +1,9 @@
-import {
-  CTVerifyEmailResponse,
-  CTCTVerifyEmailResponseStatus,
-} from '@family-dashboard/common-types';
 import { Field, ObjectType } from '@nestjs/graphql';
+
+import {
+  CTCTVerifyEmailResponseStatus,
+  CTVerifyEmailResponse,
+} from '@family-dashboard/common-types';
 
 @ObjectType()
 export class VerifyEmailDto implements CTVerifyEmailResponse {

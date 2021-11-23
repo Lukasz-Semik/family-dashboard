@@ -90,7 +90,7 @@ export const StyledForm = styled.form`
   }
 `;
 
-export const StyledTitle = styled.h2`
+export const StyledFormTitle = styled.h2`
   ${Typography24Black};
   color: ${dsStyles.colors.orange4};
   text-align: center;

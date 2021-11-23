@@ -8,6 +8,7 @@
     "test": "nx test",
     "generate": "nx generate",
     "storybook": "nx storybook",
+    "lint": "nx lint",
     "typeorm": "ts-node --transpile-only -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ./apps/dashboard-server/src/ormconfig.ts",
     "typeorm:migrate": "npm run typeorm migration:generate -- -n",
     "typeorm:run": "npm run typeorm migration:run",
@@ -16,6 +17,7 @@
   },
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.5.4",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/graphql": "^9.1.1",
