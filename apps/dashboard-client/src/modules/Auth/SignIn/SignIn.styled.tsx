@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
+
 import {
   dsStyles,
   Typography14Regular,
@@ -9,7 +11,6 @@ import {
   Typography32Black,
   Typography40Black,
 } from '@family-dashboard/design-system';
-import styled, { keyframes } from 'styled-components';
 
 export const StyledHeader = styled.header`
   box-sizing: border-box;

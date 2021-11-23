@@ -1,4 +1,3 @@
-import { CTCTVerifyEmailResponseStatus } from '@family-dashboard/common-types';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcryptjs';
@@ -6,16 +5,18 @@ import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
 import { Repository } from 'typeorm';
 
-import { FamilyEntity } from '@dashboard-server/entities/family.entity';
-import { InvitationEntity } from '@dashboard-server/entities/invitation.entity';
-import { UserEntity } from '@dashboard-server/entities/user.entity';
-import { throwError } from '@dashboard-server/helpers/throwError';
-import { generateNumericCode } from '@dashboard-server/helpers/utils';
+import { CTCTVerifyEmailResponseStatus } from '@family-dashboard/common-types';
+
+import { FamilyEntity } from '../../entities/family.entity';
+import { InvitationEntity } from '../../entities/invitation.entity';
+import { UserEntity } from '../../entities/user.entity';
+import { throwError } from '../../helpers/throwError';
+import { generateNumericCode } from '../../helpers/utils';
 import {
   CreateInvitationInput,
   CTConfirmInvitationInput,
   VerifyEmailDto,
-} from '@dashboard-server/schema';
+} from '../../schema';
 
 dayjs.extend(utc);
 

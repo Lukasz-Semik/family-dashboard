@@ -1,12 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { InvitationEntity } from '@dashboard-server/entities/invitation.entity';
+import { InvitationEntity } from '../../entities/invitation.entity';
 import {
   CreateInvitationInput,
   CTConfirmInvitationInput,
   VerifyEmailDto,
-} from '@dashboard-server/schema';
-
+} from '../../schema';
 import { InvitationService } from './invitation.service';
 
 @Resolver(() => InvitationEntity)

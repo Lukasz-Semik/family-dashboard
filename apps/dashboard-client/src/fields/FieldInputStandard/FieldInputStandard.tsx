@@ -1,9 +1,10 @@
+import { FieldConfig } from 'formik';
+
 import {
   ErrorMessage,
   InputProps,
   InputStandard,
 } from '@family-dashboard/design-system';
-import { FieldConfig } from 'formik';
 
 import { useFieldInput } from '../hooks/useFieldInput';
 

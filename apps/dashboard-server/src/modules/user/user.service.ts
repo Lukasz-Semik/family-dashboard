@@ -1,13 +1,14 @@
-import { CTGender } from '@family-dashboard/common-types';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { UserEntity } from '@dashboard-server/entities/user.entity';
-import { throwError } from '@dashboard-server/helpers/throwError';
-import { InitialAppStateDto } from '@dashboard-server/schema';
-import { serializeFamily } from '@dashboard-server/serializators/family.serializator';
-import { serializeCurrentUser } from '@dashboard-server/serializators/user.serializator';
+import { CTGender } from '@family-dashboard/common-types';
+
+import { UserEntity } from '../../entities/user.entity';
+import { throwError } from '../../helpers/throwError';
+import { InitialAppStateDto } from '../../schema';
+import { serializeFamily } from '../../serializators/family.serializator';
+import { serializeCurrentUser } from '../../serializators/user.serializator';
 
 @Injectable()
 export class UserService {

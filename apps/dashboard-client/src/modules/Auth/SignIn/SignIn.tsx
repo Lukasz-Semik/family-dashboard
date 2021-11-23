@@ -1,13 +1,13 @@
+import { Formik } from 'formik';
+
 import {
   ButtonStandard,
   IconEmail,
   WrapperIconFormControl,
 } from '@family-dashboard/design-system';
-import { Formik } from 'formik';
 
-import { FieldInputSecurity } from '@dashboard-client/fields/FieldInputSecurity/FieldInputSecurity';
-import { FieldInputStandard } from '@dashboard-client/fields/FieldInputStandard/FieldInputStandard';
-
+import { FieldInputSecurity } from '../../../fields/FieldInputSecurity/FieldInputSecurity';
+import { FieldInputStandard } from '../../../fields/FieldInputStandard/FieldInputStandard';
 import {
   StyledButtonWrapper,
   StyledDescription,

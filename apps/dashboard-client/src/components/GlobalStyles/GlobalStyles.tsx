@@ -1,5 +1,6 @@
-import { dsStyles } from '@family-dashboard/design-system';
 import { createGlobalStyle } from 'styled-components';
+
+import { dsStyles } from '@family-dashboard/design-system';
 
 export const GlobalStyles = createGlobalStyle`
   * {

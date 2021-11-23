@@ -1,6 +1,6 @@
 import { useLazyQuery, useQuery } from '@apollo/client';
 
-import { GetUserInitialAppState } from '@dashboard-client/api/queries/user';
+import { GetUserInitialAppState } from '../../api/queries/user';
 
 export function Dashboard() {
   const { data } = useQuery(GetUserInitialAppState, {
