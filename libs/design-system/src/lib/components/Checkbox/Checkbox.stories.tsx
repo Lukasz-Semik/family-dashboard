@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/react';
 
 import { StyledWrapper } from '../Stories.styled';
-// import { ButtonProps } from '../Button.types';
 import { Checkbox as CheckboxComponent } from './Checkbox';
 import { CheckboxProps } from './Checkbox.types';
 

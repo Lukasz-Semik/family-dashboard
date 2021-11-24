@@ -1,3 +1,4 @@
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Formik } from 'formik';
 
 import {
@@ -11,11 +12,12 @@ import {
   FieldInputStandard,
 } from '@family-dashboard/form-controls';
 
+import { routes } from '../../routing/routes';
 import {
   combineValidators,
   validateEmail,
   validateRequired,
-} from '../../../validators/validators';
+} from '../../validators/validators';
 import {
   StyledButtonWrapper,
   StyledDescription,
@@ -40,6 +42,7 @@ interface Values {
 
 export function SignIn() {
   const { onSubmit } = useSignIn();
+  const intl = useIntl();
 
   return (
     <StyledWrapper>
@@ -49,7 +52,9 @@ export function SignIn() {
 
       <FadeInWrapper>
         <StyledInnerWrapper>
-          <StyledSignUpLink to="">Sign Up</StyledSignUpLink>
+          <StyledSignUpLink to={routes.signUpRoute()}>
+            <FormattedMessage id="auth.signUp.title" />
+          </StyledSignUpLink>
 
           <Formik<Values>
             initialValues={{ email: '', password: '' }}
@@ -57,22 +62,27 @@ export function SignIn() {
           >
             {({ handleSubmit }) => (
               <StyledForm onSubmit={handleSubmit}>
-                <StyledFormTitle>Sign In</StyledFormTitle>
+                <StyledFormTitle>
+                  <FormattedMessage id="auth.signIn.title" />
+                </StyledFormTitle>
 
                 <StyledDescription>
-                  Family dashboard app - the best way to organize your family
-                  stuff, save time and spent it on whatever you want to.
+                  <FormattedMessage id="auth.signIn.description" />
                 </StyledDescription>
 
                 <StyledEmailFieldWrapper>
                   <FieldInputStandard
                     autoFocus
                     name="email"
-                    label="Email"
-                    placeholder="Your eamil address"
+                    label={<FormattedMessage id="fields.email.label" />}
+                    placeholder={intl.formatMessage({
+                      id: 'fields.email.label',
+                    })}
                     validate={combineValidators(
-                      validateRequired('required'),
-                      validateEmail('email')
+                      validateRequired(
+                        <FormattedMessage id="errors.required" />
+                      ),
+                      validateEmail(<FormattedMessage id="errors.email" />)
                     )}
                     renderLeftControls={(renderProps) => (
                       <WrapperIconFormControl {...renderProps}>
@@ -85,22 +95,26 @@ export function SignIn() {
                 <StyledPasswordFieldWrapper>
                   <FieldInputSecurity
                     name="password"
-                    validate={(value: string) =>
-                      !value ? 'Required' : undefined
-                    }
-                    showText="show"
-                    hideText="hide"
-                    label="Password"
-                    placeholder="Your secret password"
+                    validate={validateRequired(
+                      <FormattedMessage id="errors.required" />
+                    )}
+                    showText={<FormattedMessage id="shared.show" />}
+                    hideText={<FormattedMessage id="shared.hide" />}
+                    label={<FormattedMessage id="fields.password.label" />}
+                    placeholder={intl.formatMessage({
+                      id: 'fields.password.placeholder',
+                    })}
                   />
                 </StyledPasswordFieldWrapper>
 
                 <StyledButtonWrapper>
-                  <ButtonStandard>Sign In</ButtonStandard>
+                  <ButtonStandard>
+                    <FormattedMessage id="auth.signIn.title" />
+                  </ButtonStandard>
                 </StyledButtonWrapper>
                 <StyledForgotPasswordLinkWrapper>
                   <StyledForgotPasswordLink to="">
-                    Forgot your password?
+                    <FormattedMessage id="auth.signIn.forgotPassword" />
                   </StyledForgotPasswordLink>
                 </StyledForgotPasswordLinkWrapper>
               </StyledForm>

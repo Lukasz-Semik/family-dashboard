@@ -1,12 +1,12 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 import {
-  CTCTVerifyEmailResponseStatus,
+  CTVerifyEmailResponseStatus,
   CTGender,
 } from '@family-dashboard/common-types';
 
-registerEnumType(CTCTVerifyEmailResponseStatus, {
-  name: 'CTCTVerifyEmailResponseStatus',
+registerEnumType(CTVerifyEmailResponseStatus, {
+  name: 'CTVerifyEmailResponseStatus',
   description:
     'Status information according to existence of invitation or user during sing up',
 });

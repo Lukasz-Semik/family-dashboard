@@ -4,8 +4,8 @@ import { useMutation } from '@apollo/client';
 import { CTLoginResponse } from '@family-dashboard/common-types';
 import { sdkSetToSessionStorage } from '@family-dashboard/sdk';
 
-import { Login } from '../../../api/mutations/login';
-import { FD_TOKEN_KEY } from '../../../constants/sessionStorageKeys';
+import { Login } from '../../api/mutations/login';
+import { FD_TOKEN_KEY } from '../../constants/sessionStorageKeys';
 
 interface Values {
   email: string;

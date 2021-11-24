@@ -1,13 +1,13 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
-  CTCTVerifyEmailResponseStatus,
+  CTVerifyEmailResponseStatus,
   CTVerifyEmailResponse,
 } from '@family-dashboard/common-types';
 
 @ObjectType()
 export class VerifyEmailDto implements CTVerifyEmailResponse {
-  @Field(() => CTCTVerifyEmailResponseStatus)
-  readonly status: CTCTVerifyEmailResponseStatus;
+  @Field(() => CTVerifyEmailResponseStatus)
+  readonly status: CTVerifyEmailResponseStatus;
   @Field(() => String, { nullable: true }) readonly inviterName?: string;
 }

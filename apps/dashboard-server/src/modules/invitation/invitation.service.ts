@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
 import { Repository } from 'typeorm';
 
-import { CTCTVerifyEmailResponseStatus } from '@family-dashboard/common-types';
+import { CTVerifyEmailResponseStatus } from '@family-dashboard/common-types';
 
 import { FamilyEntity } from '../../entities/family.entity';
 import { InvitationEntity } from '../../entities/invitation.entity';
@@ -41,7 +41,7 @@ export class InvitationService {
 
       if (existingUser) {
         return {
-          status: CTCTVerifyEmailResponseStatus.AlreadyCreated,
+          status: CTVerifyEmailResponseStatus.AlreadyCreated,
         };
       }
 
@@ -51,25 +51,25 @@ export class InvitationService {
 
       if (this.getIsInvitationDeprecated(String(existingInvitation?.validTo))) {
         return {
-          status: CTCTVerifyEmailResponseStatus.Deprecated,
+          status: CTVerifyEmailResponseStatus.Deprecated,
         };
       }
 
       if (existingInvitation?.email === email) {
         return {
-          status: CTCTVerifyEmailResponseStatus.SignUpNotFinished,
+          status: CTVerifyEmailResponseStatus.SignUpNotFinished,
         };
       }
 
       if (existingInvitation?.email) {
         return {
-          status: CTCTVerifyEmailResponseStatus.Invited,
+          status: CTVerifyEmailResponseStatus.Invited,
           inviterName: existingInvitation.inviterName,
         };
       }
 
       return {
-        status: CTCTVerifyEmailResponseStatus.Success,
+        status: CTVerifyEmailResponseStatus.Success,
       };
     } catch (err) {
       throwError(HttpStatus.INTERNAL_SERVER_ERROR, err);

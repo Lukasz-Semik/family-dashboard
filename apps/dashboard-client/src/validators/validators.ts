@@ -12,18 +12,18 @@ export function combineValidators(...validators: ValidatorBase[]) {
 }
 
 export const validateRequired =
-  (message: string) => (value: string | number | undefined | null) => {
+  (message: React.ReactNode) => (value: string | number | undefined | null) => {
     if (!sdkValidateRequired(value)) {
-      return message;
+      return message as string;
     }
 
     return undefined;
   };
 
 export const validateEmail =
-  (message: string) => (value: string | number | undefined | null) => {
+  (message: React.ReactNode) => (value: string | number | undefined | null) => {
     if (!sdkValidateEmail(value)) {
-      return message;
+      return message as string;
     }
 
     return undefined;
