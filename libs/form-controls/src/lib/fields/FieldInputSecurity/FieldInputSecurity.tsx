@@ -6,7 +6,7 @@ import {
   InputSecurityProps,
 } from '@family-dashboard/design-system';
 
-import { useFieldInput } from '../hooks/useFieldInput';
+import { useFieldInput } from '../../hooks/useFieldInput';
 
 interface Props extends InputSecurityProps {
   validate?: FieldConfig['validate'];

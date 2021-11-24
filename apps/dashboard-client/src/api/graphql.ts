@@ -28,8 +28,9 @@ import { setContext } from '@apollo/client/link/context';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 
+import { sdkGetFromSessionStorage } from '@family-dashboard/sdk';
+
 import { FD_TOKEN_KEY } from '../constants/sessionStorageKeys';
-import { getFromSessionStorage } from '../tempSessionStorage/tempSessionStorage';
 
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:3000/graphql`,
@@ -43,7 +44,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = getFromSessionStorage(FD_TOKEN_KEY);
+  const token = sdkGetFromSessionStorage(FD_TOKEN_KEY);
 
   return {
     headers: {

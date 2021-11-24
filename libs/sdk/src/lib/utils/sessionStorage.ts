@@ -1,4 +1,4 @@
-export function getFromSessionStorage<T>(key: string): T | null {
+export function sdkGetFromSessionStorage<T>(key: string): T | null {
   if (!sessionStorage) {
     return null;
   }
@@ -13,7 +13,7 @@ export function getFromSessionStorage<T>(key: string): T | null {
   return parsedItem as unknown as T;
 }
 
-export function setToSessionStorage<T>(key: string, value: T) {
+export function sdkSetToSessionStorage<T>(key: string, value: T) {
   if (!sessionStorage) {
     return null;
   }

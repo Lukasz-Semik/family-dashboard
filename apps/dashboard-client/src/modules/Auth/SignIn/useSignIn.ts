@@ -2,10 +2,10 @@ import { useHistory } from 'react-router';
 import { useMutation } from '@apollo/client';
 
 import { CTLoginResponse } from '@family-dashboard/common-types';
+import { sdkSetToSessionStorage } from '@family-dashboard/sdk';
 
 import { Login } from '../../../api/mutations/login';
 import { FD_TOKEN_KEY } from '../../../constants/sessionStorageKeys';
-import { setToSessionStorage } from '../../../tempSessionStorage/tempSessionStorage';
 
 interface Values {
   email: string;
@@ -18,7 +18,7 @@ export function useSignIn() {
   const [login] = useMutation<{ login: CTLoginResponse }, Values>(Login, {
     onCompleted: (data) => {
       if (data?.login?.accessToken) {
-        setToSessionStorage(FD_TOKEN_KEY, data?.login?.accessToken);
+        sdkSetToSessionStorage(FD_TOKEN_KEY, data?.login?.accessToken);
         history.push('/dashboard');
       }
     },

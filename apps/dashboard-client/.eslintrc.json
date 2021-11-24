@@ -13,8 +13,7 @@
           ["^\\u0000"],
           ["^react", "^@?\\w"],
           [
-            "^(@family-dashboard)(/.*|$)",
-            "^(@dashboard-client)(/.*|$)"
+            "^(@family-dashboard)(/.*|$)"
           ],
           ["^\\."]
         ]

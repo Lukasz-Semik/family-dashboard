@@ -56,23 +56,11 @@ export const StyledWrapper = styled.div`
   }
 `;
 
-const animation = keyframes`
-  from {
-    opactiy: 0
-  }
-
-  to {
-    opacity: 1
-  }
-`;
-
 export const StyledInnerWrapper = styled.div`
-  opacity: 0;
   position: relative;
   box-sizing: border-box;
   padding: 0 0.5rem;
   width: 100%;
-  animation: ${animation} 1s ease-in-out forwards;
 
   @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
     width: 30rem;
