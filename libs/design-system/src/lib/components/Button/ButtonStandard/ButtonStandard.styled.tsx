@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 import { dsStyles } from '../../../utils/styles';
-import { Typography20SemiBoldOLD } from '../../../utils/typography';
+import { Typography20Regular } from '../../../utils/typography';
 
 interface Props {
   $maxWidth?: string;
 }
 
 export const StyledButton = styled.button<Props>`
-  ${Typography20SemiBoldOLD};
+  ${Typography20Regular};
 
   position: relative;
   color: ${dsStyles.colors.white};

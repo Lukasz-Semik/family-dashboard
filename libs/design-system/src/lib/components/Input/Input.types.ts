@@ -17,6 +17,6 @@ export interface InputProps
 }
 
 export interface InputSecurityProps extends InputProps {
-  showText: string;
-  hideText: string;
+  showText: React.ReactNode;
+  hideText: React.ReactNode;
 }

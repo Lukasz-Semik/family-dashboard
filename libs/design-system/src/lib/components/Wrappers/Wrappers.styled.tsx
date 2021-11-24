@@ -1,5 +1,6 @@
-import { dsStyles } from '@family-dashboard/design-system';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+import { dsStyles } from '../../utils/styles';
 
 interface Props {
   isDisabled?: boolean;
@@ -19,4 +20,19 @@ export const StyledWrapperIconFormControl = styled.div<Props>`
   ${({ isFocused }) => isFocused && `color: ${dsStyles.colors.orange4}`};
   ${({ hasError }) => hasError && `color: ${dsStyles.colors.red1}`};
   ${({ isDisabled }) => isDisabled && `color: ${dsStyles.colors.grey2}`};
+`;
+
+const animation = keyframes`
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+`;
+
+export const StyledFadeInWrapper = styled.div`
+  opacity: 0;
+  animation: ${animation} 0.7s ease-in-out forwards;
 `;

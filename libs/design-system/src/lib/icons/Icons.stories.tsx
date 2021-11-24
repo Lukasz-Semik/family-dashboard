@@ -1,6 +1,6 @@
-import { dsStyles } from '@family-dashboard/design-system';
 import { Meta } from '@storybook/react';
 
+import { dsStyles } from '../utils/styles';
 import { IconCheckmark, IconEmail, IconSecurity } from './Icons';
 import { StyledIcon } from './Icons.styled';
 import { StyledItemsWrapper, StyledItemWrapper } from './IconStories.styled';

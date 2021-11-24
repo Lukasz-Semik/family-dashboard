@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@family-dashboard/common-types": ["libs/common-types/src/index.ts"],
-      "@family-dashboard/design-system": ["libs/design-system/src/index.ts"]
+      "@family-dashboard/design-system": ["libs/design-system/src/index.ts"],
+      "@family-dashboard/form-controls": ["libs/form-controls/src/index.ts"],
+      "@family-dashboard/sdk": ["libs/sdk/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,15 +1,16 @@
 import { Link } from 'react-router-dom';
+import styled, { keyframes } from 'styled-components';
+
 import {
   dsStyles,
+  Typography14Regular,
   Typography14SemiBold,
   Typography16Regular,
   Typography16SemiBold,
-  Typography20Regular,
   Typography24Black,
   Typography32Black,
   Typography40Black,
 } from '@family-dashboard/design-system';
-import styled, { keyframes } from 'styled-components';
 
 export const StyledHeader = styled.header`
   box-sizing: border-box;
@@ -55,26 +56,14 @@ export const StyledWrapper = styled.div`
   }
 `;
 
-const animation = keyframes`
-  from {
-    opactiy: 0
-  }
-
-  to {
-    opacity: 1
-  }
-`;
-
 export const StyledInnerWrapper = styled.div`
-  opacity: 0;
   position: relative;
   box-sizing: border-box;
   padding: 0 0.5rem;
   width: 100%;
-  animation: ${animation} 1s ease-in-out forwards;
 
   @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
-    width: 32rem;
+    width: 30rem;
     padding: 0;
   }
 `;
@@ -90,7 +79,7 @@ export const StyledForm = styled.form`
   }
 `;
 
-export const StyledTitle = styled.h2`
+export const StyledFormTitle = styled.h2`
   ${Typography24Black};
   color: ${dsStyles.colors.orange4};
   text-align: center;
@@ -106,8 +95,9 @@ export const StyledSignUpLink = styled(Link)`
   ${Typography14SemiBold};
   color: ${dsStyles.colors.violet2};
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
+  top: 0.75rem;
+  right: 1.25rem;
+  outline: none;
 
   &:hover,
   &:focus {
@@ -122,13 +112,15 @@ export const StyledSignUpLink = styled(Link)`
 `;
 
 export const StyledDescription = styled.p`
-  ${Typography16Regular};
+  ${Typography14Regular};
   color: ${dsStyles.colors.violet3};
   margin-bottom: 2rem;
   text-align: center;
 
   @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
-    ${Typography20Regular};
+    ${Typography16Regular};
+    top: 1rem;
+    right: 1rem;
   }
 `;
 
@@ -170,6 +162,7 @@ export const StyledForgotPasswordLink = styled(Link)`
   ${Typography16Regular}
   color: ${dsStyles.colors.blue1};
   text-align: center;
+  outline: none;
 
   &:hover,
   &:focus {

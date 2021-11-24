@@ -5,6 +5,8 @@
     "dashboard-client": "apps/dashboard-client",
     "dashboard-client-e2e": "apps/dashboard-client-e2e",
     "dashboard-server": "apps/dashboard-server",
-    "design-system": "libs/design-system"
+    "design-system": "libs/design-system",
+    "form-controls": "libs/form-controls",
+    "sdk": "libs/sdk"
   }
 }

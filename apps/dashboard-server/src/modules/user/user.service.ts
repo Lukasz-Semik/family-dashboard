@@ -1,7 +1,8 @@
-import { CTGender } from '@family-dashboard/common-types';
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { CTGender } from '@family-dashboard/common-types';
 
 import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';

@@ -3,7 +3,7 @@ import {
   CTUserBaseData,
 } from '@family-dashboard/common-types';
 
-export enum CTCTVerifyEmailResponseStatus {
+export enum CTVerifyEmailResponseStatus {
   Success = 'Success',
   Invited = 'Invited',
   Deprecated = 'Deprecated',
@@ -12,7 +12,7 @@ export enum CTCTVerifyEmailResponseStatus {
 }
 
 export interface CTVerifyEmailResponse {
-  status: CTCTVerifyEmailResponseStatus;
+  status: CTVerifyEmailResponseStatus;
   inviterName?: string;
 }
 
