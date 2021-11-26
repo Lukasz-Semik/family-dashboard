@@ -5,8 +5,6 @@ import { IconCheckmark, IconCrossmark, IconEmail, IconSecurity } from './Icons';
 import { StyledIcon } from './Icons.styled';
 import { StyledItemsWrapper, StyledItemWrapper } from './IconStories.styled';
 
-const Placeholder = () => <div />;
-
 export default {
   component: StyledIcon,
   title: 'Icons',

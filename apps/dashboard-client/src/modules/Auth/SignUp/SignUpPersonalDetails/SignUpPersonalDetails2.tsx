@@ -1,17 +1,13 @@
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import {
   FieldInputMasked,
-  // FieldInputStandard,
   validateFieldRequired,
 } from '@family-dashboard/form-controls';
 
 import { StyledCommonDescription } from '../SignUp.styled';
-import { StyledFieldWrapper } from './SignUpPersonalDetails.styled';
 
 export function SignUpPersonalDetails2() {
-  const intl = useIntl();
-
   return (
     <>
       <StyledCommonDescription>

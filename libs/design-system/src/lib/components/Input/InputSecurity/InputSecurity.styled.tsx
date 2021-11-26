@@ -1,7 +1,7 @@
-import { Typography12SemiBold } from '@family-dashboard/design-system';
 import styled from 'styled-components';
 
 import { dsStyles } from '../../../utils/styles';
+import { Typography12SemiBold } from '../../../utils/typography';
 
 export const StyledToggleTypeButton = styled.button`
   ${Typography12SemiBold};

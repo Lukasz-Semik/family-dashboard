@@ -2,7 +2,8 @@ import { FieldConfig } from 'formik';
 
 import { InputMasked, InputMaskedProps } from '@family-dashboard/design-system';
 import { ErrorMessage } from '@family-dashboard/design-system';
-import { useFormControlField } from '@family-dashboard/form-controls';
+
+import { useFormControlField } from '../../hooks/useFormControlField';
 
 interface Props extends InputMaskedProps {
   validate?: FieldConfig['validate'];

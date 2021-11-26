@@ -8,7 +8,7 @@ export function useSignUp() {
 
   const { verifyEmail, isLoadingVerifyEmail, verifyEmailResponse } =
     useVerifyEmail({
-      goToNextStep: () => setCurrentStep(SignUpStep.PersonalDetails1),
+      goToNextStep: () => setCurrentStep(SignUpStep.FamilyName),
       goToErrorStep: () => setCurrentStep(SignUpStep.EmailVerificationFailed),
     });
 
@@ -18,13 +18,13 @@ export function useSignUp() {
         case SignUpStep.Email:
           verifyEmail(values.email);
           return;
+        case SignUpStep.FamilyName:
+          setCurrentStep(SignUpStep.PersonalDetails1);
+          return;
         case SignUpStep.PersonalDetails1:
           setCurrentStep(SignUpStep.PersonalDetails2);
           return;
         case SignUpStep.PersonalDetails2:
-          setCurrentStep(SignUpStep.FamilyName);
-          return;
-        case SignUpStep.FamilyName:
           setCurrentStep(SignUpStep.Password);
           return;
         case SignUpStep.Password:

@@ -31,7 +31,7 @@ export function SignUpButtonsGroup({ currentStep }: Props) {
   return (
     <>
       <StyledButtonWrapper>
-        <ButtonStandard>
+        <ButtonStandard type="submit">
           <FormattedMessage id={buttonTranslationPath} />
         </ButtonStandard>
       </StyledButtonWrapper>

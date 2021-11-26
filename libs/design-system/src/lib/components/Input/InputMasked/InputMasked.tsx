@@ -1,7 +1,7 @@
 import ReactInputMask from 'react-input-mask';
-import { InputStandard } from '@family-dashboard/design-system';
 
 import { InputMaskedProps } from '../Input.types';
+import { InputStandard } from '../InputStandard/InputStandard';
 
 export function InputMasked({ mask, ...props }: InputMaskedProps) {
   return (
