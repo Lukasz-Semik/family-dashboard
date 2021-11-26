@@ -20,3 +20,7 @@ export interface InputSecurityProps extends InputProps {
   showText: React.ReactNode;
   hideText: React.ReactNode;
 }
+
+export interface InputMaskedProps extends InputProps {
+  mask?: string;
+}

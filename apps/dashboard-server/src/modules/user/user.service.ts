@@ -29,30 +29,12 @@ export class UserService {
         throwError(HttpStatus.NOT_FOUND, { msg: 'user not exists' });
       }
 
-      const { family, ...currentUser } = foundUser;
-
-      console.log(foundUser);
-
-      console.log({
-        currentUser: {
-          email: currentUser.email,
-          firstName: currentUser.firstName,
-          middleName: currentUser.middleName,
-          lastName: currentUser.lastName,
-          gender: currentUser.gender as CTGender,
-          dob: currentUser.dob,
-        },
-        family: {
-          id: family.id,
-          name: family.name,
-        },
-      });
-
       return {
         currentUser: serializeCurrentUser(foundUser),
         family: serializeFamily(foundUser.family),
       };
     } catch (err) {
+      console.log(err);
       throwError(HttpStatus.INTERNAL_SERVER_ERROR, err);
     }
   }

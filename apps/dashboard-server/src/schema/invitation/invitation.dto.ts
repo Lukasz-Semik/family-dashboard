@@ -1,8 +1,8 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
-  CTVerifyEmailResponseStatus,
   CTVerifyEmailResponse,
+  CTVerifyEmailResponseStatus,
 } from '@family-dashboard/common-types';
 
 @ObjectType()

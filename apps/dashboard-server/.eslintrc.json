@@ -6,6 +6,7 @@
     "family-dashboard"
   ],
   "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
     "simple-import-sort/imports": [
       1,
       {

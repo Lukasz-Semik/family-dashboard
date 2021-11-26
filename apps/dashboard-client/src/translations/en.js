@@ -8,6 +8,30 @@ export const m = {
     },
     signUp: {
       title: 'Sign Up',
+      differentLastName: 'My last name is different',
+      description:
+        'You can start your sign up process and create family, however - if you want to join existing one, ask family head for invitation.',
+      backToSignIn: 'Back to Sign In',
+      consent: 'I agree to the terms and conditions',
+      verifyEmail: {
+        alreadyCreated: {
+          title: 'This email is already in use',
+          description: 'Just sign in to the app.',
+        },
+        invited: {
+          title: 'This email is already invited',
+          description:
+            'This email was invited by {name}. Please check your email box and accept invitation.',
+        },
+        notFinished: {
+          title: 'This email is not confirmed yet',
+          description:
+            'This email was used for signing up, however is not confirmed. Please, check your email box and finalize onboarding.',
+        },
+      },
+      familyNameDescription:
+        'Provide name of your family and confirm your last name.',
+      personalDetails: 'Provide your personal details.',
     },
   },
   fields: {
@@ -19,10 +43,29 @@ export const m = {
       label: 'Password',
       placeholder: 'Your secret password',
     },
+    familyName: {
+      label: 'Family name',
+      placeholder: 'Name of your family',
+    },
+    lastName: {
+      label: 'Last name',
+      placeholder: 'Your last name',
+    },
+    firstName: {
+      label: 'First name',
+      placeholder: 'Your first name',
+    },
+    middleName: {
+      label: 'Middle name (optional)',
+      placeholder: 'Your middle name',
+    },
   },
   shared: {
     show: 'Show',
     hide: 'Hide',
+    next: 'Next',
+    start: 'Start',
+    restart: 'Restart',
   },
   errors: {
     required: 'This field is required',

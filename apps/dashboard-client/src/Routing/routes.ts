@@ -1,5 +1,9 @@
 export const routes = {
-  signInRoute: () => '/',
-  signUpRoute: () => '/sing-up',
-  dashboardRoute: () => '/dashboard',
+  auth: {
+    signInRoute: () => '/',
+    signUpRoute: () => '/sing-up',
+  },
+  dashboard: {
+    dashboardRoute: () => '/dashboard',
+  },
 };

@@ -6,7 +6,7 @@ import { ButtonSecondary as ButtonSecondaryComponent } from './ButtonSecondary';
 
 export default {
   component: ButtonSecondaryComponent,
-  title: 'ButtonSecondary',
+  title: 'Buttons/ButtonSecondary',
 } as Meta;
 
 const Template: Story<ButtonProps> = (args) => (

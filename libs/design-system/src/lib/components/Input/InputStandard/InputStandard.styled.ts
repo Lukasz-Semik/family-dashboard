@@ -59,7 +59,7 @@ export const StyledLabel = styled.label<{
         cursor: not-allowed;
         border-color: ${dsStyles.colors.grey2};
 
-        ${StyledInput}::placeholder, ${StyledLabelContent} {
+        ${StyledInput}, ${StyledInput}::placeholder, ${StyledLabelContent} {
           color: ${dsStyles.colors.grey2};
         }
       `;

@@ -9,7 +9,7 @@ import { InputStandard as InputStandardComponent } from './InputStandard';
 
 export default {
   component: InputStandardComponent,
-  title: 'InputStandard',
+  title: 'Inputs/InputStandard',
 } as Meta;
 
 const Template: Story<InputProps> = (args) => (

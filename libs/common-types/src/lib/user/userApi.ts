@@ -1,7 +1,5 @@
-import {
-  CTFamilyBaseData,
-  CTUserBaseData,
-} from '@family-dashboard/common-types';
+import { CTFamilyBaseData } from '../family/family';
+import { CTUserBaseData } from './user';
 
 export enum CTVerifyEmailResponseStatus {
   Success = 'Success',

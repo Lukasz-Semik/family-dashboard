@@ -1,10 +1,10 @@
-import { Typography12SemiBoldOLD } from '@family-dashboard/design-system';
 import styled from 'styled-components';
 
 import { dsStyles } from '../../../utils/styles';
+import { Typography12SemiBold } from '../../../utils/typography';
 
 export const StyledToggleTypeButton = styled.button`
-  ${Typography12SemiBoldOLD};
+  ${Typography12SemiBold};
   padding: 0;
   margin: 0;
   border: none;
