@@ -6,7 +6,7 @@ import { InputSecurity as InputSecurityComponent } from './InputSecurity';
 
 export default {
   component: InputSecurityComponent,
-  title: 'InputSecurity',
+  title: 'Inputs/InputSecruity',
 } as Meta;
 
 const Template: Story<InputSecurityProps> = (args) => (

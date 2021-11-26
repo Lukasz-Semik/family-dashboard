@@ -6,7 +6,7 @@ import { ButtonStandard as ButtonStandardComponent } from './ButtonStandard';
 
 export default {
   component: ButtonStandardComponent,
-  title: 'ButtonStandard',
+  title: 'Buttons/uttonStandard',
 } as Meta;
 
 const Template: Story<ButtonProps> = (args) => (

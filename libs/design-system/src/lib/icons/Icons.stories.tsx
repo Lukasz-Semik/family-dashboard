@@ -1,7 +1,7 @@
 import { Meta } from '@storybook/react';
 
 import { dsStyles } from '../utils/styles';
-import { IconCheckmark, IconEmail, IconSecurity } from './Icons';
+import { IconCheckmark, IconCrossmark, IconEmail, IconSecurity } from './Icons';
 import { StyledIcon } from './Icons.styled';
 import { StyledItemsWrapper, StyledItemWrapper } from './IconStories.styled';
 
@@ -18,15 +18,16 @@ export const Icons = () => (
       <IconEmail />
       icon-email
     </StyledItemWrapper>
-
     <StyledItemWrapper>
       <IconSecurity />
       icon-security
     </StyledItemWrapper>
-
     <StyledItemWrapper>
       <IconCheckmark color={dsStyles.colors.orange4} />
       icon-checkmark
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconCrossmark color={dsStyles.colors.orange4} />
     </StyledItemWrapper>
   </StyledItemsWrapper>
 );

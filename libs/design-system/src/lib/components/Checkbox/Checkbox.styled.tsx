@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { dsStyles } from '../../utils/styles';
-import { Typography16RegularOLD } from '../../utils/typography';
+import { Typography16Regular } from '../../utils/typography';
 
 interface Props {
   isVisible: boolean;
@@ -11,11 +11,12 @@ export const StyledCheckedMarker = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
   border: 2px solid ${dsStyles.colors.violet4};
   border-radius: 4px;
   background-color: ${dsStyles.colors.grey3};
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin-right: 1rem;
   color: ${dsStyles.colors.orange3};
   transition: color ${dsStyles.transitions.standard},
@@ -37,8 +38,12 @@ export const StyledCheckedMarker = styled.div<Props>`
   }
 `;
 
-export const StyledLabel = styled.div`
-  ${Typography16RegularOLD};
+interface StyledLabelProps {
+  hasError?: boolean;
+}
+
+export const StyledLabel = styled.label<StyledLabelProps>`
+  ${Typography16Regular};
   display: flex;
   align-items: center;
   color: ${dsStyles.colors.violet4};
@@ -62,6 +67,16 @@ export const StyledLabel = styled.div`
       border-color: ${dsStyles.colors.orange3};
     }
   }
+
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      color: ${dsStyles.colors.red1};
+
+      ${StyledCheckedMarker} {
+        border-color: ${dsStyles.colors.red1};
+      }
+    `};
 `;
 
 export const StyledDefaultCheckbox = styled.input.attrs({

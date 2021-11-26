@@ -8,14 +8,14 @@ type FamilyDto {
 }
 
 type VerifyEmailDto {
-  status: CTCTVerifyEmailResponseStatus!
+  status: CTVerifyEmailResponseStatus!
   inviterName: String
 }
 
 """
 Status information according to existence of invitation or user during sing up
 """
-enum CTCTVerifyEmailResponseStatus {
+enum CTVerifyEmailResponseStatus {
   Success
   Invited
   Deprecated

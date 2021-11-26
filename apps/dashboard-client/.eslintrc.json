@@ -6,6 +6,7 @@
     "react-hooks/rules-of-hooks": "error", 
     "react-hooks/exhaustive-deps": "error",
     "family-dashboard/styled-prefix": 2,
+    "@typescript-eslint/no-unused-vars": "warn",
     "simple-import-sort/imports": [
       1,
       {

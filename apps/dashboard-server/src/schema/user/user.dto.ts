@@ -1,10 +1,11 @@
+import { Field, ID, ObjectType } from '@nestjs/graphql';
+
 import {
   CTGender,
   CTInitialAppStateResponse,
   CTLoginResponse,
   CTUserBaseData,
 } from '@family-dashboard/common-types';
-import { Field, ID, ObjectType } from '@nestjs/graphql';
 
 import { FamilyDto } from '../family/family.dto';
 

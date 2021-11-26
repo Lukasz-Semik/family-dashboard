@@ -1,9 +1,10 @@
+import { Field, InputType } from '@nestjs/graphql';
+
 import {
   CreateInvitationInput as CreateInvitationInputType,
   CTConfirmInvitationInput as CTConfirmInvitationInputType,
   CTGender,
 } from '@family-dashboard/common-types';
-import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateInvitationInput implements CreateInvitationInputType {

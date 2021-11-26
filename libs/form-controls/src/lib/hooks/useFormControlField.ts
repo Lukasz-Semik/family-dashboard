@@ -3,14 +3,16 @@ import { FieldConfig, useField } from 'formik';
 
 interface Args {
   validate?: FieldConfig['validate'];
+  type?: FieldConfig['type'];
   name: string;
 }
 
-export function useFieldInput({ validate, name }: Args) {
+export function useFormControlField({ validate, name, type }: Args) {
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldBase, fieldMeta] = useField({
     validate,
     name,
+    type,
   });
 
   const hasError = Boolean(fieldMeta.error && fieldMeta.touched);

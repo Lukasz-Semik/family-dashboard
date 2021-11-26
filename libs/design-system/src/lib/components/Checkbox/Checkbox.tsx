@@ -13,10 +13,10 @@ export const Checkbox = ({
   ...restProps
 }: CheckboxProps) => {
   return (
-    <StyledLabel>
+    <StyledLabel hasError={hasError}>
       <StyledDefaultCheckbox checked={checked} {...restProps} />
       <StyledCheckedMarker isVisible={Boolean(checked)}>
-        <IconCheckmark />
+        <IconCheckmark width="16px" height="16px" />
       </StyledCheckedMarker>
       <span>{label}</span>
     </StyledLabel>

@@ -1,8 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { dsStyles } from '@family-dashboard/design-system';
+import { dsStyles } from '../../utils/styles';
 
-export const GlobalStyles = createGlobalStyle`
+export const GlobalStylesDefault = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
