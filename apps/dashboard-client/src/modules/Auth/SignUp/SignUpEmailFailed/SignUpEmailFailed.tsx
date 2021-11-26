@@ -29,65 +29,50 @@ export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
     setTimeout(() => setProgress(100));
   }, []);
 
-  const title = useMemo(() => {
+  const copies = useMemo(() => {
     if (
       verifyEmailResponse?.status === CTVerifyEmailResponseStatus.AlreadyCreated
     ) {
-      return (
-        <FormattedMessage id="auth.signUp.verifyEmail.alreadyCreated.title" />
-      );
+      return {
+        title: (
+          <FormattedMessage id="auth.signUp.verifyEmail.alreadyCreated.title" />
+        ),
+        description: (
+          <FormattedMessage id="auth.signUp.verifyEmail.alreadyCreated.description" />
+        ),
+      };
     }
 
     if (verifyEmailResponse?.status === CTVerifyEmailResponseStatus.Invited) {
-      return <FormattedMessage id="auth.signUp.verifyEmail.invited.title" />;
+      return {
+        title: <FormattedMessage id="auth.signUp.verifyEmail.invited.title" />,
+        description: (
+          <FormattedMessage
+            id="auth.signUp.verifyEmail.invited.description"
+            values={{ name: verifyEmailResponse?.inviterName }}
+          />
+        ),
+      };
     }
 
     if (
       verifyEmailResponse?.status ===
       CTVerifyEmailResponseStatus.SignUpNotFinished
     ) {
-      return (
-        <FormattedMessage id="auth.signUp.verifyEmail.notFinished.title" />
-      );
+      return {
+        title: (
+          <FormattedMessage id="auth.signUp.verifyEmail.notFinished.title" />
+        ),
+      };
     }
 
-    return '';
-  }, [verifyEmailResponse?.status]);
-
-  const description = useMemo(() => {
-    if (
-      verifyEmailResponse?.status === CTVerifyEmailResponseStatus.AlreadyCreated
-    ) {
-      return (
-        <FormattedMessage id="auth.signUp.verifyEmail.alreadyCreated.description" />
-      );
-    }
-
-    if (verifyEmailResponse?.status === CTVerifyEmailResponseStatus.Invited) {
-      return (
-        <FormattedMessage
-          id="auth.signUp.verifyEmail.invited.description"
-          values={{ name: verifyEmailResponse?.inviterName }}
-        />
-      );
-    }
-
-    if (
-      verifyEmailResponse?.status ===
-      CTVerifyEmailResponseStatus.SignUpNotFinished
-    ) {
-      return (
-        <FormattedMessage id="auth.signUp.verifyEmail.notFinished.description" />
-      );
-    }
-
-    return '';
+    return {};
   }, [verifyEmailResponse]);
 
   return (
     <div>
-      <StyledErrorBox>{title}</StyledErrorBox>
-      <StyledDescription>{description}</StyledDescription>
+      <StyledErrorBox>{copies.title}</StyledErrorBox>
+      <StyledDescription>{copies.description}</StyledDescription>
 
       <StyledIndicatorWrapper>
         <IndicatorProgressCircle
