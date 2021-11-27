@@ -1,11 +1,10 @@
 import { useHistory } from 'react-router';
 import { useMutation } from '@apollo/client';
 
+import { Login } from '@family-dashboard/api-graphql';
 import { CTLoginResponse } from '@family-dashboard/common-types';
+import { FD_TOKEN_KEY } from '@family-dashboard/global-constants';
 import { sdkSetToSessionStorage } from '@family-dashboard/sdk';
-
-import { Login } from '../../../api/mutations/login';
-import { FD_TOKEN_KEY } from '../../../constants/sessionStorageKeys';
 
 interface Values {
   email: string;

@@ -28,9 +28,8 @@ import { setContext } from '@apollo/client/link/context';
 import { WebSocketLink } from '@apollo/client/link/ws';
 import { getMainDefinition } from '@apollo/client/utilities';
 
+import { FD_TOKEN_KEY } from '@family-dashboard/global-constants';
 import { sdkGetFromSessionStorage } from '@family-dashboard/sdk';
-
-import { FD_TOKEN_KEY } from '../constants/sessionStorageKeys';
 
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:3000/graphql`,
@@ -66,7 +65,7 @@ const splitLink = split(
   httpLink
 );
 
-export const client = new ApolloClient({
+export const clientDashboardGraphql = new ApolloClient({
   link: authLink.concat(splitLink),
   cache: new InMemoryCache(),
 });

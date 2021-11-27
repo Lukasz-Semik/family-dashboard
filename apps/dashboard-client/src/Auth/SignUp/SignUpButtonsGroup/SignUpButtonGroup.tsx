@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ButtonStandard } from '@family-dashboard/design-system';
+import { fdRoutes } from '@family-dashboard/global-constants';
 
-import { routes } from '../../../../routing/routes';
 import {
   StyledButtonWrapper,
   StyledLink,
@@ -38,7 +38,7 @@ export function SignUpButtonsGroup({ currentStep }: Props) {
 
       {isEmailStep && (
         <StyledLinkWrapper>
-          <StyledLink to={routes.auth.signInRoute()}>
+          <StyledLink to={fdRoutes.auth.signInRoute()}>
             <FormattedMessage id="auth.signUp.backToSignIn" />
           </StyledLink>
         </StyledLinkWrapper>

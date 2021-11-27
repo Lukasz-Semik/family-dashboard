@@ -1,19 +1,20 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { SignIn } from '../modules/Auth/SignIn/SignIn';
-import { SignUp } from '../modules/Auth/SignUp/SignUp';
-import { Dashboard } from '../modules/Dashboard/Dashboard';
+import { fdRoutes } from '@family-dashboard/global-constants';
+
+import { SignIn } from '../Auth/SignIn/SignIn';
+import { SignUp } from '../Auth/SignUp/SignUp';
+import { Dashboard } from '../Dashboard/Dashboard';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
-import { routes } from './routes';
 
 export function Routing() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={routes.auth.signInRoute()} exact component={SignIn} />
-        <Route path={routes.auth.signUpRoute()} exact component={SignUp} />
+        <Route path={fdRoutes.auth.signInRoute()} exact component={SignIn} />
+        <Route path={fdRoutes.auth.signUpRoute()} exact component={SignUp} />
         <PrivateRoute
-          path={routes.dashboard.dashboardRoute()}
+          path={fdRoutes.dashboard.dashboardRoute()}
           component={Dashboard}
         />
       </Switch>
