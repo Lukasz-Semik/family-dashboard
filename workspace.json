@@ -1,12 +1,14 @@
 {
   "version": 2,
   "projects": {
+    "api-graphql": "libs/api-graphql",
     "common-types": "libs/common-types",
     "dashboard-client": "apps/dashboard-client",
     "dashboard-client-e2e": "apps/dashboard-client-e2e",
     "dashboard-server": "apps/dashboard-server",
     "design-system": "libs/design-system",
     "form-controls": "libs/form-controls",
+    "global-constants": "libs/global-constants",
     "sdk": "libs/sdk"
   }
 }

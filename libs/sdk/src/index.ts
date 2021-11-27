@@ -1,2 +1,2 @@
-export * from './lib/utils/sessionStorage';
-export * from './lib/validators/validators';
+export * from './utils/sessionStorage';
+export * from './validators/validators';

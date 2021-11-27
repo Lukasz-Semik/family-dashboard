@@ -1,3 +1,5 @@
 TODO:
-- Translations
-- Typography
+- finalize client app refactor and migrate to top level, move routes to the root of app
+- migrate to nx_envs
+- exctract cache (when start more advanced api)
+- Typography (parallel with designs)

@@ -15,6 +15,7 @@ export function SignUpPersonalDetails2() {
       </StyledCommonDescription>
 
       <FieldInputMasked
+        autoFocus
         name="test"
         label="dasdas"
         placeholder="dd-mm-yyyy"

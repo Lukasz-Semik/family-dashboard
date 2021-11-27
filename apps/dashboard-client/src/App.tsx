@@ -1,15 +1,15 @@
 import { IntlProvider } from 'react-intl';
 import { ApolloProvider } from '@apollo/client';
 
+import { clientDashboardGraphql } from '@family-dashboard/api-graphql';
 import { GlobalStylesDefault } from '@family-dashboard/design-system';
 
-import { client } from './api/graphql';
-import { Routing } from './routing/Routing';
+import { Routing } from './Routing/Routing';
 import { messages } from './translations/en';
 
 export const App = () => {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={clientDashboardGraphql}>
       <IntlProvider locale="en" messages={messages}>
         <GlobalStylesDefault />
         <Routing />

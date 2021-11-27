@@ -13,8 +13,8 @@ import {
   validateFieldEmail,
   validateFieldRequired,
 } from '@family-dashboard/form-controls';
+import { fdRoutes } from '@family-dashboard/global-constants';
 
-import { routes } from '../../../routing/routes';
 import {
   StyledButtonWrapper,
   StyledFormTitle,
@@ -51,7 +51,7 @@ export function SignIn() {
       </StyledHeader>
 
       <StyledInnerWrapper>
-        <StyledSignUpLink to={routes.auth.signUpRoute()}>
+        <StyledSignUpLink to={fdRoutes.auth.signUpRoute()}>
           <FormattedMessage id="auth.signUp.title" />
         </StyledSignUpLink>
 

@@ -19,6 +19,7 @@ export function SignUpPersonalDetails1() {
 
       <StyledFieldWrapper>
         <FieldInputStandard
+          autoFocus
           name="firstName"
           label={<FormattedMessage id="fields.firstName.label" />}
           placeholder={intl.formatMessage({

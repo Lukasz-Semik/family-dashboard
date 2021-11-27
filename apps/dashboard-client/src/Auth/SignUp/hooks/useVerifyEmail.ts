@@ -1,12 +1,11 @@
 import { useCallback } from 'react';
 import { useLazyQuery } from '@apollo/client';
 
+import { VerifySignUpEmail } from '@family-dashboard/api-graphql';
 import {
   CTVerifyEmailResponse,
   CTVerifyEmailResponseStatus,
 } from '@family-dashboard/common-types';
-
-import { VerifySignUpEmail } from '../../../../api/queries/user';
 
 interface Args {
   goToNextStep: () => void;

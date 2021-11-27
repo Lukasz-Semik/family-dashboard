@@ -26,6 +26,7 @@ export function SignUpFamilyName() {
 
       <StyledFieldWrapper>
         <FieldInputStandard
+          autoFocus
           name="familyName"
           label={<FormattedMessage id="fields.familyName.label" />}
           placeholder={intl.formatMessage({
