@@ -2,9 +2,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { fdRoutes } from '@family-dashboard/global-constants';
 
-import { SignIn } from '../Auth/SignIn/SignIn';
-import { SignUp } from '../Auth/SignUp/SignUp';
-import { Dashboard } from '../Dashboard/Dashboard';
+import { SignIn } from '../modules/Auth/SignIn/SignIn';
+import { SignUp } from '../modules/Auth/SignUp/SignUp';
+import { Dashboard } from '../modules/Dashboard/Dashboard';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 
 export function Routing() {

@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/client';
 import { clientDashboardGraphql } from '@family-dashboard/api-graphql';
 import { GlobalStylesDefault } from '@family-dashboard/design-system';
 
-import { Routing } from './Routing/Routing';
+import { Routing } from './routing/Routing';
 import { messages } from './translations/en';
 
 export const App = () => {
