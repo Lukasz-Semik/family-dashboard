@@ -22,6 +22,7 @@ export const GlobalStylesDefault = createGlobalStyle`
   }
 
   button {
+    font-family: 'Montserrat', sans-serif;
     cursor: pointer;
     outline: none;
     border: none;

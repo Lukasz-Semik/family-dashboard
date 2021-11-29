@@ -16,17 +16,18 @@ export function SignUpEmailStepController({
   currentStep,
   verifyEmailResponse,
 }: Props) {
-  switch (currentStep) {
-    case SignUpStep.Email:
-      return <SignUpEmailFields />;
-    case SignUpStep.FamilyName:
-      return <SignUpFamilyName />;
-    case SignUpStep.PersonalDetails1:
-      return <SignUpPersonalDetails1 />;
+  const a = SignUpStep.PersonalDetails2;
+  switch (a) {
+    // case SignUpStep.Email:
+    //   return <SignUpEmailFields />;
+    // case SignUpStep.FamilyName:
+    //   return <SignUpFamilyName />;
+    // case SignUpStep.PersonalDetails1:
+    //   return <SignUpPersonalDetails1 />;
     case SignUpStep.PersonalDetails2:
       return <SignUpPersonalDetails2 />;
-    case SignUpStep.EmailVerificationFailed:
-      return <SignUpEmailFailed verifyEmailResponse={verifyEmailResponse} />;
+    // case SignUpStep.EmailVerificationFailed:
+    //   return <SignUpEmailFailed verifyEmailResponse={verifyEmailResponse} />;
     default:
       return null;
   }

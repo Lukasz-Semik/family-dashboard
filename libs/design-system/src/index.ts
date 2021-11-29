@@ -1,4 +1,5 @@
 export * from './utils/helpers';
+export * from './hooks/usePopperConfig';
 export * from './utils/styles';
 export * from './utils/typography';
 
