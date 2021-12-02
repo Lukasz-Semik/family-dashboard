@@ -1,38 +1,56 @@
 import { ReactComponent as IconCheckmarkSVG } from './assets/icon-checkmark.svg';
+import { ReactComponent as IconChevronSVG } from './assets/icon-chevron.svg';
 import { ReactComponent as IconCrossmarkSVG } from './assets/icon-crossmark.svg';
+import { ReactComponent as IconCrossmarkCircleSVG } from './assets/icon-crossmark-circle.svg';
 import { ReactComponent as IconEmailSVG } from './assets/icon-email.svg';
 import { ReactComponent as IconSecuritySVG } from './assets/icon-security.svg';
-import { StyledIcon } from './Icons.styled';
 import { IconProps } from './Icons.types';
+import { IconWrapper } from './IconWrapper';
 
-export const IconEmail = ({ width, height, color }: IconProps) => {
+export const IconEmail = (props: IconProps) => {
   return (
-    <StyledIcon $color={color} $width={width} $height={height}>
+    <IconWrapper {...props}>
       <IconEmailSVG />
-    </StyledIcon>
+    </IconWrapper>
   );
 };
 
-export const IconSecurity = ({ width, height, color }: IconProps) => {
+export const IconSecurity = (props: IconProps) => {
   return (
-    <StyledIcon $color={color} $width={width} $height={height}>
+    <IconWrapper {...props}>
       <IconSecuritySVG />
-    </StyledIcon>
+    </IconWrapper>
   );
 };
 
-export const IconCheckmark = ({ width, height, color }: IconProps) => {
+export const IconCheckmark = (props: IconProps) => {
   return (
-    <StyledIcon $color={color} $width={width} $height={height}>
+    <IconWrapper {...props}>
       <IconCheckmarkSVG />
-    </StyledIcon>
+    </IconWrapper>
   );
 };
 
-export const IconCrossmark = ({ width, height, color }: IconProps) => {
+export const IconCrossmark = (props: IconProps) => {
   return (
-    <StyledIcon $color={color} $width={width} $height={height}>
+    <IconWrapper {...props}>
       <IconCrossmarkSVG />
-    </StyledIcon>
+    </IconWrapper>
+  );
+};
+
+export const IconChevron = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconChevronSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconCrossmarkCircle = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconCrossmarkCircleSVG />
+    </IconWrapper>
   );
 };

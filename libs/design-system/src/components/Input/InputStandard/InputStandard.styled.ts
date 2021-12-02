@@ -77,6 +77,14 @@ export const StyledLabel = styled.label<{
         ${StyledInput}::placeholder {
           color: ${dsStyles.colors.grey2};
         }
+
+        &:hover {
+          border-color: ${dsStyles.colors.violet2};
+        }
+
+        &:focus-within {
+          border-color: ${dsStyles.colors.orange4};
+        }
       `;
     }
 

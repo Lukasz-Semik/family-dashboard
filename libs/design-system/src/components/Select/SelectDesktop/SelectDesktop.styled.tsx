@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+import { StyledIcon } from '../../../icons/Icons.styled';
 import { dsStyles } from '../../../utils/styles';
 import {
   Typography14SemiBold,
@@ -30,6 +31,7 @@ export const StyledTrigger = styled.button<{
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 3.5rem;
   box-sizing: border-box;
@@ -39,8 +41,24 @@ export const StyledTrigger = styled.button<{
   padding: 0 1.25rem;
   transition: border-color ${dsStyles.transitions.standard};
   cursor: pointer;
+  outline: none;
+
+  ${StyledIcon} {
+    color: ${dsStyles.colors.grey2};
+    transition: transform ${dsStyles.transitions.standard},
+      color ${dsStyles.transitions.standard};
+  }
 
   ${({ hasValue }) => !hasValue && `color: ${dsStyles.colors.grey2}`};
+
+  ${({ hasError, isOpen }) =>
+    hasError &&
+    isOpen &&
+    css`
+      ${StyledIcon} {
+        transform: rotateX(180deg);
+      }
+    `};
 
   ${({ isDisabled, hasError, isOpen }) => {
     if (isDisabled) {
@@ -56,12 +74,21 @@ export const StyledTrigger = styled.button<{
 
     if (hasError) {
       return css`
-        color: ${dsStyles.colors.red1};
         border-color: ${dsStyles.colors.red1};
 
         ${StyledLabelContent} {
           color: ${dsStyles.colors.red1};
         }
+
+        &:hover {
+          border-color: ${dsStyles.colors.violet2};
+        }
+
+        &:focus {
+          border-color: ${dsStyles.colors.orange4};
+        }
+
+        ${isOpen && `border-color: ${dsStyles.colors.orange4}`}
       `;
     }
 
@@ -71,6 +98,11 @@ export const StyledTrigger = styled.button<{
 
         ${StyledLabelContent} {
           color: ${dsStyles.colors.orange4};
+        }
+
+        ${StyledIcon} {
+          color: ${dsStyles.colors.orange4};
+          transform: rotateX(180deg);
         }
       `;
     }
@@ -95,18 +127,17 @@ export const StyledTrigger = styled.button<{
   }}
 `;
 
-export const StyledPopper = styled.ul<{ isOpen: boolean; $maxHeight: string }>`
+export const StyledPopper = styled.ul<{ isOpen: boolean }>`
   transition: opacity 0.3s ease-in-out;
   background-color: ${dsStyles.colors.white};
   border: 2px solid ${dsStyles.colors.orange4};
   width: 100%;
   border-radius: 8px;
-  padding: 1rem 0.75rem;
+  padding: 0.5rem 0.25rem 0.5rem 0.75rem;
   box-sizing: border-box;
   list-style: none;
   z-index: 10000;
   outline: none;
-  max-height: ${({ $maxHeight }) => $maxHeight};
 
   ${({ isOpen }) =>
     !isOpen
@@ -117,6 +148,24 @@ export const StyledPopper = styled.ul<{ isOpen: boolean; $maxHeight: string }>`
       : css`
           opacity: 1;
         `};
+`;
+
+export const StyledListContent = styled.div<{ $maxHeight: string }>`
+  max-height: ${({ $maxHeight }) => $maxHeight};
+  overflow: auto;
+  padding-right: 0.25rem;
+
+  &::-webkit-scrollbar {
+    height: 3px;
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 6px;
+    border: 4px solid ${dsStyles.colors.violet1};
+    background-clip: padding-box;
+    border-radius: 999px;
+  }
 `;
 
 export const StyledListItem = styled.li`
@@ -137,7 +186,7 @@ export const StyledListItem = styled.li`
   justify-content: space-between;
 
   &:not(:last-of-type) {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
   &[aria-selected='true'],

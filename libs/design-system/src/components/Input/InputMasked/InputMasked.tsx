@@ -10,14 +10,9 @@ export function InputMasked({ mask, ...props }: InputMaskedProps) {
       mask={mask || '99-99-9999'}
       onChange={props.onChange}
       disabled={props.disabled}
+      onBlur={props.onBlur}
     >
-      {() => (
-        <InputStandard
-          onChange={props.onChange}
-          value={props.value}
-          {...props}
-        />
-      )}
+      {() => <InputStandard {...props} onBlur={props.onBlur} />}
     </ReactInputMask>
   );
 }

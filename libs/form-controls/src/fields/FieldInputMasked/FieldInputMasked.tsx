@@ -11,7 +11,7 @@ interface Props extends InputMaskedProps {
 }
 
 export function FieldInputMasked({ validate, name, ...props }: Props) {
-  const { hasError, fieldBase, onTransitionEnd, errorMessage } =
+  const { hasError, fieldBase, onTransitionEnd, errorMessage, fieldHandlers } =
     useFormControlField({
       validate,
       name,
@@ -19,9 +19,15 @@ export function FieldInputMasked({ validate, name, ...props }: Props) {
 
   return (
     <InputMasked
+      {...props}
       value={fieldBase.value}
       name={fieldBase.name}
       hasError={hasError}
+      onBlur={(e) => {
+        fieldHandlers.setTouched(true);
+        fieldBase.onChange(e);
+      }}
+      onChange={fieldBase.onChange}
       renderError={(renderProps) => (
         <ErrorMessage
           onTransitionEnd={onTransitionEnd}
@@ -30,7 +36,6 @@ export function FieldInputMasked({ validate, name, ...props }: Props) {
           {errorMessage}
         </ErrorMessage>
       )}
-      {...props}
     />
   );
 }

@@ -5,6 +5,10 @@ export interface SelectItemBase {
   label: string;
 }
 
+export interface SelectRenderErrorProps {
+  hasError?: boolean;
+}
+
 export interface SelectProps<T> {
   items: T[];
   selectedItem: T | null;
@@ -15,4 +19,7 @@ export interface SelectProps<T> {
   label: React.ReactNode;
   hasError?: boolean;
   isDisabled?: boolean;
+  renderError?: (renderProps: SelectRenderErrorProps) => React.ReactElement;
+  onClose?: (selectedItem: T | null) => void;
+  onOpen?: (selectedItem: T | null) => void;
 }

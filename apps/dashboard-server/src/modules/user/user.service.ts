@@ -2,8 +2,6 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { CTGender } from '@family-dashboard/common-types';
-
 import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
 import { InitialAppStateDto } from '../../schema';
@@ -34,7 +32,6 @@ export class UserService {
         family: serializeFamily(foundUser.family),
       };
     } catch (err) {
-      console.log(err);
       throwError(HttpStatus.INTERNAL_SERVER_ERROR, err);
     }
   }

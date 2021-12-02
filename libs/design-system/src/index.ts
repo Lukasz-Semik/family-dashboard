@@ -22,4 +22,6 @@ export * from './components/Input/InputSecurity/InputSecurity';
 export * from './components/Input/InputStandard/InputStandard';
 export * from './components/Loader/Loader.types';
 export * from './components/Loader/Loader';
+export * from './components/Select/Select.types';
+export * from './components/Select/Select';
 export * from './components/Wrappers/Wrappers';

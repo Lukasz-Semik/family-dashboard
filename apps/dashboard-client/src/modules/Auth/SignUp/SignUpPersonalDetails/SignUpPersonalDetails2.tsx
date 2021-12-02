@@ -1,43 +1,58 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
+import { CTGender } from '@family-dashboard/common-types';
 import {
   FieldInputMasked,
+  FieldSelect,
   validateFieldRequired,
 } from '@family-dashboard/form-controls';
 
 import { StyledCommonDescription } from '../SignUp.styled';
-import { SelectDesktop, SelectItemBase } from './TestDrop';
-import { useState } from 'react';
+import { StyledFieldWrapper } from './SignUpPersonalDetails.styled';
 
 export function SignUpPersonalDetails2() {
-  const [selectedItem, setSelectedItem] = useState<SelectItemBase | null>(null);
+  const intl = useIntl();
+
   return (
     <>
       <StyledCommonDescription>
         <FormattedMessage id="auth.signUp.personalDetails" />
       </StyledCommonDescription>
 
-      <FieldInputMasked
-        autoFocus
-        name="test"
-        label="dasdas"
-        placeholder="dd-mm-yyyy"
+      <StyledFieldWrapper>
+        <FieldInputMasked
+          autoFocus
+          name="dob"
+          label={<FormattedMessage id="fields.dateOfBirth.label" />}
+          placeholder="dd-mm-yyyy"
+          validate={validateFieldRequired(
+            <FormattedMessage id="errors.required" />
+          )}
+        />
+      </StyledFieldWrapper>
+
+      <FieldSelect
+        label={<FormattedMessage id="fields.gender.label" />}
+        name="gender"
+        triggerPlaceholder={<FormattedMessage id="shared.select" />}
         validate={validateFieldRequired(
           <FormattedMessage id="errors.required" />
         )}
+        items={[
+          {
+            value: CTGender.Male,
+            label: intl.formatMessage({ id: 'fields.gender.items.male' }),
+          },
+          {
+            value: CTGender.Female,
+            label: intl.formatMessage({ id: 'fields.gender.items.female' }),
+          },
+          {
+            value: CTGender.Other,
+            label: intl.formatMessage({ id: 'fields.gender.items.other' }),
+          },
+        ]}
       />
-
-      <div style={{ marginTop: '20px' }}>
-        <SelectDesktop
-          onChange={(selectedItem) => setSelectedItem(selectedItem)}
-          selectedItem={selectedItem}
-          triggerPlaceholder={<div>Bleble</div>}
-          items={[
-            { value: '1', label: 'Label 1' },
-            { value: '2', label: 'Label 2' },
-          ]}
-        />
-      </div>
     </>
   );
 }

@@ -9,7 +9,7 @@ interface Args {
 
 export function useFormControlField({ validate, name, type }: Args) {
   const [errorMessage, setErrorMessage] = useState('');
-  const [fieldBase, fieldMeta] = useField({
+  const [fieldBase, fieldMeta, fieldHandlers] = useField({
     validate,
     name,
     type,
@@ -31,5 +31,12 @@ export function useFormControlField({ validate, name, type }: Args) {
     }
   }, [fieldMeta.error, hasError]);
 
-  return { hasError, fieldBase, onTransitionEnd, errorMessage };
+  return {
+    hasError,
+    fieldBase,
+    onTransitionEnd,
+    errorMessage,
+    fieldHandlers,
+    fieldMeta,
+  };
 }

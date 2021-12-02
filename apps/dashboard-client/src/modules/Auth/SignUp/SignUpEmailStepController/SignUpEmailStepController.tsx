@@ -4,6 +4,7 @@ import { SignUpStep } from '../SignUp.types';
 import { SignUpEmailFailed } from '../SignUpEmailFailed/SignUpEmailFailed';
 import { SignUpEmailFields } from '../SignUpEmailFields/SignUpEmailFields';
 import { SignUpFamilyName } from '../SignUpFamilyName/SignUpFamilyName';
+import { SignUpPassword } from '../SignUpPassword/SignUpPassword';
 import { SignUpPersonalDetails1 } from '../SignUpPersonalDetails/SignUpPersonalDetails1';
 import { SignUpPersonalDetails2 } from '../SignUpPersonalDetails/SignUpPersonalDetails2';
 
@@ -16,18 +17,19 @@ export function SignUpEmailStepController({
   currentStep,
   verifyEmailResponse,
 }: Props) {
-  const a = SignUpStep.PersonalDetails2;
-  switch (a) {
-    // case SignUpStep.Email:
-    //   return <SignUpEmailFields />;
-    // case SignUpStep.FamilyName:
-    //   return <SignUpFamilyName />;
-    // case SignUpStep.PersonalDetails1:
-    //   return <SignUpPersonalDetails1 />;
+  switch (currentStep) {
+    case SignUpStep.Email:
+      return <SignUpEmailFields />;
+    case SignUpStep.FamilyName:
+      return <SignUpFamilyName />;
+    case SignUpStep.PersonalDetails1:
+      return <SignUpPersonalDetails1 />;
     case SignUpStep.PersonalDetails2:
       return <SignUpPersonalDetails2 />;
-    // case SignUpStep.EmailVerificationFailed:
-    //   return <SignUpEmailFailed verifyEmailResponse={verifyEmailResponse} />;
+    case SignUpStep.Password:
+      return <SignUpPassword />;
+    case SignUpStep.EmailVerificationFailed:
+      return <SignUpEmailFailed verifyEmailResponse={verifyEmailResponse} />;
     default:
       return null;
   }
