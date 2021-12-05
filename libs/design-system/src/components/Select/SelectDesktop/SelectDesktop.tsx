@@ -3,13 +3,15 @@ import { useSelect } from 'downshift';
 import { usePopperConfig } from '../../../hooks/usePopperConfig';
 import { IconCheckmark, IconChevron } from '../../../icons/Icons';
 import { dsStyles } from '../../../utils/styles';
-import { SelectItemBase, SelectProps } from '../Select.types';
 import {
   StyledLabelContent,
-  StyledListContent,
   StyledListItem,
-  StyledPopper,
   StyledTrigger,
+} from '../Select.styled';
+import { SelectItemBase, SelectProps } from '../Select.types';
+import {
+  StyledListContent,
+  StyledPopper,
   StyledWrapper,
 } from './SelectDesktop.styled';
 

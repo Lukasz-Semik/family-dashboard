@@ -11,6 +11,8 @@ export * from './components/Button/ButtonStandard/ButtonStandard';
 export * from './components/Button/ButtonSecondary/ButtonSecondary';
 export * from './components/Checkbox/Checkbox.types';
 export * from './components/Checkbox/Checkbox';
+export * from './components/Elements/Elements.types';
+export * from './components/Elements/ElementCloseAnimated/ElementCloseAnimated';
 export * from './components/ErrorMessage/ErrorMessage.types';
 export * from './components/ErrorMessage/ErrorMessage';
 export * from './components/GlobalStylesDefault/GlobalStylesDefault';

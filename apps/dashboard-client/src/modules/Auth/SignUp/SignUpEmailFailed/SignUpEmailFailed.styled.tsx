@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   dsStyles,
@@ -24,21 +24,6 @@ export const StyledDescription = styled.div`
   margin-bottom: 1.5rem;
   color: ${dsStyles.colors.red2};
   text-align: center;
-`;
-
-export const StyledCrossmarkWrapper = styled.span<{ isVisible?: boolean }>`
-  * {
-    transform: rotateZ(-90deg) scale(0.8);
-    opacity: 0;
-    transition: transform 0.7s linear, opacity 0.7s linear;
-
-    ${({ isVisible }) =>
-      isVisible &&
-      css`
-        transform: rotateZ(0) scale(1);
-        opacity: 1;
-      `};
-  }
 `;
 
 export const StyledIndicatorWrapper = styled.div`
