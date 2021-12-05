@@ -1,4 +1,3 @@
-
 import {
   dsStyles,
   IconCheckmark,
@@ -16,6 +15,7 @@ interface Props {
   isValid: boolean;
   children: React.ReactNode;
 }
+
 export function SignUpPasswordErrorText({ isValid, children }: Props) {
   return (
     <StyledTextWrapper>
