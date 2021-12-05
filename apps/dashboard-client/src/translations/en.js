@@ -32,6 +32,12 @@ export const m = {
       familyNameDescription:
         'Provide name of your family and confirm your last name.',
       personalDetails: 'Provide your personal details.',
+      passwordErrors: {
+        specialCharacter: 'At least one special character',
+        minCharacters: 'Minimum 8 characters',
+        numericCharacter: 'At least one numeric character',
+        upperAndLowerCharacter: 'One uppercase and lowercase letter',
+      },
     },
   },
   fields: {
@@ -42,6 +48,9 @@ export const m = {
     password: {
       label: 'Password',
       placeholder: 'Your secret password',
+    },
+    confirmPassword: {
+      label: 'Confirm password',
     },
     familyName: {
       label: 'Family name',
@@ -59,6 +68,17 @@ export const m = {
       label: 'Middle name (optional)',
       placeholder: 'Your middle name',
     },
+    dateOfBirth: {
+      label: 'Date of birth',
+    },
+    gender: {
+      label: 'Gender',
+      items: {
+        male: 'Male',
+        female: 'Female',
+        other: 'Other',
+      },
+    },
   },
   shared: {
     show: 'Show',
@@ -66,6 +86,7 @@ export const m = {
     next: 'Next',
     start: 'Start',
     restart: 'Restart',
+    select: 'Select...',
   },
   errors: {
     required: 'This field is required',

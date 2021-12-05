@@ -17,15 +17,19 @@ export function useSignUp() {
       switch (currentStep) {
         case SignUpStep.Email:
           verifyEmail(values.email);
+          resetForm({ values });
           return;
         case SignUpStep.FamilyName:
           setCurrentStep(SignUpStep.PersonalDetails1);
+          resetForm({ values });
           return;
         case SignUpStep.PersonalDetails1:
           setCurrentStep(SignUpStep.PersonalDetails2);
+          resetForm({ values });
           return;
         case SignUpStep.PersonalDetails2:
           setCurrentStep(SignUpStep.Password);
+          resetForm({ values });
           return;
         case SignUpStep.Password:
           setCurrentStep(SignUpStep.ConfirmEmail);

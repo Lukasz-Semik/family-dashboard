@@ -1,3 +1,5 @@
+import { CTGender } from '@family-dashboard/common-types';
+
 export enum SignUpStep {
   Email = 'Email',
   FamilyName = 'FamilyName',
@@ -17,4 +19,7 @@ export interface Values {
   familyName: string;
   isConsentGiven: boolean;
   isLastNameDifferent: boolean;
+  gender: CTGender | undefined;
+  dob: string;
+  password: string;
 }

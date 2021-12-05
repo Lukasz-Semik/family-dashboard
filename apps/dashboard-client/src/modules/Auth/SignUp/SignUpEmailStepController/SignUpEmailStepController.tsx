@@ -4,6 +4,7 @@ import { SignUpStep } from '../SignUp.types';
 import { SignUpEmailFailed } from '../SignUpEmailFailed/SignUpEmailFailed';
 import { SignUpEmailFields } from '../SignUpEmailFields/SignUpEmailFields';
 import { SignUpFamilyName } from '../SignUpFamilyName/SignUpFamilyName';
+import { SignUpPassword } from '../SignUpPassword/SignUpPassword';
 import { SignUpPersonalDetails1 } from '../SignUpPersonalDetails/SignUpPersonalDetails1';
 import { SignUpPersonalDetails2 } from '../SignUpPersonalDetails/SignUpPersonalDetails2';
 
@@ -25,6 +26,8 @@ export function SignUpEmailStepController({
       return <SignUpPersonalDetails1 />;
     case SignUpStep.PersonalDetails2:
       return <SignUpPersonalDetails2 />;
+    case SignUpStep.Password:
+      return <SignUpPassword />;
     case SignUpStep.EmailVerificationFailed:
       return <SignUpEmailFailed verifyEmailResponse={verifyEmailResponse} />;
     default:

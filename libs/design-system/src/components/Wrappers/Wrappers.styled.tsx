@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { dsStyles } from '../../utils/styles';
 
@@ -20,4 +20,21 @@ export const StyledWrapperIconFormControl = styled.div<Props>`
   ${({ isFocused }) => isFocused && `color: ${dsStyles.colors.orange4}`};
   ${({ hasError }) => hasError && `color: ${dsStyles.colors.red1}`};
   ${({ isDisabled }) => isDisabled && `color: ${dsStyles.colors.grey2}`};
+`;
+
+export const StyledWrapperRoundShowAnimation = styled.span<{
+  isVisible?: boolean;
+}>`
+  * {
+    transform: rotateZ(-90deg) scale(0.8);
+    opacity: 0;
+    transition: transform 0.7s linear, opacity 0.7s linear;
+
+    ${({ isVisible }) =>
+      isVisible &&
+      css`
+        transform: rotateZ(0) scale(1);
+        opacity: 1;
+      `};
+  }
 `;

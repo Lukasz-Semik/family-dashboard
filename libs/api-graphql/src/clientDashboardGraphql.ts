@@ -32,7 +32,7 @@ import { FD_TOKEN_KEY } from '@family-dashboard/global-constants';
 import { sdkGetFromSessionStorage } from '@family-dashboard/sdk';
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:3000/graphql`,
+  uri: `ws://localhost:3001/graphql`,
   options: {
     reconnect: true,
   },
