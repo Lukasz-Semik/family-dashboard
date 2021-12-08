@@ -2,7 +2,6 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcryptjs';
 import * as dayjs from 'dayjs';
-import * as utc from 'dayjs/plugin/utc';
 import { Repository } from 'typeorm';
 
 import { CTVerifyEmailResponseStatus } from '@family-dashboard/global/types';
@@ -17,8 +16,6 @@ import {
   CreateInvitationInput,
   VerifyEmailDto,
 } from '../../schema';
-
-dayjs.extend(utc);
 
 @Injectable()
 export class InvitationService {
