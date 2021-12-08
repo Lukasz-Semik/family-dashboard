@@ -1,6 +1,7 @@
 TODO:
 - domain driven - restructure + better linting approach globally (sorts)
 - tests
+- dob validation
 - finalize errors states in sign up (validation code)
 - code todos
 - handle resend code
@@ -8,3 +9,18 @@ TODO:
 - migrate to nx_envs
 - exctract cache (when start more advanced api)
 - Typography (parallel with designs)
+
+libs structure:
+-global-libs
+--types
+--constants
+--sdk
+
+-frontend-libs
+--design-system
+--field-controls
+--api-graphql
+
+-frontend-modules
+--auth
+
