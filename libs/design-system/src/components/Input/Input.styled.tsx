@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
-import { dsStyles } from '../../../utils/styles';
+import { dsStyles } from '../../utils/styles';
 import {
   Typography14SemiBold,
   Typography16Regular,
-} from '../../../utils/typography';
+} from '../../utils/typography';
 
 export const StyledWrapper = styled.div`
   padding-top: 0.5rem;

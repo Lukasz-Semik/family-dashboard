@@ -61,7 +61,7 @@ type Query {
 
 type Mutation {
   createSignUpInvitation(input: CreateInvitationInput!): Boolean!
-  confirmSignUpInvitation(input: CTConfirmInvitationInput!): Boolean!
+  confirmSignUpInvitation(input: ConfirmInvitationInput!): Boolean!
   login(password: String!, email: String!): LoginDto!
 }
 
@@ -73,9 +73,10 @@ input CreateInvitationInput {
   lastName: String
   dob: DateTime
   gender: CTGender
+  familyName: String
 }
 
-input CTConfirmInvitationInput {
+input ConfirmInvitationInput {
   email: String!
   password: String!
   firstName: String!

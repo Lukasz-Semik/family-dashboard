@@ -20,8 +20,9 @@ export interface CTConfirmInvitationInput extends Omit<CTUserBaseData, 'id'> {
   familyName: string;
 }
 
-export interface CreateInvitationInput
+export interface CTCreateInvitationInput
   extends Partial<Omit<CTConfirmInvitationInput, 'password'>> {
+  email: string;
   inviterName: string;
 }
 

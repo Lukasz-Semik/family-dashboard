@@ -13,8 +13,8 @@ import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
 import { generateNumericCode } from '../../helpers/utils';
 import {
+  ConfirmInvitationInput,
   CreateInvitationInput,
-  CTConfirmInvitationInput,
   VerifyEmailDto,
 } from '../../schema';
 
@@ -119,7 +119,7 @@ export class InvitationService {
   }
 
   async confirmSignUpInvitation(
-    input: CTConfirmInvitationInput
+    input: ConfirmInvitationInput
   ): Promise<boolean> {
     try {
       const existingUser = await this.userRepository.findOne({

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { InputProps } from '../Input.types';
 import {
   StyledInput,
   StyledLabel,
   StyledLabelContent,
   StyledWrapper,
-} from './InputStandard.styled';
+} from '../Input.styled';
+import { InputProps } from '../Input.types';
 
 export const InputStandard = ({
   hasError,

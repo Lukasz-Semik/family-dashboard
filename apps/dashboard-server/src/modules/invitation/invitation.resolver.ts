@@ -2,8 +2,8 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
+  ConfirmInvitationInput,
   CreateInvitationInput,
-  CTConfirmInvitationInput,
   VerifyEmailDto,
 } from '../../schema';
 import { InvitationService } from './invitation.service';
@@ -25,9 +25,7 @@ export class InvitationResolver {
   }
 
   @Mutation(() => Boolean)
-  async confirmSignUpInvitation(
-    @Args('input') input: CTConfirmInvitationInput
-  ) {
+  async confirmSignUpInvitation(@Args('input') input: ConfirmInvitationInput) {
     return this.invitationService.confirmSignUpInvitation(input);
   }
 }

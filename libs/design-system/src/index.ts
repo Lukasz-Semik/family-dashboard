@@ -19,6 +19,7 @@ export * from './components/GlobalStylesDefault/GlobalStylesDefault';
 export * from './components/IndicatorProgressCircle/IndicatorProgressCircle.types';
 export * from './components/IndicatorProgressCircle/IndicatorProgressCircle';
 export * from './components/Input/Input.types';
+export * from './components/Input/InputPure/InputPure';
 export * from './components/Input/InputMasked/InputMasked';
 export * from './components/Input/InputSecurity/InputSecurity';
 export * from './components/Input/InputStandard/InputStandard';

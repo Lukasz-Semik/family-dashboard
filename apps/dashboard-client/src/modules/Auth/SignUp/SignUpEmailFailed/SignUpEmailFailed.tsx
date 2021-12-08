@@ -55,6 +55,9 @@ export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
         title: (
           <FormattedMessage id="auth.signUp.verifyEmail.notFinished.title" />
         ),
+        description: (
+          <FormattedMessage id="auth.signUp.verifyEmail.notFinished.description" />
+        ),
       };
     }
 

@@ -1,5 +1,10 @@
 TODO:
-- finalize client app refactor and migrate to top level, move routes to the root of app
+- domain driven - restructure
+- tests
+- finalize errors states in sign up (validation code)
+- code todos
+- handle resend code
+- handle token returns on confirm sign up invitation
 - migrate to nx_envs
 - exctract cache (when start more advanced api)
 - Typography (parallel with designs)

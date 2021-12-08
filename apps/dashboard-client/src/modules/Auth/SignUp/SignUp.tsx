@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
 
+import { CTGender } from '@family-dashboard/common-types';
 import { Loader } from '@family-dashboard/design-system';
 
 import {
@@ -36,21 +37,24 @@ export function SignUp() {
 
         <Formik<Values>
           initialValues={{
-            email: '',
-            firstName: '',
-            middleName: '',
-            lastName: '',
-            familyName: '',
+            email: 'djpluki@gmail.com',
+            firstName: 'Lukasz',
+            middleName: 'L',
+            lastName: 'Semik',
+            familyName: 'Semil',
             isConsentGiven: false,
             isLastNameDifferent: false,
-            gender: undefined,
-            dob: '',
-            password: '',
+            gender: CTGender.Male,
+            dob: '01-12-2000',
+            password: 'Password123*',
+            code0: '',
+            code1: '',
+            code2: '',
+            code3: '',
           }}
           onSubmit={onSubmit}
         >
-          {({ handleSubmit, values }) => {
-            console.log(values);
+          {({ handleSubmit }) => {
             return (
               <StyledForm onSubmit={handleSubmit}>
                 <div>
