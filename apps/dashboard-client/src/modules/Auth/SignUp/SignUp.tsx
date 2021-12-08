@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
 
-import { CTGender } from '@family-dashboard/common-types';
 import { Loader } from '@family-dashboard/design-system';
 
 import {
@@ -37,16 +36,16 @@ export function SignUp() {
 
         <Formik<Values>
           initialValues={{
-            email: 'djpluki@gmail.com',
-            firstName: 'Lukasz',
-            middleName: 'L',
-            lastName: 'Semik',
-            familyName: 'Semil',
+            email: '',
+            firstName: '',
+            middleName: '',
+            lastName: '',
+            familyName: '',
             isConsentGiven: false,
             isLastNameDifferent: false,
-            gender: CTGender.Male,
-            dob: '01-12-2000',
-            password: 'Password123*',
+            gender: undefined,
+            dob: '',
+            password: '',
             code0: '',
             code1: '',
             code2: '',

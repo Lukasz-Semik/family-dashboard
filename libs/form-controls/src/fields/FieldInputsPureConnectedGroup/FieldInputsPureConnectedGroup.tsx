@@ -1,4 +1,3 @@
-import { FieldInputPure } from '@family-dashboard/form-controls';
 import { FieldConfig } from 'formik';
 import { useRef } from 'react';
 import { times } from 'lodash';
@@ -7,6 +6,7 @@ import {
   StyledGroupWrapper,
   StyledInputWrapper,
 } from './FieldInputPureConnectedGroup.styled';
+import { FieldInputPure } from '../FieldInputPure/FieldInputPure';
 
 interface Props {
   groupName: string;
@@ -72,30 +72,4 @@ export function FieldInputsPureConnectedGroup({
       ))}
     </StyledGroupWrapper>
   );
-  // const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.value.length === 1) {
-  //   }
-  // };
-
-  // return (
-  //   <StyledGroupWrapper>
-  //     <StyledInputWrapper>
-  //       <FieldInputPure ref={ref1} name={`${groupName}-1`} label={groupName} />
-  //     </StyledInputWrapper>
-  //     <StyledInputWrapper>
-  //       <FieldInputPure
-  //         onChange={(e) => console.log(e)}
-  //         ref={ref2}
-  //         name={`${groupName}-2`}
-  //         label={groupName}
-  //       />
-  //     </StyledInputWrapper>
-  //     <StyledInputWrapper>
-  //       <FieldInputPure ref={ref3} name={`${groupName}-3`} label={groupName} />
-  //     </StyledInputWrapper>
-  //     <StyledInputWrapper>
-  //       <FieldInputPure ref={ref4} name={`${groupName}-4`} label={groupName} />
-  //     </StyledInputWrapper>
-  //   </StyledGroupWrapper>
-  // );
 }

@@ -1,5 +1,5 @@
 TODO:
-- domain driven - restructure
+- domain driven - restructure + better linting approach globally (sorts)
 - tests
 - finalize errors states in sign up (validation code)
 - code todos
