@@ -19,6 +19,7 @@
             ]
           }
         ],
+        "family-dashboard/styled-prefix": 2,
         "simple-import-sort/imports": [
           1,
           {
