@@ -1,4 +1,4 @@
-import { CTFamilyBaseData } from '@family-dashboard/common-types';
+import { CTFamilyBaseData } from '@family-dashboard/global/types';
 
 import { FamilyEntity } from '../entities/family.entity';
 

@@ -4,7 +4,7 @@ import {
   CTConfirmInvitationInput,
   CTCreateInvitationInput,
   CTGender,
-} from '@family-dashboard/common-types';
+} from '@family-dashboard/global/types';
 
 @InputType()
 export class CreateInvitationInput implements CTCreateInvitationInput {

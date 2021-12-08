@@ -1,0 +1,23 @@
+{
+  "root": "libs/fe-libs/api-graphql",
+  "sourceRoot": "libs/fe-libs/api-graphql/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/fe-libs/api-graphql/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/fe-libs/api-graphql"],
+      "options": {
+        "jestConfig": "libs/fe-libs/api-graphql/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

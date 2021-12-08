@@ -5,7 +5,7 @@ import {
   CTInitialAppStateResponse,
   CTLoginResponse,
   CTUserBaseData,
-} from '@family-dashboard/common-types';
+} from '@family-dashboard/global/types';
 
 import { FamilyDto } from '../family/family.dto';
 

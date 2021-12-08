@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs';
 import * as utc from 'dayjs/plugin/utc';
 import { Repository } from 'typeorm';
 
-import { CTVerifyEmailResponseStatus } from '@family-dashboard/common-types';
+import { CTVerifyEmailResponseStatus } from '@family-dashboard/global/types';
 
 import { FamilyEntity } from '../../entities/family.entity';
 import { InvitationEntity } from '../../entities/invitation.entity';
