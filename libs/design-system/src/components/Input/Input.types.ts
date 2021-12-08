@@ -24,3 +24,8 @@ export interface InputSecurityProps extends InputProps {
 export interface InputMaskedProps extends InputProps {
   mask?: string;
 }
+
+export type InputPureProps = Omit<
+  InputProps,
+  'renderRightControls' | 'renderLeftControls' | 'renderError'
+>;

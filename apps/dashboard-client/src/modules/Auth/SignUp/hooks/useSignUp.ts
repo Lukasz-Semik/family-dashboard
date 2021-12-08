@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
 
 import { SignUpStep, Values } from '../SignUp.types';
+import { useConfirmSignUpInvitation } from './useConfirmSignUpInvitation';
+import { useCreateSignUpInvitation } from './useCreateSignUpInvitation';
 import { useVerifyEmail } from './useVerifyEmail';
 
 export function useSignUp() {
@@ -11,6 +13,9 @@ export function useSignUp() {
       goToNextStep: () => setCurrentStep(SignUpStep.FamilyName),
       goToErrorStep: () => setCurrentStep(SignUpStep.EmailVerificationFailed),
     });
+
+  const { createSignUpInvitation } = useCreateSignUpInvitation();
+  const { confirmSignUpInvitation } = useConfirmSignUpInvitation();
 
   const onSubmit = useCallback(
     (values: Values, { resetForm }) => {
@@ -32,20 +37,37 @@ export function useSignUp() {
           resetForm({ values });
           return;
         case SignUpStep.Password:
+          createSignUpInvitation(values);
           setCurrentStep(SignUpStep.ConfirmEmail);
+          resetForm({ values });
           return;
         case SignUpStep.ConfirmEmail:
-          return setCurrentStep(SignUpStep.FinalStep);
+          confirmSignUpInvitation(values);
+          setCurrentStep(SignUpStep.FinalStep);
+          return;
         case SignUpStep.EmailVerificationFailed:
           setCurrentStep(SignUpStep.Email);
-          resetForm();
+          resetForm({
+            values: {
+              email: '',
+              firstName: '',
+              middleName: '',
+              lastName: '',
+              familyName: '',
+              isConsentGiven: false,
+              isLastNameDifferent: false,
+              gender: undefined,
+              dob: '',
+              password: '',
+            },
+          });
           return;
         default:
           // TODO: ERROR TOAST
           return;
       }
     },
-    [currentStep, verifyEmail]
+    [currentStep, verifyEmail, createSignUpInvitation, confirmSignUpInvitation]
   );
 
   return {

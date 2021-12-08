@@ -1,9 +1,11 @@
 import { CTVerifyEmailResponse } from '@family-dashboard/common-types';
 
 import { SignUpStep } from '../SignUp.types';
+import { SignUpConfirmEmail } from '../SignUpConfirmEmail/SignUpConfirmEmail';
 import { SignUpEmailFailed } from '../SignUpEmailFailed/SignUpEmailFailed';
 import { SignUpEmailFields } from '../SignUpEmailFields/SignUpEmailFields';
 import { SignUpFamilyName } from '../SignUpFamilyName/SignUpFamilyName';
+import { SignUpFinalStep } from '../SignUpFinalStep/SignUpFinalStep';
 import { SignUpPassword } from '../SignUpPassword/SignUpPassword';
 import { SignUpPersonalDetails1 } from '../SignUpPersonalDetails/SignUpPersonalDetails1';
 import { SignUpPersonalDetails2 } from '../SignUpPersonalDetails/SignUpPersonalDetails2';
@@ -28,6 +30,10 @@ export function SignUpEmailStepController({
       return <SignUpPersonalDetails2 />;
     case SignUpStep.Password:
       return <SignUpPassword />;
+    case SignUpStep.ConfirmEmail:
+      return <SignUpConfirmEmail />;
+    case SignUpStep.FinalStep:
+      return <SignUpFinalStep />;
     case SignUpStep.EmailVerificationFailed:
       return <SignUpEmailFailed verifyEmailResponse={verifyEmailResponse} />;
     default:

@@ -42,6 +42,12 @@ export class InvitationEntity {
   public gender: string;
 
   @Column({
+    type: 'varchar',
+    length: 255,
+  })
+  public familyName: string;
+
+  @Column({
     type: 'timestamp with time zone',
   })
   public validTo: Date;

@@ -22,4 +22,8 @@ export interface Values {
   gender: CTGender | undefined;
   dob: string;
   password: string;
+  code0: string;
+  code1: string;
+  code2: string;
+  code3: string;
 }

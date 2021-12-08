@@ -38,6 +38,13 @@ export const m = {
         numericCharacter: 'At least one numeric character',
         upperAndLowerCharacter: 'One uppercase and lowercase letter',
       },
+      confirmEmail: {
+        description:
+          'We have sent you an confirmation e-mail to {email} with validation code. Please enter it.',
+        codeDescription:
+          'You don’t receive an e-mail? Please, check spam folder. ',
+        sendNewCode: 'Send new code',
+      },
     },
   },
   fields: {

@@ -46,11 +46,14 @@ export function SignUp() {
             gender: undefined,
             dob: '',
             password: '',
+            code0: '',
+            code1: '',
+            code2: '',
+            code3: '',
           }}
           onSubmit={onSubmit}
         >
-          {({ handleSubmit, values }) => {
-            console.log(values);
+          {({ handleSubmit }) => {
             return (
               <StyledForm onSubmit={handleSubmit}>
                 <div>
