@@ -1,4 +1,4 @@
-import { CTGender, CTUserBaseData } from '@family-dashboard/common-types';
+import { CTGender, CTUserBaseData } from '@family-dashboard/global/types';
 
 import { UserEntity } from '../entities/user.entity';
 

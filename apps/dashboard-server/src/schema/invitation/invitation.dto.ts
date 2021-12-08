@@ -3,7 +3,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import {
   CTVerifyEmailResponse,
   CTVerifyEmailResponseStatus,
-} from '@family-dashboard/common-types';
+} from '@family-dashboard/global/types';
 
 @ObjectType()
 export class VerifyEmailDto implements CTVerifyEmailResponse {

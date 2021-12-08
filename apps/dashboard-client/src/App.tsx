@@ -2,8 +2,8 @@ import { IntlProvider } from 'react-intl';
 import Modal from 'react-modal';
 import { ApolloProvider } from '@apollo/client';
 
-import { clientDashboardGraphql } from '@family-dashboard/api-graphql';
 import { GlobalStylesDefault } from '@family-dashboard/design-system';
+import { clientDashboardGraphql } from '@family-dashboard/fe-libs/api-graphql';
 
 import { Routing } from './routing/Routing';
 import { messages } from './translations/en';

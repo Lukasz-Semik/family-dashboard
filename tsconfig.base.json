@@ -15,14 +15,19 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@family-dashboard/api-graphql": ["libs/api-graphql/src/index.ts"],
-      "@family-dashboard/common-types": ["libs/common-types/src/index.ts"],
       "@family-dashboard/design-system": ["libs/design-system/src/index.ts"],
-      "@family-dashboard/form-controls": ["libs/form-controls/src/index.ts"],
-      "@family-dashboard/global-constants": [
-        "libs/global-constants/src/index.ts"
+      "@family-dashboard/fe-libs/api-graphql": [
+        "libs/fe-libs/api-graphql/src/index.ts"
       ],
-      "@family-dashboard/sdk": ["libs/sdk/src/index.ts"]
+      "@family-dashboard/fe-libs/field-controls": [
+        "libs/fe-libs/field-controls/src/index.ts"
+      ],
+      "@family-dashboard/fe-modules/auth": [
+        "libs/fe-modules/auth/src/index.ts"
+      ],
+      "@family-dashboard/global/const": ["libs/global/const/src/index.ts"],
+      "@family-dashboard/global/sdk": ["libs/global/sdk/src/index.ts"],
+      "@family-dashboard/global/types": ["libs/global/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { fdRoutes } from '@family-dashboard/global-constants';
+import { SignIn } from '@family-dashboard/fe-modules/auth';
+import { SignUp } from '@family-dashboard/fe-modules/auth';
+import { fdRoutes } from '@family-dashboard/global/const';
 
-import { SignIn } from '../modules/Auth/SignIn/SignIn';
-import { SignUp } from '../modules/Auth/SignUp/SignUp';
 import { Dashboard } from '../modules/Dashboard/Dashboard';
 import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 

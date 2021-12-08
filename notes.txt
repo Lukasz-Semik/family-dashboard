@@ -1,10 +1,11 @@
 TODO:
-- domain driven - restructure + better linting approach globally (sorts)
-- tests
 - finalize errors states in sign up (validation code)
+- tests
+- dob validation
 - code todos
 - handle resend code
 - handle token returns on confirm sign up invitation
 - migrate to nx_envs
 - exctract cache (when start more advanced api)
 - Typography (parallel with designs)
+

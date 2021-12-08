@@ -1,14 +1,15 @@
 {
   "version": 2,
   "projects": {
-    "api-graphql": "libs/api-graphql",
-    "common-types": "libs/common-types",
     "dashboard-client": "apps/dashboard-client",
     "dashboard-client-e2e": "apps/dashboard-client-e2e",
     "dashboard-server": "apps/dashboard-server",
     "design-system": "libs/design-system",
-    "form-controls": "libs/form-controls",
-    "global-constants": "libs/global-constants",
-    "sdk": "libs/sdk"
+    "fe-libs-api-graphql": "libs/fe-libs/api-graphql",
+    "fe-libs-field-controls": "libs/fe-libs/field-controls",
+    "fe-modules-auth": "libs/fe-modules/auth",
+    "global-const": "libs/global/const",
+    "global-sdk": "libs/global/sdk",
+    "global-types": "libs/global/types"
   }
 }

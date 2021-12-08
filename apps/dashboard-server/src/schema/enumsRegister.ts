@@ -3,7 +3,7 @@ import { registerEnumType } from '@nestjs/graphql';
 import {
   CTGender,
   CTVerifyEmailResponseStatus,
-} from '@family-dashboard/common-types';
+} from '@family-dashboard/global/types';
 
 registerEnumType(CTVerifyEmailResponseStatus, {
   name: 'CTVerifyEmailResponseStatus',
