@@ -61,7 +61,14 @@ export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
       };
     }
 
-    return {};
+    return {
+      title: (
+        <FormattedMessage id="auth.signUp.verifyEmail.defaultMessage.title" />
+      ),
+      description: (
+        <FormattedMessage id="auth.signUp.verifyEmail.defaultMessage.description" />
+      ),
+    };
   }, [verifyEmailResponse]);
 
   return (

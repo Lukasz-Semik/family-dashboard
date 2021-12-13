@@ -1,3 +1,4 @@
+// TODO: Extract messages and split
 export const m = {
   auth: {
     signIn: {
@@ -28,6 +29,11 @@ export const m = {
           description:
             'This email was used for signing up, however is not confirmed. Please, check your email box and finalize onboarding.',
         },
+        defaultMessage: {
+          title: 'Something went wrong',
+          description:
+            'It is possible that your invitation is deprecated. You can contact our support via: 666-666-666',
+        },
       },
       familyNameDescription:
         'Provide name of your family and confirm your last name.',
@@ -44,6 +50,10 @@ export const m = {
         codeDescription:
           'You don’t receive an e-mail? Please, check spam folder. ',
         sendNewCode: 'Send new code',
+        invalidCode: 'This code is invalid',
+        successDescription:
+          'Your account is set. Would you like to add your family members? ',
+        doItLater: 'You can do it later :)',
       },
     },
   },
@@ -87,6 +97,10 @@ export const m = {
       },
     },
   },
+  controls: {
+    goToDashboard: 'Go to dashboard',
+    addFamilyMembers: 'Add family members',
+  },
   shared: {
     show: 'Show',
     hide: 'Hide',
@@ -96,8 +110,10 @@ export const m = {
     select: 'Select...',
   },
   errors: {
+    somethingWentWrong: 'Something went wrong',
     required: 'This field is required',
     email: 'Provide valid e-mail address',
+    invalidDate: 'Invalid date',
   },
 };
 

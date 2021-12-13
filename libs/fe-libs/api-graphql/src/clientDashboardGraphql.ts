@@ -1,23 +1,3 @@
-// import { ApolloClient, InMemoryCache } from '@apollo/client';
-
-// // TODO: exctract cache
-// export const client = new ApolloClient({
-//   uri: 'http://localhost:3001/graphql',
-//   cache: new InMemoryCache({
-//     typePolicies: {
-//       Query: {
-//         fields: {
-//           token: {
-//             read(existingToken) {
-//               return existingToken;
-//             },
-//           },
-//         },
-//       },
-//     },
-//   }),
-// });
-
 import {
   ApolloClient,
   createHttpLink,

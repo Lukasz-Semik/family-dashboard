@@ -1,11 +1,9 @@
 TODO:
-- finalize errors states in sign up (validation code)
-- tests
-- dob validation
+- extract i118n
 - code todos
 - handle resend code
 - handle token returns on confirm sign up invitation
 - migrate to nx_envs
+- tests
 - exctract cache (when start more advanced api)
 - Typography (parallel with designs)
-

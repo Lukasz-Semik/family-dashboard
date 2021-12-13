@@ -2,7 +2,7 @@ import { useHistory } from 'react-router';
 import { useMutation } from '@apollo/client';
 
 import { Login } from '@family-dashboard/fe-libs/api-graphql';
-import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
+import { FD_TOKEN_KEY, fdRoutes } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import { CTLoginResponse } from '@family-dashboard/global/types';
 
@@ -20,10 +20,11 @@ export function useSignIn() {
       onCompleted: (data) => {
         if (data?.login?.accessToken) {
           sdkSetToSessionStorage(FD_TOKEN_KEY, data?.login?.accessToken);
-          history.push('/dashboard');
+          history.push(fdRoutes.dashboard.dashboardRoute());
         }
       },
       onError: (a) => {
+        // TODO: error toast
         console.log(a.message);
       },
     }

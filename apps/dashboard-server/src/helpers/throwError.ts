@@ -1,12 +1,5 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { GraphQLError } from 'graphql';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const throwError = (statusCode: HttpStatus, errors: any) => {
-  throw new HttpException(
-    {
-      statusCode,
-      errors,
-    },
-    statusCode
-  );
+export const throwError = (errorMessage: string) => {
+  throw new GraphQLError(errorMessage);
 };

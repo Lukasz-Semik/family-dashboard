@@ -4,13 +4,18 @@ import { InvitationEntity } from '../../entities/invitation.entity';
 import {
   ConfirmInvitationInput,
   CreateInvitationInput,
+  LoginDto,
   VerifyEmailDto,
 } from '../../schema';
+import { AuthService } from '../auth/auth.service';
 import { InvitationService } from './invitation.service';
 
 @Resolver(() => InvitationEntity)
 export class InvitationResolver {
-  constructor(private readonly invitationService: InvitationService) {}
+  constructor(
+    private readonly invitationService: InvitationService,
+    private readonly authService: AuthService
+  ) {}
 
   @Query(() => VerifyEmailDto)
   async verifySignUpEmail(@Args('email') email: string) {
@@ -24,8 +29,10 @@ export class InvitationResolver {
     return this.invitationService.createSignUpInvitation(input);
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => LoginDto)
   async confirmSignUpInvitation(@Args('input') input: ConfirmInvitationInput) {
-    return this.invitationService.confirmSignUpInvitation(input);
+    const user = await this.invitationService.confirmSignUpInvitation(input);
+
+    return this.authService.createToken(user.email, user.id);
   }
 }

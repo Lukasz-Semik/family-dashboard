@@ -1,10 +1,13 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcryptjs';
 import * as dayjs from 'dayjs';
 import { Repository } from 'typeorm';
 
-import { CTVerifyEmailResponseStatus } from '@family-dashboard/global/types';
+import {
+  CTInvitationErrors,
+  CTVerifyEmailResponseStatus,
+} from '@family-dashboard/global/types';
 
 import { FamilyEntity } from '../../entities/family.entity';
 import { InvitationEntity } from '../../entities/invitation.entity';
@@ -69,7 +72,7 @@ export class InvitationService {
         status: CTVerifyEmailResponseStatus.Success,
       };
     } catch (err) {
-      throwError(HttpStatus.INTERNAL_SERVER_ERROR, err);
+      throwError(err.message);
     }
   }
 
@@ -84,7 +87,7 @@ export class InvitationService {
       });
 
       if (existingUser) {
-        throwError(HttpStatus.CONFLICT, { msg: 'Email already in use' });
+        throwError(CTInvitationErrors.EmailAlreadyInUse);
       }
 
       const existingInvitation = await this.invitationRepository.findOne({
@@ -92,7 +95,7 @@ export class InvitationService {
       });
 
       if (existingInvitation) {
-        throwError(HttpStatus.CONFLICT, { msg: 'Email already invited' });
+        throwError(CTInvitationErrors.EmailAlreadyInvited);
       }
 
       this.invitationRepository.save({
@@ -105,7 +108,7 @@ export class InvitationService {
 
       return true;
     } catch (err) {
-      throwError(HttpStatus.INTERNAL_SERVER_ERROR, err);
+      throwError(err.message);
     }
   }
 
@@ -117,14 +120,14 @@ export class InvitationService {
 
   async confirmSignUpInvitation(
     input: ConfirmInvitationInput
-  ): Promise<boolean> {
+  ): Promise<UserEntity> {
     try {
       const existingUser = await this.userRepository.findOne({
         email: input.email,
       });
 
       if (existingUser) {
-        throwError(HttpStatus.CONFLICT, { msg: 'Email already in use' });
+        throwError(CTInvitationErrors.EmailAlreadyInUse);
       }
 
       const existingInvitation = await this.invitationRepository.findOne({
@@ -132,15 +135,15 @@ export class InvitationService {
       });
 
       if (!existingInvitation) {
-        throwError(HttpStatus.NOT_FOUND, { msg: 'Email is not invited' });
+        throwError(CTInvitationErrors.EmailIsNotInvited);
       }
 
       if (this.getIsInvitationDeprecated(String(existingInvitation?.validTo))) {
-        throwError(HttpStatus.BAD_REQUEST, { msg: 'Invitation deprecated' });
+        throwError(CTInvitationErrors.InvitationDeprecated);
       }
 
       if (existingInvitation.code !== input.code) {
-        throwError(HttpStatus.BAD_REQUEST, { msg: 'Code is invalid' });
+        throwError(CTInvitationErrors.CodeInvalid);
       }
 
       const { familyName, ...userInput } = input;
@@ -162,9 +165,9 @@ export class InvitationService {
 
       this.invitationRepository.delete({ email: input.email });
 
-      return true;
+      return createdUser;
     } catch (err) {
-      throwError(HttpStatus.INTERNAL_SERVER_ERROR, err);
+      throwError(err.message);
     }
   }
 }

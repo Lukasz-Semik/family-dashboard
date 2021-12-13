@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { compare } from 'bcryptjs';
@@ -31,17 +31,22 @@ export class AuthService {
     return null;
   }
 
-  async login(email: string, password: string) {
-    const user = await this.validateUser(email, password);
-
-    if (!user) {
-      throwError(HttpStatus.UNAUTHORIZED, {});
-    }
-
-    const payload = { email: user.email, sub: user.id };
+  createToken(email: string, userId: string) {
+    const payload = { email, sub: userId };
 
     return {
       accessToken: this.jwtService.sign(payload),
     };
+  }
+
+  async login(email: string, password: string) {
+    const user = await this.validateUser(email, password);
+
+    if (!user) {
+      // TODO: check all throws
+      throwError('msg');
+    }
+
+    return this.createToken(user.email, user.id);
   }
 }

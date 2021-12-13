@@ -3,18 +3,44 @@ import { useMutation } from '@apollo/client';
 import dayjs from 'dayjs';
 
 import { ConfirmSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
+import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
+import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
+import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
   CTConfirmInvitationInput,
   CTGender,
+  CTInvitationErrors,
+  CTLoginResponse,
 } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
 
-export function useConfirmSignUpInvitation() {
-  const [confirmSignUpInvitationMutation] = useMutation<
-    { confirmSignUpInvitation: boolean },
+interface Args {
+  setHasFailedPin: () => void;
+  goToNextStep: () => void;
+}
+
+export function useConfirmSignUpInvitation({
+  setHasFailedPin,
+  goToNextStep,
+}: Args) {
+  const [confirmSignUpInvitationMutation, { loading }] = useMutation<
+    { confirmSignUpInvitation: CTLoginResponse },
     { input: CTConfirmInvitationInput }
-  >(ConfirmSignUpInvitation);
+  >(ConfirmSignUpInvitation, {
+    onCompleted: (responseData) => {
+      sdkSetToSessionStorage(
+        FD_TOKEN_KEY,
+        responseData?.confirmSignUpInvitation?.accessToken
+      );
+      goToNextStep();
+    },
+    onError: (error) => {
+      if (error.graphQLErrors[0].message === CTInvitationErrors.CodeInvalid) {
+        setHasFailedPin();
+      }
+    },
+  });
 
   const confirmSignUpInvitation = useCallback(
     (values: Values) => {
@@ -36,7 +62,7 @@ export function useConfirmSignUpInvitation() {
             ...rest,
             code,
             gender: gender as CTGender,
-            dob: dayjs(values.dob).toDate(),
+            dob: dayjs(values.dob, FULL_DATE_FORMAT).toDate(),
           },
         },
       });
@@ -46,5 +72,6 @@ export function useConfirmSignUpInvitation() {
 
   return {
     confirmSignUpInvitation,
+    isLoadingSignUpInvitation: loading,
   };
 }
