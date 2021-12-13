@@ -48,9 +48,7 @@ export function FieldInputsPureConnectedGroup({
     index: number
   ) => {
     const isFirst = index === 0;
-    if (e.key === 'Backspace') {
-      console.log(e.target);
-    }
+
     if (e.key === 'Backspace' && ref.current[index]?.value === '' && !isFirst) {
       setTimeout(() => {
         ref.current[index - 1]?.focus();

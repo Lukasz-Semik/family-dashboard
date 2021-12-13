@@ -21,7 +21,6 @@ interface Props {
 }
 
 export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
-  console.log({ verifyEmailResponse });
   const copies = useMemo(() => {
     if (
       verifyEmailResponse?.status === CTVerifyEmailResponseStatus.AlreadyCreated

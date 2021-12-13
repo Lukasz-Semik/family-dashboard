@@ -60,7 +60,6 @@ export function SignUp() {
           onSubmit={onSubmit}
         >
           {({ handleSubmit, values }) => {
-            console.log(values);
             return (
               <StyledForm onSubmit={handleSubmit}>
                 <div>
