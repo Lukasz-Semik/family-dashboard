@@ -4,10 +4,8 @@ import dayjs from 'dayjs';
 
 import { ConfirmSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
-import {
-  FULL_DATE_FORMAT,
-  sdkSetToSessionStorage,
-} from '@family-dashboard/global/sdk';
+import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
+import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
   CTConfirmInvitationInput,
   CTGender,

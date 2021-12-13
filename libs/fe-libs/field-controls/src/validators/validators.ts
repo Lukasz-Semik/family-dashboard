@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
+import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import {
-  sdkValidateDateValid,
   sdkValidateEmail,
   sdkValidateRequired,
 } from '@family-dashboard/global/sdk';
@@ -19,8 +19,7 @@ export function combineFieldValidators(...validators: ValidatorBase[]) {
 
 export const validateFieldDateValid =
   (message: React.ReactNode) => (value: string | number | undefined | null) => {
-    console.log(sdkValidateDateValid(String(value)));
-    if (dayjs(value, 'DD-MM-YYYY').format('DD-MM-YYYY') !== value) {
+    if (dayjs(value, FULL_DATE_FORMAT).format(FULL_DATE_FORMAT) !== value) {
       return message as string;
     }
 

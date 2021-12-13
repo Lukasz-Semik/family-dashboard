@@ -2,7 +2,7 @@ import { useLazyQuery, useQuery } from '@apollo/client';
 import dayjs from 'dayjs';
 
 import { GetUserInitialAppState } from '@family-dashboard/fe-libs/api-graphql';
-import { FULL_DATE_FORMAT } from '@family-dashboard/global/sdk';
+import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 
 export function Dashboard() {
   const { data } = useQuery(GetUserInitialAppState, {

@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 
 import { showErrorToast } from '@family-dashboard/design-system';
 import { CreateSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
-import { FULL_DATE_FORMAT } from '@family-dashboard/global/sdk';
+import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import { CTCreateInvitationInput } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
