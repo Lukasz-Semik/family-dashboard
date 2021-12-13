@@ -22,8 +22,14 @@ import { SignUpEmailStepController } from './SignUpEmailStepController/SignUpEma
 import { SignUpIndicatorProgress } from './SignUpIndicatorProgress/SignUpIndicatorProgress';
 
 export function SignUp() {
-  const { onSubmit, currentStep, isLoadingVerifyEmail, verifyEmailResponse } =
-    useSignUp();
+  const {
+    onSubmit,
+    currentStep,
+    isLoading,
+    verifyEmailResponse,
+    hasFailedPin,
+    resetHasFailedPin,
+  } = useSignUp();
 
   return (
     <StyledWrapper>
@@ -53,7 +59,8 @@ export function SignUp() {
           }}
           onSubmit={onSubmit}
         >
-          {({ handleSubmit }) => {
+          {({ handleSubmit, values }) => {
+            console.log(values);
             return (
               <StyledForm onSubmit={handleSubmit}>
                 <div>
@@ -63,21 +70,21 @@ export function SignUp() {
                     </StyledFormTitle>
                   </StyledFormTitleHeader>
 
-                  {!isLoadingVerifyEmail && (
+                  {!isLoading && (
                     <SignUpEmailStepController
                       currentStep={currentStep}
                       verifyEmailResponse={verifyEmailResponse}
+                      hasFailedPin={hasFailedPin}
+                      resetHasFailedPin={resetHasFailedPin}
                     />
                   )}
                 </div>
 
-                {!isLoadingVerifyEmail && (
+                {!isLoading ? (
                   <div>
                     <SignUpButtonsGroup currentStep={currentStep} />
                   </div>
-                )}
-
-                {isLoadingVerifyEmail && (
+                ) : (
                   <StyledLoaderWrapper>
                     <Loader />
                   </StyledLoaderWrapper>

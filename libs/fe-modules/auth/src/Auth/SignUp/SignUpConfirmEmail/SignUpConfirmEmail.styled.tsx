@@ -10,6 +10,13 @@ export const StyledInputsWrapper = styled.div`
   margin-bottom: 2rem;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const StyledErrorWrapper = styled.div`
+  width: 100%;
+  position: relative;
 `;
 
 export const StyledButtonResend = styled.div`

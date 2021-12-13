@@ -1,4 +1,4 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -24,15 +24,16 @@ export class UserService {
         .getOne();
 
       if (!foundUser) {
-        throwError(HttpStatus.NOT_FOUND, { msg: 'user not exists' });
+        throwError('user not exists');
       }
 
+      // TODO: move serializators to resolver and keep convention - serialize only and alwyas in resolvers
       return {
         currentUser: serializeCurrentUser(foundUser),
         family: serializeFamily(foundUser.family),
       };
     } catch (err) {
-      throwError(HttpStatus.INTERNAL_SERVER_ERROR, err);
+      throwError(err.message);
     }
   }
 }

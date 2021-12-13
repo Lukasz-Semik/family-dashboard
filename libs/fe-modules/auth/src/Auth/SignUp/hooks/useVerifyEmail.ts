@@ -26,8 +26,8 @@ export function useVerifyEmail({ goToNextStep, goToErrorStep }: Args) {
         goToErrorStep();
       }
     },
-    // TODO: toasts
-    onError: () => console.log('error'),
+
+    onError: () => goToErrorStep(),
   });
 
   const verifyEmail = useCallback(

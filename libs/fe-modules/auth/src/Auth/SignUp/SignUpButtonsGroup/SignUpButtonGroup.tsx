@@ -17,6 +17,8 @@ interface Props {
 
 export function SignUpButtonsGroup({ currentStep }: Props) {
   const isEmailStep = currentStep === SignUpStep.Email;
+  const isFinalStep = currentStep === SignUpStep.FinalStep;
+
   const buttonTranslationPath = useMemo(() => {
     switch (currentStep) {
       case SignUpStep.Email:
@@ -27,6 +29,10 @@ export function SignUpButtonsGroup({ currentStep }: Props) {
         return 'shared.next';
     }
   }, [currentStep]);
+
+  if (isFinalStep) {
+    return null;
+  }
 
   return (
     <>

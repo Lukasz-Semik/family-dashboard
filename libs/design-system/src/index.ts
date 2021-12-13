@@ -27,4 +27,7 @@ export * from './components/Loader/Loader.types';
 export * from './components/Loader/Loader';
 export * from './components/Select/Select.types';
 export * from './components/Select/Select';
+export * from './components/Toast/ToastRoot';
+export * from './components/Toast/Toast.types';
+export * from './components/Toast/handlers';
 export * from './components/Wrappers/Wrappers';

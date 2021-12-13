@@ -13,11 +13,15 @@ import { SignUpPersonalDetails2 } from '../SignUpPersonalDetails/SignUpPersonalD
 interface Props {
   currentStep: SignUpStep;
   verifyEmailResponse?: CTVerifyEmailResponse;
+  hasFailedPin: boolean;
+  resetHasFailedPin: () => void;
 }
 
 export function SignUpEmailStepController({
   currentStep,
   verifyEmailResponse,
+  hasFailedPin,
+  resetHasFailedPin,
 }: Props) {
   switch (currentStep) {
     case SignUpStep.Email:
@@ -31,7 +35,12 @@ export function SignUpEmailStepController({
     case SignUpStep.Password:
       return <SignUpPassword />;
     case SignUpStep.ConfirmEmail:
-      return <SignUpConfirmEmail />;
+      return (
+        <SignUpConfirmEmail
+          hasFailedPin={hasFailedPin}
+          resetHasFailedPin={resetHasFailedPin}
+        />
+      );
     case SignUpStep.FinalStep:
       return <SignUpFinalStep />;
     case SignUpStep.EmailVerificationFailed:

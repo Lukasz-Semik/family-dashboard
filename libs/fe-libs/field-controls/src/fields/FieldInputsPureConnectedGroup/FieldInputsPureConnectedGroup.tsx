@@ -13,6 +13,9 @@ interface Props {
   validate?: FieldConfig['validate'];
   quantity: number;
   type?: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  hasError?: boolean;
+  autoFocus?: boolean;
 }
 
 export function FieldInputsPureConnectedGroup({
@@ -20,11 +23,14 @@ export function FieldInputsPureConnectedGroup({
   validate,
   quantity,
   type = 'text',
+  hasError,
+  autoFocus,
+  ...restProps
 }: Props) {
   const ref = useRef<HTMLInputElement[] | null[]>([]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    console.log(e.target.value);
+    restProps.onChange(e);
     const isLast = index + 1 === ref.current.length;
     if (e.target.value.length === 1 && !isLast) {
       ref.current[index + 1]?.focus();
@@ -61,11 +67,13 @@ export function FieldInputsPureConnectedGroup({
             ref={(el: HTMLInputElement | null) => {
               ref.current[index] = el;
             }}
+            autoFocus={autoFocus && index === 0}
             onChange={(e) => onChange(e, index)}
             name={`${groupName}${index}`}
             label={groupName}
             onKeyDown={(e) => onKeyDown(e, index)}
             maxLength={1}
+            hasError={hasError}
             type={type}
           />
         </StyledInputWrapper>

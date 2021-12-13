@@ -1,8 +1,10 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
+  combineFieldValidators,
   FieldInputMasked,
   FieldSelect,
+  validateFieldDateValid,
   validateFieldRequired,
 } from '@family-dashboard/fe-libs/field-controls';
 import { CTGender } from '@family-dashboard/global/types';
@@ -24,9 +26,10 @@ export function SignUpPersonalDetails2() {
           autoFocus
           name="dob"
           label={<FormattedMessage id="fields.dateOfBirth.label" />}
-          placeholder="dd-mm-yyyy"
-          validate={validateFieldRequired(
-            <FormattedMessage id="errors.required" />
+          placeholder="DD-MM-YYYY"
+          validate={combineFieldValidators(
+            validateFieldRequired(<FormattedMessage id="errors.required" />),
+            validateFieldDateValid(<FormattedMessage id="errors.invalidDate" />)
           )}
         />
       </StyledFieldWrapper>

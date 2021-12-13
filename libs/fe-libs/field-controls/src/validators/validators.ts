@@ -1,4 +1,7 @@
+import dayjs from 'dayjs';
+
 import {
+  sdkValidateDateValid,
   sdkValidateEmail,
   sdkValidateRequired,
 } from '@family-dashboard/global/sdk';
@@ -13,6 +16,16 @@ export function combineFieldValidators(...validators: ValidatorBase[]) {
     }, '');
   };
 }
+
+export const validateFieldDateValid =
+  (message: React.ReactNode) => (value: string | number | undefined | null) => {
+    console.log(sdkValidateDateValid(String(value)));
+    if (dayjs(value, 'DD-MM-YYYY').format('DD-MM-YYYY') !== value) {
+      return message as string;
+    }
+
+    return undefined;
+  };
 
 export const validateFieldRequired =
   (message: React.ReactNode) => (value: string | number | undefined | null) => {

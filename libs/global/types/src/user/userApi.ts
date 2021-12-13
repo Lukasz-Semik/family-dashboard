@@ -9,6 +9,14 @@ export enum CTVerifyEmailResponseStatus {
   AlreadyCreated = 'AlreadyCreated',
 }
 
+export enum CTInvitationErrors {
+  EmailAlreadyInUse = 'EmailAlreadyInUse',
+  EmailAlreadyInvited = 'EmailAlreadyInvited',
+  EmailIsNotInvited = 'EmailIsNoteInvited',
+  InvitationDeprecated = 'InvitationDeprecated',
+  CodeInvalid = 'CodeInvalid',
+}
+
 export interface CTVerifyEmailResponse {
   status: CTVerifyEmailResponseStatus;
   inviterName?: string;

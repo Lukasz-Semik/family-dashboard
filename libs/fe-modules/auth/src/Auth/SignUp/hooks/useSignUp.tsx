@@ -1,4 +1,7 @@
 import { useCallback, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
+
+import { showErrorToast } from '@family-dashboard/design-system';
 
 import { SignUpStep, Values } from '../SignUp.types';
 import { useConfirmSignUpInvitation } from './useConfirmSignUpInvitation';
@@ -7,6 +10,7 @@ import { useVerifyEmail } from './useVerifyEmail';
 
 export function useSignUp() {
   const [currentStep, setCurrentStep] = useState(SignUpStep.Email);
+  const [hasFailedPin, setHasFailedPin] = useState(false);
 
   const { verifyEmail, isLoadingVerifyEmail, verifyEmailResponse } =
     useVerifyEmail({
@@ -14,8 +18,13 @@ export function useSignUp() {
       goToErrorStep: () => setCurrentStep(SignUpStep.EmailVerificationFailed),
     });
 
+  const { confirmSignUpInvitation, isLoadingSignUpInvitation } =
+    useConfirmSignUpInvitation({
+      setHasFailedPin: () => setHasFailedPin(true),
+      goToNextStep: () => setCurrentStep(SignUpStep.FinalStep),
+    });
+
   const { createSignUpInvitation } = useCreateSignUpInvitation();
-  const { confirmSignUpInvitation } = useConfirmSignUpInvitation();
 
   const onSubmit = useCallback(
     (values: Values, { resetForm }) => {
@@ -43,7 +52,6 @@ export function useSignUp() {
           return;
         case SignUpStep.ConfirmEmail:
           confirmSignUpInvitation(values);
-          setCurrentStep(SignUpStep.FinalStep);
           return;
         case SignUpStep.EmailVerificationFailed:
           setCurrentStep(SignUpStep.Email);
@@ -63,7 +71,9 @@ export function useSignUp() {
           });
           return;
         default:
-          // TODO: ERROR TOAST
+          showErrorToast(
+            <FormattedMessage id="shared.errors.somethingWentWrong" />
+          );
           return;
       }
     },
@@ -73,7 +83,9 @@ export function useSignUp() {
   return {
     currentStep,
     onSubmit,
-    isLoadingVerifyEmail,
+    hasFailedPin,
+    resetHasFailedPin: () => setHasFailedPin(false),
     verifyEmailResponse,
+    isLoading: isLoadingVerifyEmail || isLoadingSignUpInvitation,
   };
 }
