@@ -114,6 +114,7 @@ export const m = {
     required: 'This field is required',
     email: 'Provide valid e-mail address',
     invalidDate: 'Invalid date',
+    wrongSignIn: 'Email or password is invalid',
   },
 };
 

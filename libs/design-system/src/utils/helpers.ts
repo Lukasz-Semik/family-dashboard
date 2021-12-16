@@ -18,11 +18,9 @@ export const cssFadeIn = css`
   animation: ${animation} 0.7s ease-in-out forwards;
 `;
 
-// TODO: reuse it
 export const cssLinkLike = css`
   ${Typography16Regular}
   color: ${dsStyles.colors.blue1};
-  text-align: center;
   outline: none;
   border: none;
   background-color: transparent;

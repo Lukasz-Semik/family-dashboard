@@ -43,8 +43,7 @@ export class AuthService {
     const user = await this.validateUser(email, password);
 
     if (!user) {
-      // TODO: check all throws
-      throwError('msg');
+      throwError('invalid login');
     }
 
     return this.createToken(user.email, user.id);

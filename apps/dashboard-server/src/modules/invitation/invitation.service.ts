@@ -19,6 +19,10 @@ import {
   CreateInvitationInput,
   VerifyEmailDto,
 } from '../../schema';
+import {
+  validateConfirmInvitationInput,
+  validateCreateInvitationInput,
+} from './validators/invitationInput.validator';
 
 @Injectable()
 export class InvitationService {
@@ -80,8 +84,10 @@ export class InvitationService {
     input: CreateInvitationInput,
     code: string
   ): Promise<boolean> {
-    // TODO: add validations
     try {
+      if (!validateCreateInvitationInput(input)) {
+        throwError(CTInvitationErrors.WrongPayload);
+      }
       const existingUser = await this.userRepository.findOne({
         email: input.email,
       });
@@ -122,6 +128,10 @@ export class InvitationService {
     input: ConfirmInvitationInput
   ): Promise<UserEntity> {
     try {
+      if (!validateConfirmInvitationInput(input)) {
+        throwError(CTInvitationErrors.WrongPayload);
+      }
+
       const existingUser = await this.userRepository.findOne({
         email: input.email,
       });

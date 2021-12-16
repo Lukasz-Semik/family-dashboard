@@ -15,6 +15,7 @@ export enum CTInvitationErrors {
   EmailIsNotInvited = 'EmailIsNoteInvited',
   InvitationDeprecated = 'InvitationDeprecated',
   CodeInvalid = 'CodeInvalid',
+  WrongPayload = 'WrongPayload',
 }
 
 export interface CTVerifyEmailResponse {
