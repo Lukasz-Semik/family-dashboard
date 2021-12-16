@@ -7,7 +7,6 @@
     "design-system": "libs/design-system",
     "fe-libs-api-graphql": "libs/fe-libs/api-graphql",
     "fe-libs-field-controls": "libs/fe-libs/field-controls",
-    "fe-modules-auth": "libs/fe-modules/auth",
     "global-const": "libs/global/const",
     "global-sdk": "libs/global/sdk",
     "global-types": "libs/global/types"
