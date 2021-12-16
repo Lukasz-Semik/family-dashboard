@@ -1,6 +1,8 @@
+import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router';
 import { useMutation } from '@apollo/client';
 
+import { showErrorToast } from '@family-dashboard/design-system';
 import { Login } from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY, fdRoutes } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
@@ -19,13 +21,12 @@ export function useSignIn() {
     {
       onCompleted: (data) => {
         if (data?.login?.accessToken) {
-          sdkSetToSessionStorage(FD_TOKEN_KEY, data?.login?.accessToken);
+          sdkSetToSessionStorage(FD_TOKEN_KEY, data.login.accessToken);
           history.push(fdRoutes.dashboard.dashboardRoute());
         }
       },
-      onError: (a) => {
-        // TODO: error toast
-        console.log(a.message);
+      onError: () => {
+        showErrorToast(<FormattedMessage id="errors.wrongSignIn" />);
       },
     }
   );

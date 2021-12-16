@@ -22,4 +22,5 @@ export const StyledErrorWrapper = styled.div`
 export const StyledButtonResend = styled.div`
   ${cssLinkLike};
   margin-top: 1rem;
+  text-align: center;
 `;

@@ -1,6 +1,8 @@
 import validator from 'validator';
 
-export const sdkValidateRequired = (value?: string | number | null) => {
+type Value = string | number | undefined | null;
+
+export const sdkValidateRequired = (value?: Value) => {
   if (!value) {
     return false;
   }
@@ -12,7 +14,7 @@ export const sdkValidateRequired = (value?: string | number | null) => {
   return true;
 };
 
-export const sdkValidateEmail = (value: string | number | undefined | null) => {
+export const sdkValidateEmail = (value: Value) => {
   if (!value) {
     return false;
   }
@@ -22,6 +24,18 @@ export const sdkValidateEmail = (value: string | number | undefined | null) => {
   }
 
   if (!validator.isEmail(String(value))) {
+    return false;
+  }
+
+  return true;
+};
+
+export const sdkValidateMaxLength = (value: Value, maxLength: number) => {
+  if (!value) {
+    return true;
+  }
+
+  if (String(value).length > maxLength) {
     return false;
   }
 

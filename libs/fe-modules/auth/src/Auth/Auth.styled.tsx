@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
+  cssLinkLike,
   dsStyles,
-  Typography16Regular,
   Typography24Black,
   Typography32Black,
   Typography40Black,
@@ -93,13 +93,6 @@ export const StyledLinkWrapper = styled.div`
 `;
 
 export const StyledLink = styled(Link)`
-  ${Typography16Regular}
-  color: ${dsStyles.colors.blue1};
+  ${cssLinkLike}
   text-align: center;
-  outline: none;
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
 `;
