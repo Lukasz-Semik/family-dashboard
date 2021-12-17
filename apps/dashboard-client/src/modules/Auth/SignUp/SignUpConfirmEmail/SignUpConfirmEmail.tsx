@@ -1,7 +1,20 @@
 import { FormattedMessage } from 'react-intl';
+import { useMutation } from '@apollo/client';
 import { useFormikContext } from 'formik';
 
-import { ErrorMessage } from '@family-dashboard/design-system';
+import {
+  ErrorMessage,
+  showErrorToast,
+  showSuccessToast,
+} from '@family-dashboard/design-system';
+import {
+  Modal,
+  ModalButtonsGroup,
+  ModalText,
+  ModalTitle,
+  useModalState,
+} from '@family-dashboard/design-system';
+import { ResendInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FieldInputsPureConnectedGroup } from '@family-dashboard/fe-libs/field-controls';
 
 import { StyledCommonDescription } from '../SignUp.styled';
@@ -20,6 +33,24 @@ interface Props {
 
 export function SignUpConfirmEmail({ hasFailedPin, resetHasFailedPin }: Props) {
   const { values } = useFormikContext<Values>();
+  const [isModalOpen, openModal, closeModal] = useModalState();
+  const [resendInvitation, { loading }] = useMutation<{
+    resendInvitation: boolean;
+    email: string;
+  }>(ResendInvitation, {
+    variables: {
+      email: values.email,
+    },
+    onCompleted: () => {
+      showSuccessToast(
+        <FormattedMessage id="auth.signUp.confirmEmail.resendSuccess" />
+      );
+      closeModal();
+    },
+    onError: () => {
+      showErrorToast(<FormattedMessage id="errors.somethingWentWrong" />);
+    },
+  });
 
   return (
     <>
@@ -54,9 +85,27 @@ export function SignUpConfirmEmail({ hasFailedPin, resetHasFailedPin }: Props) {
         <FormattedMessage id="auth.signUp.confirmEmail.codeDescription" />
       </StyledCommonDescription>
 
-      <StyledButtonResend>
+      <StyledButtonResend onClick={openModal}>
         <FormattedMessage id="auth.signUp.confirmEmail.sendNewCode" />
       </StyledButtonResend>
+
+      <Modal isOpen={isModalOpen} closeModal={closeModal}>
+        <ModalTitle>
+          <FormattedMessage id="auth.signUp.confirmEmail.sendNewCode" />
+        </ModalTitle>
+        <ModalText>
+          <FormattedMessage id="auth.signUp.confirmEmail.sendNewCodeDescription" />
+        </ModalText>
+
+        <ModalButtonsGroup
+          isConfirmLoading={loading}
+          isDisabled={loading}
+          onCancelButtonClick={closeModal}
+          onConfirmButtonClick={resendInvitation}
+          cancelContent={<FormattedMessage id="shared.cancel" />}
+          confirmContent={<FormattedMessage id="shared.confirm" />}
+        />
+      </Modal>
     </>
   );
 }

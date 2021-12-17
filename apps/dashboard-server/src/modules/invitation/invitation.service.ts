@@ -180,4 +180,32 @@ export class InvitationService {
       throwError(err.message);
     }
   }
+
+  async resendInvitation(email: string): Promise<boolean> {
+    const code = generateNumericCode(4);
+    // FUTURE: Send resend email
+    try {
+      const existingInvitation = await this.invitationRepository.findOne({
+        email,
+      });
+
+      if (!existingInvitation) {
+        throwError(CTInvitationErrors.EmailIsNotInvited);
+      }
+
+      if (this.getIsInvitationDeprecated(String(existingInvitation?.validTo))) {
+        throwError(CTInvitationErrors.InvitationDeprecated);
+      }
+
+      this.invitationRepository.save({
+        ...existingInvitation,
+        validTo: dayjs.utc().add(2, 'day').toDate(),
+        code,
+      });
+
+      return true;
+    } catch (err) {
+      throwError(err.message);
+    }
+  }
 }

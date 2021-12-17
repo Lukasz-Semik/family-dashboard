@@ -1,7 +1,7 @@
 TODO:
 - extract i118n
 - handle resend code
-- handle token returns on confirm sign up invitation
+- rgba colors
 - migrate to nx_envs
 - tests
 - exctract cache (when start more advanced api)

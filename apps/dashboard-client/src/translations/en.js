@@ -50,6 +50,9 @@ export const m = {
         codeDescription:
           'You don’t receive an e-mail? Please, check spam folder. ',
         sendNewCode: 'Send new code',
+        sendNewCodeDescription:
+          'Are you sure, you need to receive a new verification code? Please, check you spam before confirmation.',
+        resendSuccess: 'Invitation has been resent',
         invalidCode: 'This code is invalid',
         successDescription:
           'Your account is set. Would you like to add your family members? ',
@@ -108,6 +111,8 @@ export const m = {
     start: 'Start',
     restart: 'Restart',
     select: 'Select...',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
   },
   errors: {
     somethingWentWrong: 'Something went wrong',

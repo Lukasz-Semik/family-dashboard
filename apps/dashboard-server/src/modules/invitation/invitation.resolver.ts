@@ -29,6 +29,11 @@ export class InvitationResolver {
     return this.invitationService.createSignUpInvitation(input);
   }
 
+  @Mutation(() => Boolean)
+  async resendInvitation(@Args('email') email: string) {
+    return this.invitationService.resendInvitation(email);
+  }
+
   @Mutation(() => LoginDto)
   async confirmSignUpInvitation(@Args('input') input: ConfirmInvitationInput) {
     const user = await this.invitationService.confirmSignUpInvitation(input);

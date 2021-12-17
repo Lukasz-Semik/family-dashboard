@@ -21,6 +21,7 @@ export const dsStyles = {
     yellow2: '#B2B532',
     blue1: '#3890E1',
   },
+  // TODO: handle better handlers
   transitions: {
     standard: '0.3s ease-in-out',
   },
