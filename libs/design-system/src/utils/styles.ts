@@ -27,5 +27,6 @@ export const dsStyles = {
   },
   breakpoints: {
     xs: '767',
+    md: '1024',
   },
 };

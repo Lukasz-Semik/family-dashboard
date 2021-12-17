@@ -18,6 +18,12 @@ export const Typography24Black = css`
   line-height: 1.09;
 `;
 
+export const Typography24SemiBold = css`
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.09;
+`;
+
 export const Typography20SemiBold = css`
   font-size: 1.25rem;
   font-weight: 600;
@@ -28,6 +34,12 @@ export const Typography20Regular = css`
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.1;
+`;
+
+export const Typography16Black = css`
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.125;
 `;
 
 export const Typography16SemiBold = css`

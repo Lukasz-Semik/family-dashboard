@@ -1,8 +1,22 @@
 import { Meta } from '@storybook/react';
 
-import { IconChevron } from '..';
 import { dsStyles } from '../utils/styles';
-import { IconCheckmark, IconCrossmark, IconEmail, IconSecurity } from './Icons';
+import {
+  IconCheckmark,
+  IconChevron,
+  IconCrossmark,
+  IconDashboard,
+  IconEmail,
+  IconFamily,
+  IconGear,
+  IconHamburger,
+  IconMessage,
+  IconOrganizer,
+  IconSecurity,
+  IconSignOut,
+  IconUser,
+  IconWallet,
+} from './Icons';
 import { StyledIcon } from './Icons.styled';
 import { StyledItemsWrapper, StyledItemWrapper } from './IconStories.styled';
 
@@ -32,6 +46,42 @@ export const Icons = () => (
     <StyledItemWrapper>
       <IconChevron />
       icon-chevron
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconDashboard />
+      icon-dashboard
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconGear />
+      icon-gear
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconOrganizer />
+      icon-organizer
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconWallet />
+      icon-wallet
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconUser />
+      icon-user
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconFamily />
+      icon-family
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconSignOut />
+      icon-signout
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconHamburger />
+      icon-hamburger
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconMessage />
+      icon-message
     </StyledItemWrapper>
   </StyledItemsWrapper>
 );
