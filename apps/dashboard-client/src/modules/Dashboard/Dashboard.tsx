@@ -22,7 +22,7 @@ export function Dashboard() {
   );
   return (
     <div>
-      Dashboard <button onClick={() => f()}>click</button>
+      <button onClick={() => f()}>click</button>
     </div>
   );
 }

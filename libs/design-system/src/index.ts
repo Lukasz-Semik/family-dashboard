@@ -1,14 +1,18 @@
 export * from './utils/helpers';
 export * from './hooks/usePopperConfig';
+export * from './hooks/useIsResolution';
 export * from './utils/styles';
 export * from './utils/typography';
 
 export * from './icons/Icons';
 export * from './icons/Icons.types';
 
+export * from './components/Avatar/Avatar.types';
+export * from './components/Avatar/Avatar';
 export * from './components/Button/Button.types';
 export * from './components/Button/ButtonStandard/ButtonStandard';
 export * from './components/Button/ButtonSecondary/ButtonSecondary';
+export * from './components/Button/ButtonCloseAnimated/ButtonCloseAnimated';
 export * from './components/Checkbox/Checkbox.types';
 export * from './components/Checkbox/Checkbox';
 export * from './components/Elements/Elements.types';
@@ -25,6 +29,7 @@ export * from './components/Input/InputSecurity/InputSecurity';
 export * from './components/Input/InputStandard/InputStandard';
 export * from './components/Loader/Loader.types';
 export * from './components/Loader/Loader';
+export * from './components/Modal/Modal.styled';
 export * from './components/Modal/Modal';
 export * from './components/Modal/ModalElements';
 export * from './components/Modal/useModalState';

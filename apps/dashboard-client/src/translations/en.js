@@ -100,6 +100,24 @@ export const m = {
       },
     },
   },
+  organization: {
+    title: 'Organization',
+  },
+  finance: {
+    title: 'Finance',
+  },
+  family: {
+    title: 'Family',
+  },
+  familySettings: {
+    title: 'Family Settings',
+  },
+  account: {
+    title: 'Account',
+  },
+  dashboard: {
+    title: 'Dashboard',
+  },
   controls: {
     goToDashboard: 'Go to dashboard',
     addFamilyMembers: 'Add family members',
