@@ -18,9 +18,9 @@ export function MobileHeader() {
     <StyledWrapper>
       <button onClick={() => setIsSidebarOpen(true)}>
         <IconHamburger
-          height="28px"
-          width="28px"
-          color={dsStyles.colors.orange3}
+          height="1.5rem"
+          width="1.5rem"
+          color={dsStyles.colors.orange4}
         />
       </button>
 
@@ -28,8 +28,8 @@ export function MobileHeader() {
 
       <button onClick={() => console.log('Chat trigger')}>
         <IconMessage
-          height="28px"
-          width="28px"
+          height="1.5rem"
+          width="1.5rem"
           color={dsStyles.colors.violet2}
         />
       </button>

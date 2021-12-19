@@ -3,8 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
 
-import { dsStyles } from '@family-dashboard/design-system';
-
+import { dsStyles } from '../../utils/styles';
 import { ToastVariant } from './Toast.types';
 
 export const StyledWrapper = styled(ToastContainer)`
@@ -47,6 +46,7 @@ export const StyledWrapper = styled(ToastContainer)`
 interface Props {
   variant: ToastVariant;
 }
+
 export const StyledToastMessage = styled.div<Props>`
   width: 100%;
   padding: 0.5rem 1rem;
@@ -58,7 +58,7 @@ export const StyledToastMessage = styled.div<Props>`
   background-color: ${({ variant }) => {
     switch (variant) {
       case ToastVariant.Error:
-        return dsStyles.colors.red1;
+        return dsStyles.colors.red2;
       case ToastVariant.Info:
         return dsStyles.colors.violet1;
       case ToastVariant.Warning:

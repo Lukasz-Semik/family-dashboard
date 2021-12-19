@@ -1,5 +1,7 @@
-import { fdRoutes } from '@family-dashboard/global/const';
 import { Switch } from 'react-router-dom';
+
+import { fdRoutes } from '@family-dashboard/global/const';
+
 import { Layout } from '../../layout/Layout';
 import { Dashboard } from '../../modules/Dashboard/Dashboard';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
