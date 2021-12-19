@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
 
-import { Loader } from '@family-dashboard/design-system';
+import { LoaderSimple } from '@family-dashboard/design-system';
 
 import {
   StyledFormTitle,
@@ -85,7 +85,7 @@ export function SignUp() {
                   </div>
                 ) : (
                   <StyledLoaderWrapper>
-                    <Loader />
+                    <LoaderSimple />
                   </StyledLoaderWrapper>
                 )}
               </StyledForm>
