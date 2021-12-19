@@ -1,3 +1,6 @@
+import { ReactComponent as IconBookMarkedSVG } from './assets/icon-book-marked.svg';
+import { ReactComponent as IconCalendarSVG } from './assets/icon-calendar.svg';
+import { ReactComponent as IconCartSVG } from './assets/icon-cart.svg';
 import { ReactComponent as IconCheckmarkSVG } from './assets/icon-checkmark.svg';
 import { ReactComponent as IconChevronSVG } from './assets/icon-chevron.svg';
 import { ReactComponent as IconCrossmarkSVG } from './assets/icon-crossmark.svg';
@@ -9,6 +12,7 @@ import { ReactComponent as IconGearSVG } from './assets/icon-gear.svg';
 import { ReactComponent as IconHamburgerSVG } from './assets/icon-hamburger.svg';
 import { ReactComponent as IconMessageSVG } from './assets/icon-message.svg';
 import { ReactComponent as IconOrganizerSVG } from './assets/icon-organizer.svg';
+import { ReactComponent as IconPlusCircleSVG } from './assets/icon-plus-circle.svg';
 import { ReactComponent as IconSecuritySVG } from './assets/icon-security.svg';
 import { ReactComponent as IconSignOutSVG } from './assets/icon-signout.svg';
 import { ReactComponent as IconUserSVG } from './assets/icon-user.svg';
@@ -132,6 +136,38 @@ export const IconMessage = (props: IconProps) => {
   return (
     <IconWrapper {...props}>
       <IconMessageSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconPlusCircle = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconPlusCircleSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconBookMarked = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconBookMarkedSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconCalendar = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconCalendarSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconCart = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconCartSVG />
     </IconWrapper>
   );
 };

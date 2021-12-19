@@ -1,7 +1,11 @@
 import { ButtonCloseAnimated } from '@family-dashboard/design-system';
 
 import { ItemsList } from '../ItemsList/ItemsList';
-import { StyledButtonWrapper, StyledWrapper } from './SidebarMobile.styled';
+import {
+  StyledButtonWrapper,
+  StyledTitle,
+  StyledWrapper,
+} from './SidebarMobile.styled';
 
 interface Props {
   isOpen: boolean;
@@ -11,6 +15,7 @@ interface Props {
 export function SidebarMobile({ isOpen, closeSidebar }: Props) {
   return (
     <StyledWrapper isOpen={isOpen}>
+      <StyledTitle>Menu</StyledTitle>
       <StyledButtonWrapper>
         <ButtonCloseAnimated onClick={closeSidebar} />
       </StyledButtonWrapper>

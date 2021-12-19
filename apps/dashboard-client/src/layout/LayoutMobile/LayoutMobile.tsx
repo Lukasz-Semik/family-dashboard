@@ -1,3 +1,4 @@
+import { MobileFooter } from '../MobileFooter/MobileFooter';
 import { MobileHeader } from '../MobileHeader/MobileHeader';
 import { StyledWrapper } from './LayoutMobile.styled';
 
@@ -10,6 +11,7 @@ export function LayoutMobile({ children }: Props) {
     <StyledWrapper>
       <MobileHeader />
       {children}
+      <MobileFooter />
     </StyledWrapper>
   );
 }

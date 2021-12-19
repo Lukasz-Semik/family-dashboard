@@ -1,25 +1,20 @@
 import styled from 'styled-components';
 
-import { dsStyles, Typography16Black } from '@family-dashboard/design-system';
+import { dsStyles } from '@family-dashboard/design-system';
 
 import { MOBILE_HEADER_HEIGHT } from '../Layout.const';
 
-export const StyledWrapper = styled.header`
+export const StyledWrapper = styled.nav`
   position: fixed;
   width: 100%;
   height: ${MOBILE_HEADER_HEIGHT};
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   box-sizing: border-box;
   background-color: ${dsStyles.colors.white};
-  top: 0;
+  bottom: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 10000;
-`;
-
-export const StyledTitle = styled.h1`
-  ${Typography16Black};
-  color: ${dsStyles.colors.violet4};
+  border-top: 1px solid ${dsStyles.colors.grey2};
 `;

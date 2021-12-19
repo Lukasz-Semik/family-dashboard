@@ -2,6 +2,9 @@ import { Meta } from '@storybook/react';
 
 import { dsStyles } from '../utils/styles';
 import {
+  IconBookMarked,
+  IconCalendar,
+  IconCart,
   IconCheckmark,
   IconChevron,
   IconCrossmark,
@@ -12,6 +15,7 @@ import {
   IconHamburger,
   IconMessage,
   IconOrganizer,
+  IconPlusCircle,
   IconSecurity,
   IconSignOut,
   IconUser,
@@ -82,6 +86,22 @@ export const Icons = () => (
     <StyledItemWrapper>
       <IconMessage />
       icon-message
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconPlusCircle />
+      icon-plus-circle
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconBookMarked />
+      icon-book-marked
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconCalendar />
+      icon-calendar
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconCart />
+      icon-cart
     </StyledItemWrapper>
   </StyledItemsWrapper>
 );
