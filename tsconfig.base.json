@@ -19,6 +19,9 @@
       "@family-dashboard/fe-libs/api-graphql": [
         "libs/fe-libs/api-graphql/src/index.ts"
       ],
+      "@family-dashboard/fe-libs/fd-store": [
+        "libs/fe-libs/fd-store/src/index.ts"
+      ],
       "@family-dashboard/fe-libs/field-controls": [
         "libs/fe-libs/field-controls/src/index.ts"
       ],

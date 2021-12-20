@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 
 import { dsStyles } from '../utils/styles';
 import {
+  IconBell,
   IconBookMarked,
   IconCalendar,
   IconCart,
@@ -102,6 +103,10 @@ export const Icons = () => (
     <StyledItemWrapper>
       <IconCart />
       icon-cart
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconBell />
+      icon-bell
     </StyledItemWrapper>
   </StyledItemsWrapper>
 );

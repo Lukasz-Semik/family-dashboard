@@ -10,5 +10,6 @@ export const fdRoutes = {
     familyRoute: () => '/dashboard/family',
     accountRoute: () => '/dashboard/account',
     familySettingsRoute: () => '/dashboard/settings',
+    notificationsRoute: () => '/dashboard/notifications',
   },
 };
