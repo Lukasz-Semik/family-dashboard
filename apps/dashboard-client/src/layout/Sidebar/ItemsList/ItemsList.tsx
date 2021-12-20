@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import {
+  IconBell,
   IconDashboard,
   IconFamily,
   IconGear,
@@ -26,6 +27,14 @@ export function ItemsList({ closeSidebar }: Props) {
         icon={<IconDashboard width="18px" height="18px" />}
         closeSidebar={closeSidebar}
         content={<FormattedMessage id="dashboard.title" />}
+      />
+
+      <Item
+        path={fdRoutes.dashboard.notificationsRoute()}
+        isExact
+        icon={<IconBell width="18px" height="18px" />}
+        closeSidebar={closeSidebar}
+        content={<FormattedMessage id="notifications.title" />}
       />
 
       <Item

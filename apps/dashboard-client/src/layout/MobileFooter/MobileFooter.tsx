@@ -20,14 +20,6 @@ export function MobileFooter() {
       </button>
 
       <button>
-        <IconCalendar
-          width="1.5rem"
-          height="1.5rem"
-          color={dsStyles.colors.orange4}
-        />
-      </button>
-
-      <button>
         <IconBookMarked
           width="1.5rem"
           height="1.5rem"
@@ -37,6 +29,14 @@ export function MobileFooter() {
 
       <button>
         <IconCart
+          width="1.5rem"
+          height="1.5rem"
+          color={dsStyles.colors.orange4}
+        />
+      </button>
+
+      <button>
+        <IconCalendar
           width="1.5rem"
           height="1.5rem"
           color={dsStyles.colors.orange4}

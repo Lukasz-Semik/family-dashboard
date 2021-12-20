@@ -118,6 +118,9 @@ export const m = {
   dashboard: {
     title: 'Dashboard',
   },
+  notifications: {
+    title: 'Notifications',
+  },
   controls: {
     goToDashboard: 'Go to dashboard',
     addFamilyMembers: 'Add family members',
@@ -131,6 +134,7 @@ export const m = {
     select: 'Select...',
     cancel: 'Cancel',
     confirm: 'Confirm',
+    loadingApp: 'Loading your dashboard...',
   },
   errors: {
     somethingWentWrong: 'Something went wrong',

@@ -1,4 +1,4 @@
-import { Loader } from '../../Loader/Loader';
+import { LoaderSimple } from '../../Loader/LoaderSimple/LoaderSimple';
 import {
   StyledChildrenWrapper,
   StyledLoaderWrapper,
@@ -12,7 +12,7 @@ export const ButtonContent = ({ children, isLoading }: ButtonContentProps) => {
         {children}
       </StyledChildrenWrapper>
       <StyledLoaderWrapper data-testid="button-loader" isLoading={isLoading}>
-        <Loader size={20} />
+        <LoaderSimple size={20} />
       </StyledLoaderWrapper>
     </>
   );

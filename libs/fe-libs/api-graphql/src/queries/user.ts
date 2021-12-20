@@ -13,9 +13,15 @@ export const GetUserInitialAppState = gql`
   query GetUserInitialAppState {
     getUserInitialAppState {
       currentUser {
+        email
+        id
         firstName
+        middleName
         lastName
         dob
+        lastName
+        dob
+        gender
       }
       family {
         name

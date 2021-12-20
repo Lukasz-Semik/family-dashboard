@@ -1,3 +1,4 @@
+import { ReactComponent as IconBellSVG } from './assets/icon-bell.svg';
 import { ReactComponent as IconBookMarkedSVG } from './assets/icon-book-marked.svg';
 import { ReactComponent as IconCalendarSVG } from './assets/icon-calendar.svg';
 import { ReactComponent as IconCartSVG } from './assets/icon-cart.svg';
@@ -168,6 +169,14 @@ export const IconCart = (props: IconProps) => {
   return (
     <IconWrapper {...props}>
       <IconCartSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconBell = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconBellSVG />
     </IconWrapper>
   );
 };

@@ -14,6 +14,14 @@ export function useHeaderText() {
       return <FormattedMessage id="organization.title" />;
     }
 
+    if (
+      history.location.pathname.includes(
+        fdRoutes.dashboard.notificationsRoute()
+      )
+    ) {
+      return <FormattedMessage id="notifications.title" />;
+    }
+
     if (history.location.pathname.includes(fdRoutes.dashboard.financeRoute())) {
       return <FormattedMessage id="finance.title" />;
     }

@@ -1,12 +1,23 @@
+import { FormattedMessage } from 'react-intl';
 import { Switch } from 'react-router-dom';
 
+import { LoaderFullScreen } from '@family-dashboard/design-system';
 import { fdRoutes } from '@family-dashboard/global/const';
 
 import { Layout } from '../../layout/Layout';
 import { Dashboard } from '../../modules/Dashboard/Dashboard';
+import { useInitializeDashboard } from '../hooks/useInitializeDashboard';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 
 export function DashboardRouting() {
+  const { isLoading } = useInitializeDashboard();
+
+  if (isLoading) {
+    return (
+      <LoaderFullScreen content={<FormattedMessage id="shared.loadingApp" />} />
+    );
+  }
+
   return (
     <Layout>
       <Switch>
@@ -14,6 +25,12 @@ export function DashboardRouting() {
           exact
           path={fdRoutes.dashboard.dashboardRoute()}
           component={Dashboard}
+        />
+
+        <PrivateRoute
+          exact
+          path={fdRoutes.dashboard.notificationsRoute()}
+          render={() => <div>Notifications</div>}
         />
 
         <PrivateRoute

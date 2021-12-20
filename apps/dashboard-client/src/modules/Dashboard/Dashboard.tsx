@@ -7,6 +7,7 @@ import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 export function Dashboard() {
   const { data } = useQuery(GetUserInitialAppState, {
     onCompleted: () => console.log('main'),
+    skip: true,
   });
   console.log(data);
 

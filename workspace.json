@@ -6,6 +6,7 @@
     "dashboard-server": "apps/dashboard-server",
     "design-system": "libs/design-system",
     "fe-libs-api-graphql": "libs/fe-libs/api-graphql",
+    "fe-libs-fd-store": "libs/fe-libs/fd-store",
     "fe-libs-field-controls": "libs/fe-libs/field-controls",
     "global-const": "libs/global/const",
     "global-sdk": "libs/global/sdk",
