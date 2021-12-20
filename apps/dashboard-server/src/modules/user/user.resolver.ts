@@ -26,10 +26,6 @@ export class UserResolver {
     return {
       currentUser: serializeUser(result.foundUser),
       family: serializeFamily(result.foundFamily),
-      users: result.foundFamily.users
-        .filter((user) => user.id !== userId)
-        .map(serializeUser),
-      invitations: result.foundFamily.invitations.map(serializeInvitation),
     };
   }
 

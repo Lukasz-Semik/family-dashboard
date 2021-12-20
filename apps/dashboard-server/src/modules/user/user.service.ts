@@ -25,15 +25,8 @@ export class UserService {
     try {
       const foundUser = await this.userRepository
         .createQueryBuilder('user')
-        .leftJoinAndSelect('user.family', 'family.id')
+        .leftJoinAndSelect('user.family', 'family')
         .where('user.id = :id', { id })
-        .getOne();
-
-      const foundFamily = await this.familyRepository
-        .createQueryBuilder('family')
-        .leftJoinAndSelect('family.users', 'users')
-        .leftJoinAndSelect('family.invitations', 'invitations')
-        .where('family.id = :id', { id: foundUser.family.id })
         .getOne();
 
       if (!foundUser) {
@@ -42,7 +35,7 @@ export class UserService {
 
       return {
         foundUser,
-        foundFamily,
+        foundFamily: foundUser.family,
       };
     } catch (err) {
       throwError(err.message);

@@ -125,36 +125,6 @@ export class InvitationService {
     return true;
   }
 
-  async createUserInvitation(
-    input: CreateInvitationInput,
-    userId: string
-  ): Promise<InvitationEntity[]> {
-    try {
-      const code = generateNumericCode(4);
-      // FUTURE: Send invitation sent e-mail
-      const invitation = await this.createInvitationBase(input, code);
-
-      const foundUser = await this.userRepository
-        .createQueryBuilder('user')
-        .leftJoinAndSelect('user.family', 'family')
-        .leftJoinAndSelect('family.invitations', 'invitations')
-        .where('user.id = :id', { id: userId })
-        .getOne();
-
-      if (!foundUser) {
-        throwError('user not exists');
-      }
-
-      const updatedFamily = await this.familyRepository.save({
-        ...foundUser.family,
-        invitations: [...foundUser.family.invitations, invitation],
-      });
-      return updatedFamily.invitations;
-    } catch (err) {
-      throwError(err.message);
-    }
-  }
-
   async confirmSignUpInvitation(
     input: ConfirmInvitationInput
   ): Promise<UserEntity> {
@@ -235,6 +205,36 @@ export class InvitationService {
       });
 
       return true;
+    } catch (err) {
+      throwError(err.message);
+    }
+  }
+
+  async createUserInvitation(
+    input: CreateInvitationInput,
+    userId: string
+  ): Promise<InvitationEntity[]> {
+    try {
+      const code = generateNumericCode(4);
+      // FUTURE: Send invitation sent e-mail
+      const invitation = await this.createInvitationBase(input, code);
+
+      const foundUser = await this.userRepository
+        .createQueryBuilder('user')
+        .leftJoinAndSelect('user.family', 'family')
+        .leftJoinAndSelect('family.invitations', 'invitations')
+        .where('user.id = :id', { id: userId })
+        .getOne();
+
+      if (!foundUser) {
+        throwError('user not exists');
+      }
+
+      const updatedFamily = await this.familyRepository.save({
+        ...foundUser.family,
+        invitations: [...foundUser.family.invitations, invitation],
+      });
+      return updatedFamily.invitations;
     } catch (err) {
       throwError(err.message);
     }
