@@ -3,6 +3,7 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {
   CTGender,
   CTInitialAppStateResponse,
+  CTInvitationBaseData,
   CTLoginResponse,
   CTUserBaseData,
 } from '@family-dashboard/global/types';

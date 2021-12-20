@@ -83,7 +83,7 @@ export class InvitationService {
   async createInvitationBase(
     input: CreateInvitationInput,
     code: string
-  ): Promise<boolean> {
+  ): Promise<InvitationEntity> {
     try {
       if (!validateCreateInvitationInput(input)) {
         throwError(CTInvitationErrors.WrongPayload);
@@ -104,7 +104,7 @@ export class InvitationService {
         throwError(CTInvitationErrors.EmailAlreadyInvited);
       }
 
-      this.invitationRepository.save({
+      const savedInvitation = this.invitationRepository.save({
         ...new InvitationEntity(),
         ...input,
         validTo: dayjs.utc().add(2, 'day').toDate(),
@@ -112,7 +112,7 @@ export class InvitationService {
         code,
       });
 
-      return true;
+      return savedInvitation;
     } catch (err) {
       throwError(err.message);
     }
@@ -121,7 +121,38 @@ export class InvitationService {
   async createSignUpInvitation(input: CreateInvitationInput): Promise<boolean> {
     const code = generateNumericCode(4);
     // FUTURE: Send sign up e-mail
-    return this.createInvitationBase(input, code);
+    await this.createInvitationBase(input, code);
+    return true;
+  }
+
+  async createUserInvitation(
+    input: CreateInvitationInput,
+    userId: string
+  ): Promise<InvitationEntity[]> {
+    try {
+      const code = generateNumericCode(4);
+      // FUTURE: Send invitation sent e-mail
+      const invitation = await this.createInvitationBase(input, code);
+
+      const foundUser = await this.userRepository
+        .createQueryBuilder('user')
+        .leftJoinAndSelect('user.family', 'family')
+        .leftJoinAndSelect('family.invitations', 'invitations')
+        .where('user.id = :id', { id: userId })
+        .getOne();
+
+      if (!foundUser) {
+        throwError('user not exists');
+      }
+
+      const updatedFamily = await this.familyRepository.save({
+        ...foundUser.family,
+        invitations: [...foundUser.family.invitations, invitation],
+      });
+      return updatedFamily.invitations;
+    } catch (err) {
+      throwError(err.message);
+    }
   }
 
   async confirmSignUpInvitation(

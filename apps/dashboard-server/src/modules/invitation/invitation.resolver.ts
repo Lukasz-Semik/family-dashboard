@@ -1,13 +1,17 @@
+import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
+import { CurrentUserId } from '../../decorators/currentUserId.decorator';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
   ConfirmInvitationInput,
   CreateInvitationInput,
+  InvitationDto,
   LoginDto,
   VerifyEmailDto,
 } from '../../schema';
 import { AuthService } from '../auth/auth.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { InvitationService } from './invitation.service';
 
 @Resolver(() => InvitationEntity)
@@ -27,6 +31,15 @@ export class InvitationResolver {
   @Mutation(() => Boolean)
   async createSignUpInvitation(@Args('input') input: CreateInvitationInput) {
     return this.invitationService.createSignUpInvitation(input);
+  }
+
+  @Mutation(() => [InvitationDto])
+  @UseGuards(JwtAuthGuard)
+  async createUserInvitation(
+    @Args('input') input: CreateInvitationInput,
+    @CurrentUserId() userId: string
+  ) {
+    return this.invitationService.createUserInvitation(input, userId);
   }
 
   @Mutation(() => Boolean)

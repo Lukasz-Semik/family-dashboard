@@ -12,4 +12,4 @@ export const fdStore = configureStore({
 
 export type FDStoreRootState = ReturnType<typeof fdStore.getState>;
 
-export type GDStoreAppDispatch = typeof fdStore.dispatch;
+export type FDStoreAppDispatch = typeof fdStore.dispatch;

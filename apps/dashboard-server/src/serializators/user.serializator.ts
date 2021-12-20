@@ -2,7 +2,7 @@ import { CTGender, CTUserBaseData } from '@family-dashboard/global/types';
 
 import { UserEntity } from '../entities/user.entity';
 
-export const serializeCurrentUser = (user: UserEntity): CTUserBaseData => {
+export const serializeUser = (user: UserEntity): CTUserBaseData => {
   return {
     id: user.id,
     email: user.email,

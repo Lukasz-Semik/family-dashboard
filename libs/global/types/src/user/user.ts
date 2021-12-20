@@ -13,3 +13,9 @@ export interface CTUserBaseData {
   gender: CTGender;
   dob: Date;
 }
+
+export interface CTInvitationBaseData
+  extends Omit<Partial<CTUserBaseData>, 'id'> {
+  email: string;
+  validTo: Date;
+}

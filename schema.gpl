@@ -23,18 +23,14 @@ enum CTVerifyEmailResponseStatus {
   AlreadyCreated
 }
 
-type LoginDto {
-  accessToken: String!
-}
-
-type CurrentUserDto {
-  id: ID!
+type InvitationDto {
   email: String!
   firstName: String!
-  middleName: String!
+  middleName: String
   lastName: String!
   dob: DateTime!
   gender: CTGender!
+  validTo: DateTime!
 }
 
 """
@@ -49,6 +45,20 @@ enum CTGender {
   Other
 }
 
+type LoginDto {
+  accessToken: String!
+}
+
+type CurrentUserDto {
+  id: ID!
+  email: String!
+  firstName: String!
+  middleName: String!
+  lastName: String!
+  dob: DateTime!
+  gender: CTGender!
+}
+
 type InitialAppStateDto {
   currentUser: CurrentUserDto!
   family: FamilyDto!
@@ -61,6 +71,7 @@ type Query {
 
 type Mutation {
   createSignUpInvitation(input: CreateInvitationInput!): Boolean!
+  createUserInvitation(input: CreateInvitationInput!): [InvitationDto!]!
   resendInvitation(email: String!): Boolean!
   confirmSignUpInvitation(input: ConfirmInvitationInput!): LoginDto!
   login(password: String!, email: String!): LoginDto!
