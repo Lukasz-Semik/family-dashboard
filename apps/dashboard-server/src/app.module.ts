@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import { DatabaseOrmModule } from './database-orm.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { FamilyModule } from './modules/family/family.module';
 import { InvitationModule } from './modules/invitation/invitation.module';
 import { UserModule } from './modules/user/user.module';
 import { EnvModule } from './modules/utils/env/env.module';
@@ -18,6 +19,7 @@ import { TokenModule } from './modules/utils/token/token.module';
     AuthModule,
     InvitationModule,
     UserModule,
+    FamilyModule,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gpl',
       installSubscriptionHandlers: true,

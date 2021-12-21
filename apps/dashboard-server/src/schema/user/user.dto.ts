@@ -16,7 +16,7 @@ export class LoginDto implements CTLoginResponse {
 }
 
 @ObjectType()
-export class CurrentUserDto implements CTUserBaseData {
+export class UserDto implements CTUserBaseData {
   @Field(() => ID) readonly id: string;
   @Field(() => String) readonly email: string;
   @Field(() => String) readonly firstName: string;
@@ -28,7 +28,7 @@ export class CurrentUserDto implements CTUserBaseData {
 
 @ObjectType()
 export class InitialAppStateDto implements CTInitialAppStateResponse {
-  @Field(() => CurrentUserDto)
+  @Field(() => UserDto)
   readonly currentUser: CTInitialAppStateResponse['currentUser'];
   @Field(() => FamilyDto) readonly family: CTInitialAppStateResponse['family'];
 }

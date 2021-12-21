@@ -2,11 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type FamilyDto {
-  id: ID!
-  name: String!
-}
-
 type VerifyEmailDto {
   status: CTVerifyEmailResponseStatus!
   inviterName: String
@@ -49,7 +44,7 @@ type LoginDto {
   accessToken: String!
 }
 
-type CurrentUserDto {
+type UserDto {
   id: ID!
   email: String!
   firstName: String!
@@ -60,13 +55,24 @@ type CurrentUserDto {
 }
 
 type InitialAppStateDto {
-  currentUser: CurrentUserDto!
+  currentUser: UserDto!
   family: FamilyDto!
+}
+
+type FamilyDto {
+  id: ID!
+  name: String!
+}
+
+type FamilyAllMembersDto {
+  users: [UserDto!]!
+  invitations: [InvitationDto!]!
 }
 
 type Query {
   verifySignUpEmail(email: String!): VerifyEmailDto!
   getUserInitialAppState: InitialAppStateDto!
+  getAllFamilyMembers: FamilyAllMembersDto!
 }
 
 type Mutation {

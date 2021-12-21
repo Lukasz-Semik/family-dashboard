@@ -5,7 +5,6 @@ import { CurrentUserId } from '../../decorators/currentUserId.decorator';
 import { UserEntity } from '../../entities/user.entity';
 import { InitialAppStateDto, LoginDto } from '../../schema';
 import { serializeFamily } from '../../serializators/family.serializator';
-import { serializeInvitation } from '../../serializators/invitation.serializator';
 import { serializeUser } from '../../serializators/user.serializator';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
