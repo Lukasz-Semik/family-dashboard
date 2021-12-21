@@ -15,22 +15,20 @@ export class FamilyService {
     private readonly familyRepository: Repository<FamilyEntity>
   ) {}
 
-  async getFamilyWithAllMembers(id: string): Promise<FamilyEntity> {
+  async getFamilyWithAllMembers(familyId: string): Promise<FamilyEntity> {
     try {
-      // HERE!
-      const foundUser = await this.userRepository
-        .createQueryBuilder('user')
-        .leftJoinAndSelect('user.family', 'family')
-        // .leftJoinAndSelect('user.family', 'family.users')
-        .where('user.id = :id', { id })
+      const foundFamily = await this.familyRepository
+        .createQueryBuilder('family')
+        .leftJoinAndSelect('family.users', 'users')
+        .leftJoinAndSelect('family.invitations', 'invitations')
+        .where('family.id = :id', { id: familyId })
         .getOne();
 
-      console.log(foundUser);
-      if (!foundUser) {
+      if (!foundFamily) {
         throwError('user not exists');
       }
 
-      return foundUser.family;
+      return foundFamily;
     } catch (err) {
       throwError(err.message);
     }

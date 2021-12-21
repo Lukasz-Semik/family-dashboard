@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { CurrentUserId } from '../../decorators/currentUserId.decorator';
+import { CurrentLoggedInUser } from '../../decorators/currentLoggedInUser.decorator';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
   ConfirmInvitationInput,
@@ -37,7 +37,7 @@ export class InvitationResolver {
   @UseGuards(JwtAuthGuard)
   async createUserInvitation(
     @Args('input') input: CreateInvitationInput,
-    @CurrentUserId() userId: string
+    @CurrentLoggedInUser() userId: string
   ) {
     return this.invitationService.createUserInvitation(input, userId);
   }
@@ -51,6 +51,6 @@ export class InvitationResolver {
   async confirmSignUpInvitation(@Args('input') input: ConfirmInvitationInput) {
     const user = await this.invitationService.confirmSignUpInvitation(input);
 
-    return this.authService.createToken(user.email, user.id);
+    return this.authService.createToken(user.email, user.id, user.family.id);
   }
 }

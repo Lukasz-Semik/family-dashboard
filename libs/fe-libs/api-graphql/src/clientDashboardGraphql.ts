@@ -24,7 +24,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   const token = sdkGetFromSessionStorage(FD_TOKEN_KEY);
-  console.log({ token });
+
   return {
     headers: {
       ...headers,

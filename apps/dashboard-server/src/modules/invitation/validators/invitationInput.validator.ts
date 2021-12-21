@@ -36,7 +36,6 @@ export const validateCreateInvitationInput = (
 export const validateConfirmInvitationInput = (
   confirmInvitationInput: ConfirmInvitationInput
 ) => {
-  console.log(confirmInvitationInput);
   if (isEmpty(confirmInvitationInput)) {
     return false;
   }

@@ -168,7 +168,7 @@ export class InvitationService {
         password: hashedPassword,
       });
 
-      this.familyRepository.save({
+      const family = await this.familyRepository.save({
         ...new FamilyEntity(),
         name: familyName,
         users: [createdUser],
@@ -176,7 +176,7 @@ export class InvitationService {
 
       this.invitationRepository.delete({ email: input.email });
 
-      return createdUser;
+      return { ...createdUser, family };
     } catch (err) {
       throwError(err.message);
     }

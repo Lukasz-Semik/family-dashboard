@@ -16,9 +16,14 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<UserEntity> {
-    const user = await this.userRepository.findOne({ email });
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.family', 'family.id')
+      // .leftJoinAndSelect('user.family', 'family.users')
+      .where('user.email = :email', { email })
+      .getOne();
 
-    if (!user || !user) {
+    if (!user) {
       return null;
     }
 
@@ -31,8 +36,8 @@ export class AuthService {
     return null;
   }
 
-  createToken(email: string, userId: string) {
-    const payload = { email, sub: userId };
+  createToken(email: string, userId: string, familyId: string) {
+    const payload = { email, sub: userId, familyId };
 
     return {
       accessToken: this.jwtService.sign(payload),
@@ -46,6 +51,6 @@ export class AuthService {
       throwError('invalid login');
     }
 
-    return this.createToken(user.email, user.id);
+    return this.createToken(user.email, user.id, user.family.id);
   }
 }

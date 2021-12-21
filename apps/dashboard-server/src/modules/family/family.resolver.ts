@@ -1,7 +1,10 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Query, Resolver } from '@nestjs/graphql';
 
-import { CurrentUserId } from '../../decorators/currentUserId.decorator';
+import {
+  CurrentLoggedInUser,
+  CurrentLoggedInUserData,
+} from '../../decorators/currentLoggedInUser.decorator';
 import { FamilyEntity } from '../../entities/family.entity';
 import { FamilyAllMembersDto } from '../../schema';
 import { serializeInvitation } from '../../serializators/invitation.serializator';
@@ -12,19 +15,20 @@ import { FamilyService } from './family.service';
 
 @Resolver(() => FamilyEntity)
 export class FamilyResolver {
-  constructor(
-    private readonly familyService: FamilyService,
-    private readonly authService: AuthService
-  ) {}
+  constructor(private readonly familyService: FamilyService) {}
 
   @Query(() => FamilyAllMembersDto)
   @UseGuards(JwtAuthGuard)
-  async getAllFamilyMembers(@CurrentUserId() userId: string) {
-    const family = await this.familyService.getFamilyWithAllMembers(userId);
+  async getAllFamilyMembers(
+    @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData
+  ) {
+    const family = await this.familyService.getFamilyWithAllMembers(
+      currentLoggedInUser.familyId
+    );
 
     return {
       users: family.users
-        .filter((user) => user.id !== userId)
+        .filter((user) => user.id !== currentLoggedInUser.userId)
         .map(serializeUser),
       invitations: family.invitations.map(serializeInvitation),
     };
