@@ -19,13 +19,18 @@ export const GlobalStylesDefault = createGlobalStyle`
     padding: 0;
   }
 
+  html, body, #root {
+    height: 100%;
+    min-height: 100%;
+  }
+
   html {
     font-family: 'Montserrat', sans-serif;
   }
 
   body {
     background-color: ${dsStyles.colors.orange1};
-    color: ${dsStyles.colors.violet4}
+    color: ${dsStyles.colors.violet4};
   }
 
   a {

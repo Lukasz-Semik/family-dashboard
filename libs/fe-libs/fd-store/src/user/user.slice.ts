@@ -22,9 +22,8 @@ export const fdStoreUser = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserData: (state, action: PayloadAction<CTUserBaseData>) => {
-      console.log({ action });
-      state.data = action.payload;
+    setUserData: (user, action: PayloadAction<CTUserBaseData>) => {
+      user.data = action.payload;
     },
   },
 });

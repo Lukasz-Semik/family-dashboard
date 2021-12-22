@@ -7,10 +7,10 @@ const selectFamily = (state: FDStoreRootState) => {
   return state.family;
 };
 
-export const fdStoreSelectFamilyData = createSelector(
+export const fdStoreSelectFamily = createSelector(
   selectFamily,
-  (family) => family.data
+  (family) => family
 );
 
-export const useSelectFamilyData = (): FDStoreRootState['family']['data'] =>
-  useSelector(fdStoreSelectFamilyData);
+export const useSelectFamily = (): FDStoreRootState['family'] =>
+  useSelector(fdStoreSelectFamily);

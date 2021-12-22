@@ -83,7 +83,7 @@ export class InvitationService {
   async createInvitationBase(
     input: CreateInvitationInput,
     code: string
-  ): Promise<boolean> {
+  ): Promise<InvitationEntity> {
     try {
       if (!validateCreateInvitationInput(input)) {
         throwError(CTInvitationErrors.WrongPayload);
@@ -104,7 +104,7 @@ export class InvitationService {
         throwError(CTInvitationErrors.EmailAlreadyInvited);
       }
 
-      this.invitationRepository.save({
+      const savedInvitation = this.invitationRepository.save({
         ...new InvitationEntity(),
         ...input,
         validTo: dayjs.utc().add(2, 'day').toDate(),
@@ -112,7 +112,7 @@ export class InvitationService {
         code,
       });
 
-      return true;
+      return savedInvitation;
     } catch (err) {
       throwError(err.message);
     }
@@ -121,7 +121,8 @@ export class InvitationService {
   async createSignUpInvitation(input: CreateInvitationInput): Promise<boolean> {
     const code = generateNumericCode(4);
     // FUTURE: Send sign up e-mail
-    return this.createInvitationBase(input, code);
+    await this.createInvitationBase(input, code);
+    return true;
   }
 
   async confirmSignUpInvitation(
@@ -167,7 +168,7 @@ export class InvitationService {
         password: hashedPassword,
       });
 
-      this.familyRepository.save({
+      const family = await this.familyRepository.save({
         ...new FamilyEntity(),
         name: familyName,
         users: [createdUser],
@@ -175,7 +176,7 @@ export class InvitationService {
 
       this.invitationRepository.delete({ email: input.email });
 
-      return createdUser;
+      return { ...createdUser, family };
     } catch (err) {
       throwError(err.message);
     }
@@ -204,6 +205,36 @@ export class InvitationService {
       });
 
       return true;
+    } catch (err) {
+      throwError(err.message);
+    }
+  }
+
+  async createUserInvitation(
+    input: CreateInvitationInput,
+    familyId: string
+  ): Promise<InvitationEntity[]> {
+    try {
+      const code = generateNumericCode(4);
+      // FUTURE: Send invitation sent e-mail
+      const invitation = await this.createInvitationBase(input, code);
+
+      const foundFamily = await this.familyRepository
+        .createQueryBuilder('family')
+        .leftJoinAndSelect('family.invitations', 'invitations')
+        .where('family.id = :id', { id: familyId })
+        .getOne();
+
+      if (!foundFamily) {
+        throwError('family not exists');
+      }
+
+      const updatedFamily = await this.familyRepository.save({
+        ...foundFamily,
+        invitations: [invitation, ...foundFamily.invitations],
+      });
+
+      return updatedFamily.invitations;
     } catch (err) {
       throwError(err.message);
     }

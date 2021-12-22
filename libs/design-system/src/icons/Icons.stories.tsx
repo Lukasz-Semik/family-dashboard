@@ -16,9 +16,12 @@ import {
   IconHamburger,
   IconMessage,
   IconOrganizer,
+  IconPen,
   IconPlusCircle,
+  IconProgress,
   IconSecurity,
   IconSignOut,
+  IconTrash,
   IconUser,
   IconWallet,
 } from './Icons';
@@ -107,6 +110,18 @@ export const Icons = () => (
     <StyledItemWrapper>
       <IconBell />
       icon-bell
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconProgress />
+      icon-progress
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconTrash />
+      icon-trash
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconPen />
+      icon-pen
     </StyledItemWrapper>
   </StyledItemsWrapper>
 );

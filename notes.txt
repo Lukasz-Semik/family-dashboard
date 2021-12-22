@@ -1,6 +1,7 @@
 TODO:
 - extract i118n
 - handle resend code
+- no found user error message
 - rgba colors
 - migrate to nx_envs
 - tests

@@ -1,11 +1,14 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { CurrentUserId } from '../../decorators/currentUserId.decorator';
+import {
+  CurrentLoggedInUser,
+  CurrentLoggedInUserData,
+} from '../../decorators/currentLoggedInUser.decorator';
 import { UserEntity } from '../../entities/user.entity';
 import { InitialAppStateDto, LoginDto } from '../../schema';
 import { serializeFamily } from '../../serializators/family.serializator';
-import { serializeCurrentUser } from '../../serializators/user.serializator';
+import { serializeUser } from '../../serializators/user.serializator';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UserService } from './user.service';
@@ -19,12 +22,16 @@ export class UserResolver {
 
   @Query(() => InitialAppStateDto)
   @UseGuards(JwtAuthGuard)
-  async getUserInitialAppState(@CurrentUserId() userId: string) {
-    const foundUser = await this.userService.getUserInitialAppState(userId);
+  async getUserInitialAppState(
+    @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData
+  ) {
+    const result = await this.userService.getUserInitialAppState(
+      currentLoggedInUser.userId
+    );
 
     return {
-      currentUser: serializeCurrentUser(foundUser),
-      family: serializeFamily(foundUser.family),
+      currentUser: serializeUser(result.foundUser),
+      family: serializeFamily(result.foundFamily),
     };
   }
 

@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import { FamilyEntity } from './family.entity';
 
 @Entity('invitation')
 export class InvitationEntity {
@@ -46,6 +48,9 @@ export class InvitationEntity {
     length: 255,
   })
   public familyName: string;
+
+  @ManyToOne(() => FamilyEntity, (family) => family.invitations)
+  family: FamilyEntity;
 
   @Column({
     type: 'timestamp with time zone',

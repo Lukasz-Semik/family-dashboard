@@ -66,7 +66,7 @@ export function ItemsList({ closeSidebar }: Props) {
       />
 
       <Item
-        path={fdRoutes.dashboard.familySettingsRoute()}
+        path={fdRoutes.dashboard.familySettings.familySettingsRoute()}
         icon={<IconGear width="18px" height="18px" />}
         closeSidebar={closeSidebar}
         content={<FormattedMessage id="familySettings.title" />}

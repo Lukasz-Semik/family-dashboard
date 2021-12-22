@@ -5,8 +5,7 @@ import { dsStyles } from '@family-dashboard/design-system';
 import { MOBILE_HEADER_HEIGHT } from '../Layout.const';
 
 export const StyledWrapper = styled.div`
-  padding-top: ${MOBILE_HEADER_HEIGHT};
-  padding-bottom: ${MOBILE_HEADER_HEIGHT};
+  padding: ${MOBILE_HEADER_HEIGHT} 0.5rem;
   max-height: 100vh;
   box-sizing: border-box;
   overflow: auto;

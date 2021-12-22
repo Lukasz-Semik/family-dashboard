@@ -32,7 +32,7 @@ export function useHeaderText() {
 
     if (
       history.location.pathname.includes(
-        fdRoutes.dashboard.familySettingsRoute()
+        fdRoutes.dashboard.familySettings.familySettingsRoute()
       )
     ) {
       return <FormattedMessage id="familySettings.title" />;

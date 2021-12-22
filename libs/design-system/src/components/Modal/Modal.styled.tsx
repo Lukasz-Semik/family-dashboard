@@ -2,11 +2,7 @@ import ReactModal from 'react-modal';
 import styled, { keyframes } from 'styled-components';
 
 import { dsStyles } from '../../utils/styles';
-import {
-  Typography16Regular,
-  Typography20Regular,
-  Typography24Black,
-} from '../../utils/typography';
+import { Typography16Regular, Typography24Black } from '../../utils/typography';
 
 const animation = keyframes`
   from {

@@ -25,6 +25,7 @@ export const GetUserInitialAppState = gql`
       }
       family {
         name
+        id
       }
     }
   }

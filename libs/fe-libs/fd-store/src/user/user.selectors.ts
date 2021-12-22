@@ -7,10 +7,7 @@ const selectUser = (state: FDStoreRootState) => {
   return state.user;
 };
 
-export const fdStoreSelectUserData = createSelector(
-  selectUser,
-  (user) => user.data
-);
+export const fdStoreSelectUser = createSelector(selectUser, (user) => user);
 
-export const useSelectUserData = (): FDStoreRootState['user']['data'] =>
-  useSelector(fdStoreSelectUserData);
+export const useSelectUser = (): FDStoreRootState['user'] =>
+  useSelector(fdStoreSelectUser);
