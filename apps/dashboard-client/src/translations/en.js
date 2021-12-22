@@ -111,6 +111,9 @@ export const m = {
   },
   familySettings: {
     title: 'Family Settings',
+    addMember: 'Add member',
+    pendingInvitations: 'Pending invitations',
+    familyMembers: 'Family members',
   },
   account: {
     title: 'Account',
@@ -135,6 +138,11 @@ export const m = {
     cancel: 'Cancel',
     confirm: 'Confirm',
     loadingApp: 'Loading your dashboard...',
+    name: 'Name',
+    validTo: 'Valid to',
+    emptyList: 'This list is empty',
+    type: 'Type',
+    birthday: 'Birthday',
   },
   errors: {
     somethingWentWrong: 'Something went wrong',

@@ -1,7 +1,10 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { CurrentLoggedInUser } from '../../decorators/currentLoggedInUser.decorator';
+import {
+  CurrentLoggedInUser,
+  CurrentLoggedInUserData,
+} from '../../decorators/currentLoggedInUser.decorator';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
   ConfirmInvitationInput,
@@ -37,9 +40,9 @@ export class InvitationResolver {
   @UseGuards(JwtAuthGuard)
   async createUserInvitation(
     @Args('input') input: CreateInvitationInput,
-    @CurrentLoggedInUser() userId: string
+    @CurrentLoggedInUser() user: CurrentLoggedInUserData
   ) {
-    return this.invitationService.createUserInvitation(input, userId);
+    return this.invitationService.createUserInvitation(input, user.familyId);
   }
 
   @Mutation(() => Boolean)

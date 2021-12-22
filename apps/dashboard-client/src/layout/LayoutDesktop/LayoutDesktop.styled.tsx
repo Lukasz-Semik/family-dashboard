@@ -5,12 +5,22 @@ import { dsStyles, Typography40Black } from '@family-dashboard/design-system';
 import { SIDEBAR_WIDTH } from '../Layout.const';
 
 export const StyledWraper = styled.div`
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+
   @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
     padding-left: ${SIDEBAR_WIDTH};
   }
 `;
 
 export const StyledContentWrapper = styled.div`
+  height: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  position: relative;
+
   @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
     padding-top: 2rem;
     padding-left: 2.5rem;

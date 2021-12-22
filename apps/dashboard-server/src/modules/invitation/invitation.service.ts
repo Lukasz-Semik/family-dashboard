@@ -212,28 +212,28 @@ export class InvitationService {
 
   async createUserInvitation(
     input: CreateInvitationInput,
-    userId: string
+    familyId: string
   ): Promise<InvitationEntity[]> {
     try {
       const code = generateNumericCode(4);
       // FUTURE: Send invitation sent e-mail
       const invitation = await this.createInvitationBase(input, code);
 
-      const foundUser = await this.userRepository
-        .createQueryBuilder('user')
-        .leftJoinAndSelect('user.family', 'family')
+      const foundFamily = await this.familyRepository
+        .createQueryBuilder('family')
         .leftJoinAndSelect('family.invitations', 'invitations')
-        .where('user.id = :id', { id: userId })
+        .where('family.id = :id', { id: familyId })
         .getOne();
 
-      if (!foundUser) {
-        throwError('user not exists');
+      if (!foundFamily) {
+        throwError('family not exists');
       }
 
       const updatedFamily = await this.familyRepository.save({
-        ...foundUser.family,
-        invitations: [...foundUser.family.invitations, invitation],
+        ...foundFamily,
+        invitations: [invitation, ...foundFamily.invitations],
       });
+
       return updatedFamily.invitations;
     } catch (err) {
       throwError(err.message);

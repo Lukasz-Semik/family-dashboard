@@ -13,9 +13,12 @@ import { ReactComponent as IconGearSVG } from './assets/icon-gear.svg';
 import { ReactComponent as IconHamburgerSVG } from './assets/icon-hamburger.svg';
 import { ReactComponent as IconMessageSVG } from './assets/icon-message.svg';
 import { ReactComponent as IconOrganizerSVG } from './assets/icon-organizer.svg';
+import { ReactComponent as IconPenSVG } from './assets/icon-pen.svg';
 import { ReactComponent as IconPlusCircleSVG } from './assets/icon-plus-circle.svg';
+import { ReactComponent as IconProgressSVG } from './assets/icon-progress.svg';
 import { ReactComponent as IconSecuritySVG } from './assets/icon-security.svg';
 import { ReactComponent as IconSignOutSVG } from './assets/icon-signout.svg';
+import { ReactComponent as IconTrashSVG } from './assets/icon-trash.svg';
 import { ReactComponent as IconUserSVG } from './assets/icon-user.svg';
 import { ReactComponent as IconWalletSVG } from './assets/icon-wallet.svg';
 import { IconProps } from './Icons.types';
@@ -177,6 +180,30 @@ export const IconBell = (props: IconProps) => {
   return (
     <IconWrapper {...props}>
       <IconBellSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconProgress = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconProgressSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconTrash = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconTrashSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconPen = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconPenSVG />
     </IconWrapper>
   );
 };

@@ -6,6 +6,7 @@ import { fdRoutes } from '@family-dashboard/global/const';
 
 import { Layout } from '../../layout/Layout';
 import { Dashboard } from '../../modules/Dashboard/Dashboard';
+import { FamilySettingsRouting } from '../FamilySettingsRouting/FamilySettingsRouting';
 import { useInitializeDashboard } from '../hooks/useInitializeDashboard';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 
@@ -58,8 +59,8 @@ export function DashboardRouting() {
         />
 
         <PrivateRoute
-          path={fdRoutes.dashboard.familySettingsRoute()}
-          render={() => <div>Family Settings</div>}
+          path={fdRoutes.dashboard.familySettings.familySettingsRoute()}
+          component={FamilySettingsRouting}
         />
       </Switch>
     </Layout>

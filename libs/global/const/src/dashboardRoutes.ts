@@ -9,7 +9,10 @@ export const fdRoutes = {
     financeRoute: () => '/dashboard/finance',
     familyRoute: () => '/dashboard/family',
     accountRoute: () => '/dashboard/account',
-    familySettingsRoute: () => '/dashboard/settings',
     notificationsRoute: () => '/dashboard/notifications',
+    familySettings: {
+      familySettingsRoute: () => '/dashboard/settings',
+      familySettingsCreateUserRoute: () => '/dashboard/settings/create-user',
+    },
   },
 };

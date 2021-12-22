@@ -1,7 +1,7 @@
 import { Avatar } from '@family-dashboard/design-system';
 import {
-  useSelectFamilyData,
-  useSelectUserData,
+  useSelectFamily,
+  useSelectUser,
 } from '@family-dashboard/fe-libs/fd-store';
 
 import { CurrentDate } from '../CurrentDate/CurrentDate';
@@ -15,20 +15,20 @@ import {
 } from './SidebarDesktop.styled';
 
 export function SidebarDesktop() {
-  const user = useSelectUserData();
-  const family = useSelectFamilyData();
+  const user = useSelectUser();
+  const family = useSelectFamily();
 
   return (
     <StyledWrapper>
       <CurrentDate />
-      <StyledFamilyName>{family.name}</StyledFamilyName>
+      <StyledFamilyName>{family.data.name}</StyledFamilyName>
       <StyledAvatarGroupWrapper>
         <StyledAvatarWrapper>
-          <Avatar>{`${user.firstName.charAt(0)}${user.lastName.charAt(
+          <Avatar>{`${user.data.firstName.charAt(0)}${user.data.lastName.charAt(
             0
           )}`}</Avatar>
         </StyledAvatarWrapper>
-        <StyledName>{user.firstName}</StyledName>
+        <StyledName>{user.data.firstName}</StyledName>
       </StyledAvatarGroupWrapper>
 
       <ItemsList />

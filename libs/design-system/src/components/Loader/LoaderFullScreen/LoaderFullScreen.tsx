@@ -1,5 +1,4 @@
-import { dsStyles } from '@family-dashboard/design-system';
-
+import { dsStyles } from '../../../utils/styles';
 import { LoaderFullScreenProps } from '../Loader.types';
 import { LoaderSimple } from '../LoaderSimple/LoaderSimple';
 import {
