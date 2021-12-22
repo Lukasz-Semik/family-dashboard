@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
+import { dsStyles } from '../../../utils/styles';
 import {
-  dsStyles,
   Typography14Regular,
   Typography14SemiBold,
   Typography20SemiBold,
-} from '@family-dashboard/design-system';
+} from '../../../utils/typography';
 
 export const StyledListStandardNoItemsMessage = styled.p`
   ${Typography20SemiBold};

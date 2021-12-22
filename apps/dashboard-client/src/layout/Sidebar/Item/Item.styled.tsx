@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import {
   dsStyles,
   Typography16SemiBold,
-  Typography20SemiBold,
-  Typography24SemiBold,
 } from '@family-dashboard/design-system';
 
 export const StyledWrapper = styled.button<{ isActive?: boolean }>`
