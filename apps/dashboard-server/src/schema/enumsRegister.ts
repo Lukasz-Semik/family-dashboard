@@ -3,6 +3,7 @@ import { registerEnumType } from '@nestjs/graphql';
 import {
   CTGender,
   CTMemberType,
+  CTUserModulePermission,
   CTVerifyEmailResponseStatus,
 } from '@family-dashboard/global/types';
 
@@ -20,4 +21,9 @@ registerEnumType(CTGender, {
 registerEnumType(CTMemberType, {
   name: 'CTMemberType',
   description: "User's and characters member type",
+});
+
+registerEnumType(CTUserModulePermission, {
+  name: 'CTUserModulePermission',
+  description: "User's modules permissions",
 });

@@ -13,8 +13,7 @@ export const GetAllFamilyMembers = gql`
         lastName
         dob
         gender
-        hasFinanceModuleAccess
-        isFamilyHead
+        modulePermissions
         memberType
       }
       invitations {

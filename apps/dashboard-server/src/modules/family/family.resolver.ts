@@ -9,7 +9,6 @@ import { FamilyEntity } from '../../entities/family.entity';
 import { FamilyAllMembersDto } from '../../schema';
 import { serializeInvitation } from '../../serializators/invitation.serializator';
 import { serializeUser } from '../../serializators/user.serializator';
-import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { FamilyService } from './family.service';
 

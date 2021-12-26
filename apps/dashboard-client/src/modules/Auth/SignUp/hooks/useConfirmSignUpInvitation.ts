@@ -7,8 +7,8 @@ import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
-  CTConfirmInvitationInput,
   CTGender,
+  CTInvitationConfirmInput,
   CTInvitationErrors,
   CTLoginResponse,
 } from '@family-dashboard/global/types';
@@ -26,7 +26,7 @@ export function useConfirmSignUpInvitation({
 }: Args) {
   const [confirmSignUpInvitationMutation, { loading }] = useMutation<
     { confirmSignUpInvitation: CTLoginResponse },
-    { input: CTConfirmInvitationInput }
+    { input: CTInvitationConfirmInput }
   >(ConfirmSignUpInvitation, {
     onCompleted: (responseData) => {
       sdkSetToSessionStorage(
@@ -36,7 +36,7 @@ export function useConfirmSignUpInvitation({
       goToNextStep();
     },
     onError: (error) => {
-      if (error.graphQLErrors[0].message === CTInvitationErrors.CodeInvalid) {
+      if (error.graphQLErrors[0]?.message === CTInvitationErrors.CodeInvalid) {
         setHasFailedPin();
       }
     },
@@ -52,6 +52,7 @@ export function useConfirmSignUpInvitation({
         code2,
         code3,
         gender,
+        familyName,
         ...rest
       } = values;
       const code = `${code0}${code1}${code2}${code3}`;

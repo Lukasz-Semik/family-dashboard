@@ -19,8 +19,7 @@ const initialState: UserState = {
     gender: '' as CTGender,
     email: '',
     id: '',
-    isFamilyHead: false,
-    hasFinanceModuleAccess: false,
+    modulePermissions: [],
     memberType: '' as CTMemberType,
   },
 };

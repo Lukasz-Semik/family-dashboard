@@ -53,15 +53,8 @@ export class UserEntity {
   })
   public gender: string;
 
-  @Column({
-    type: 'boolean',
-  })
-  public isFamilyHead: boolean;
-
-  @Column({
-    type: 'boolean',
-  })
-  public hasFinanceModuleAccess: boolean;
+  @Column('text', { array: true, default: [] })
+  public modulePermissions: string[];
 
   @Column({
     type: 'varchar',

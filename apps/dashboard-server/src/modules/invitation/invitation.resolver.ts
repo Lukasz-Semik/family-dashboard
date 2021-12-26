@@ -7,9 +7,10 @@ import {
 } from '../../decorators/currentLoggedInUser.decorator';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
-  ConfirmInvitationInput,
-  CreateInvitationInput,
+  InvitationConfirmInput,
+  InvitationCreateInput,
   InvitationDto,
+  InvitationSignUpCreateInput,
   LoginDto,
   VerifyEmailDto,
 } from '../../schema';
@@ -32,14 +33,16 @@ export class InvitationResolver {
   }
 
   @Mutation(() => Boolean)
-  async createSignUpInvitation(@Args('input') input: CreateInvitationInput) {
+  async createSignUpInvitation(
+    @Args('input') input: InvitationSignUpCreateInput
+  ) {
     return this.invitationService.createSignUpInvitation(input);
   }
 
-  @Mutation(() => [InvitationDto])
+  @Mutation(() => InvitationDto)
   @UseGuards(JwtAuthGuard)
   async createUserInvitation(
-    @Args('input') input: CreateInvitationInput,
+    @Args('input') input: InvitationCreateInput,
     @CurrentLoggedInUser() user: CurrentLoggedInUserData
   ) {
     return this.invitationService.createUserInvitation(input, user.familyId);
@@ -60,7 +63,7 @@ export class InvitationResolver {
   }
 
   @Mutation(() => LoginDto)
-  async confirmSignUpInvitation(@Args('input') input: ConfirmInvitationInput) {
+  async confirmSignUpInvitation(@Args('input') input: InvitationConfirmInput) {
     const user = await this.invitationService.confirmSignUpInvitation(input);
 
     return this.authService.createToken(user.email, user.id, user.family.id);

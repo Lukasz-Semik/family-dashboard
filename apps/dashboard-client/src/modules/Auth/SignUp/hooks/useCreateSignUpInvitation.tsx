@@ -6,14 +6,14 @@ import dayjs from 'dayjs';
 import { showErrorToast } from '@family-dashboard/design-system';
 import { CreateSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
-import { CTCreateInvitationInput } from '@family-dashboard/global/types';
+import { CTInvitationSignUpCreateInput } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
 
 export function useCreateSignUpInvitation() {
   const [createSignUpInvitationMutation] = useMutation<
     { createSignUpInvitation: boolean },
-    { input: CTCreateInvitationInput }
+    { input: CTInvitationSignUpCreateInput }
   >(CreateSignUpInvitation, {
     onError: () =>
       showErrorToast(
