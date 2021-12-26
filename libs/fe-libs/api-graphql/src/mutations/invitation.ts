@@ -19,3 +19,9 @@ export const ResendInvitation = gql`
     resendInvitation(email: $email)
   }
 `;
+
+export const CancelInvitation = gql`
+  mutation CancelInvitation($email: String!) {
+    cancelInvitation(email: $email)
+  }
+`;
