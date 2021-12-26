@@ -12,8 +12,8 @@ import {
 import { clientDashboardGraphql } from '@family-dashboard/fe-libs/api-graphql';
 import { fdStore } from '@family-dashboard/fe-libs/fd-store';
 
-import { Routing } from './routing/Routing';
-import { messages } from './translations/en';
+import { messages } from '../translations/en';
+import { Routing } from './Routing';
 
 dayjs.extend(CustomParseFormat);
 Modal.setAppElement('#root');

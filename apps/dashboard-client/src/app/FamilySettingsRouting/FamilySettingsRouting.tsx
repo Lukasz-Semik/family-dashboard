@@ -4,7 +4,7 @@ import { LoaderFullContent } from '@family-dashboard/design-system';
 import { fdRoutes } from '@family-dashboard/global/const';
 
 import { FamilySettingsPage } from '../../modules/FamilySettings/FamilySettingsPage/FamilySettingsPage';
-import { useGetAllFamilyMembers } from '../hooks/useGetAllFamilyMembers';
+import { useGetAllFamilyMembers } from '../_dataHooks/useGetAllFamilyMembers';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 
 export function FamilySettingsRouting() {

@@ -77,7 +77,6 @@ export function FamilySettingsInvitationsList() {
     [family.invitations, cancelInvitationMutation, dispatch]
   );
 
-  console.log(family);
   return (
     <>
       <StyledListTitle>

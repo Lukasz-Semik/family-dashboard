@@ -6,8 +6,8 @@ import { fdRoutes } from '@family-dashboard/global/const';
 
 import { Layout } from '../../layout/Layout';
 import { Dashboard } from '../../modules/Dashboard/Dashboard';
+import { useInitializeDashboard } from '../_dataHooks/useInitializeDashboard';
 import { FamilySettingsRouting } from '../FamilySettingsRouting/FamilySettingsRouting';
-import { useInitializeDashboard } from '../hooks/useInitializeDashboard';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 
 export function DashboardRouting() {
