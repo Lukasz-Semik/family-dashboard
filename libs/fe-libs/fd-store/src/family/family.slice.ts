@@ -13,6 +13,7 @@ export interface FamilyState {
 }
 
 type SetFamilyMembersActionPaylod = Pick<FamilyState, 'invitations' | 'users'>;
+type SetInvitationsActionPayload = CTInvitationDisplayData[];
 
 const initialState: FamilyState = {
   data: {
@@ -36,6 +37,13 @@ export const fdStoreFamily = createSlice({
     ) => {
       family.invitations = action.payload.invitations;
       family.users = action.payload.users;
+    },
+    setInvitations: (
+      family,
+      action: PayloadAction<SetInvitationsActionPayload>
+    ) => {
+      console.log(action);
+      family.invitations = action.payload;
     },
   },
 });

@@ -50,6 +50,15 @@ export class InvitationResolver {
     return this.invitationService.resendInvitation(email);
   }
 
+  @Mutation(() => Boolean)
+  @UseGuards(JwtAuthGuard)
+  async cancelInvitation(
+    @Args('email') email: string,
+    @CurrentLoggedInUser() user: CurrentLoggedInUserData
+  ) {
+    return this.invitationService.cancelUserInvitation(email, user.familyId);
+  }
+
   @Mutation(() => LoginDto)
   async confirmSignUpInvitation(@Args('input') input: ConfirmInvitationInput) {
     const user = await this.invitationService.confirmSignUpInvitation(input);

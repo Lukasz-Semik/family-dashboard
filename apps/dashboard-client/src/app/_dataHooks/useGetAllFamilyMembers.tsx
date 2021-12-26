@@ -11,6 +11,7 @@ export function useGetAllFamilyMembers() {
   const { loading } = useQuery<{
     getAllFamilyMembers: CTFamilyAllMembersResponse;
   }>(GetAllFamilyMembers, {
+    fetchPolicy: 'network-only',
     onCompleted: (responseData) => {
       dispatch(
         fdStoreFamilyActions.setFamilyMembers(responseData.getAllFamilyMembers)

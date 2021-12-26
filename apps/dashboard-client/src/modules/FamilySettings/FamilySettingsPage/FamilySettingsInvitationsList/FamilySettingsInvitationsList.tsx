@@ -10,8 +10,11 @@ import {
   ListStandardItem,
   ListStandardItemColumn,
   ListStandardNoItemsMessage,
+  Modal,
+  ModalButtonsGroup,
+  ModalText,
+  ModalTitle,
 } from '@family-dashboard/design-system';
-import { useSelectFamily } from '@family-dashboard/fe-libs/fd-store';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import { CTInvitationDisplayData } from '@family-dashboard/global/types';
 
@@ -26,10 +29,17 @@ import {
   StyledCancelButton,
   StyledIconCancelWrapper,
 } from './FamilySettingsInvitationsList.styled';
+import { useFamilySettingsInvitationsList } from './useFamilySettingsInvitationsList';
 
 export function FamilySettingsInvitationsList() {
-  const family = useSelectFamily();
-  console.log(family);
+  const {
+    isLoading,
+    family,
+    setSelectedInvitation,
+    selectedInvitation,
+    cancelInvitation,
+  } = useFamilySettingsInvitationsList();
+
   return (
     <>
       <StyledListTitle>
@@ -51,8 +61,8 @@ export function FamilySettingsInvitationsList() {
             </ListStandardHeaderColumn>
           </ListStandardHeadersWrapper>
         )}
-        renderItem={(item) => (
-          <ListStandardItem key={item.email}>
+        renderItem={(invitation) => (
+          <ListStandardItem key={invitation.email}>
             {() => (
               <>
                 <ListStandardItemColumn width="20%">
@@ -60,12 +70,12 @@ export function FamilySettingsInvitationsList() {
                     <StyledIconWrapper>
                       <IconProgress />
                     </StyledIconWrapper>
-                    {item.firstName}
+                    {invitation.firstName}
                   </StyledContentWithIconWrapper>
                 </ListStandardItemColumn>
 
                 <ListStandardItemColumn width="40%">
-                  {item.email}
+                  {invitation.email}
                 </ListStandardItemColumn>
 
                 <ListStandardItemColumn width="20%">
@@ -73,11 +83,13 @@ export function FamilySettingsInvitationsList() {
                     <StyledDescriptionColumnLabel>
                       <FormattedMessage id="shared.validTo" />:{' '}
                     </StyledDescriptionColumnLabel>
-                    {dayjs(item.validTo).format(FULL_DATE_FORMAT)}
+                    {dayjs(invitation.validTo).format(FULL_DATE_FORMAT)}
                   </StyledDescriptionColumnContent>
                 </ListStandardItemColumn>
 
-                <StyledCancelButton>
+                <StyledCancelButton
+                  onClick={() => setSelectedInvitation(invitation)}
+                >
                   <StyledIconCancelWrapper>
                     <IconTrash width="14px" height="18px" />
                   </StyledIconCancelWrapper>
@@ -93,6 +105,29 @@ export function FamilySettingsInvitationsList() {
           </ListStandardNoItemsMessage>
         )}
       />
+
+      <Modal
+        isOpen={Boolean(selectedInvitation)}
+        closeModal={() => setSelectedInvitation(null)}
+      >
+        <ModalTitle>
+          <FormattedMessage id="auth.signUp.confirmEmail.sendNewCode" />
+        </ModalTitle>
+        <ModalText>
+          <FormattedMessage id="auth.signUp.confirmEmail.sendNewCodeDescription" />
+        </ModalText>
+
+        <ModalButtonsGroup
+          isConfirmLoading={isLoading}
+          isDisabled={isLoading}
+          onCancelButtonClick={() => setSelectedInvitation(null)}
+          onConfirmButtonClick={() =>
+            cancelInvitation(selectedInvitation?.email)
+          }
+          cancelContent={<FormattedMessage id="shared.cancel" />}
+          confirmContent={<FormattedMessage id="shared.confirm" />}
+        />
+      </Modal>
     </>
   );
 }

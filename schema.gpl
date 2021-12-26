@@ -79,6 +79,7 @@ type Mutation {
   createSignUpInvitation(input: CreateInvitationInput!): Boolean!
   createUserInvitation(input: CreateInvitationInput!): [InvitationDto!]!
   resendInvitation(email: String!): Boolean!
+  cancelInvitation(email: String!): Boolean!
   confirmSignUpInvitation(input: ConfirmInvitationInput!): LoginDto!
   login(password: String!, email: String!): LoginDto!
 }

@@ -35,8 +35,53 @@ export class InvitationService {
     private readonly familyRepository: Repository<FamilyEntity>
   ) {}
 
+  private findFamily = async (familyId: string) =>
+    this.familyRepository
+      .createQueryBuilder('family')
+      .leftJoinAndSelect('family.invitations', 'invitations')
+      .where('family.id = :id', { id: familyId })
+      .getOne();
+
   private getIsInvitationDeprecated(validTo?: string) {
     return dayjs.utc().isAfter(dayjs.utc(validTo));
+  }
+
+  private async createInvitationBase(
+    input: CreateInvitationInput,
+    code: string
+  ): Promise<InvitationEntity> {
+    try {
+      if (!validateCreateInvitationInput(input)) {
+        throwError(CTInvitationErrors.WrongPayload);
+      }
+      const existingUser = await this.userRepository.findOne({
+        email: input.email,
+      });
+
+      if (existingUser) {
+        throwError(CTInvitationErrors.EmailAlreadyInUse);
+      }
+
+      const existingInvitation = await this.invitationRepository.findOne({
+        email: input.email,
+      });
+
+      if (existingInvitation) {
+        throwError(CTInvitationErrors.EmailAlreadyInvited);
+      }
+
+      const savedInvitation = this.invitationRepository.save({
+        ...new InvitationEntity(),
+        ...input,
+        validTo: dayjs.utc().add(2, 'day').toDate(),
+        inviterName: input.inviterName,
+        code,
+      });
+
+      return savedInvitation;
+    } catch (err) {
+      throwError(err.message);
+    }
   }
 
   async verifyEmail(email: string): Promise<VerifyEmailDto> {
@@ -75,44 +120,6 @@ export class InvitationService {
       return {
         status: CTVerifyEmailResponseStatus.Success,
       };
-    } catch (err) {
-      throwError(err.message);
-    }
-  }
-
-  async createInvitationBase(
-    input: CreateInvitationInput,
-    code: string
-  ): Promise<InvitationEntity> {
-    try {
-      if (!validateCreateInvitationInput(input)) {
-        throwError(CTInvitationErrors.WrongPayload);
-      }
-      const existingUser = await this.userRepository.findOne({
-        email: input.email,
-      });
-
-      if (existingUser) {
-        throwError(CTInvitationErrors.EmailAlreadyInUse);
-      }
-
-      const existingInvitation = await this.invitationRepository.findOne({
-        email: input.email,
-      });
-
-      if (existingInvitation) {
-        throwError(CTInvitationErrors.EmailAlreadyInvited);
-      }
-
-      const savedInvitation = this.invitationRepository.save({
-        ...new InvitationEntity(),
-        ...input,
-        validTo: dayjs.utc().add(2, 'day').toDate(),
-        inviterName: input.inviterName,
-        code,
-      });
-
-      return savedInvitation;
     } catch (err) {
       throwError(err.message);
     }
@@ -219,11 +226,7 @@ export class InvitationService {
       // FUTURE: Send invitation sent e-mail
       const invitation = await this.createInvitationBase(input, code);
 
-      const foundFamily = await this.familyRepository
-        .createQueryBuilder('family')
-        .leftJoinAndSelect('family.invitations', 'invitations')
-        .where('family.id = :id', { id: familyId })
-        .getOne();
+      const foundFamily = await this.findFamily(familyId);
 
       if (!foundFamily) {
         throwError('family not exists');
@@ -235,6 +238,33 @@ export class InvitationService {
       });
 
       return updatedFamily.invitations;
+    } catch (err) {
+      throwError(err.message);
+    }
+  }
+
+  async cancelUserInvitation(
+    emailToRemove: string,
+    familyId: string
+  ): Promise<boolean> {
+    try {
+      const foundFamily = await this.findFamily(familyId);
+
+      if (!foundFamily) {
+        throwError('family not exists');
+      }
+
+      const foundInvitation = foundFamily.invitations.find(
+        (invitation) => invitation.email === emailToRemove
+      );
+
+      if (!foundInvitation) {
+        throwError('invitation not exists');
+      }
+
+      this.invitationRepository.delete({ email: emailToRemove });
+
+      return true;
     } catch (err) {
       throwError(err.message);
     }
