@@ -5,6 +5,7 @@ import {
   CTInitialAppStateResponse,
   CTInvitationBaseData,
   CTLoginResponse,
+  CTMemberType,
   CTUserBaseData,
 } from '@family-dashboard/global/types';
 
@@ -24,6 +25,9 @@ export class UserDto implements CTUserBaseData {
   @Field(() => String) readonly lastName: string;
   @Field(() => Date) readonly dob: Date;
   @Field(() => CTGender) readonly gender: CTGender;
+  @Field(() => Boolean) readonly isFamilyHead: boolean;
+  @Field(() => Boolean) readonly hasFinanceModuleAccess: boolean;
+  @Field(() => CTMemberType) readonly memberType: CTMemberType;
 }
 
 @ObjectType()

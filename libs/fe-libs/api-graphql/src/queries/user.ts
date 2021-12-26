@@ -22,6 +22,9 @@ export const GetUserInitialAppState = gql`
         lastName
         dob
         gender
+        hasFinanceModuleAccess
+        isFamilyHead
+        memberType
       }
       family {
         name

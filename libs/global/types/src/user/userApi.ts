@@ -23,7 +23,11 @@ export interface CTVerifyEmailResponse {
   inviterName?: string;
 }
 
-export interface CTConfirmInvitationInput extends Omit<CTUserBaseData, 'id'> {
+export interface CTConfirmInvitationInput
+  extends Omit<
+    CTUserBaseData,
+    'id' | 'isFamilyHead' | 'memberType' | 'hasFinanceModuleAccess'
+  > {
   password: string;
   code: string;
   familyName: string;

@@ -4,6 +4,11 @@ export enum CTGender {
   Other = 'Other',
 }
 
+export enum CTMemberType {
+  AdultUser = 'AdultUser',
+  ChildUser = 'ChuldUser',
+}
+
 export interface CTUserBaseData {
   id: string;
   email: string;
@@ -12,6 +17,9 @@ export interface CTUserBaseData {
   lastName: string;
   gender: CTGender;
   dob: Date;
+  isFamilyHead: boolean;
+  hasFinanceModuleAccess: boolean;
+  memberType: CTMemberType;
 }
 
 export interface CTInvitationBaseData

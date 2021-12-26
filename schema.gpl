@@ -52,6 +52,15 @@ type UserDto {
   lastName: String!
   dob: DateTime!
   gender: CTGender!
+  isFamilyHead: Boolean!
+  hasFinanceModuleAccess: Boolean!
+  memberType: CTMemberType!
+}
+
+"""User's and characters member type"""
+enum CTMemberType {
+  AdultUser
+  ChildUser
 }
 
 type InitialAppStateDto {

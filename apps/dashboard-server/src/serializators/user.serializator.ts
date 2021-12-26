@@ -1,4 +1,8 @@
-import { CTGender, CTUserBaseData } from '@family-dashboard/global/types';
+import {
+  CTGender,
+  CTMemberType,
+  CTUserBaseData,
+} from '@family-dashboard/global/types';
 
 import { UserEntity } from '../entities/user.entity';
 
@@ -11,5 +15,8 @@ export const serializeUser = (user: UserEntity): CTUserBaseData => {
     lastName: user.lastName,
     gender: user.gender as CTGender,
     dob: user.dob,
+    isFamilyHead: user.isFamilyHead,
+    hasFinanceModuleAccess: user.hasFinanceModuleAccess,
+    memberType: user.memberType as CTMemberType,
   };
 };

@@ -53,6 +53,22 @@ export class UserEntity {
   })
   public gender: string;
 
+  @Column({
+    type: 'boolean',
+  })
+  public isFamilyHead: boolean;
+
+  @Column({
+    type: 'boolean',
+  })
+  public hasFinanceModuleAccess: boolean;
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+  })
+  public memberType: string;
+
   @ManyToOne(() => FamilyEntity, (family) => family.users)
   family: FamilyEntity;
 

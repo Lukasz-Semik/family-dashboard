@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 
 import {
   CTInvitationErrors,
+  CTMemberType,
   CTVerifyEmailResponseStatus,
 } from '@family-dashboard/global/types';
 
@@ -171,6 +172,9 @@ export class InvitationService {
       const createdUser = await this.userRepository.save({
         ...new UserEntity(),
         ...userInput,
+        isFamilyHead: true,
+        hasFinanceModuleAccess: true,
+        memberType: CTMemberType.AdultUser,
         dob: dayjs.utc(input.dob).toDate(),
         password: hashedPassword,
       });
