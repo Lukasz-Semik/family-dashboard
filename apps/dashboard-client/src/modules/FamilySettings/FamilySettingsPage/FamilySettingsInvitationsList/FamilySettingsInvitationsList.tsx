@@ -1,7 +1,4 @@
-import { useCallback, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useDispatch } from 'react-redux';
-import { useMutation } from '@apollo/client';
 import dayjs from 'dayjs';
 
 import {
@@ -17,13 +14,7 @@ import {
   ModalButtonsGroup,
   ModalText,
   ModalTitle,
-  showErrorToast,
 } from '@family-dashboard/design-system';
-import { CancelInvitation } from '@family-dashboard/fe-libs/api-graphql';
-import {
-  fdStoreFamilyActions,
-  useSelectFamily,
-} from '@family-dashboard/fe-libs/fd-store';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import { CTInvitationDisplayData } from '@family-dashboard/global/types';
 
@@ -38,44 +29,16 @@ import {
   StyledCancelButton,
   StyledIconCancelWrapper,
 } from './FamilySettingsInvitationsList.styled';
+import { useFamilySettingsInvitationsList } from './useFamilySettingsInvitationsList';
 
 export function FamilySettingsInvitationsList() {
-  const family = useSelectFamily();
-  const dispatch = useDispatch();
-  const [selectedInvitation, setSelectedInvitation] =
-    useState<CTInvitationDisplayData | null>(null);
-  const [cancelInvitationMutation, { loading }] = useMutation<{
-    cancelInvitation: boolean;
-    email: string;
-  }>(CancelInvitation, {
-    onError: () => {
-      showErrorToast('failed');
-    },
-  });
-
-  const cancelInvitation = useCallback(
-    async (email?: string) => {
-      if (!email) {
-        showErrorToast('EMAIL');
-        return;
-      }
-
-      await cancelInvitationMutation({
-        variables: {
-          email,
-        },
-      });
-
-      dispatch(
-        fdStoreFamilyActions.setInvitations(
-          family.invitations.filter((invitation) => invitation.email !== email)
-        )
-      );
-
-      setSelectedInvitation(null);
-    },
-    [family.invitations, cancelInvitationMutation, dispatch]
-  );
+  const {
+    isLoading,
+    family,
+    setSelectedInvitation,
+    selectedInvitation,
+    cancelInvitation,
+  } = useFamilySettingsInvitationsList();
 
   return (
     <>
@@ -155,8 +118,8 @@ export function FamilySettingsInvitationsList() {
         </ModalText>
 
         <ModalButtonsGroup
-          isConfirmLoading={loading}
-          isDisabled={loading}
+          isConfirmLoading={isLoading}
+          isDisabled={isLoading}
           onCancelButtonClick={() => setSelectedInvitation(null)}
           onConfirmButtonClick={() =>
             cancelInvitation(selectedInvitation?.email)
