@@ -49,6 +49,15 @@ export class InvitationEntity {
   })
   public familyName: string;
 
+  @Column('simple-array')
+  public modulePermissions: string[];
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+  })
+  public memberType: string;
+
   @ManyToOne(() => FamilyEntity, (family) => family.invitations)
   family: FamilyEntity;
 

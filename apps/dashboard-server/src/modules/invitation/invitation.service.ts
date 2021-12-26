@@ -6,6 +6,8 @@ import { Repository } from 'typeorm';
 
 import {
   CTInvitationErrors,
+  CTMemberType,
+  CTUserModulePermission,
   CTVerifyEmailResponseStatus,
 } from '@family-dashboard/global/types';
 
@@ -15,8 +17,9 @@ import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
 import { generateNumericCode } from '../../helpers/utils';
 import {
-  ConfirmInvitationInput,
-  CreateInvitationInput,
+  InvitationConfirmInput,
+  InvitationCreateInput,
+  InvitationSignUpCreateInput,
   VerifyEmailDto,
 } from '../../schema';
 import {
@@ -47,7 +50,7 @@ export class InvitationService {
   }
 
   private async createInvitationBase(
-    input: CreateInvitationInput,
+    input: InvitationCreateInput & { familyName: string },
     code: string
   ): Promise<InvitationEntity> {
     try {
@@ -125,15 +128,27 @@ export class InvitationService {
     }
   }
 
-  async createSignUpInvitation(input: CreateInvitationInput): Promise<boolean> {
+  async createSignUpInvitation(
+    input: InvitationSignUpCreateInput
+  ): Promise<boolean> {
     const code = generateNumericCode(4);
     // FUTURE: Send sign up e-mail
-    await this.createInvitationBase(input, code);
+    await this.createInvitationBase(
+      {
+        ...input,
+        modulePermissions: [
+          CTUserModulePermission.FamilySettings,
+          CTUserModulePermission.Financial,
+        ],
+        memberType: CTMemberType.AdultUser,
+      },
+      code
+    );
     return true;
   }
 
   async confirmSignUpInvitation(
-    input: ConfirmInvitationInput
+    input: InvitationConfirmInput
   ): Promise<UserEntity> {
     try {
       if (!validateConfirmInvitationInput(input)) {
@@ -164,20 +179,25 @@ export class InvitationService {
         throwError(CTInvitationErrors.CodeInvalid);
       }
 
-      const { familyName, ...userInput } = input;
+      const { ...userInput } = input;
 
       const hashedPassword = await hash(input.password, 10);
 
       const createdUser = await this.userRepository.save({
         ...new UserEntity(),
         ...userInput,
+        modulePermissions: [
+          CTUserModulePermission.FamilySettings,
+          CTUserModulePermission.Financial,
+        ],
+        memberType: CTMemberType.AdultUser,
         dob: dayjs.utc(input.dob).toDate(),
         password: hashedPassword,
       });
 
       const family = await this.familyRepository.save({
         ...new FamilyEntity(),
-        name: familyName,
+        name: existingInvitation.familyName,
         users: [createdUser],
       });
 
@@ -218,26 +238,31 @@ export class InvitationService {
   }
 
   async createUserInvitation(
-    input: CreateInvitationInput,
+    input: InvitationCreateInput,
     familyId: string
-  ): Promise<InvitationEntity[]> {
+  ): Promise<InvitationEntity> {
     try {
       const code = generateNumericCode(4);
       // FUTURE: Send invitation sent e-mail
-      const invitation = await this.createInvitationBase(input, code);
-
       const foundFamily = await this.findFamily(familyId);
+      const invitation = await this.createInvitationBase(
+        {
+          ...input,
+          familyName: foundFamily.name,
+        },
+        code
+      );
 
       if (!foundFamily) {
         throwError('family not exists');
       }
 
-      const updatedFamily = await this.familyRepository.save({
+      this.familyRepository.save({
         ...foundFamily,
         invitations: [invitation, ...foundFamily.invitations],
       });
 
-      return updatedFamily.invitations;
+      return invitation;
     } catch (err) {
       throwError(err.message);
     }

@@ -5,10 +5,10 @@ import {
   sdkValidateMaxLength,
 } from '@family-dashboard/global/sdk';
 
-import { ConfirmInvitationInput, CreateInvitationInput } from '../../../schema';
+import { InvitationConfirmInput, InvitationCreateInput } from '../../../schema';
 
 export const validateCreateInvitationInput = (
-  createInvitationInput: CreateInvitationInput
+  createInvitationInput: InvitationCreateInput
 ) => {
   if (isEmpty(createInvitationInput)) {
     return false;
@@ -23,7 +23,6 @@ export const validateCreateInvitationInput = (
     createInvitationInput.firstName,
     createInvitationInput.middleName,
     createInvitationInput.lastName,
-    createInvitationInput.familyName,
   ];
 
   if (fieldsForLength.some((field) => !sdkValidateMaxLength(field, 80))) {
@@ -34,7 +33,7 @@ export const validateCreateInvitationInput = (
 };
 
 export const validateConfirmInvitationInput = (
-  confirmInvitationInput: ConfirmInvitationInput
+  confirmInvitationInput: InvitationConfirmInput
 ) => {
   if (isEmpty(confirmInvitationInput)) {
     return false;
@@ -54,7 +53,6 @@ export const validateConfirmInvitationInput = (
     confirmInvitationInput.firstName,
     confirmInvitationInput.middleName,
     confirmInvitationInput.lastName,
-    confirmInvitationInput.familyName,
   ];
 
   if (fieldsForLength.some((field) => !sdkValidateMaxLength(field, 80))) {

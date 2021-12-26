@@ -22,6 +22,8 @@ export const GetUserInitialAppState = gql`
         lastName
         dob
         gender
+        modulePermissions
+        memberType
       }
       family {
         name

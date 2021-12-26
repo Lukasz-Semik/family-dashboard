@@ -3,6 +3,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import {
   CTGender,
   CTInvitationBaseData,
+  CTInvitationDisplayData,
   CTVerifyEmailResponse,
   CTVerifyEmailResponseStatus,
 } from '@family-dashboard/global/types';
@@ -15,12 +16,8 @@ export class VerifyEmailDto implements CTVerifyEmailResponse {
 }
 
 @ObjectType()
-export class InvitationDto implements CTInvitationBaseData {
+export class InvitationDto implements CTInvitationDisplayData {
   @Field(() => String) readonly email: string;
-  @Field(() => String) readonly firstName?: string;
-  @Field(() => String, { nullable: true }) readonly middleName?: string;
-  @Field(() => String) readonly lastName?: string;
-  @Field(() => Date) readonly dob?: Date;
-  @Field(() => CTGender) readonly gender?: CTGender;
+  @Field(() => String) readonly firstName: string;
   @Field(() => Date) readonly validTo: Date;
 }

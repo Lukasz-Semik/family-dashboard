@@ -4,9 +4,17 @@ export enum CTGender {
   Other = 'Other',
 }
 
-export interface CTUserBaseData {
-  id: string;
-  email: string;
+export enum CTMemberType {
+  AdultUser = 'AdultUser',
+  ChildUser = 'ChuldUser',
+}
+
+export enum CTUserModulePermission {
+  FamilySettings = 'FamilySettings',
+  Financial = 'Financial',
+}
+
+export interface CTUserPersonalDetails {
   firstName: string;
   middleName?: string;
   lastName: string;
@@ -14,8 +22,9 @@ export interface CTUserBaseData {
   dob: Date;
 }
 
-export interface CTInvitationBaseData
-  extends Omit<Partial<CTUserBaseData>, 'id'> {
+export interface CTUserBaseData extends CTUserPersonalDetails {
+  id: string;
   email: string;
-  validTo: Date;
+  modulePermissions: CTUserModulePermission[];
+  memberType: CTMemberType;
 }

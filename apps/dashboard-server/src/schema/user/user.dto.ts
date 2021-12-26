@@ -3,9 +3,10 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {
   CTGender,
   CTInitialAppStateResponse,
-  CTInvitationBaseData,
   CTLoginResponse,
+  CTMemberType,
   CTUserBaseData,
+  CTUserModulePermission,
 } from '@family-dashboard/global/types';
 
 import { FamilyDto } from '../family/family.dto';
@@ -24,6 +25,9 @@ export class UserDto implements CTUserBaseData {
   @Field(() => String) readonly lastName: string;
   @Field(() => Date) readonly dob: Date;
   @Field(() => CTGender) readonly gender: CTGender;
+  @Field(() => [CTUserModulePermission])
+  readonly modulePermissions: CTUserModulePermission[];
+  @Field(() => CTMemberType) readonly memberType: CTMemberType;
 }
 
 @ObjectType()

@@ -53,6 +53,15 @@ export class UserEntity {
   })
   public gender: string;
 
+  @Column('text', { array: true, default: [] })
+  public modulePermissions: string[];
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+  })
+  public memberType: string;
+
   @ManyToOne(() => FamilyEntity, (family) => family.users)
   family: FamilyEntity;
 

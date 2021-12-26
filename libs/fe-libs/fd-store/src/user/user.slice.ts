@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { CTGender, CTUserBaseData } from '@family-dashboard/global/types';
+import {
+  CTGender,
+  CTMemberType,
+  CTUserBaseData,
+} from '@family-dashboard/global/types';
 
 export interface UserState {
   data: CTUserBaseData;
@@ -15,6 +19,8 @@ const initialState: UserState = {
     gender: '' as CTGender,
     email: '',
     id: '',
+    modulePermissions: [],
+    memberType: '' as CTMemberType,
   },
 };
 

@@ -9,8 +9,6 @@ import { throwError } from '../../helpers/throwError';
 @Injectable()
 export class FamilyService {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
     @InjectRepository(FamilyEntity)
     private readonly familyRepository: Repository<FamilyEntity>
   ) {}

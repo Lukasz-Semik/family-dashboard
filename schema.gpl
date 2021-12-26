@@ -21,10 +21,6 @@ enum CTVerifyEmailResponseStatus {
 type InvitationDto {
   email: String!
   firstName: String!
-  middleName: String
-  lastName: String!
-  dob: DateTime!
-  gender: CTGender!
   validTo: DateTime!
 }
 
@@ -32,13 +28,6 @@ type InvitationDto {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
-
-"""User's gender"""
-enum CTGender {
-  Male
-  Female
-  Other
-}
 
 type LoginDto {
   accessToken: String!
@@ -52,6 +41,27 @@ type UserDto {
   lastName: String!
   dob: DateTime!
   gender: CTGender!
+  modulePermissions: [CTUserModulePermission!]!
+  memberType: CTMemberType!
+}
+
+"""User's gender"""
+enum CTGender {
+  Male
+  Female
+  Other
+}
+
+"""User's modules permissions"""
+enum CTUserModulePermission {
+  FamilySettings
+  Financial
+}
+
+"""User's and characters member type"""
+enum CTMemberType {
+  AdultUser
+  ChildUser
 }
 
 type InitialAppStateDto {
@@ -76,26 +86,38 @@ type Query {
 }
 
 type Mutation {
-  createSignUpInvitation(input: CreateInvitationInput!): Boolean!
-  createUserInvitation(input: CreateInvitationInput!): [InvitationDto!]!
+  createSignUpInvitation(input: InvitationSignUpCreateInput!): Boolean!
+  createUserInvitation(input: InvitationCreateInput!): InvitationDto!
   resendInvitation(email: String!): Boolean!
   cancelInvitation(email: String!): Boolean!
-  confirmSignUpInvitation(input: ConfirmInvitationInput!): LoginDto!
+  confirmSignUpInvitation(input: InvitationConfirmInput!): LoginDto!
   login(password: String!, email: String!): LoginDto!
 }
 
-input CreateInvitationInput {
+input InvitationSignUpCreateInput {
   email: String!
   inviterName: String!
+  familyName: String!
   firstName: String
   middleName: String
   lastName: String
   dob: DateTime
   gender: CTGender
-  familyName: String
 }
 
-input ConfirmInvitationInput {
+input InvitationCreateInput {
+  email: String!
+  inviterName: String!
+  memberType: CTMemberType!
+  modulePermissions: [CTUserModulePermission!]!
+  firstName: String
+  middleName: String
+  lastName: String
+  dob: DateTime
+  gender: CTGender
+}
+
+input InvitationConfirmInput {
   email: String!
   password: String!
   firstName: String!
@@ -104,5 +126,4 @@ input ConfirmInvitationInput {
   dob: DateTime!
   gender: CTGender!
   code: String!
-  familyName: String!
 }
