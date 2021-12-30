@@ -1,6 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useFormikContext } from 'formik';
 
+import { dsStyles } from '@family-dashboard/design-system';
 import {
   FieldCheckbox,
   FieldInputStandard,
@@ -28,6 +29,7 @@ export function SignUpFamilyName() {
         <FieldInputStandard
           autoFocus
           name="familyName"
+          labelBgColor={dsStyles.colors.white}
           label={<FormattedMessage id="fields.familyName.label" />}
           placeholder={intl.formatMessage({
             id: 'fields.familyName.placeholder',
@@ -59,6 +61,7 @@ export function SignUpFamilyName() {
         <FieldInputStandard
           name="lastName"
           disabled={!values.isLastNameDifferent}
+          labelBgColor={dsStyles.colors.white}
           label={<FormattedMessage id="fields.lastName.label" />}
           placeholder={intl.formatMessage({
             id: 'fields.lastName.placeholder',

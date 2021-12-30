@@ -28,6 +28,7 @@ export function SelectDesktop<T extends SelectItemBase>({
   onClose,
   onOpen,
   maxHeight = '12.5rem',
+  labelBgColor = dsStyles.colors.orange1,
 }: SelectProps<T>) {
   const {
     getToggleButtonProps,
@@ -64,7 +65,9 @@ export function SelectDesktop<T extends SelectItemBase>({
         isDisabled={isDisabled}
         type="button"
       >
-        <StyledLabelContent {...getLabelProps()}>{label}</StyledLabelContent>
+        <StyledLabelContent {...getLabelProps()} bgColor={labelBgColor}>
+          {label}
+        </StyledLabelContent>
         {selectedItem?.label || triggerPlaceholder}
         <IconChevron width="0.75rem" />
       </StyledTrigger>

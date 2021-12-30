@@ -9,6 +9,7 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
   label: React.ReactNode;
+  labelBgColor?: string;
   renderRightControls?: (
     renderProps: ControlsRenderProps
   ) => React.ReactElement;

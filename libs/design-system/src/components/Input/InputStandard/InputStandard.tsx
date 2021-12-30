@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { dsStyles } from '../../../utils/styles';
 import {
   StyledInput,
   StyledLabel,
@@ -15,6 +16,7 @@ export const InputStandard = ({
   renderLeftControls,
   renderRightControls,
   renderError,
+  labelBgColor = dsStyles.colors.orange1,
   ...restProps
 }: InputProps) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -28,7 +30,7 @@ export const InputStandard = ({
         isDisabled={disabled}
         hasError={hasError}
       >
-        <StyledLabelContent>{label}</StyledLabelContent>
+        <StyledLabelContent bgColor={labelBgColor}>{label}</StyledLabelContent>
         {renderLeftControls?.({
           isFocused,
           isHovered,

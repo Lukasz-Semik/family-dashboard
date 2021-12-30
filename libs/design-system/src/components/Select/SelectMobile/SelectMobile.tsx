@@ -28,6 +28,7 @@ export function SelectMobile<T extends SelectItemBase>({
   renderError,
   onClose,
   onOpen,
+  labelBgColor = dsStyles.colors.orange1,
 }: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,7 +57,7 @@ export function SelectMobile<T extends SelectItemBase>({
         isDisabled={isDisabled}
         type="button"
       >
-        <StyledLabelContent>{label}</StyledLabelContent>
+        <StyledLabelContent bgColor={labelBgColor}>{label}</StyledLabelContent>
         {selectedItem?.label || triggerPlaceholder}
         <IconChevron width="0.75rem" />
       </StyledTrigger>

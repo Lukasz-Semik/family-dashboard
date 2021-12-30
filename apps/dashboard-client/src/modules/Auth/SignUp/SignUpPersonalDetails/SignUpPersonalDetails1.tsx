@@ -1,5 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { dsStyles } from '@family-dashboard/design-system';
 import {
   FieldInputStandard,
   validateFieldRequired,
@@ -21,6 +22,7 @@ export function SignUpPersonalDetails1() {
         <FieldInputStandard
           autoFocus
           name="firstName"
+          labelBgColor={dsStyles.colors.white}
           label={<FormattedMessage id="fields.firstName.label" />}
           placeholder={intl.formatMessage({
             id: 'fields.firstName.placeholder',
@@ -34,6 +36,7 @@ export function SignUpPersonalDetails1() {
       <StyledFieldWrapper>
         <FieldInputStandard
           name="middleName"
+          labelBgColor={dsStyles.colors.white}
           label={<FormattedMessage id="fields.middleName.label" />}
           placeholder={intl.formatMessage({
             id: 'fields.middleName.placeholder',

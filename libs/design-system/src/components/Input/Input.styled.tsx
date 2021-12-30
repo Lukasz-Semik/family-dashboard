@@ -27,9 +27,9 @@ export const StyledInput = styled.input`
   }
 `;
 
-export const StyledLabelContent = styled.span`
+export const StyledLabelContent = styled.span<{ bgColor: string }>`
   ${Typography14SemiBold};
-  background-color: ${dsStyles.colors.white};
+  background-color: ${({ bgColor }) => bgColor};
   position: absolute;
   top: -7px;
   line-height: 0.8;

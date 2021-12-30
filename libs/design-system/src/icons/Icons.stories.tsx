@@ -2,6 +2,7 @@ import { Meta } from '@storybook/react';
 
 import { dsStyles } from '../utils/styles';
 import {
+  IconBackArrow,
   IconBell,
   IconBookMarked,
   IconCalendar,
@@ -122,6 +123,10 @@ export const Icons = () => (
     <StyledItemWrapper>
       <IconPen />
       icon-pen
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconBackArrow color={dsStyles.colors.orange4} />
+      icon-back-arrow
     </StyledItemWrapper>
   </StyledItemsWrapper>
 );

@@ -30,4 +30,5 @@ export const StyledContentWrapper = styled.div`
 export const StyledTitle = styled.h1`
   ${Typography40Black};
   color: ${dsStyles.colors.violet4};
+  margin-bottom: 1rem;
 `;

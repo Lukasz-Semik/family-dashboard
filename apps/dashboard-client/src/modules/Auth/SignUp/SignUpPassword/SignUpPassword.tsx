@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import { useFormikContext } from 'formik';
 
+import { dsStyles } from '@family-dashboard/design-system';
 import {
   FieldInputSecurity,
   validateFieldRequired,
@@ -21,6 +22,7 @@ export function SignUpPassword() {
       <StyledFieldWrapper>
         <FieldInputSecurity
           autoFocus
+          labelBgColor={dsStyles.colors.white}
           name="password"
           validate={validateFieldRequired(
             <FormattedMessage id="errors.required" />

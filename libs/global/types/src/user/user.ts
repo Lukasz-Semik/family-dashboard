@@ -6,7 +6,7 @@ export enum CTGender {
 
 export enum CTMemberType {
   AdultUser = 'AdultUser',
-  ChildUser = 'ChuldUser',
+  ChildUser = 'ChildUser',
 }
 
 export enum CTUserModulePermission {

@@ -18,6 +18,7 @@ export interface SelectProps<T> {
   maxHeight?: string;
   label: React.ReactNode;
   hasError?: boolean;
+  labelBgColor?: string;
   isDisabled?: boolean;
   renderError?: (renderProps: SelectRenderErrorProps) => React.ReactElement;
   onClose?: (selectedItem: T | null) => void;

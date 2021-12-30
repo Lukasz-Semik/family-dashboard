@@ -114,6 +114,20 @@ export const m = {
     addMember: 'Add member',
     pendingInvitations: 'Pending invitations',
     familyMembers: 'Family members',
+    createMember: {
+      chooseMemberType: 'Choose a member type',
+      learnMore: 'Learn more about members type',
+      adultUser: {
+        label: 'Adult user - with account',
+        description:
+          'Adult users will have normal access to the app, will be able to add/edit/remove items',
+      },
+      childUser: {
+        label: 'Child user - with account',
+        description:
+          'Adult users will have normal access to the app, will be able to add/edit/remove items',
+      },
+    },
   },
   account: {
     title: 'Account',
@@ -143,6 +157,7 @@ export const m = {
     emptyList: 'This list is empty',
     type: 'Type',
     birthday: 'Birthday',
+    backToLists: 'Back to lists',
   },
   errors: {
     somethingWentWrong: 'Something went wrong',

@@ -1,3 +1,4 @@
+import { ReactComponent as IconBackArrowSVG } from './assets/icon-back-arrow.svg';
 import { ReactComponent as IconBellSVG } from './assets/icon-bell.svg';
 import { ReactComponent as IconBookMarkedSVG } from './assets/icon-book-marked.svg';
 import { ReactComponent as IconCalendarSVG } from './assets/icon-calendar.svg';
@@ -204,6 +205,14 @@ export const IconPen = (props: IconProps) => {
   return (
     <IconWrapper {...props}>
       <IconPenSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconBackArrow = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconBackArrowSVG />
     </IconWrapper>
   );
 };

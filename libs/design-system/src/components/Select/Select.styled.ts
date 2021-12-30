@@ -7,10 +7,10 @@ import {
   Typography16Regular,
 } from '../../utils/typography';
 
-export const StyledLabelContent = styled.span`
+export const StyledLabelContent = styled.span<{ bgColor: string }>`
   ${Typography14SemiBold};
   color: ${dsStyles.colors.violet4};
-  background-color: ${dsStyles.colors.white};
+  background-color: ${({ bgColor }) => bgColor};
   position: absolute;
   top: -7px;
   line-height: 0.8;
