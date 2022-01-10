@@ -42,7 +42,6 @@ export const fdStoreFamily = createSlice({
       family,
       action: PayloadAction<SetInvitationsActionPayload>
     ) => {
-      console.log(action);
       family.invitations = action.payload;
     },
   },

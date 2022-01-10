@@ -65,7 +65,6 @@ export function CreateMemberForm({ backToInitialStep }: Props) {
         }}
       >
         {({ submitForm, values, setFieldValue }) => {
-          console.log(values);
           return (
             <StyledForm onSubmit={submitForm}>
               <StyledSingleFieldWrapper>

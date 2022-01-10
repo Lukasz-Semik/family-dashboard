@@ -15,6 +15,7 @@ import { fdRoutes, FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import {
   CTInvitationCreateInput,
   CTInvitationDisplayData,
+  CTInvitationErrors,
   CTMemberType,
   CTUserModulePermission,
 } from '@family-dashboard/global/types';
@@ -45,8 +46,20 @@ export function useCreateUserInvitation({ closeModal }: Args) {
       );
       history.push(fdRoutes.dashboard.familySettings.familySettingsRoute());
     },
-    onError: () => {
-      showErrorToast(<FormattedMessage id="errors.somethingWentWrong" />);
+    onError: (errors) => {
+      if (
+        errors.graphQLErrors[0].message ===
+          CTInvitationErrors.EmailAlreadyInUse ||
+        errors.graphQLErrors[0].message ===
+          CTInvitationErrors.EmailAlreadyInvited
+      ) {
+        showErrorToast(
+          <FormattedMessage id="auth.signUp.verifyEmail.alreadyCreated.title" />
+        );
+      } else {
+        showErrorToast(<FormattedMessage id="errors.somethingWentWrong" />);
+      }
+
       closeModal();
     },
   });
