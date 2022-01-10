@@ -38,7 +38,11 @@ export function FamilySettingsCreateMemberPage() {
         />
       )}
 
-      {createStep === CreateStep.Creating && <CreateMemberForm />}
+      {createStep === CreateStep.Creating && (
+        <CreateMemberForm
+          backToInitialStep={() => setCreateStep(CreateStep.Initial)}
+        />
+      )}
     </div>
   );
 }

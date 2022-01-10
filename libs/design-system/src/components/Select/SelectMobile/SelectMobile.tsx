@@ -15,6 +15,7 @@ import {
   StyledList,
   StyledModalMobileDropdown,
   StyledTitle,
+  StyledWrapper,
 } from './SelectMobile.styled';
 
 export function SelectMobile<T extends SelectItemBase>({
@@ -48,7 +49,7 @@ export function SelectMobile<T extends SelectItemBase>({
   };
 
   return (
-    <div>
+    <StyledWrapper>
       <StyledTrigger
         isOpen={isOpen}
         hasValue={Boolean(selectedItem)}
@@ -87,6 +88,6 @@ export function SelectMobile<T extends SelectItemBase>({
       </StyledModalMobileDropdown>
 
       {renderError?.({ hasError })}
-    </div>
+    </StyledWrapper>
   );
 }

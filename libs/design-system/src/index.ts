@@ -13,6 +13,7 @@ export * from './components/Button/Button.types';
 export * from './components/Button/ButtonArrowBack/ButtonArrowBack';
 export * from './components/Button/ButtonStandard/ButtonStandard';
 export * from './components/Button/ButtonSecondary/ButtonSecondary';
+export * from './components/Button/ButtonsFormGroup/ButtonsFormGroup';
 export * from './components/Button/ButtonCloseAnimated/ButtonCloseAnimated';
 export * from './components/Checkbox/Checkbox.types';
 export * from './components/Checkbox/Checkbox';

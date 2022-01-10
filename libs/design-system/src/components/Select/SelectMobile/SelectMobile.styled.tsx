@@ -14,6 +14,11 @@ const animation = keyframes`
   }
 `;
 
+export const StyledWrapper = styled.div`
+  padding-top: 0.5rem;
+  position: relative;
+`;
+
 export const StyledModalMobileDropdown = styled(ReactModal)`
   width: 100%;
   height: 100%;
@@ -25,6 +30,7 @@ export const StyledModalMobileDropdown = styled(ReactModal)`
   padding: 0.5rem;
   padding-bottom: 2rem;
   box-sizing: border-box;
+  z-index: 1000;
 `;
 
 export const StyledTitle = styled.div`

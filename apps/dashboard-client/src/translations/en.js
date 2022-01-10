@@ -117,7 +117,10 @@ export const m = {
     createMember: {
       chooseMemberType: 'Choose a member type',
       learnMore: 'Learn more about members type',
+      giveFinancialModule: 'Give access to financial module',
+      giveFamilySettingsModule: 'Give family head permissions',
       adultUser: {
+        adding: 'Adding adult user',
         label: 'Adult user - with account',
         description:
           'Adult users will have normal access to the app, will be able to add/edit/remove items',

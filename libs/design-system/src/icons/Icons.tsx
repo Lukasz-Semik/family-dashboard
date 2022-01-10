@@ -8,6 +8,7 @@ import { ReactComponent as IconChevronSVG } from './assets/icon-chevron.svg';
 import { ReactComponent as IconCrossmarkSVG } from './assets/icon-crossmark.svg';
 import { ReactComponent as IconCrossmarkCircleSVG } from './assets/icon-crossmark-circle.svg';
 import { ReactComponent as IconDashboardSVG } from './assets/icon-dashboard.svg';
+import { ReactComponent as IconDoubleChevronLeftSVG } from './assets/icon-double-chevron-left.svg';
 import { ReactComponent as IconEmailSVG } from './assets/icon-email.svg';
 import { ReactComponent as IconFamilySVG } from './assets/icon-family.svg';
 import { ReactComponent as IconGearSVG } from './assets/icon-gear.svg';
@@ -213,6 +214,14 @@ export const IconBackArrow = (props: IconProps) => {
   return (
     <IconWrapper {...props}>
       <IconBackArrowSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconDoubleChevronLeft = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconDoubleChevronLeftSVG />
     </IconWrapper>
   );
 };

@@ -8,6 +8,7 @@ import {
 
 export const StyledWrapper = styled.div`
   padding-top: 0.5rem;
+  position: relative;
 `;
 
 export const StyledInput = styled.input`

@@ -52,11 +52,15 @@ export const GlobalStylesDefault = createGlobalStyle`
     right: 0;
     bottom: 0;
     background-color: rgba(122, 105, 120, 0.4);
-    z-index: 10001;
+    z-index: 100000;
     display: flex;
     align-items: center;
     justify-content: center;
     animation: ${animation} 0.3s ease-in-out;
     padding: 0.5rem;
+  }
+
+  .ReactModal__Overlay {
+    z-index: 100000;
   }
 `;
