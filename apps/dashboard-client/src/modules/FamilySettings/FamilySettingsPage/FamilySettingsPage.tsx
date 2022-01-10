@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 
 import { ButtonStandard } from '@family-dashboard/design-system';
-import { useSelectFamily } from '@family-dashboard/fe-libs/fd-store';
 import { fdRoutes } from '@family-dashboard/global/const';
 
 import { FamilySettingsInvitationsList } from './FamilySettingsInvitationsList/FamilySettingsInvitationsList';
@@ -15,8 +14,7 @@ import {
 
 export function FamilySettingsPage() {
   const history = useHistory();
-  const family = useSelectFamily();
-  console.log(family);
+
   return (
     <StyledListsWrapper>
       <StyledAddMemberButtonWrapper>

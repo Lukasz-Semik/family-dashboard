@@ -1,3 +1,4 @@
+import { ReactComponent as IconBackArrowSVG } from './assets/icon-back-arrow.svg';
 import { ReactComponent as IconBellSVG } from './assets/icon-bell.svg';
 import { ReactComponent as IconBookMarkedSVG } from './assets/icon-book-marked.svg';
 import { ReactComponent as IconCalendarSVG } from './assets/icon-calendar.svg';
@@ -7,6 +8,7 @@ import { ReactComponent as IconChevronSVG } from './assets/icon-chevron.svg';
 import { ReactComponent as IconCrossmarkSVG } from './assets/icon-crossmark.svg';
 import { ReactComponent as IconCrossmarkCircleSVG } from './assets/icon-crossmark-circle.svg';
 import { ReactComponent as IconDashboardSVG } from './assets/icon-dashboard.svg';
+import { ReactComponent as IconDoubleChevronLeftSVG } from './assets/icon-double-chevron-left.svg';
 import { ReactComponent as IconEmailSVG } from './assets/icon-email.svg';
 import { ReactComponent as IconFamilySVG } from './assets/icon-family.svg';
 import { ReactComponent as IconGearSVG } from './assets/icon-gear.svg';
@@ -204,6 +206,22 @@ export const IconPen = (props: IconProps) => {
   return (
     <IconWrapper {...props}>
       <IconPenSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconBackArrow = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconBackArrowSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconDoubleChevronLeft = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconDoubleChevronLeftSVG />
     </IconWrapper>
   );
 };

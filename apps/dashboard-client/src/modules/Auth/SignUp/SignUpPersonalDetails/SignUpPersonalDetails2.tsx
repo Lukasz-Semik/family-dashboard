@@ -1,5 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { dsStyles } from '@family-dashboard/design-system';
 import {
   combineFieldValidators,
   FieldInputMasked,
@@ -25,6 +26,7 @@ export function SignUpPersonalDetails2() {
         <FieldInputMasked
           autoFocus
           name="dob"
+          labelBgColor={dsStyles.colors.white}
           label={<FormattedMessage id="fields.dateOfBirth.label" />}
           placeholder="DD-MM-YYYY"
           validate={combineFieldValidators(
@@ -35,6 +37,7 @@ export function SignUpPersonalDetails2() {
       </StyledFieldWrapper>
 
       <FieldSelect
+        labelBgColor={dsStyles.colors.white}
         label={<FormattedMessage id="fields.gender.label" />}
         name="gender"
         triggerPlaceholder={<FormattedMessage id="shared.select" />}

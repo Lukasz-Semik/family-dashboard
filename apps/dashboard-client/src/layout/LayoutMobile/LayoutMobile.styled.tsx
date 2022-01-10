@@ -22,3 +22,7 @@ export const StyledWrapper = styled.div`
     border-radius: 999px;
   }
 `;
+
+export const StyledContentWrapper = styled.div`
+  padding-top: 1rem;
+`;

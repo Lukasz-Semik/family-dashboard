@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 
 import {
   ButtonStandard,
+  dsStyles,
   IconEmail,
   WrapperIconFormControl,
 } from '@family-dashboard/design-system';
@@ -74,6 +75,7 @@ export function SignIn() {
               <StyledEmailFieldWrapper>
                 <FieldInputStandard
                   autoFocus
+                  labelBgColor={dsStyles.colors.white}
                   name="email"
                   label={<FormattedMessage id="fields.email.label" />}
                   placeholder={intl.formatMessage({
@@ -96,6 +98,7 @@ export function SignIn() {
               <StyledPasswordFieldWrapper>
                 <FieldInputSecurity
                   name="password"
+                  labelBgColor={dsStyles.colors.white}
                   validate={validateFieldRequired(
                     <FormattedMessage id="errors.required" />
                   )}

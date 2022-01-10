@@ -4,6 +4,7 @@ import { dsStyles } from '../../../utils/styles';
 
 export const StyledWrapper = styled.div`
   position: relative;
+  padding-top: 0.5rem;
 `;
 
 export const StyledPopper = styled.ul<{ isOpen: boolean }>`

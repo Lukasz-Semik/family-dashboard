@@ -1,6 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
+  dsStyles,
   IconEmail,
   WrapperIconFormControl,
 } from '@family-dashboard/design-system';
@@ -29,6 +30,7 @@ export function SignUpEmailFields() {
       <StyledEmailFieldWrapper>
         <FieldInputStandard
           autoFocus
+          labelBgColor={dsStyles.colors.white}
           name="email"
           label={<FormattedMessage id="fields.email.label" />}
           placeholder={intl.formatMessage({

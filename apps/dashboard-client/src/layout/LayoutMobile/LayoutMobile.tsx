@@ -1,6 +1,6 @@
 import { MobileFooter } from '../MobileFooter/MobileFooter';
 import { MobileHeader } from '../MobileHeader/MobileHeader';
-import { StyledWrapper } from './LayoutMobile.styled';
+import { StyledContentWrapper, StyledWrapper } from './LayoutMobile.styled';
 
 interface Props {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ export function LayoutMobile({ children }: Props) {
   return (
     <StyledWrapper>
       <MobileHeader />
-      {children}
+      <StyledContentWrapper>{children}</StyledContentWrapper>
       <MobileFooter />
     </StyledWrapper>
   );

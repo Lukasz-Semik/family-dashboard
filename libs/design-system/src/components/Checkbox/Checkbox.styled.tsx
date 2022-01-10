@@ -5,6 +5,7 @@ import { Typography16Regular } from '../../utils/typography';
 
 interface Props {
   isVisible: boolean;
+  isDisabled?: boolean;
 }
 
 export const StyledCheckedMarker = styled.div<Props>`
@@ -19,6 +20,7 @@ export const StyledCheckedMarker = styled.div<Props>`
   height: 1.5rem;
   margin-right: 1rem;
   color: ${dsStyles.colors.orange3};
+
   transition: color ${dsStyles.transitions.standard},
     border-color ${dsStyles.transitions.standard};
 
@@ -37,9 +39,11 @@ export const StyledCheckedMarker = styled.div<Props>`
       `};
   }
 `;
-
+/* color: ${({ isDisabled }) =>
+    isDisabled ? dsStyles.colors.grey1 : dsStyles.colors.orange3}; */
 interface StyledLabelProps {
   hasError?: boolean;
+  isDisabled?: boolean;
 }
 
 export const StyledLabel = styled.label<StyledLabelProps>`
@@ -50,23 +54,36 @@ export const StyledLabel = styled.label<StyledLabelProps>`
   cursor: pointer;
   transition: color ${dsStyles.transitions.standard};
 
-  &:hover {
-    color: ${dsStyles.colors.violet2};
+  ${({ isDisabled }) =>
+    isDisabled
+      ? css`
+          color: ${dsStyles.colors.grey1};
+          cursor: not-allowed;
 
-    ${StyledCheckedMarker} {
-      color: ${dsStyles.colors.violet1};
-      border-color: ${dsStyles.colors.violet2};
-    }
-  }
+          ${StyledCheckedMarker} {
+            color: ${dsStyles.colors.grey1};
+            border-color: ${dsStyles.colors.grey1};
+          }
+        `
+      : css`
+          &:hover {
+            color: ${dsStyles.colors.violet2};
 
-  &:focus-within {
-    color: ${dsStyles.colors.orange4};
+            ${StyledCheckedMarker} {
+              color: ${dsStyles.colors.violet1};
+              border-color: ${dsStyles.colors.violet2};
+            }
+          }
 
-    ${StyledCheckedMarker} {
-      color: ${dsStyles.colors.orange3};
-      border-color: ${dsStyles.colors.orange3};
-    }
-  }
+          &:focus-within {
+            color: ${dsStyles.colors.orange4};
+
+            ${StyledCheckedMarker} {
+              color: ${dsStyles.colors.orange3};
+              border-color: ${dsStyles.colors.orange3};
+            }
+          }
+        `}
 
   ${({ hasError }) =>
     hasError &&

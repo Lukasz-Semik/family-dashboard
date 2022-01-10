@@ -7,7 +7,6 @@ import {
 } from '@family-dashboard/design-system';
 
 export const StyledAddMemberButtonWrapper = styled.div`
-  padding-top: 1rem;
   margin-bottom: 2rem;
 
   @media screen and (min-width: ${dsStyles.breakpoints.md}px) {

@@ -15,6 +15,7 @@ import {
   StyledList,
   StyledModalMobileDropdown,
   StyledTitle,
+  StyledWrapper,
 } from './SelectMobile.styled';
 
 export function SelectMobile<T extends SelectItemBase>({
@@ -28,6 +29,7 @@ export function SelectMobile<T extends SelectItemBase>({
   renderError,
   onClose,
   onOpen,
+  labelBgColor = dsStyles.colors.orange1,
 }: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,7 +49,7 @@ export function SelectMobile<T extends SelectItemBase>({
   };
 
   return (
-    <div>
+    <StyledWrapper>
       <StyledTrigger
         isOpen={isOpen}
         hasValue={Boolean(selectedItem)}
@@ -56,7 +58,7 @@ export function SelectMobile<T extends SelectItemBase>({
         isDisabled={isDisabled}
         type="button"
       >
-        <StyledLabelContent>{label}</StyledLabelContent>
+        <StyledLabelContent bgColor={labelBgColor}>{label}</StyledLabelContent>
         {selectedItem?.label || triggerPlaceholder}
         <IconChevron width="0.75rem" />
       </StyledTrigger>
@@ -86,6 +88,6 @@ export function SelectMobile<T extends SelectItemBase>({
       </StyledModalMobileDropdown>
 
       {renderError?.({ hasError })}
-    </div>
+    </StyledWrapper>
   );
 }

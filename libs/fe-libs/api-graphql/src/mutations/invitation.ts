@@ -6,6 +6,16 @@ export const CreateSignUpInvitation = gql`
   }
 `;
 
+export const CreateUserInvitation = gql`
+  mutation createUserInvitation($input: InvitationCreateInput!) {
+    createUserInvitation(input: $input) {
+      email
+      firstName
+      validTo
+    }
+  }
+`;
+
 export const ConfirmSignUpInvitation = gql`
   mutation ConfirmSignUpInvitation($input: InvitationConfirmInput!) {
     confirmSignUpInvitation(input: $input) {
