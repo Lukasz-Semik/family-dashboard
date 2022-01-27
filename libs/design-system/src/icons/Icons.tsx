@@ -4,6 +4,7 @@ import { ReactComponent as IconBookMarkedSVG } from './assets/icon-book-marked.s
 import { ReactComponent as IconCalendarSVG } from './assets/icon-calendar.svg';
 import { ReactComponent as IconCartSVG } from './assets/icon-cart.svg';
 import { ReactComponent as IconCheckmarkSVG } from './assets/icon-checkmark.svg';
+import { ReactComponent as IconCheckmarkPureSVG } from './assets/icon-checkmark-pure.svg';
 import { ReactComponent as IconChevronSVG } from './assets/icon-chevron.svg';
 import { ReactComponent as IconCrossmarkSVG } from './assets/icon-crossmark.svg';
 import { ReactComponent as IconCrossmarkCircleSVG } from './assets/icon-crossmark-circle.svg';
@@ -222,6 +223,13 @@ export const IconDoubleChevronLeft = (props: IconProps) => {
   return (
     <IconWrapper {...props}>
       <IconDoubleChevronLeftSVG />
+    </IconWrapper>
+  );
+};
+export const IconCheckmarkPure = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconCheckmarkPureSVG />
     </IconWrapper>
   );
 };

@@ -17,3 +17,10 @@ export type CTInvitationDisplayData = Pick<
   CTInvitationBaseData,
   'firstName' | 'email' | 'validTo'
 >;
+
+export interface CTInvitationUserPersonalDetailsData
+  extends CTUserPersonalDetails {
+  email: string;
+  familyName: string;
+  inviterName: string;
+}

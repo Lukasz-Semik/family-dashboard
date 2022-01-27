@@ -10,6 +10,7 @@ import { CreateUserInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import {
   fdStoreFamilyActions,
   useSelectFamily,
+  useSelectUser,
 } from '@family-dashboard/fe-libs/fd-store';
 import { fdRoutes, FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import {
@@ -28,6 +29,7 @@ interface Args {
 
 export function useCreateUserInvitation({ closeModal }: Args) {
   const family = useSelectFamily();
+  const user = useSelectUser();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -44,7 +46,7 @@ export function useCreateUserInvitation({ closeModal }: Args) {
           ...family.invitations,
         ])
       );
-      history.push(fdRoutes.dashboard.familySettings.familySettingsRoute());
+      history.push(fdRoutes.dashboard.familySettings.familySettingsRoute.path);
     },
     onError: (errors) => {
       if (
@@ -75,7 +77,7 @@ export function useCreateUserInvitation({ closeModal }: Args) {
           input: {
             ...values,
             dob: dayjs(values.dob, FULL_DATE_FORMAT).toDate(),
-            inviterName: family.data.name,
+            inviterName: user.data.firstName,
             modulePermissions: [
               hasFamilySettingsModulePermission
                 ? CTUserModulePermission.FamilySettings
@@ -89,7 +91,7 @@ export function useCreateUserInvitation({ closeModal }: Args) {
         },
       });
     },
-    [family.data.name, createUserInvitationMutation]
+    [user.data.firstName, createUserInvitationMutation]
   );
 
   return {

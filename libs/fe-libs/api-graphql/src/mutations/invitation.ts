@@ -17,8 +17,19 @@ export const CreateUserInvitation = gql`
 `;
 
 export const ConfirmSignUpInvitation = gql`
-  mutation ConfirmSignUpInvitation($input: InvitationConfirmInput!) {
+  mutation ConfirmSignUpInvitation($input: InvitationSignUpConfirmInput!) {
     confirmSignUpInvitation(input: $input) {
+      accessToken
+    }
+  }
+`;
+
+export const ConfirmUserInvitation = gql`
+  mutation ConfirmUserInvitation(
+    $input: InvitationUserConfirmInput!
+    $token: String!
+  ) {
+    confirmUserInvitation(input: $input, token: $token) {
       accessToken
     }
   }

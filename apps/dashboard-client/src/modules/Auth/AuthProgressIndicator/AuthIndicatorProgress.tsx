@@ -3,18 +3,17 @@ import {
   IndicatorProgressCircle,
 } from '@family-dashboard/design-system';
 
-import { SignUpStep } from '../SignUp.types';
-import { progressMap } from '../SignUp.utils';
 import {
   StyledIndicatorProgressWrapper,
   StyledIndicatorStep,
-} from './SignUpIndicatorProgress.styled';
+} from './AuthIndicatorProgress.styled';
 
 interface Props {
-  currentStep: SignUpStep;
+  progress: number;
+  content: React.ReactNode;
 }
 
-export function SignUpIndicatorProgress({ currentStep }: Props) {
+export function AuthIndicatorProgress({ progress, content }: Props) {
   return (
     <StyledIndicatorProgressWrapper>
       <IndicatorProgressCircle
@@ -22,11 +21,9 @@ export function SignUpIndicatorProgress({ currentStep }: Props) {
         size={44}
         bgColor={dsStyles.colors.orange1}
         barColor={dsStyles.colors.orange4}
-        progress={progressMap[currentStep].progress}
+        progress={progress}
       >
-        <StyledIndicatorStep>
-          {progressMap[currentStep].step}/7
-        </StyledIndicatorStep>
+        <StyledIndicatorStep>{content}</StyledIndicatorStep>
       </IndicatorProgressCircle>
     </StyledIndicatorProgressWrapper>
   );

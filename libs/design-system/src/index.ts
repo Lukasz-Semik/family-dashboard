@@ -18,6 +18,7 @@ export * from './components/Button/ButtonCloseAnimated/ButtonCloseAnimated';
 export * from './components/Checkbox/Checkbox.types';
 export * from './components/Checkbox/Checkbox';
 export * from './components/Elements/Elements.types';
+export * from './components/Elements/ElementCircleAnimatedBase/ElementCircleAnimatedBase';
 export * from './components/Elements/ElementCloseAnimated/ElementCloseAnimated';
 export * from './components/ErrorMessage/ErrorMessage.types';
 export * from './components/ErrorMessage/ErrorMessage';

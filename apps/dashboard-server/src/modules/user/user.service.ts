@@ -14,9 +14,7 @@ interface GetUserInitialAppStateResult {
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
-    @InjectRepository(FamilyEntity)
-    private readonly familyRepository: Repository<FamilyEntity>
+    private readonly userRepository: Repository<UserEntity>
   ) {}
 
   async getUserInitialAppState(

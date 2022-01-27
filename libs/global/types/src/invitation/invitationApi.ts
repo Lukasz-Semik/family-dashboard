@@ -28,10 +28,15 @@ export type CTInvitationSignUpCreateInput = Omit<
   'modulePermissions' | 'memberType' | 'validTo'
 >;
 
-export interface CTInvitationConfirmInput extends CTUserPersonalDetails {
+export interface CTInvitationSignUpConfirmInput extends CTUserPersonalDetails {
   password: string;
   code: string;
 }
+
+export type CTInvitationUserConfirmInput = Omit<
+  CTInvitationSignUpConfirmInput,
+  'code' | 'email'
+>;
 
 export interface CTVerifyEmailResponse {
   status: CTVerifyEmailResponseStatus;

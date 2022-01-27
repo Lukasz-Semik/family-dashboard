@@ -44,7 +44,7 @@ export function SignUpButtonsGroup({ currentStep }: Props) {
 
       {isEmailStep && (
         <StyledLinkWrapper>
-          <StyledLink to={fdRoutes.auth.signInRoute()}>
+          <StyledLink to={fdRoutes.auth.signInRoute.path}>
             <FormattedMessage id="auth.signUp.backToSignIn" />
           </StyledLink>
         </StyledLinkWrapper>

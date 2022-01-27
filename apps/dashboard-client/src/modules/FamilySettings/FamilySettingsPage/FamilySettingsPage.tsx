@@ -21,7 +21,8 @@ export function FamilySettingsPage() {
         <ButtonStandard
           onClick={() =>
             history.push(
-              fdRoutes.dashboard.familySettings.familySettingsCreateUserRoute()
+              fdRoutes.dashboard.familySettings.familySettingsCreateUserRoute
+                .path
             )
           }
         >

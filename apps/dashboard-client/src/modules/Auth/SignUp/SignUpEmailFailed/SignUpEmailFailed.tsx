@@ -11,10 +11,10 @@ import {
 } from '@family-dashboard/global/types';
 
 import {
-  StyledDescription,
   StyledErrorBox,
-  StyledIndicatorWrapper,
-} from './SignUpEmailFailed.styled';
+  StyledErrorDescription,
+  StyledErrorIndicatorWrapper,
+} from '../../Auth.styled';
 
 interface Props {
   verifyEmailResponse?: CTVerifyEmailResponse;
@@ -74,9 +74,9 @@ export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
   return (
     <div>
       <StyledErrorBox>{copies.title}</StyledErrorBox>
-      <StyledDescription>{copies.description}</StyledDescription>
+      <StyledErrorDescription>{copies.description}</StyledErrorDescription>
 
-      <StyledIndicatorWrapper>
+      <StyledErrorIndicatorWrapper>
         <ElementCloseAnimated
           bgColor="transparent"
           barColor={dsStyles.colors.red2}
@@ -85,7 +85,7 @@ export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
           iconColor={dsStyles.colors.red2}
           iconSize="22px"
         />
-      </StyledIndicatorWrapper>
+      </StyledErrorIndicatorWrapper>
     </div>
   );
 }

@@ -7,6 +7,13 @@ export const m = {
         'Family dashboard app - the best way to organize your family stuff, save time and spent it on whatever you want to.',
       forgotPassword: 'Forgot your password?',
     },
+    confirmInvitedUser: {
+      description:
+        'You have been invited to Family Dashboard App. {inviterName} wants you to join {familyName} family. Please, verify your personal details and sign up :) ',
+      personalDetails: 'Confirm or update your personal details.',
+      finalStepDescription:
+        'Thank you for signing up. Your account is ready to use!',
+    },
     signUp: {
       title: 'Sign Up',
       differentLastName: 'My last name is different',

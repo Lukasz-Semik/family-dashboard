@@ -8,7 +8,7 @@ import {
   validateFieldRequired,
 } from '@family-dashboard/fe-libs/field-controls';
 
-import { StyledCommonDescription } from '../SignUp.styled';
+import { StyledCommonDescription } from '../../Auth.styled';
 import { Values } from '../SignUp.types';
 import {
   StyledCheckboxWrapper,

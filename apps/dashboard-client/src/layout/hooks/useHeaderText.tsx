@@ -9,36 +9,44 @@ export function useHeaderText() {
 
   const headerText = useMemo(() => {
     if (
-      history.location.pathname.includes(fdRoutes.dashboard.organizationRoute())
+      history.location.pathname.includes(
+        fdRoutes.dashboard.organizationRoute.path
+      )
     ) {
       return <FormattedMessage id="organization.title" />;
     }
 
     if (
       history.location.pathname.includes(
-        fdRoutes.dashboard.notificationsRoute()
+        fdRoutes.dashboard.notificationsRoute.path
       )
     ) {
       return <FormattedMessage id="notifications.title" />;
     }
 
-    if (history.location.pathname.includes(fdRoutes.dashboard.financeRoute())) {
+    if (
+      history.location.pathname.includes(fdRoutes.dashboard.financeRoute.path)
+    ) {
       return <FormattedMessage id="finance.title" />;
     }
 
-    if (history.location.pathname.includes(fdRoutes.dashboard.familyRoute())) {
+    if (
+      history.location.pathname.includes(fdRoutes.dashboard.familyRoute.path)
+    ) {
       return <FormattedMessage id="family.title" />;
     }
 
     if (
       history.location.pathname.includes(
-        fdRoutes.dashboard.familySettings.familySettingsRoute()
+        fdRoutes.dashboard.familySettings.familySettingsRoute.path
       )
     ) {
       return <FormattedMessage id="familySettings.title" />;
     }
 
-    if (history.location.pathname.includes(fdRoutes.dashboard.accountRoute())) {
+    if (
+      history.location.pathname.includes(fdRoutes.dashboard.accountRoute.path)
+    ) {
       return <FormattedMessage id="account.title" />;
     }
 

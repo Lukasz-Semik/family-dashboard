@@ -1,5 +1,4 @@
 import { FormattedMessage } from 'react-intl';
-import { useFormikContext } from 'formik';
 
 import { dsStyles } from '@family-dashboard/design-system';
 import {
@@ -7,16 +6,17 @@ import {
   validateFieldRequired,
 } from '@family-dashboard/fe-libs/field-controls';
 
-import { Values } from '../SignUp.types';
 import {
   StyledAllTextsWrapper,
   StyledFieldWrapper,
-} from './SignUpPassword.styled';
-import { SignUpPasswordErrorText } from './SignUpPasswordErrorText';
+} from './AuthPassword.styled';
+import { AuthPasswordErrorText } from './AuthPasswordErrorText';
 
-export function SignUpPassword() {
-  const { values } = useFormikContext<Values>();
+interface Props {
+  password: string;
+}
 
+export function AuthPassword({ password }: Props) {
   return (
     <>
       <StyledFieldWrapper>
@@ -35,27 +35,23 @@ export function SignUpPassword() {
 
       <StyledAllTextsWrapper>
         <div>
-          <SignUpPasswordErrorText
-            isValid={/[^a-zA-Z0-9]/.test(values.password)}
-          >
+          <AuthPasswordErrorText isValid={/[^a-zA-Z0-9]/.test(password)}>
             <FormattedMessage id="auth.signUp.passwordErrors.specialCharacter" />
-          </SignUpPasswordErrorText>
+          </AuthPasswordErrorText>
 
-          <SignUpPasswordErrorText isValid={values.password.length >= 8}>
+          <AuthPasswordErrorText isValid={password.length >= 8}>
             <FormattedMessage id="auth.signUp.passwordErrors.minCharacters" />
-          </SignUpPasswordErrorText>
+          </AuthPasswordErrorText>
 
-          <SignUpPasswordErrorText isValid={/[0-9]/.test(values.password)}>
+          <AuthPasswordErrorText isValid={/[0-9]/.test(password)}>
             <FormattedMessage id="auth.signUp.passwordErrors.numericCharacter" />
-          </SignUpPasswordErrorText>
+          </AuthPasswordErrorText>
 
-          <SignUpPasswordErrorText
-            isValid={
-              /[A-Z]/.test(values.password) && /[a-z]/.test(values.password)
-            }
+          <AuthPasswordErrorText
+            isValid={/[A-Z]/.test(password) && /[a-z]/.test(password)}
           >
             <FormattedMessage id="auth.signUp.passwordErrors.upperAndLowerCharacter" />
-          </SignUpPasswordErrorText>
+          </AuthPasswordErrorText>
         </div>
       </StyledAllTextsWrapper>
     </>

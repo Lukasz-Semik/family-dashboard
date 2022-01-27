@@ -24,42 +24,42 @@ export function DashboardRouting() {
       <Switch>
         <PrivateRoute
           exact
-          path={fdRoutes.dashboard.dashboardRoute()}
+          path={fdRoutes.dashboard.dashboardRoute.path}
           component={Dashboard}
         />
 
         <PrivateRoute
           exact
-          path={fdRoutes.dashboard.notificationsRoute()}
+          path={fdRoutes.dashboard.notificationsRoute.path}
           render={() => <div>Notifications</div>}
         />
 
         <PrivateRoute
           exact
-          path={fdRoutes.dashboard.organizationRoute()}
+          path={fdRoutes.dashboard.organizationRoute.path}
           render={() => <div>Organization</div>}
         />
 
         <PrivateRoute
           exact
-          path={fdRoutes.dashboard.financeRoute()}
+          path={fdRoutes.dashboard.financeRoute.path}
           render={() => <div>Finance</div>}
         />
 
         <PrivateRoute
           exact
-          path={fdRoutes.dashboard.familyRoute()}
+          path={fdRoutes.dashboard.familyRoute.path}
           render={() => <div>Family</div>}
         />
 
         <PrivateRoute
           exact
-          path={fdRoutes.dashboard.accountRoute()}
+          path={fdRoutes.dashboard.accountRoute.path}
           render={() => <div>Account</div>}
         />
 
         <PrivateRoute
-          path={fdRoutes.dashboard.familySettings.familySettingsRoute()}
+          path={fdRoutes.dashboard.familySettings.familySettingsRoute.path}
           component={FamilySettingsRouting}
         />
       </Switch>

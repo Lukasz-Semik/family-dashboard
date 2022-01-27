@@ -8,6 +8,7 @@ import {
   IconCalendar,
   IconCart,
   IconCheckmark,
+  IconCheckmarkPure,
   IconChevron,
   IconCrossmark,
   IconDashboard,
@@ -48,6 +49,10 @@ export const Icons = () => (
     <StyledItemWrapper>
       <IconCheckmark color={dsStyles.colors.orange4} />
       icon-checkmark
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconCheckmarkPure />
+      icon-checkmark-pure
     </StyledItemWrapper>
     <StyledItemWrapper>
       <IconCrossmark />

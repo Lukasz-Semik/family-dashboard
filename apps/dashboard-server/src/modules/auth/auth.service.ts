@@ -4,6 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { compare } from 'bcryptjs';
 import { Repository } from 'typeorm';
 
+import { CTTokenDecoded } from '@family-dashboard/global/types';
+
 import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
 
@@ -19,7 +21,6 @@ export class AuthService {
     const user = await this.userRepository
       .createQueryBuilder('user')
       .leftJoinAndSelect('user.family', 'family.id')
-      // .leftJoinAndSelect('user.family', 'family.users')
       .where('user.email = :email', { email })
       .getOne();
 
@@ -42,6 +43,12 @@ export class AuthService {
     return {
       accessToken: this.jwtService.sign(payload),
     };
+  }
+
+  decodeToken(token: string) {
+    const data = this.jwtService.decode(token);
+
+    return data as CTTokenDecoded;
   }
 
   async login(email: string, password: string) {

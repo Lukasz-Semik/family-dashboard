@@ -4,54 +4,12 @@ import styled from 'styled-components';
 import {
   cssLinkLike,
   dsStyles,
+  Typography14Regular,
+  Typography16Regular,
+  Typography20Regular,
   Typography24Black,
   Typography32Black,
-  Typography40Black,
 } from '@family-dashboard/design-system';
-
-export const StyledHeader = styled.header`
-  box-sizing: border-box;
-  position: absolute;
-  width: 100%;
-  height: 3.5rem;
-  top: 0;
-  left: 0;
-  background-color: ${dsStyles.colors.white};
-  display: flex;
-  align-items: center;
-
-  @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
-    top: 2rem;
-    left: 4rem;
-    background-color: transparent;
-    width: auto;
-  }
-`;
-
-export const StyledHeaderTitle = styled.h1`
-  ${Typography24Black};
-  text-align: center;
-  width: 100%;
-
-  @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
-    ${Typography40Black};
-    text-align: start;
-  }
-`;
-
-export const StyledWrapper = styled.div`
-  position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  padding-top: 3.5rem;
-
-  @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
-    padding: 0;
-  }
-`;
 
 export const StyledInnerWrapper = styled.div`
   position: relative;
@@ -95,4 +53,57 @@ export const StyledLinkWrapper = styled.div`
 export const StyledLink = styled(Link)`
   ${cssLinkLike}
   text-align: center;
+`;
+
+export const StyledFlexForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: ${dsStyles.colors.white};
+  border-radius: 4px;
+  padding: 1rem 0.5rem;
+  height: 100%;
+  box-sizing: border-box;
+
+  @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
+    border-radius: 8px;
+    padding: 2rem;
+  }
+`;
+
+export const StyledCommonDescription = styled.p`
+  ${Typography14Regular};
+  color: ${dsStyles.colors.violet3};
+  margin-bottom: 0.5rem;
+  text-align: center;
+
+  @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
+    ${Typography16Regular};
+  }
+`;
+
+export const StyledErrorBox = styled.div`
+  ${Typography20Regular};
+  background-color: ${dsStyles.colors.red2};
+  color: ${dsStyles.colors.white};
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  margin-bottom: 1.5rem;
+`;
+
+export const StyledErrorDescription = styled.div`
+  ${Typography16Regular};
+  margin-bottom: 1.5rem;
+  color: ${dsStyles.colors.red2};
+  text-align: center;
+`;
+
+export const StyledErrorIndicatorWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;

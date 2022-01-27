@@ -8,8 +8,8 @@ import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
   CTGender,
-  CTInvitationConfirmInput,
   CTInvitationErrors,
+  CTInvitationSignUpConfirmInput,
   CTLoginResponse,
 } from '@family-dashboard/global/types';
 
@@ -26,7 +26,7 @@ export function useConfirmSignUpInvitation({
 }: Args) {
   const [confirmSignUpInvitationMutation, { loading }] = useMutation<
     { confirmSignUpInvitation: CTLoginResponse },
-    { input: CTInvitationConfirmInput }
+    { input: CTInvitationSignUpConfirmInput }
   >(ConfirmSignUpInvitation, {
     onCompleted: (responseData) => {
       sdkSetToSessionStorage(
