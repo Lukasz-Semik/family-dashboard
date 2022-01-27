@@ -20,7 +20,6 @@ export const serializeInvitation = (
 export const serilizeUserInvitation = (
   invitation: InvitationEntity
 ): CTInvitationUserPersonalDetailsData => {
-  console.log(invitation);
   return {
     email: invitation.email,
     familyName: invitation.familyName,

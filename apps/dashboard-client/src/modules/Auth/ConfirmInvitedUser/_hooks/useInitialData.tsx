@@ -16,7 +16,6 @@ export function useInitialData() {
     },
   });
 
-  console.log(error);
   return {
     initialData: data?.getUserInvitation,
     isLoading: loading,
