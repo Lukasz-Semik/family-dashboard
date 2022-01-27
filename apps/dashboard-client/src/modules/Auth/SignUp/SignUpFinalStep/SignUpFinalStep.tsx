@@ -7,7 +7,7 @@ import {
 } from '@family-dashboard/design-system';
 import { fdRoutes } from '@family-dashboard/global/const';
 
-import { StyledCommonDescription } from '../SignUp.styled';
+import { StyledCommonDescription } from '../../Auth.styled';
 import {
   StyledButtonWrapper,
   StyledDescriptionWrapper,
@@ -25,7 +25,15 @@ export function SignUpFinalStep() {
       </StyledDescriptionWrapper>
 
       <StyledButtonWrapper>
-        <ButtonStandard>
+        <ButtonStandard
+          type="button"
+          onClick={() =>
+            history.push(
+              fdRoutes.dashboard.familySettings.familySettingsCreateUserRoute
+                .path
+            )
+          }
+        >
           <FormattedMessage id="controls.addFamilyMembers" />
         </ButtonStandard>
       </StyledButtonWrapper>
@@ -38,7 +46,7 @@ export function SignUpFinalStep() {
 
       <StyledButtonWrapper>
         <ButtonSecondary
-          onClick={() => history.push(fdRoutes.dashboard.dashboardRoute())}
+          onClick={() => history.push(fdRoutes.dashboard.dashboardRoute.path)}
         >
           <FormattedMessage id="controls.goToDashboard" />
         </ButtonSecondary>

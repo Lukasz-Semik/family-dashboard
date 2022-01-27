@@ -3,23 +3,17 @@ import { Formik } from 'formik';
 
 import { LoaderSimple } from '@family-dashboard/design-system';
 
-import {
-  StyledFormTitle,
-  StyledHeader,
-  StyledHeaderTitle,
-  StyledWrapper,
-} from '../Auth.styled';
-import { useSignUp } from './hooks/useSignUp';
-import {
-  StyledForm,
-  StyledFormTitleHeader,
-  StyledInnerWrapper,
-  StyledLoaderWrapper,
-} from './SignUp.styled';
+import { StyledFlexForm, StyledFormTitle } from '../Auth.styled';
+import { AuthLayout } from '../AuthLayout/AuthLayout';
+import { AuthIndicatorProgress } from '../AuthProgressIndicator/AuthIndicatorProgress';
+import { useSignUp } from './_hooks/useSignUp';
+import { StyledFormTitleHeader, StyledLoaderWrapper } from './SignUp.styled';
 import { Values } from './SignUp.types';
+import { progressMap } from './SignUp.utils';
 import { SignUpButtonsGroup } from './SignUpButtonsGroup/SignUpButtonGroup';
-import { SignUpEmailStepController } from './SignUpEmailStepController/SignUpEmailStepController';
-import { SignUpIndicatorProgress } from './SignUpIndicatorProgress/SignUpIndicatorProgress';
+import { SignUpStepController } from './SignUpStepController/SignUpStepController';
+
+const STEPS_COUNT = 7;
 
 export function SignUp() {
   const {
@@ -32,67 +26,64 @@ export function SignUp() {
   } = useSignUp();
 
   return (
-    <StyledWrapper>
-      <StyledHeader>
-        <StyledHeaderTitle>Family Dashboard</StyledHeaderTitle>
-      </StyledHeader>
+    <AuthLayout>
+      <AuthIndicatorProgress
+        progress={progressMap[currentStep].progress}
+        content={`${progressMap[currentStep].step}/${STEPS_COUNT}`}
+      />
 
-      <StyledInnerWrapper>
-        <SignUpIndicatorProgress currentStep={currentStep} />
+      <Formik<Values>
+        initialValues={{
+          email: '',
+          firstName: '',
+          middleName: '',
+          lastName: '',
+          familyName: '',
+          isConsentGiven: false,
+          isLastNameDifferent: false,
+          gender: undefined,
+          dob: '',
+          password: '',
+          code0: '',
+          code1: '',
+          code2: '',
+          code3: '',
+        }}
+        onSubmit={onSubmit}
+      >
+        {({ handleSubmit }) => {
+          return (
+            <StyledFlexForm onSubmit={handleSubmit}>
+              <div>
+                <StyledFormTitleHeader>
+                  <StyledFormTitle>
+                    <FormattedMessage id="auth.signUp.title" />
+                  </StyledFormTitle>
+                </StyledFormTitleHeader>
 
-        <Formik<Values>
-          initialValues={{
-            email: '',
-            firstName: '',
-            middleName: '',
-            lastName: '',
-            familyName: '',
-            isConsentGiven: false,
-            isLastNameDifferent: false,
-            gender: undefined,
-            dob: '',
-            password: '',
-            code0: '',
-            code1: '',
-            code2: '',
-            code3: '',
-          }}
-          onSubmit={onSubmit}
-        >
-          {({ handleSubmit, values }) => {
-            return (
-              <StyledForm onSubmit={handleSubmit}>
-                <div>
-                  <StyledFormTitleHeader>
-                    <StyledFormTitle>
-                      <FormattedMessage id="auth.signUp.title" />
-                    </StyledFormTitle>
-                  </StyledFormTitleHeader>
-
-                  {!isLoading && (
-                    <SignUpEmailStepController
-                      currentStep={currentStep}
-                      verifyEmailResponse={verifyEmailResponse}
-                      hasFailedPin={hasFailedPin}
-                      resetHasFailedPin={resetHasFailedPin}
-                    />
-                  )}
-                </div>
-
-                {!isLoading ? (
-                  <div>
-                    <SignUpButtonsGroup currentStep={currentStep} />
-                  </div>
-                ) : (
-                  <StyledLoaderWrapper>
-                    <LoaderSimple />
-                  </StyledLoaderWrapper>
+                {!isLoading && (
+                  <SignUpStepController
+                    currentStep={currentStep}
+                    verifyEmailResponse={verifyEmailResponse}
+                    hasFailedPin={hasFailedPin}
+                    resetHasFailedPin={resetHasFailedPin}
+                  />
                 )}
-              </StyledForm>
-            );
-          }}
-        </Formik>
-      </StyledInnerWrapper>
-    </StyledWrapper>
+              </div>
+
+              {!isLoading ? (
+                <div>
+                  <SignUpButtonsGroup currentStep={currentStep} />
+                </div>
+              ) : (
+                <StyledLoaderWrapper>
+                  <LoaderSimple />
+                </StyledLoaderWrapper>
+              )}
+            </StyledFlexForm>
+          );
+        }}
+      </Formik>
+    </AuthLayout>
   );
 }

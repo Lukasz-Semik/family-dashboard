@@ -6,17 +6,19 @@ import {
   validateFieldRequired,
 } from '@family-dashboard/fe-libs/field-controls';
 
-import { StyledCommonDescription } from '../SignUp.styled';
-import { StyledFieldWrapper } from './SignUpPersonalDetails.styled';
+import { StyledCommonDescription } from '../Auth.styled';
+import { StyledFieldWrapper } from './AuthPersonalDetails.styled';
 
-export function SignUpPersonalDetails1() {
+interface Props {
+  description: React.ReactNode;
+}
+
+export function AuthPersonalDetails1({ description }: Props) {
   const intl = useIntl();
 
   return (
     <>
-      <StyledCommonDescription>
-        <FormattedMessage id="auth.signUp.personalDetails" />
-      </StyledCommonDescription>
+      <StyledCommonDescription>{description}</StyledCommonDescription>
 
       <StyledFieldWrapper>
         <FieldInputStandard

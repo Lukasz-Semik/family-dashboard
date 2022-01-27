@@ -1,14 +1,17 @@
+import { FormattedMessage } from 'react-intl';
+import { useFormikContext } from 'formik';
+
 import { CTVerifyEmailResponse } from '@family-dashboard/global/types';
 
-import { SignUpStep } from '../SignUp.types';
+import { AuthPassword } from '../../AuthPassword/AuthPassword';
+import { AuthPersonalDetails1 } from '../../AuthPersonalDetails/AuthPersonalDetails1';
+import { AuthPersonalDetails2 } from '../../AuthPersonalDetails/AuthPersonalDetails2';
+import { SignUpStep, Values } from '../SignUp.types';
 import { SignUpConfirmEmail } from '../SignUpConfirmEmail/SignUpConfirmEmail';
 import { SignUpEmailFailed } from '../SignUpEmailFailed/SignUpEmailFailed';
 import { SignUpEmailFields } from '../SignUpEmailFields/SignUpEmailFields';
 import { SignUpFamilyName } from '../SignUpFamilyName/SignUpFamilyName';
 import { SignUpFinalStep } from '../SignUpFinalStep/SignUpFinalStep';
-import { SignUpPassword } from '../SignUpPassword/SignUpPassword';
-import { SignUpPersonalDetails1 } from '../SignUpPersonalDetails/SignUpPersonalDetails1';
-import { SignUpPersonalDetails2 } from '../SignUpPersonalDetails/SignUpPersonalDetails2';
 
 interface Props {
   currentStep: SignUpStep;
@@ -17,23 +20,33 @@ interface Props {
   resetHasFailedPin: () => void;
 }
 
-export function SignUpEmailStepController({
+export function SignUpStepController({
   currentStep,
   verifyEmailResponse,
   hasFailedPin,
   resetHasFailedPin,
 }: Props) {
+  const { values } = useFormikContext<Values>();
+
   switch (currentStep) {
     case SignUpStep.Email:
       return <SignUpEmailFields />;
     case SignUpStep.FamilyName:
       return <SignUpFamilyName />;
     case SignUpStep.PersonalDetails1:
-      return <SignUpPersonalDetails1 />;
+      return (
+        <AuthPersonalDetails1
+          description={<FormattedMessage id="auth.signUp.personalDetails" />}
+        />
+      );
     case SignUpStep.PersonalDetails2:
-      return <SignUpPersonalDetails2 />;
+      return (
+        <AuthPersonalDetails2
+          description={<FormattedMessage id="auth.signUp.personalDetails" />}
+        />
+      );
     case SignUpStep.Password:
-      return <SignUpPassword />;
+      return <AuthPassword password={values.password} />;
     case SignUpStep.ConfirmEmail:
       return (
         <SignUpConfirmEmail

@@ -9,14 +9,14 @@ import {
   StyledIconWrapper,
   StyledText,
   StyledTextWrapper,
-} from './SignUpPassword.styled';
+} from './AuthPassword.styled';
 
 interface Props {
   isValid: boolean;
   children: React.ReactNode;
 }
 
-export function SignUpPasswordErrorText({ isValid, children }: Props) {
+export function AuthPasswordErrorText({ isValid, children }: Props) {
   return (
     <StyledTextWrapper>
       <StyledIconWrapper>

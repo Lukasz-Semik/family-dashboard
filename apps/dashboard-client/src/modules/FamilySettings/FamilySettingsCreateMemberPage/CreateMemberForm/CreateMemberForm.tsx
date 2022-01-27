@@ -11,6 +11,7 @@ import {
   useModalState,
   WrapperIconFormControl,
 } from '@family-dashboard/design-system';
+import { useSelectFamily } from '@family-dashboard/fe-libs/fd-store';
 import {
   combineFieldValidators,
   FieldCheckbox,
@@ -44,6 +45,7 @@ export function CreateMemberForm({ backToInitialStep }: Props) {
   const { createUserInvitation, isLoading } = useCreateUserInvitation({
     closeModal,
   });
+  const family = useSelectFamily();
 
   return (
     <>
@@ -57,7 +59,7 @@ export function CreateMemberForm({ backToInitialStep }: Props) {
           email: '',
           firstName: '',
           middleName: '',
-          lastName: '',
+          lastName: family.data.name,
           gender: undefined,
           dob: '',
           hasFamilySettingsModulePermission: false,

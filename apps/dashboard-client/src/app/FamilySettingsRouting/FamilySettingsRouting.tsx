@@ -19,13 +19,15 @@ export function FamilySettingsRouting() {
     <Switch>
       <PrivateRoute
         exact
-        path={fdRoutes.dashboard.familySettings.familySettingsRoute()}
+        path={fdRoutes.dashboard.familySettings.familySettingsRoute.path}
         component={FamilySettingsPage}
       />
 
       <PrivateRoute
         exact
-        path={fdRoutes.dashboard.familySettings.familySettingsCreateUserRoute()}
+        path={
+          fdRoutes.dashboard.familySettings.familySettingsCreateUserRoute.path
+        }
         component={FamilySettingsCreateMemberPage}
       />
     </Switch>

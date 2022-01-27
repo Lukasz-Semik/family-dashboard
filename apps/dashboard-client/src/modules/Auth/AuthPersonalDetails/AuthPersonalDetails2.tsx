@@ -10,17 +10,19 @@ import {
 } from '@family-dashboard/fe-libs/field-controls';
 import { CTGender } from '@family-dashboard/global/types';
 
-import { StyledCommonDescription } from '../SignUp.styled';
-import { StyledFieldWrapper } from './SignUpPersonalDetails.styled';
+import { StyledCommonDescription } from '../Auth.styled';
+import { StyledFieldWrapper } from './AuthPersonalDetails.styled';
 
-export function SignUpPersonalDetails2() {
+interface Props {
+  description: React.ReactNode;
+}
+
+export function AuthPersonalDetails2({ description }: Props) {
   const intl = useIntl();
 
   return (
     <>
-      <StyledCommonDescription>
-        <FormattedMessage id="auth.signUp.personalDetails" />
-      </StyledCommonDescription>
+      <StyledCommonDescription>{description}</StyledCommonDescription>
 
       <StyledFieldWrapper>
         <FieldInputMasked

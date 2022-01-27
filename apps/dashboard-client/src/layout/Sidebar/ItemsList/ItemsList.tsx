@@ -22,7 +22,7 @@ export function ItemsList({ closeSidebar }: Props) {
   return (
     <>
       <Item
-        path={fdRoutes.dashboard.dashboardRoute()}
+        path={fdRoutes.dashboard.dashboardRoute.path}
         isExact
         icon={<IconDashboard width="18px" height="18px" />}
         closeSidebar={closeSidebar}
@@ -30,7 +30,7 @@ export function ItemsList({ closeSidebar }: Props) {
       />
 
       <Item
-        path={fdRoutes.dashboard.notificationsRoute()}
+        path={fdRoutes.dashboard.notificationsRoute.path}
         isExact
         icon={<IconBell width="18px" height="18px" />}
         closeSidebar={closeSidebar}
@@ -38,35 +38,35 @@ export function ItemsList({ closeSidebar }: Props) {
       />
 
       <Item
-        path={fdRoutes.dashboard.organizationRoute()}
+        path={fdRoutes.dashboard.organizationRoute.path}
         icon={<IconOrganizer width="18px" height="18px" />}
         closeSidebar={closeSidebar}
         content={<FormattedMessage id="organization.title" />}
       />
 
       <Item
-        path={fdRoutes.dashboard.financeRoute()}
+        path={fdRoutes.dashboard.financeRoute.path}
         icon={<IconWallet width="18px" height="18px" />}
         closeSidebar={closeSidebar}
         content={<FormattedMessage id="finance.title" />}
       />
 
       <Item
-        path={fdRoutes.dashboard.familyRoute()}
+        path={fdRoutes.dashboard.familyRoute.path}
         icon={<IconFamily width="18px" height="18px" />}
         closeSidebar={closeSidebar}
         content={<FormattedMessage id="family.title" />}
       />
 
       <Item
-        path={fdRoutes.dashboard.accountRoute()}
+        path={fdRoutes.dashboard.accountRoute.path}
         icon={<IconUser width="18px" height="18px" />}
         closeSidebar={closeSidebar}
         content={<FormattedMessage id="account.title" />}
       />
 
       <Item
-        path={fdRoutes.dashboard.familySettings.familySettingsRoute()}
+        path={fdRoutes.dashboard.familySettings.familySettingsRoute.path}
         icon={<IconGear width="18px" height="18px" />}
         closeSidebar={closeSidebar}
         content={<FormattedMessage id="familySettings.title" />}

@@ -22,7 +22,7 @@ export function useSignIn() {
       onCompleted: (data) => {
         if (data?.login?.accessToken) {
           sdkSetToSessionStorage(FD_TOKEN_KEY, data.login.accessToken);
-          history.push(fdRoutes.dashboard.dashboardRoute());
+          history.push(fdRoutes.dashboard.dashboardRoute.path);
         }
       },
       onError: () => {

@@ -22,7 +22,7 @@ export function FamilySettingsCreateMemberPage() {
         <ButtonArrowBack
           onClick={() =>
             history.push(
-              fdRoutes.dashboard.familySettings.familySettingsRoute()
+              fdRoutes.dashboard.familySettings.familySettingsRoute.path
             )
           }
         >

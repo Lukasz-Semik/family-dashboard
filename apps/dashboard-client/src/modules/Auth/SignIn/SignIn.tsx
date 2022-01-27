@@ -19,12 +19,10 @@ import { fdRoutes } from '@family-dashboard/global/const';
 import {
   StyledButtonWrapper,
   StyledFormTitle,
-  StyledHeader,
-  StyledHeaderTitle,
   StyledLink,
   StyledLinkWrapper,
-  StyledWrapper,
 } from '../Auth.styled';
+import { AuthLayout } from '../AuthLayout/AuthLayout';
 import {
   StyledDescription,
   StyledEmailFieldWrapper,
@@ -46,13 +44,9 @@ export function SignIn() {
   const intl = useIntl();
 
   return (
-    <StyledWrapper>
-      <StyledHeader>
-        <StyledHeaderTitle>Family Dashboard</StyledHeaderTitle>
-      </StyledHeader>
-
+    <AuthLayout>
       <StyledInnerWrapper>
-        <StyledSignUpLink to={fdRoutes.auth.signUpRoute()}>
+        <StyledSignUpLink to={fdRoutes.auth.signUpRoute.path}>
           <FormattedMessage id="auth.signUp.title" />
         </StyledSignUpLink>
 
@@ -125,6 +119,6 @@ export function SignIn() {
           )}
         </Formik>
       </StyledInnerWrapper>
-    </StyledWrapper>
+    </AuthLayout>
   );
 }

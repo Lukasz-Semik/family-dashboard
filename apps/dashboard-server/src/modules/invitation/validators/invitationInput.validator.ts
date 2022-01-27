@@ -5,7 +5,10 @@ import {
   sdkValidateMaxLength,
 } from '@family-dashboard/global/sdk';
 
-import { InvitationConfirmInput, InvitationCreateInput } from '../../../schema';
+import {
+  InvitationCreateInput,
+  InvitationSignUpConfirmInput,
+} from '../../../schema';
 
 export const validateCreateInvitationInput = (
   createInvitationInput: InvitationCreateInput
@@ -33,7 +36,7 @@ export const validateCreateInvitationInput = (
 };
 
 export const validateConfirmInvitationInput = (
-  confirmInvitationInput: InvitationConfirmInput
+  confirmInvitationInput: InvitationSignUpConfirmInput
 ) => {
   if (isEmpty(confirmInvitationInput)) {
     return false;

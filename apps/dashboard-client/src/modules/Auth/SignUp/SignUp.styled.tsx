@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
-import {
-  cssFadeIn,
-  dsStyles,
-  Typography14Regular,
-  Typography16Regular,
-} from '@family-dashboard/design-system';
+import { cssFadeIn, dsStyles } from '@family-dashboard/design-system';
 
 export const StyledInnerWrapper = styled.div`
   ${cssFadeIn};
@@ -46,15 +41,4 @@ export const StyledLoaderWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-export const StyledCommonDescription = styled.p`
-  ${Typography14Regular};
-  color: ${dsStyles.colors.violet3};
-  margin-bottom: 0.5rem;
-  text-align: center;
-
-  @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
-    ${Typography16Regular};
-  }
 `;

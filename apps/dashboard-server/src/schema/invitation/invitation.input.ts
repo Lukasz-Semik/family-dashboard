@@ -2,9 +2,10 @@ import { Field, InputType } from '@nestjs/graphql';
 
 import {
   CTGender,
-  CTInvitationConfirmInput,
   CTInvitationCreateInput,
+  CTInvitationSignUpConfirmInput,
   CTInvitationSignUpCreateInput,
+  CTInvitationUserConfirmInput,
   CTMemberType,
   CTUserModulePermission,
 } from '@family-dashboard/global/types';
@@ -39,7 +40,9 @@ export class InvitationSignUpCreateInput
 }
 
 @InputType()
-export class InvitationConfirmInput implements CTInvitationConfirmInput {
+export class InvitationSignUpConfirmInput
+  implements CTInvitationSignUpConfirmInput
+{
   @Field(() => String) readonly email: string;
   @Field(() => String) readonly password: string;
   @Field(() => String) readonly firstName: string;
@@ -48,4 +51,16 @@ export class InvitationConfirmInput implements CTInvitationConfirmInput {
   @Field(() => Date) readonly dob: Date;
   @Field(() => CTGender) readonly gender: CTGender;
   @Field(() => String) readonly code: string;
+}
+
+@InputType()
+export class InvitationUserConfirmInput
+  implements CTInvitationUserConfirmInput
+{
+  @Field(() => String) readonly password: string;
+  @Field(() => String) readonly firstName: string;
+  @Field(() => String, { nullable: true }) readonly middleName?: string;
+  @Field(() => String) readonly lastName: string;
+  @Field(() => Date) readonly dob: Date;
+  @Field(() => CTGender) readonly gender: CTGender;
 }

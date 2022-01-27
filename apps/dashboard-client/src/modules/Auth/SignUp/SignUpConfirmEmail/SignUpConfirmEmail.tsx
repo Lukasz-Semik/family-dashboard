@@ -17,7 +17,7 @@ import {
 import { ResendInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FieldInputsPureConnectedGroup } from '@family-dashboard/fe-libs/field-controls';
 
-import { StyledCommonDescription } from '../SignUp.styled';
+import { StyledCommonDescription } from '../../Auth.styled';
 import { Values } from '../SignUp.types';
 import {
   StyledButtonResend,

@@ -15,7 +15,7 @@ export function ItemSignOut() {
 
   const onClick = () => {
     sessionStorage.clear();
-    history.push(fdRoutes.auth.signInRoute());
+    history.push(fdRoutes.auth.signInRoute.path);
   };
 
   return (
