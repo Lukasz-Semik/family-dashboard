@@ -26,6 +26,7 @@
         "libs/fe-libs/field-controls/src/index.ts"
       ],
       "@family-dashboard/global/const": ["libs/global/const/src/index.ts"],
+      "@family-dashboard/global/copies": ["libs/global/copies/src/index.ts"],
       "@family-dashboard/global/sdk": ["libs/global/sdk/src/index.ts"],
       "@family-dashboard/global/styled-constants": [
         "libs/global/styled-constants/src/index.ts"

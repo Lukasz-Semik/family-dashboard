@@ -34,4 +34,7 @@ export const styledConstants = {
     xs: '767',
     md: '1024',
   },
+  fontFamily: {
+    main: 'Montserrat',
+  },
 };
