@@ -15,11 +15,13 @@
     "typeorm:migrate": "npm run typeorm migration:generate -- -n",
     "typeorm:run": "npm run typeorm migration:run",
     "migrate:create": "npm run typeorm:migrate",
-    "migrate:run": "npm run typeorm:run"
+    "migrate:run": "npm run typeorm:run",
+    "expo": "expo"
   },
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.5.4",
+    "@expo-google-fonts/montserrat": "^0.2.2",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/graphql": "^9.1.1",

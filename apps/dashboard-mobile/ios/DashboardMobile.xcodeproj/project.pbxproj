@@ -10,6 +10,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		33C6212027A55DE1009297C1 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33C6211D27A55DE1009297C1 /* Montserrat-SemiBold.ttf */; };
+		33C6212127A55DE2009297C1 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33C6211E27A55DE1009297C1 /* Montserrat-Black.ttf */; };
+		33C6212227A55DE2009297C1 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33C6211F27A55DE1009297C1 /* Montserrat-Regular.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		CB28F6E71BFFBBFFE4D6CA71 /* libPods-DashboardMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 65E4FAB80E3D35EA640E54A7 /* libPods-DashboardMobile.a */; };
 /* End PBXBuildFile section */
@@ -21,6 +24,9 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DashboardMobile/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = DashboardMobile/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = DashboardMobile/main.m; sourceTree = "<group>"; };
+		33C6211D27A55DE1009297C1 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-SemiBold.ttf"; path = "../src/assets/fonts/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		33C6211E27A55DE1009297C1 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Black.ttf"; path = "../src/assets/fonts/Montserrat-Black.ttf"; sourceTree = "<group>"; };
+		33C6211F27A55DE1009297C1 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		56DF1300CF795902963DA15C /* Pods-DashboardMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DashboardMobile.release.xcconfig"; path = "Target Support Files/Pods-DashboardMobile/Pods-DashboardMobile.release.xcconfig"; sourceTree = "<group>"; };
 		65E4FAB80E3D35EA640E54A7 /* libPods-DashboardMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DashboardMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = DashboardMobile/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				33C6211E27A55DE1009297C1 /* Montserrat-Black.ttf */,
+				33C6211F27A55DE1009297C1 /* Montserrat-Regular.ttf */,
+				33C6211D27A55DE1009297C1 /* Montserrat-SemiBold.ttf */,
 				13B07FAE1A68108700A75B9A /* DashboardMobile */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -97,7 +106,6 @@
 				D06EE1839428A1A3F684470B /* Pods-DashboardMobile.debug.xcconfig */,
 				56DF1300CF795902963DA15C /* Pods-DashboardMobile.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -134,10 +142,6 @@
 			attributes = {
 				LastUpgradeCheck = 1210;
 				TargetAttributes = {
-					00E356ED1AD99517003FC87E = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1120;
 					};
@@ -166,7 +170,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33C6212027A55DE1009297C1 /* Montserrat-SemiBold.ttf in Resources */,
+				33C6212127A55DE2009297C1 /* Montserrat-Black.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				33C6212227A55DE2009297C1 /* Montserrat-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -2,45 +2,41 @@ import React from 'react';
 import { SafeAreaView } from 'react-native';
 import styled from 'styled-components/native';
 
-export const dsStyles = {
-  colors: {
-    orange1: '#FFF3E9',
-    orange2: '#F6D6B8',
-    orange3: '#FDA758',
-    orange4: '#FC9D45',
-    orange5: '#E89951',
-    violet1: '#E0D6FE',
-    violet2: '#C991F5',
-    violet3: '#9F8D9D',
-    violet4: '#573353',
-    violet5: '#7A6978',
-    grey1: '#9B9B9B',
-    grey2: '#C8C1C8',
-    grey3: '#F8F5F3',
-    white: '#FFF',
-    green1: '#3BE557',
-    red1: '#F51515',
-    red2: '#FF6767',
-    yellow1: '#FBFF50',
-    yellow2: '#B2B532',
-    blue1: '#3890E1',
-  },
-  // TODO: handle better handlers
-  transitions: {
-    standard: '0.3s ease-in-out',
-  },
-  breakpoints: {
-    xs: '767',
-    md: '1024',
-  },
-};
+import { styledConstants } from '@family-dashboard/global/styled-constants';
 
 const StyledText = styled.Text`
-  color: blue;
+  font-size: 32px;
+  font-weight: 900;
+  color: ${styledConstants.colors.violet4};
+  font-family: 'Montserrat';
+  margin-bottom: 40px;
+`;
+
+const StyledRow = styled.View`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-direction: row;
+`;
+
+const StyledText2 = styled.Text`
+  font-size: 32px;
+  font-weight: 900;
+  color: ${styledConstants.colors.orange4};
+  font-family: 'Montserrat';
+`;
+
+const StyledText3 = styled.Text`
+  font-size: 14px;
+  font-weight: 600;
+  color: ${styledConstants.colors.violet2};
+  font-family: 'Montserrat';
 `;
 
 const StyledView = styled.View`
-  background-color: ${dsStyles.colors.orange1};
+  padding: 16px;
+  background-color: ${styledConstants.colors.orange1};
   height: 100%;
 `;
 
@@ -48,7 +44,11 @@ export function App() {
   return (
     <SafeAreaView>
       <StyledView>
-        <StyledText>Yooo</StyledText>
+        <StyledText>Family Dashboard</StyledText>
+        <StyledRow>
+          <StyledText2>Sign Up</StyledText2>
+          <StyledText3>Sign in</StyledText3>
+        </StyledRow>
       </StyledView>
     </SafeAreaView>
   );

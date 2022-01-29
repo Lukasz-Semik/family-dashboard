@@ -12,6 +12,7 @@
     "fe-libs-field-controls": "libs/fe-libs/field-controls",
     "global-const": "libs/global/const",
     "global-sdk": "libs/global/sdk",
+    "global-styled-constants": "libs/global/styled-constants",
     "global-types": "libs/global/types"
   }
 }
