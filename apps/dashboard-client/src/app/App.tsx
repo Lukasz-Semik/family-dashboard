@@ -11,8 +11,8 @@ import {
 } from '@family-dashboard/design-system';
 import { clientDashboardGraphql } from '@family-dashboard/fe-libs/api-graphql';
 import { fdStore } from '@family-dashboard/fe-libs/fd-store';
+import { messages } from '@family-dashboard/global/copies';
 
-import { messages } from '../translations/en';
 import { Routing } from './Routing';
 
 dayjs.extend(CustomParseFormat);

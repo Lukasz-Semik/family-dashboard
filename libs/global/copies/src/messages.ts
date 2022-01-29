@@ -1,5 +1,4 @@
-// TODO: Extract messages and split
-export const m = {
+export const messagesData = {
   auth: {
     signIn: {
       title: 'Sign In',
@@ -178,7 +177,7 @@ export const m = {
   },
 };
 
-export const flattenMessages = (nestedMessages, prefix = '') => {
+export const flattenMessages = (nestedMessages: any, prefix = '') => {
   if (nestedMessages === null) {
     return {};
   }
@@ -196,4 +195,4 @@ export const flattenMessages = (nestedMessages, prefix = '') => {
   }, {});
 };
 
-export const messages = flattenMessages(m);
+export const messages = flattenMessages(messagesData);
