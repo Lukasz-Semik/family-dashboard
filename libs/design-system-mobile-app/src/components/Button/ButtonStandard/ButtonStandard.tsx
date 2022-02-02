@@ -7,12 +7,8 @@ import { useAnimatedColor } from '../../../hooks/useAnimatedColor';
 import { ButtonProps, ButtonTextProps } from '../Button.types';
 import { StyledText, StyledWrapper } from './ButtonStandard.styled';
 
-export function ButtonStandardText({ children }: ButtonTextProps) {
-  return (
-    <StyledText style={{ color: styledConstants.colors.white }}>
-      {children}
-    </StyledText>
-  );
+export function ButtonStandardText({ text }: ButtonTextProps) {
+  return <StyledText>{text}</StyledText>;
 }
 
 export function ButtonStandard({

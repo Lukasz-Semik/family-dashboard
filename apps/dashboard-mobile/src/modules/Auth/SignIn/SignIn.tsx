@@ -89,9 +89,7 @@ export function SignIn() {
                 />
               </View>
               <ButtonStandard>
-                <ButtonStandardText>
-                  {messagesData.auth.signIn.title}
-                </ButtonStandardText>
+                <ButtonStandardText text={messagesData.auth.signIn.title} />
               </ButtonStandard>
             </>
           );
