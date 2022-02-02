@@ -9,9 +9,9 @@ interface Props {
   children: React.ReactNode;
 }
 
-export function ErrorMessage({ isVisible }: Props) {
+export function ErrorMessage({ isVisible, children }: Props) {
   const anmiationRef = useRef(new Animated.Value(0));
-  console.log({ isVisible });
+
   const animateIn = () => {
     Animated.timing(anmiationRef.current, {
       toValue: 1,
@@ -50,7 +50,7 @@ export function ErrorMessage({ isVisible }: Props) {
         ],
       }}
     >
-      Error super long, oh yeah
+      {children}
     </StyledErrorMessage>
   );
 }
