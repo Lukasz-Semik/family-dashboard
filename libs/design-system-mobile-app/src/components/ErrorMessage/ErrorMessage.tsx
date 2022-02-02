@@ -1,32 +1,36 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useEffect, useRef } from 'react';
-import { Animated, Text } from 'react-native';
+import { Animated } from 'react-native';
 
 import { StyledErrorMessage } from './ErrorMessage.styled';
 
 interface Props {
   isVisible?: boolean;
-  children: React.ReactNode;
+  message?: string;
 }
 
-export function ErrorMessage({ isVisible, children }: Props) {
+export function ErrorMessage({ isVisible, message }: Props) {
   const anmiationRef = useRef(new Animated.Value(0));
+  const [persitedMessage, setPersistedMessage] = useState<string>();
 
-  const animateIn = () => {
+  const animateIn = useCallback(() => {
+    setPersistedMessage(message);
     Animated.timing(anmiationRef.current, {
       toValue: 1,
       duration: 300,
       useNativeDriver: false,
     }).start();
-  };
+  }, [message]);
 
-  const animateOut = () => {
+  const animateOut = useCallback(() => {
     Animated.timing(anmiationRef.current, {
       toValue: 0,
       duration: 300,
       useNativeDriver: false,
-    }).start();
-  };
+    }).start(() => {
+      setPersistedMessage(undefined);
+    });
+  }, []);
 
   useEffect(() => {
     if (isVisible) {
@@ -34,7 +38,7 @@ export function ErrorMessage({ isVisible, children }: Props) {
     } else {
       animateOut();
     }
-  }, [isVisible]);
+  }, [isVisible, animateIn, animateOut]);
 
   return (
     <StyledErrorMessage
@@ -50,7 +54,7 @@ export function ErrorMessage({ isVisible, children }: Props) {
         ],
       }}
     >
-      {children}
+      {persitedMessage}
     </StyledErrorMessage>
   );
 }

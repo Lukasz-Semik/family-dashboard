@@ -22,19 +22,17 @@ export function FieldInputStandard({ name, validate, ...props }: Props) {
   const hasError = Boolean(fieldMeta.error && fieldMeta.touched);
 
   return (
-    <View style={{ marginBottom: 30 }}>
-      <InputStandard
-        hasError={hasError}
-        onChangeText={handleChange(name)}
-        onBlur={() => {
-          fieldHandlers.setTouched(true);
-        }}
-        value={fieldBase.value}
-        renderError={() => (
-          <ErrorMessage isVisible={hasError}>{fieldMeta.error}</ErrorMessage>
-        )}
-        {...props}
-      />
-    </View>
+    <InputStandard
+      hasError={hasError}
+      onChangeText={handleChange(name)}
+      onBlur={() => {
+        fieldHandlers.setTouched(true);
+      }}
+      value={fieldBase.value}
+      renderError={() => (
+        <ErrorMessage isVisible={hasError} message={fieldMeta.error} />
+      )}
+      {...props}
+    />
   );
 }
