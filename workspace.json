@@ -7,6 +7,7 @@
     "dashboard-mobile-e2e": "apps/dashboard-mobile-e2e",
     "dashboard-server": "apps/dashboard-server",
     "design-system": "libs/design-system",
+    "design-system-mobile-app": "libs/design-system-mobile-app",
     "fe-libs-api-graphql": "libs/fe-libs/api-graphql",
     "fe-libs-fd-store": "libs/fe-libs/fd-store",
     "fe-libs-field-controls": "libs/fe-libs/field-controls",

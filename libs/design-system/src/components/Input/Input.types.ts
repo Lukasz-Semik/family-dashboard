@@ -10,11 +10,9 @@ export interface InputProps
   hasError?: boolean;
   label: React.ReactNode;
   labelBgColor?: string;
-  renderRightControls?: (
-    renderProps: ControlsRenderProps
-  ) => React.ReactElement;
-  renderLeftControls?: (renderProps: ControlsRenderProps) => React.ReactElement;
-  renderError?: (renderProps: ControlsRenderProps) => React.ReactElement;
+  renderRightControls?: (renderProps: ControlsRenderProps) => React.ReactNode;
+  renderLeftControls?: (renderProps: ControlsRenderProps) => React.ReactNode;
+  renderError?: (renderProps: ControlsRenderProps) => React.ReactNode;
 }
 
 export interface InputSecurityProps extends InputProps {

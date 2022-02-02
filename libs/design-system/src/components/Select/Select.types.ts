@@ -20,7 +20,7 @@ export interface SelectProps<T> {
   hasError?: boolean;
   labelBgColor?: string;
   isDisabled?: boolean;
-  renderError?: (renderProps: SelectRenderErrorProps) => React.ReactElement;
+  renderError?: (renderProps: SelectRenderErrorProps) => React.ReactNode;
   onClose?: (selectedItem: T | null) => void;
   onOpen?: (selectedItem: T | null) => void;
 }

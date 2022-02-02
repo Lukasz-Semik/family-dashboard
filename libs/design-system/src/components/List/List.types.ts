@@ -2,9 +2,9 @@ import React from 'react';
 
 export interface ListProps<ItemType> {
   items: ItemType[];
-  renderNoItemsMessage?: () => React.ReactElement;
-  renderItem: (item: ItemType) => React.ReactElement;
-  renderHeaders?: () => React.ReactElement;
+  renderNoItemsMessage?: () => React.ReactNode;
+  renderItem: (item: ItemType) => React.ReactNode;
+  renderHeaders?: () => React.ReactNode;
 }
 
 interface ListItemChildrenRenderProps {
