@@ -7,14 +7,14 @@ export const StyledHeader = styled.Text`
   font-weight: ${styledConstants.fontWeight.black};
   color: ${styledConstants.colors.violet4};
   font-family: ${styledConstants.fontFamily.main};
-  margin-bottom: 40px;
+  margin-bottom: 64px;
 `;
 
 export const StyledSubHeader = styled.Text`
   font-weight: ${styledConstants.fontWeight.black};
   color: ${styledConstants.colors.orange4};
   font-family: ${styledConstants.fontFamily.main};
-  font-size: 24px;
+  font-size: 32px;
   margin-bottom: 16px;
 `;
 
@@ -23,5 +23,5 @@ export const StyledDescription = styled.Text`
   color: ${styledConstants.colors.violet3};
   font-family: ${styledConstants.fontFamily.main};
   font-size: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 `;

@@ -11,3 +11,11 @@ TODO:
 
 NOTES:
 - FUTURE: for future plans
+
+ARHICTECTURE:
+- restructure according to mobile:
+ - nest design-system
+ - extract field validators common for rn and fe
+ - extract api calls for both
+ - typography for mobile
+- make experiment for mongo
