@@ -10,6 +10,8 @@
     "react-native-config": "*",
     "react-native-svg": "*",
     "styled-components": "*",
-    "@expo-google-fonts/montserrat": "*"
+    "@expo-google-fonts/montserrat": "*",
+    "polished": "*",
+    "formik": "*"
   }
 }

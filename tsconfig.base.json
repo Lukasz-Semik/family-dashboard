@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@family-dashboard/design-system": ["libs/design-system/src/index.ts"],
+      "@family-dashboard/design-system-mobile-app": [
+        "libs/design-system-mobile-app/src/index.ts"
+      ],
       "@family-dashboard/fe-libs/api-graphql": [
         "libs/fe-libs/api-graphql/src/index.ts"
       ],
