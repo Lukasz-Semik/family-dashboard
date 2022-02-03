@@ -1,0 +1,23 @@
+{
+  "root": "libs/design-system-mobile",
+  "sourceRoot": "libs/design-system-mobile/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/design-system-mobile/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/design-system-mobile"],
+      "options": {
+        "jestConfig": "libs/design-system-mobile/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

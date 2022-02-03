@@ -10,9 +10,9 @@ import {
   IconSecurity,
   LayoutBasic,
   WrapperIconFormControl,
-} from '@family-dashboard/design-system-mobile-app';
-import { messages, messagesData } from '@family-dashboard/global/copies';
-import { styledConstants } from '@family-dashboard/global/styled-constants';
+} from '@family-dashboard/design-system-mobile';
+import { copies } from '@family-dashboard/global/copies';
+import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
 
 import {
   StyledDescription,
@@ -32,19 +32,17 @@ export function SignIn() {
             <>
               <View>
                 <StyledHeader>Family Dashboard</StyledHeader>
-                <StyledSubHeader>
-                  {messagesData.auth.signIn.title}
-                </StyledSubHeader>
+                <StyledSubHeader>{copies.auth.signIn.title}</StyledSubHeader>
 
                 <StyledDescription>
-                  {messagesData.auth.signIn.description}
+                  {copies.auth.signIn.description}
                 </StyledDescription>
 
                 <View style={{ marginBottom: 32 }}>
                   <FieldInputStandard
-                    label={messagesData.fields.email.label}
+                    label={copies.fields.email.label}
                     name="email"
-                    placeholder={messagesData.fields.email.placeholder}
+                    placeholder={copies.fields.email.placeholder}
                     validate={(v) => {
                       if (!v) {
                         return 'Required';
@@ -68,10 +66,10 @@ export function SignIn() {
                 </View>
 
                 <FieldInputStandard
-                  label={messagesData.fields.password.label}
+                  label={copies.fields.password.label}
                   name="password"
                   secureTextEntry
-                  placeholder={messagesData.fields.password.placeholder}
+                  placeholder={copies.fields.password.placeholder}
                   textContentType="password"
                   renderLeftControls={({ isFocused, hasError }) => (
                     <WrapperIconFormControl
@@ -89,7 +87,7 @@ export function SignIn() {
                 />
               </View>
               <ButtonStandard>
-                <ButtonStandardText text={messagesData.auth.signIn.title} />
+                <ButtonStandardText text={copies.auth.signIn.title} />
               </ButtonStandard>
             </>
           );

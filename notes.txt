@@ -14,8 +14,7 @@ NOTES:
 
 ARHICTECTURE:
 - restructure according to mobile:
- - nest design-system
  - extract field validators common for rn and fe
- - extract api calls for both
  - typography for mobile
+ - convention to _hooks and do better with _dataHooks
 - make experiment for mongo
