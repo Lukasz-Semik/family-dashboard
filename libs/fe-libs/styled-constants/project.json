@@ -1,0 +1,25 @@
+{
+  "root": "libs/fe-libs/styled-constants",
+  "sourceRoot": "libs/fe-libs/styled-constants/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/fe-libs/styled-constants/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/fe-libs/styled-constants"],
+      "options": {
+        "jestConfig": "libs/fe-libs/styled-constants/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

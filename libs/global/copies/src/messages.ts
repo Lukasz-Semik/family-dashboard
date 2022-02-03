@@ -1,4 +1,4 @@
-export const messagesData = {
+export const copies = {
   auth: {
     signIn: {
       title: 'Sign In',
@@ -196,4 +196,4 @@ export const flattenMessages = (nestedMessages: any, prefix = '') => {
   }, {});
 };
 
-export const messages = flattenMessages(messagesData);
+export const messages = flattenMessages(copies);

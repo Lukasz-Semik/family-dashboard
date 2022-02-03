@@ -1,0 +1,25 @@
+{
+  "root": "libs/fe-libs/field-validators",
+  "sourceRoot": "libs/fe-libs/field-validators/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/fe-libs/field-validators/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/fe-libs/field-validators"],
+      "options": {
+        "jestConfig": "libs/fe-libs/field-validators/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "root": "libs/web-libs/field-controls",
+  "sourceRoot": "libs/web-libs/field-controls/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/web-libs/field-controls/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web-libs/field-controls"],
+      "options": {
+        "jestConfig": "libs/web-libs/field-controls/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

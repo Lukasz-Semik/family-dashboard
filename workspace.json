@@ -1,20 +1,21 @@
 {
   "version": 2,
   "projects": {
-    "dashboard-client": "apps/dashboard-client",
-    "dashboard-client-e2e": "apps/dashboard-client-e2e",
     "dashboard-mobile": "apps/dashboard-mobile",
     "dashboard-mobile-e2e": "apps/dashboard-mobile-e2e",
     "dashboard-server": "apps/dashboard-server",
+    "dashboard-web": "apps/dashboard-web",
+    "dashboard-web-e2e": "apps/dashboard-web-e2e",
     "design-system": "libs/design-system",
-    "design-system-mobile-app": "libs/design-system-mobile-app",
+    "design-system-mobile": "libs/design-system-mobile",
     "fe-libs-api-graphql": "libs/fe-libs/api-graphql",
-    "fe-libs-fd-store": "libs/fe-libs/fd-store",
-    "fe-libs-field-controls": "libs/fe-libs/field-controls",
+    "fe-libs-field-validators": "libs/fe-libs/field-validators",
+    "fe-libs-styled-constants": "libs/fe-libs/styled-constants",
     "global-const": "libs/global/const",
     "global-copies": "libs/global/copies",
     "global-sdk": "libs/global/sdk",
-    "global-styled-constants": "libs/global/styled-constants",
-    "global-types": "libs/global/types"
+    "global-types": "libs/global/types",
+    "web-libs-field-controls": "libs/web-libs/field-controls",
+    "web-libs-store": "libs/web-libs/store"
   }
 }

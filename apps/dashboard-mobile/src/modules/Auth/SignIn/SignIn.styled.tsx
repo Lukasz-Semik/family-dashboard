@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { styledConstants } from '@family-dashboard/global/styled-constants';
+import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
 
 export const StyledHeader = styled.Text`
   font-size: 32px;

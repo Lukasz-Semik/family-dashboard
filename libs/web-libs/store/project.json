@@ -1,0 +1,23 @@
+{
+  "root": "libs/web-libs/store",
+  "sourceRoot": "libs/web-libs/store/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/web-libs/store/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web-libs/store"],
+      "options": {
+        "jestConfig": "libs/web-libs/store/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
