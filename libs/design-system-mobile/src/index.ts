@@ -5,3 +5,4 @@ export * from './components/Layout/Layout.elements';
 export * from './components/Wrappers/Wrappers';
 export * from './fields/Input/FieldInputStandard';
 export * from './icons/Icons';
+export * from './utils/typography';

@@ -3,19 +3,23 @@ import styled from 'styled-components/native';
 
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
 
+import {
+  Typography16Regular,
+  Typography16SemiBold,
+} from '../../utils/typography';
+
 export const StyledWrapper = styled.View`
   padding-top: 8px;
   position: relative;
 `;
 
-export const StyledLabel = styled(Animated.Text)<{
+interface StyledLabelProps {
   bgColor: string;
-}>`
-  font-size: 14px;
-  line-height: 16px;
-  font-weight: ${styledConstants.fontWeight.bold};
+}
+
+export const StyledLabel = styled(Animated.Text)<StyledLabelProps>`
+  ${Typography16SemiBold};
   color: ${styledConstants.colors.violet4};
-  font-family: ${styledConstants.fontFamily.main};
   background-color: ${({ bgColor }) => bgColor};
   position: absolute;
   top: -8px;
@@ -38,8 +42,7 @@ export const StyledInputWrapper = styled(Animated.View)`
 export const StyledInput = styled.TextInput`
   width: 100%;
   height: 100%;
-  font-family: ${styledConstants.fontFamily.main};
-  line-height: 18px;
+  ${Typography16Regular};
 `;
 
 export const StyledErrorWrapper = styled.View`

@@ -24,6 +24,7 @@ export function ButtonStandard({
     });
 
   const handleOnPressIn = (event: GestureResponderEvent) => {
+    console.log(event);
     runColorAnimation();
     onPressIn?.(event);
   };
