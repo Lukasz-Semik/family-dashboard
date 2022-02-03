@@ -11,6 +11,11 @@ import {
   LayoutBasic,
   WrapperIconFormControl,
 } from '@family-dashboard/design-system-mobile';
+import {
+  combineFieldValidators,
+  validateFieldEmail,
+  validateFieldRequired,
+} from '@family-dashboard/fe-libs/field-validators';
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
 import { copies } from '@family-dashboard/global/copies';
 
@@ -20,14 +25,19 @@ import {
   StyledSubHeader,
 } from './SignIn.styled';
 
+interface Values {
+  email: string;
+  password: string;
+}
+
 export function SignIn() {
   return (
     <LayoutBasic>
-      <Formik
-        initialValues={{ email: '' }}
+      <Formik<Values>
+        initialValues={{ email: '', password: '' }}
         onSubmit={(values) => console.log(values)}
       >
-        {() => {
+        {({ submitForm }) => {
           return (
             <>
               <View>
@@ -43,12 +53,10 @@ export function SignIn() {
                     label={copies.fields.email.label}
                     name="email"
                     placeholder={copies.fields.email.placeholder}
-                    validate={(v) => {
-                      if (!v) {
-                        return 'Required';
-                      }
-                      return undefined;
-                    }}
+                    validate={combineFieldValidators(
+                      validateFieldRequired(copies.errors.required),
+                      validateFieldEmail(copies.errors.email)
+                    )}
                     renderLeftControls={({ isFocused, hasError }) => (
                       <WrapperIconFormControl
                         shouldRunAnimation={isFocused}
@@ -71,6 +79,7 @@ export function SignIn() {
                   secureTextEntry
                   placeholder={copies.fields.password.placeholder}
                   textContentType="password"
+                  validate={validateFieldRequired(copies.errors.required)}
                   renderLeftControls={({ isFocused, hasError }) => (
                     <WrapperIconFormControl
                       shouldRunAnimation={isFocused}
@@ -86,7 +95,8 @@ export function SignIn() {
                   )}
                 />
               </View>
-              <ButtonStandard>
+
+              <ButtonStandard onPressIn={submitForm}>
                 <ButtonStandardText text={copies.auth.signIn.title} />
               </ButtonStandard>
             </>

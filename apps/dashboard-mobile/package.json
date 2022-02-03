@@ -12,6 +12,7 @@
     "styled-components": "*",
     "@expo-google-fonts/montserrat": "*",
     "polished": "*",
-    "formik": "*"
+    "formik": "*",
+    "validator": "*"
   }
 }
