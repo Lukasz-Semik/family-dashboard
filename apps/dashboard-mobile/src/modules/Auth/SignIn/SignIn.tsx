@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import { Formik } from 'formik';
 
 import {
@@ -11,8 +11,8 @@ import {
   LayoutBasic,
   WrapperIconFormControl,
 } from '@family-dashboard/design-system-mobile';
-import { copies } from '@family-dashboard/global/copies';
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
+import { copies } from '@family-dashboard/global/copies';
 
 import {
   StyledDescription,

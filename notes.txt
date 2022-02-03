@@ -14,7 +14,6 @@ NOTES:
 
 ARHICTECTURE:
 - restructure according to mobile:
- - extract field validators common for rn and fe
  - typography for mobile
  - convention to _hooks and do better with _dataHooks
 - make experiment for mongo
