@@ -6,4 +6,5 @@ export interface ButtonTextProps {
 
 export interface ButtonProps extends PressableProps {
   isLoading?: boolean;
+  isDisabled?: boolean;
 }

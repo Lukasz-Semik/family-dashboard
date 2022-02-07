@@ -19,23 +19,21 @@ import {
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
 import { copies } from '@family-dashboard/global/copies';
 
+import { useSignIn, Values } from './_hooks/useSignIn';
 import {
   StyledDescription,
   StyledHeader,
   StyledSubHeader,
 } from './SignIn.styled';
 
-interface Values {
-  email: string;
-  password: string;
-}
-
 export function SignIn() {
+  const { onSubmit, isLoading } = useSignIn();
+
   return (
     <LayoutBasic>
       <Formik<Values>
         initialValues={{ email: '', password: '' }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={onSubmit}
       >
         {({ submitForm }) => {
           return (
@@ -96,7 +94,11 @@ export function SignIn() {
                 />
               </View>
 
-              <ButtonStandard onPressIn={submitForm}>
+              <ButtonStandard
+                onPressIn={submitForm}
+                isDisabled={isLoading}
+                isLoading={isLoading}
+              >
                 <ButtonStandardText text={copies.auth.signIn.title} />
               </ButtonStandard>
             </>

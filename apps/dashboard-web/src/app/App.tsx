@@ -9,9 +9,9 @@ import {
   GlobalStylesDefault,
   ToastRoot,
 } from '@family-dashboard/design-system';
-import { clientDashboardGraphql } from '@family-dashboard/fe-libs/api-graphql';
+import { webDashboardGraphql } from '@family-dashboard/fe-libs/api-graphql';
 import { messages } from '@family-dashboard/global/copies';
-import { fdStore } from '@family-dashboard/web-libs/store';
+import { webStore } from '@family-dashboard/web-libs/store';
 
 import { Routing } from './Routing';
 
@@ -20,8 +20,8 @@ Modal.setAppElement('#root');
 
 export const App = () => {
   return (
-    <Provider store={fdStore}>
-      <ApolloProvider client={clientDashboardGraphql}>
+    <Provider store={webStore}>
+      <ApolloProvider client={webDashboardGraphql}>
         <IntlProvider locale="en" messages={messages}>
           <GlobalStylesDefault />
           <ToastRoot />

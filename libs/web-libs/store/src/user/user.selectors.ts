@@ -7,7 +7,7 @@ const selectUser = (state: WebStoreRootState) => {
   return state.user;
 };
 
-export const fdStoreSelectUser = createSelector(selectUser, (user) => user);
+export const webStoreSelectUser = createSelector(selectUser, (user) => user);
 
 export const useSelectUser = (): WebStoreRootState['user'] =>
-  useSelector(fdStoreSelectUser);
+  useSelector(webStoreSelectUser);
