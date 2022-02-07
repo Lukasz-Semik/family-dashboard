@@ -5,6 +5,9 @@ module.exports = (async () => {
   const {
     resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
+
+  assetExts.push('cjs');
+
   return withNxMetro(
     {
       transformer: {
