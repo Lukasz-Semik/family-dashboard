@@ -27,6 +27,7 @@ export function useSignIn() {
         navigation.navigate('Dashboard');
       },
       onError: (e) => {
+        // ERROR
         console.log({ e });
       },
     }
