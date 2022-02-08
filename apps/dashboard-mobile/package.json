@@ -20,6 +20,7 @@
     "@react-navigation/native-stack": "*",
     "react-native-screens": "*",
     "react-native-safe-area-context": "*",
-    "react-native-animated-spinkit": "*"
+    "react-native-animated-spinkit": "*",
+    "react-native-modal": "*"
   }
 }

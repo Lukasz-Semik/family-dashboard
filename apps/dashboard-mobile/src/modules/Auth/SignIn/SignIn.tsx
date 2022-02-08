@@ -9,6 +9,7 @@ import {
   IconEmail,
   IconSecurity,
   LayoutBasic,
+  LoaderFullScreen,
   WrapperIconFormControl,
 } from '@family-dashboard/design-system-mobile';
 import {
@@ -45,7 +46,7 @@ export function SignIn() {
                 <StyledDescription>
                   {copies.auth.signIn.description}
                 </StyledDescription>
-
+                <LoaderFullScreen isVisible={isLoading} />
                 <View style={{ marginBottom: 32 }}>
                   <FieldInputStandard
                     label={copies.fields.email.label}
@@ -94,11 +95,7 @@ export function SignIn() {
                 />
               </View>
 
-              <ButtonStandard
-                onPressIn={submitForm}
-                isDisabled={isLoading}
-                isLoading={isLoading}
-              >
+              <ButtonStandard onPressIn={submitForm}>
                 <ButtonStandardText text={copies.auth.signIn.title} />
               </ButtonStandard>
             </>
