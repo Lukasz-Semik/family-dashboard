@@ -1,12 +1,12 @@
 import React from 'react';
-import { Animated, GestureResponderEvent, Pressable, Text } from 'react-native';
+import { GestureResponderEvent, Pressable, Text } from 'react-native';
 
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
 
 import { useAnimatedColor } from '../../../hooks/useAnimatedColor';
+import { LoaderStandard } from '../../Loader/LoaderStandard/LoaderStandard';
 import { ButtonProps, ButtonTextProps } from '../Button.types';
 import { StyledText, StyledWrapper } from './ButtonStandard.styled';
-import { Grid } from 'react-native-animated-spinkit';
 
 export function ButtonStandardText({ text }: ButtonTextProps) {
   return <StyledText>{text}</StyledText>;
@@ -50,11 +50,7 @@ export function ButtonStandard({
           backgroundColor: animatedColor,
         }}
       >
-        {isLoading ? (
-          <Grid size={32} color={styledConstants.colors.violet2} />
-        ) : (
-          children
-        )}
+        {isLoading ? <LoaderStandard /> : children}
       </StyledWrapper>
     </Pressable>
   );

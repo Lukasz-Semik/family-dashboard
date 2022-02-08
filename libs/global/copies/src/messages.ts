@@ -167,6 +167,7 @@ export const copies = {
     type: 'Type',
     birthday: 'Birthday',
     backToLists: 'Back to lists',
+    loading: 'Loading',
   },
   errors: {
     somethingWentWrong: 'Something went wrong',
