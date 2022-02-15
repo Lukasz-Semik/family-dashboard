@@ -59,6 +59,7 @@
     "react-modal": "^3.14.4",
     "react-native": "0.66.4",
     "react-native-animated-spinkit": "^1.5.2",
+    "react-native-gesture-handler": "^2.2.0",
     "react-native-modal": "^13.0.0",
     "react-native-reanimated": "^2.4.1",
     "react-native-safe-area-context": "^3.3.2",
