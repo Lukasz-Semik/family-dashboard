@@ -5,6 +5,7 @@ import { SvgProps } from 'react-native-svg';
 import IconBackArrowBase from './assets/icon-back-arrow.svg';
 import IconEmailBase from './assets/icon-email.svg';
 import IconHamburgerBase from './assets/icon-hamburger.svg';
+import IconMessageBase from './assets/icon-message.svg';
 import IconSecurityBase from './assets/icon-security.svg';
 
 class IconEmailParsed extends React.Component<SvgProps> {
@@ -45,3 +46,12 @@ class IconBackArrowParsed extends React.Component<SvgProps> {
 }
 export const IconBackArrow =
   Animated.createAnimatedComponent(IconBackArrowParsed);
+
+class IconMessageParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconMessageBase {...this.props} />;
+  }
+}
+export const IconMessage = Animated.createAnimatedComponent(IconMessageParsed);

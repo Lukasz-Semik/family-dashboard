@@ -1,35 +1,54 @@
 import React from 'react';
 import { Pressable } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { HeaderBackButtonProps } from '@react-navigation/native-stack/lib/typescript/src/types';
+import {
+  NavigationContainerRef,
+  useNavigation,
+} from '@react-navigation/native';
 
 import {
   IconBackArrow,
   IconHamburger,
 } from '@family-dashboard/design-system-mobile';
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
-import { MobileStackParamList } from '@family-dashboard/global/const';
+import {
+  MobileRoute,
+  MobileStackParamList,
+} from '@family-dashboard/global/const';
 
-import { StyledWrapper } from './NavigationLeftControls.styled';
+import { StyledWrapper } from './NavigatorLeftControls.styled';
 
-export function NavigatorLeftControls({ canGoBack }: HeaderBackButtonProps) {
+const routesWithBackButton = [MobileRoute.Menu];
+const routesWithMenuHidden = [MobileRoute.Menu];
+
+export function NavigatorLeftControls() {
   const navigation =
-    useNavigation<NativeStackNavigationProp<MobileStackParamList, 'SignIn'>>();
+    useNavigation<NavigationContainerRef<MobileStackParamList>>();
 
-  console.log(navigation);
+  const currentRoute = navigation.getCurrentRoute();
+
+  const hasBackButton = routesWithBackButton.includes(
+    currentRoute.name as MobileRoute
+  );
+  const shouldHideMenu = routesWithMenuHidden.includes(
+    currentRoute.name as MobileRoute
+  );
 
   return (
     <StyledWrapper>
-      <Pressable style={{ marginRight: 8 }}>
-        <IconHamburger
-          width={18}
-          height={16}
-          color={styledConstants.colors.orange4}
-        />
-      </Pressable>
+      {!shouldHideMenu && (
+        <Pressable
+          style={{ marginRight: 8 }}
+          onPressIn={() => navigation.navigate(MobileRoute.Menu)}
+        >
+          <IconHamburger
+            width={18}
+            height={16}
+            color={styledConstants.colors.orange4}
+          />
+        </Pressable>
+      )}
 
-      {canGoBack && (
+      {navigation.canGoBack && hasBackButton && (
         <Pressable onPressIn={() => navigation.goBack()}>
           <IconBackArrow
             width={20}

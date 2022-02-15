@@ -7,6 +7,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Login } from '@family-dashboard/fe-libs/api-graphql';
 import {
   FD_TOKEN_KEY,
+  MobileRoute,
   MobileStackParamList,
 } from '@family-dashboard/global/const';
 import { CTLoginResponse } from '@family-dashboard/global/types';
@@ -18,13 +19,16 @@ export interface Values {
 
 export function useSignIn() {
   const navigation =
-    useNavigation<NativeStackNavigationProp<MobileStackParamList, 'SignIn'>>();
+    useNavigation<
+      NativeStackNavigationProp<MobileStackParamList, MobileRoute.SignIn>
+    >();
+
   const [login, { loading }] = useMutation<{ login: CTLoginResponse }, Values>(
     Login,
     {
       onCompleted: async (data) => {
         await AsyncStorage.setItem(FD_TOKEN_KEY, data.login.accessToken);
-        navigation.navigate('Dashboard');
+        navigation.navigate(MobileRoute.Dashboard);
       },
       onError: (e) => {
         // ERROR
