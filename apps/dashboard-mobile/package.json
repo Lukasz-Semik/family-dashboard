@@ -21,6 +21,8 @@
     "react-native-screens": "*",
     "react-native-safe-area-context": "*",
     "react-native-animated-spinkit": "*",
-    "react-native-modal": "*"
+    "react-native-modal": "*",
+    "react-native-gesture-handler": "*",
+    "@react-navigation/drawer": "*"
   }
 }
