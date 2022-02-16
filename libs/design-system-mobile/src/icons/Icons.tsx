@@ -3,9 +3,12 @@ import { Animated } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 import IconBackArrowBase from './assets/icon-back-arrow.svg';
+import IconBellBase from './assets/icon-bell.svg';
+import IconClockBase from './assets/icon-clock.svg';
 import IconEmailBase from './assets/icon-email.svg';
 import IconHamburgerBase from './assets/icon-hamburger.svg';
 import IconMessageBase from './assets/icon-message.svg';
+import IconPlusCircleBase from './assets/icon-plus-circle.svg';
 import IconSecurityBase from './assets/icon-security.svg';
 
 class IconEmailParsed extends React.Component<SvgProps> {
@@ -55,3 +58,30 @@ class IconMessageParsed extends React.Component<SvgProps> {
   }
 }
 export const IconMessage = Animated.createAnimatedComponent(IconMessageParsed);
+
+class IconClockParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconClockBase {...this.props} />;
+  }
+}
+export const IconClock = Animated.createAnimatedComponent(IconClockParsed);
+class IconPlusCircleParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconPlusCircleBase {...this.props} />;
+  }
+}
+export const IconPlusCircle =
+  Animated.createAnimatedComponent(IconPlusCircleParsed);
+
+class IconBellParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconBellBase {...this.props} />;
+  }
+}
+export const IconBell = Animated.createAnimatedComponent(IconBellParsed);

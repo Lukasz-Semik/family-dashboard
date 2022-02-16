@@ -1,1 +1,5 @@
-export { StyledLayoutBasic as LayoutBasic } from './Layout.styled';
+export {
+  StyledLayoutBasic as LayoutBasic,
+  StyledLayoutBackground as LayoutBackground,
+  StyledLayoutCard as LayoutCard,
+} from './Layout.styled';

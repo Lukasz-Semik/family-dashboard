@@ -1,4 +1,6 @@
 export * from './components/Button/ButtonStandard/ButtonStandard';
+export * from './components/Button/ButtonLink/ButtonLink';
+export * from './components/Button/ButtonCreate/ButtonCreate';
 export * from './components/ErrorMessage/ErrorMessage';
 export * from './components/Input/InputStandard/InputStandard';
 export * from './components/Layout/Layout.elements';
