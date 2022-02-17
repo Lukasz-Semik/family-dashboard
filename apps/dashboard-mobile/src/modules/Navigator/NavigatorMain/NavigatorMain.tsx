@@ -8,11 +8,16 @@ import {
 } from '@family-dashboard/global/const';
 import { copies } from '@family-dashboard/global/copies';
 
+import { Account } from '../../Account/Account';
 import { SignIn } from '../../Auth/SignIn/SignIn';
+import { Calendar } from '../../Calendar/Calendar';
 import { Dashboard } from '../../Dashboard/Dashboard';
+import { Family } from '../../Family/Family';
+import { Notifications } from '../../Notifications/Notifications';
+import { Reminders } from '../../Reminders/Reminders';
 import { Shop } from '../../Shop/Shop';
+import { Todos } from '../../Todos/Todos';
 import { NavigatorLeftControls } from '../NavigatorLeftControls/NavigatorLeftControls';
-import { NavigatorMenu } from '../NavigatorMenu/NavigatorMenu';
 import { NavigatorRightControls } from '../NavigatorRightControls/NavigatorRightControls';
 import { NavigatorTitle } from '../NavigatorTitle/NavigatorTitle';
 
@@ -43,8 +48,6 @@ export function NavigatorMain() {
         }}
       />
 
-      <Stack.Screen name={MobileRoute.Menu} component={NavigatorMenu} />
-
       <Stack.Screen
         name={MobileRoute.Dashboard}
         component={Dashboard}
@@ -52,9 +55,45 @@ export function NavigatorMain() {
       />
 
       <Stack.Screen
+        name={MobileRoute.Reminders}
+        component={Reminders}
+        options={{ title: copies.reminders.title }}
+      />
+
+      <Stack.Screen
+        name={MobileRoute.Notifications}
+        component={Notifications}
+        options={{ title: copies.notifications.title }}
+      />
+
+      <Stack.Screen
+        name={MobileRoute.Calendar}
+        component={Calendar}
+        options={{ title: copies.calendar.title }}
+      />
+
+      <Stack.Screen
         name={MobileRoute.Shop}
         component={Shop}
-        options={{ title: 'shop' }}
+        options={{ title: copies.shop.title }}
+      />
+
+      <Stack.Screen
+        name={MobileRoute.Todos}
+        component={Todos}
+        options={{ title: copies.todos.title }}
+      />
+
+      <Stack.Screen
+        name={MobileRoute.Family}
+        component={Family}
+        options={{ title: copies.family.title }}
+      />
+
+      <Stack.Screen
+        name={MobileRoute.Account}
+        component={Account}
+        options={{ title: copies.account.title }}
       />
     </Stack.Navigator>
   );

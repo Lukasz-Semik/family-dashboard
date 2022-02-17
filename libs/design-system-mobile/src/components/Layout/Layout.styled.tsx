@@ -10,16 +10,13 @@ export const StyledLayoutBasic = styled.View`
   justify-content: space-between;
 `;
 
-export const StyledHeaderWrapper = styled.View`
-  height: 56px;
-  padding-right: 24px;
-  padding-left: 24px;
-  background-color: ${styledConstants.colors.white};
-`;
-
-export const StyledContentWrapper = styled.View`
-  padding-right: 24px;
-  padding-left: 24px;
+export const StyledLayoutBackground = styled.View`
   background-color: ${styledConstants.colors.orange1};
   height: 100%;
+`;
+
+export const StyledLayoutCard = styled.View`
+  background-color: ${styledConstants.colors.white};
+  padding: 16px;
+  border-radius: 8px;
 `;
