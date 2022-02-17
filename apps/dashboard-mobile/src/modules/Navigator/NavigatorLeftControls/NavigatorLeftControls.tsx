@@ -8,6 +8,7 @@ import {
 import {
   IconBackArrow,
   IconHamburger,
+  useModalState,
 } from '@family-dashboard/design-system-mobile';
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
 import {
@@ -15,48 +16,52 @@ import {
   MobileStackParamList,
 } from '@family-dashboard/global/const';
 
+import { NavigatorDrawer } from '../NavigatorDrawer/NavigatorDrawer';
 import { StyledWrapper } from './NavigatorLeftControls.styled';
 
-const routesWithBackButton = [MobileRoute.Menu];
-const routesWithMenuHidden = [MobileRoute.Menu];
+const routesWithBackButtonHidden = [MobileRoute.Dashboard, MobileRoute.SignIn];
 
 export function NavigatorLeftControls() {
+  const [isDrawerOpen, openDrawer, closeDrawer] = useModalState();
+
   const navigation =
     useNavigation<NavigationContainerRef<MobileStackParamList>>();
 
   const currentRoute = navigation.getCurrentRoute();
 
-  const hasBackButton = routesWithBackButton.includes(
-    currentRoute.name as MobileRoute
-  );
-  const shouldHideMenu = routesWithMenuHidden.includes(
+  const hasBackButtonHidden = routesWithBackButtonHidden.includes(
     currentRoute.name as MobileRoute
   );
 
   return (
-    <StyledWrapper>
-      {!shouldHideMenu && (
-        <Pressable
-          style={{ marginRight: 8 }}
-          onPressIn={() => navigation.navigate(MobileRoute.Menu)}
-        >
+    <>
+      <NavigatorDrawer
+        currentRouteName={currentRoute.name}
+        closeDrawer={closeDrawer}
+        isOpen={isDrawerOpen}
+      />
+
+      <StyledWrapper>
+        <Pressable style={{ marginRight: 8 }} onPressIn={openDrawer}>
           <IconHamburger
             width={18}
             height={16}
             color={styledConstants.colors.orange4}
           />
         </Pressable>
-      )}
 
-      {navigation.canGoBack && hasBackButton && (
-        <Pressable onPressIn={() => navigation.goBack()}>
-          <IconBackArrow
-            width={20}
-            height={20}
-            color={styledConstants.colors.violet2}
-          />
-        </Pressable>
-      )}
-    </StyledWrapper>
+        {!hasBackButtonHidden && (
+          <Pressable
+            onPressIn={() => navigation.navigate(MobileRoute.Dashboard)}
+          >
+            <IconBackArrow
+              width={20}
+              height={20}
+              color={styledConstants.colors.violet2}
+            />
+          </Pressable>
+        )}
+      </StyledWrapper>
+    </>
   );
 }

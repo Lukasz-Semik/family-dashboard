@@ -66,6 +66,59 @@ export const copies = {
       },
     },
   },
+  organization: {
+    title: 'Organization',
+  },
+  finance: {
+    title: 'Finance',
+  },
+  family: {
+    title: 'Family',
+  },
+  shop: {
+    title: 'Shop',
+  },
+  familySettings: {
+    title: 'Family Settings',
+    addMember: 'Add member',
+    pendingInvitations: 'Pending invitations',
+    familyMembers: 'Family members',
+    createMember: {
+      chooseMemberType: 'Choose a member type',
+      learnMore: 'Learn more about members type',
+      giveFinancialModule: 'Give access to financial module',
+      giveFamilySettingsModule: 'Give family head permissions',
+      adultUser: {
+        adding: 'Adding adult user',
+        label: 'Adult user - with account',
+        description:
+          'Adult users will have normal access to the app, will be able to add/edit/remove items',
+      },
+      childUser: {
+        label: 'Child user - with account',
+        description:
+          'Adult users will have normal access to the app, will be able to add/edit/remove items',
+      },
+    },
+  },
+  account: {
+    title: 'Account',
+  },
+  dashboard: {
+    title: 'Dashboard',
+  },
+  calendar: {
+    title: 'Calendar',
+  },
+  notifications: {
+    title: 'Notifications',
+  },
+  reminders: {
+    title: 'Reminders',
+  },
+  todos: {
+    title: 'Todos',
+  },
   fields: {
     email: {
       label: 'Email',
@@ -106,47 +159,6 @@ export const copies = {
       },
     },
   },
-  organization: {
-    title: 'Organization',
-  },
-  finance: {
-    title: 'Finance',
-  },
-  family: {
-    title: 'Family',
-  },
-  familySettings: {
-    title: 'Family Settings',
-    addMember: 'Add member',
-    pendingInvitations: 'Pending invitations',
-    familyMembers: 'Family members',
-    createMember: {
-      chooseMemberType: 'Choose a member type',
-      learnMore: 'Learn more about members type',
-      giveFinancialModule: 'Give access to financial module',
-      giveFamilySettingsModule: 'Give family head permissions',
-      adultUser: {
-        adding: 'Adding adult user',
-        label: 'Adult user - with account',
-        description:
-          'Adult users will have normal access to the app, will be able to add/edit/remove items',
-      },
-      childUser: {
-        label: 'Child user - with account',
-        description:
-          'Adult users will have normal access to the app, will be able to add/edit/remove items',
-      },
-    },
-  },
-  account: {
-    title: 'Account',
-  },
-  dashboard: {
-    title: 'Dashboard',
-  },
-  notifications: {
-    title: 'Notifications',
-  },
   controls: {
     goToDashboard: 'Go to dashboard',
     addFamilyMembers: 'Add family members',
@@ -168,6 +180,7 @@ export const copies = {
     birthday: 'Birthday',
     backToLists: 'Back to lists',
     loading: 'Loading',
+    menu: 'Menu',
   },
   errors: {
     somethingWentWrong: 'Something went wrong',

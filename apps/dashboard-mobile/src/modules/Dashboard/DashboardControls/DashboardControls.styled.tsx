@@ -1,6 +1,7 @@
+import styled from 'styled-components/native';
+
 import { Typography16Black } from '@family-dashboard/design-system-mobile';
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
-import styled from 'styled-components/native';
 
 export const StyledCard = styled.View`
   background-color: ${styledConstants.colors.white};

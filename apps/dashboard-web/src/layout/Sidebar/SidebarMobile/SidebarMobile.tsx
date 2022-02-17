@@ -15,6 +15,7 @@ interface Props {
 export function SidebarMobile({ isOpen, closeSidebar }: Props) {
   return (
     <StyledWrapper isOpen={isOpen}>
+      {/* TODO: Copies! */}
       <StyledTitle>Menu</StyledTitle>
       <StyledButtonWrapper>
         <ButtonCloseAnimated onClick={closeSidebar} />

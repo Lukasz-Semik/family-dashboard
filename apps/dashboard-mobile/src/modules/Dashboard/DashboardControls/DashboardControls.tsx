@@ -1,9 +1,17 @@
-import { IconBell, LayoutCard } from '@family-dashboard/design-system-mobile';
-import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
-import React, { useMemo, useRef, useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useMemo, useState } from 'react';
+import { View } from 'react-native';
 
-import { StyledCard, StyledText } from './DashboardControls.styled';
+import {
+  IconBell,
+  IconCalendar,
+  IconNotepad,
+  IconShop,
+} from '@family-dashboard/design-system-mobile';
+import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
+import { MobileRoute } from '@family-dashboard/global/const';
+import { copies } from '@family-dashboard/global/copies';
+
+import { DashboardControl } from './DashboardControl';
 
 export function DashboardControls() {
   const [tileWidth, setTileWidth] = useState(0);
@@ -12,11 +20,6 @@ export function DashboardControls() {
   const bottomMargin = useMemo(() => {
     return rowWidth - 2 * tileWidth;
   }, [rowWidth, tileWidth]);
-
-  const tileSize = {
-    width: '48%',
-    height: tileWidth,
-  };
 
   return (
     <View>
@@ -31,29 +34,34 @@ export function DashboardControls() {
           setRowWidth(e.nativeEvent.layout.width);
         }}
       >
-        <View
-          style={tileSize}
+        <DashboardControl
+          text={copies.reminders.title}
+          route={MobileRoute.Reminders}
+          tileHeight={tileWidth}
           onLayout={(e) => {
             setTileWidth(e.nativeEvent.layout.width);
           }}
-        >
-          <StyledCard>
-            <View style={{ marginBottom: 12 }}>
-              <IconBell
-                width={32}
-                height={32}
-                color={styledConstants.colors.orange4}
-              />
-            </View>
-            <StyledText>Notifications</StyledText>
-          </StyledCard>
-        </View>
+          icon={
+            <IconBell
+              width={32}
+              height={32}
+              color={styledConstants.colors.orange4}
+            />
+          }
+        />
 
-        <View style={tileSize}>
-          <StyledCard>
-            <Text>x</Text>
-          </StyledCard>
-        </View>
+        <DashboardControl
+          text={copies.calendar.title}
+          route={MobileRoute.Calendar}
+          tileHeight={tileWidth}
+          icon={
+            <IconCalendar
+              width={32}
+              height={32}
+              color={styledConstants.colors.orange4}
+            />
+          }
+        />
       </View>
 
       <View
@@ -63,17 +71,31 @@ export function DashboardControls() {
           flexDirection: 'row',
         }}
       >
-        <View style={tileSize}>
-          <StyledCard>
-            <Text>x</Text>
-          </StyledCard>
-        </View>
+        <DashboardControl
+          text={copies.shop.title}
+          route={MobileRoute.Shop}
+          tileHeight={tileWidth}
+          icon={
+            <IconShop
+              width={32}
+              height={32}
+              color={styledConstants.colors.orange4}
+            />
+          }
+        />
 
-        <View style={tileSize}>
-          <StyledCard>
-            <Text>x</Text>
-          </StyledCard>
-        </View>
+        <DashboardControl
+          text={copies.todos.title}
+          route={MobileRoute.Todos}
+          tileHeight={tileWidth}
+          icon={
+            <IconNotepad
+              width={32}
+              height={32}
+              color={styledConstants.colors.orange4}
+            />
+          }
+        />
       </View>
     </View>
   );

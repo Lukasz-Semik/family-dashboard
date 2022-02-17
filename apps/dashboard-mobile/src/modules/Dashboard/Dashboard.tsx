@@ -4,8 +4,8 @@ import { LayoutBackground } from '@family-dashboard/design-system-mobile';
 
 import { StyledContentWrapper, StyledWrapper } from './Dashboard.styled';
 import { DashboardBasicInfoPanel } from './DashboardBasicInfoPanel/DashboardBasicInfoPanel';
-import { DashboardReminders } from './DashboardReminders/DashboardReminders';
 import { DashboardControls } from './DashboardControls/DashboardControls';
+import { DashboardReminders } from './DashboardReminders/DashboardReminders';
 
 export function Dashboard() {
   return (

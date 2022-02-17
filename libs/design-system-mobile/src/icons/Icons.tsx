@@ -4,12 +4,19 @@ import { SvgProps } from 'react-native-svg';
 
 import IconBackArrowBase from './assets/icon-back-arrow.svg';
 import IconBellBase from './assets/icon-bell.svg';
+import IconCalendarBase from './assets/icon-calendar.svg';
 import IconClockBase from './assets/icon-clock.svg';
+import IconCrossmarkBase from './assets/icon-crossmark.svg';
+import IconDashboardBase from './assets/icon-dashboard.svg';
 import IconEmailBase from './assets/icon-email.svg';
+import IconFamilyBase from './assets/icon-family.svg';
 import IconHamburgerBase from './assets/icon-hamburger.svg';
 import IconMessageBase from './assets/icon-message.svg';
+import IconNotepadBase from './assets/icon-notepad.svg';
 import IconPlusCircleBase from './assets/icon-plus-circle.svg';
 import IconSecurityBase from './assets/icon-security.svg';
+import IconShopBase from './assets/icon-shop.svg';
+import IconUserBase from './assets/icon-user.svg';
 
 class IconEmailParsed extends React.Component<SvgProps> {
   render() {
@@ -85,3 +92,69 @@ class IconBellParsed extends React.Component<SvgProps> {
   }
 }
 export const IconBell = Animated.createAnimatedComponent(IconBellParsed);
+
+class IconCrossmarkParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconCrossmarkBase {...this.props} />;
+  }
+}
+export const IconCrossmark =
+  Animated.createAnimatedComponent(IconCrossmarkParsed);
+
+class IconDashboardParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconDashboardBase {...this.props} />;
+  }
+}
+export const IconDashboard =
+  Animated.createAnimatedComponent(IconDashboardParsed);
+
+class IconShopParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconShopBase {...this.props} />;
+  }
+}
+export const IconShop = Animated.createAnimatedComponent(IconShopParsed);
+
+class IconCalendarParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconCalendarBase {...this.props} />;
+  }
+}
+export const IconCalendar =
+  Animated.createAnimatedComponent(IconCalendarParsed);
+
+class IconNotepadParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconNotepadBase {...this.props} />;
+  }
+}
+export const IconNotepad = Animated.createAnimatedComponent(IconNotepadParsed);
+
+class IconFamilyParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconFamilyBase {...this.props} />;
+  }
+}
+export const IconFamily = Animated.createAnimatedComponent(IconFamilyParsed);
+
+class IconUserParsed extends React.Component<SvgProps> {
+  render() {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return <IconUserBase {...this.props} />;
+  }
+}
+export const IconUser = Animated.createAnimatedComponent(IconUserParsed);
