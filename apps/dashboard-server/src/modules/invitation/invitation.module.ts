@@ -5,6 +5,7 @@ import { FamilyEntity } from '../../entities/family.entity';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import { UserEntity } from '../../entities/user.entity';
 import { AuthModule } from '../auth/auth.module';
+import { InvitationDB } from './invitation.db';
 import { InvitationResolver } from './invitation.resolver';
 import { InvitationService } from './invitation.service';
 
@@ -13,6 +14,6 @@ import { InvitationService } from './invitation.service';
     AuthModule,
     TypeOrmModule.forFeature([UserEntity, InvitationEntity, FamilyEntity]),
   ],
-  providers: [InvitationResolver, InvitationService],
+  providers: [InvitationResolver, InvitationService, InvitationDB],
 })
 export class InvitationModule {}

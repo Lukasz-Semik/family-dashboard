@@ -1,3 +1,9 @@
+import {
+  GTMemberModulePermission,
+  GTMemberType,
+  GTPersonalDetails,
+} from '../misc/misc';
+
 export enum CTGender {
   Male = 'Male',
   Female = 'Female',
@@ -28,3 +34,19 @@ export interface CTUserBaseData extends CTUserPersonalDetails {
   modulePermissions: CTUserModulePermission[];
   memberType: CTMemberType;
 }
+
+// V2
+export interface GTMemberDBRecord {
+  memberId: string;
+  familyId: string;
+  type: string;
+  email: string;
+  password: string;
+  memberType: GTMemberType;
+  modulePermissions: GTMemberModulePermission;
+  personalDetails: GTPersonalDetails;
+  updatedAt: Date;
+  createdAt: Date;
+}
+
+export type GTMemberDisplay = Omit<GTMemberDBRecord, 'password'>;
