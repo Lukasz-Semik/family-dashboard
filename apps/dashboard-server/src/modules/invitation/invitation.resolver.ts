@@ -20,17 +20,19 @@ import { serilizeUserInvitation } from '../../serializators/invitation.serializa
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { InvitationService } from './invitation.service';
+import { InvitationServiceV2 } from './invitation.servicev2';
 
 @Resolver(() => InvitationEntity)
 export class InvitationResolver {
   constructor(
     private readonly invitationService: InvitationService,
+    private readonly invitationServiceV2: InvitationServiceV2,
     private readonly authService: AuthService
   ) {}
 
   @Query(() => VerifyEmailDto)
   async verifySignUpEmail(@Args('email') email: string) {
-    const result = await this.invitationService.verifyEmail(email);
+    const result = await this.invitationServiceV2.verifyEmail(email);
 
     return result;
   }

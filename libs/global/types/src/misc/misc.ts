@@ -27,7 +27,7 @@ export enum GTMemberType {
   ChildUser = 'ChildUser',
 }
 
-export interface GTMemberModulePermission {
+export interface GTMemberModulePermissions {
   hasFamilySettings: boolean;
   hasFinanacial: boolean;
 }
