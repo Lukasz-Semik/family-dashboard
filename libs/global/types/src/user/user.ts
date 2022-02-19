@@ -45,8 +45,8 @@ export interface GTMemberDBRecord {
   memberType: GTMemberType;
   modulePermissions: GTMemberModulePermissions;
   personalDetails: GTPersonalDetails;
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt: string;
+  createdAt: string;
 }
 
 export interface GTMemberDisplay

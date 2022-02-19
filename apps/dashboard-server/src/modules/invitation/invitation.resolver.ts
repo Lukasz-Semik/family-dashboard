@@ -33,7 +33,7 @@ export class InvitationResolver {
   @Query(() => VerifyEmailDto)
   async verifySignUpEmail(@Args('email') email: string) {
     const result = await this.invitationServiceV2.verifyEmail(email);
-
+    console.log(result);
     return result;
   }
 

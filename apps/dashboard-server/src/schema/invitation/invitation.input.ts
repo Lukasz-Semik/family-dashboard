@@ -78,7 +78,7 @@ export class InputPersonalDetailsInvitation
   @Field(() => String) readonly firstName: string;
   @Field(() => String, { nullable: true }) readonly middleName?: string;
   @Field(() => String) readonly lastName: string;
-  @Field(() => Date) readonly dob: Date;
+  @Field(() => String) readonly dob: string;
   @Field(() => GTGender) readonly gender: GTGender;
 }
 

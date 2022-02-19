@@ -26,6 +26,8 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@aws-sdk/client-dynamodb": "^3.52.0",
+    "@aws-sdk/lib-dynamodb": "^3.52.0",
     "@expo-google-fonts/montserrat": "^0.2.2",
     "@nestjs/common": "^7.0.0",
     "@nestjs/config": "^1.2.0",

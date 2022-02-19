@@ -1,20 +1,19 @@
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { Injectable } from '@nestjs/common';
 import { DynamoDB } from 'aws-sdk';
 import { AttributeValue as DynamoDbData } from 'dynamodb-data-types';
 import { isEmpty } from 'lodash';
 import { InjectAwsService } from 'nest-aws-sdk';
-import { v4 as uuidv4 } from 'uuid';
 
 import {
   EMAIL_GSI,
-  FDFamilyRecordType,
   FD_FAMILY,
+  FDFamilyRecordType,
 } from '@family-dashboard/global/const';
 import {
-  GTInputCreateSignUpInvitation,
   GTInvitationDBRecord,
   GTMemberDBRecord,
-  GTMemberDisplay,
 } from '@family-dashboard/global/types';
 
 @Injectable()
@@ -77,16 +76,18 @@ export class InvitationDB {
     return invitation;
   }
 
-  async createInvitation(input: GTInputCreateSignUpInvitation): Promise<any> {
-    const response = await this.dynamoDb
-      .putItem({
+  async createInvitation(
+    item: GTInvitationDBRecord
+  ): Promise<GTInvitationDBRecord> {
+    const client = new DynamoDBClient({});
+    const ddbDocClient = DynamoDBDocumentClient.from(client);
+    const response = await ddbDocClient.send(
+      new PutCommand({
         TableName: FD_FAMILY,
-        Item: {
-          familyId: {
-            S: `temporary-${uuidv4()}`,
-          },
-        },
+        Item: item,
       })
-      .promise();
+    );
+    console.log(response);
+    return item;
   }
 }

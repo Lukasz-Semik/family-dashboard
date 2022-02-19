@@ -30,7 +30,7 @@ export interface CTInvitationUserPersonalDetailsData
 
 export interface GTInvitationDetails {
   familyName: string;
-  validTo: Date;
+  validTo: string;
   code: string | 'verified';
   inviterName: string;
   inviterEmail: string;
@@ -45,8 +45,8 @@ export interface GTInvitationDBRecord {
   modulePermissions: GTMemberModulePermissions;
   personalDetails: Partial<GTPersonalDetails>;
   invitationDetails: GTInvitationDetails;
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt: string;
+  createdAt: string;
 }
 
 export interface GTInvitationDisplay {
