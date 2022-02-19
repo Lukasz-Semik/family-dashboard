@@ -7,6 +7,8 @@ import {
   CTInvitationUserPersonalDetailsData,
   CTVerifyEmailResponse,
   CTVerifyEmailResponseStatus,
+  GTVerifyEmailResponse,
+  GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
 
 @ObjectType()
@@ -35,4 +37,12 @@ export class InvitationUserPersonalDetailsDto
   @Field(() => String) readonly lastName: string;
   @Field(() => Date) readonly dob: Date;
   @Field(() => CTGender) readonly gender: CTGender;
+}
+
+// V2
+@ObjectType()
+export class VerifyEmailResponseDto implements GTVerifyEmailResponse {
+  @Field(() => GTVerifyEmailStatus)
+  readonly status: GTVerifyEmailStatus;
+  @Field(() => String, { nullable: true }) readonly inviterName?: string;
 }

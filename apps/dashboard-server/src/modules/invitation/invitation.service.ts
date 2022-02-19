@@ -111,9 +111,6 @@ export class InvitationService {
 
   async verifyEmail(email: string): Promise<VerifyEmailDto> {
     try {
-      const test = await this.invitationDb.checkIsEmailFree(email);
-      console.log('isFree?', test);
-
       const existingUser = await this.userRepository.findOne({ email });
 
       if (existingUser) {

@@ -1,5 +1,5 @@
 import {
-  GTMemberModulePermission,
+  GTMemberModulePermissions,
   GTMemberType,
   GTPersonalDetails,
 } from '../misc/misc';
@@ -43,10 +43,13 @@ export interface GTMemberDBRecord {
   email: string;
   password: string;
   memberType: GTMemberType;
-  modulePermissions: GTMemberModulePermission;
+  modulePermissions: GTMemberModulePermissions;
   personalDetails: GTPersonalDetails;
-  updatedAt: Date;
-  createdAt: Date;
+  updatedAt: string;
+  createdAt: string;
 }
 
-export type GTMemberDisplay = Omit<GTMemberDBRecord, 'password'>;
+export interface GTMemberDisplay
+  extends Omit<GTMemberDBRecord, 'password' | 'memberId'> {
+  id: string;
+}

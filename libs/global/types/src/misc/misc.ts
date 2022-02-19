@@ -27,7 +27,7 @@ export enum GTMemberType {
   ChildUser = 'ChildUser',
 }
 
-export interface GTMemberModulePermission {
+export interface GTMemberModulePermissions {
   hasFamilySettings: boolean;
   hasFinanacial: boolean;
 }
@@ -37,5 +37,5 @@ export interface GTPersonalDetails {
   middleName?: string;
   lastName: string;
   gender: GTGender;
-  dob: Date;
+  dob: string;
 }

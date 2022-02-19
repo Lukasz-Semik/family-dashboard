@@ -8,6 +8,10 @@ import {
   CTInvitationUserConfirmInput,
   CTMemberType,
   CTUserModulePermission,
+  GTGender,
+  GTInputCreateSignUpInvitation,
+  GTInvitationDetails,
+  GTPersonalDetails,
 } from '@family-dashboard/global/types';
 
 @InputType()
@@ -63,4 +67,37 @@ export class InvitationUserConfirmInput
   @Field(() => String) readonly lastName: string;
   @Field(() => Date) readonly dob: Date;
   @Field(() => CTGender) readonly gender: CTGender;
+}
+
+// V2
+@InputType()
+export class InputPersonalDetailsInvitation
+  implements Partial<GTPersonalDetails>
+{
+  @Field(() => String) readonly password: string;
+  @Field(() => String) readonly firstName: string;
+  @Field(() => String, { nullable: true }) readonly middleName?: string;
+  @Field(() => String) readonly lastName: string;
+  @Field(() => String) readonly dob: string;
+  @Field(() => GTGender) readonly gender: GTGender;
+}
+
+@InputType()
+export class InputInvitationDetailsInvitation
+  implements Omit<GTInvitationDetails, 'code' | 'validTo'>
+{
+  @Field(() => String) readonly familyName: string;
+  @Field(() => String) readonly inviterEmail: string;
+  @Field(() => String) inviterName: string;
+}
+
+@InputType()
+export class InputCreateSignUpInvitation
+  implements GTInputCreateSignUpInvitation
+{
+  @Field(() => String) readonly email: string;
+  @Field(() => InputPersonalDetailsInvitation)
+  readonly personalDetails: Partial<GTPersonalDetails>;
+  @Field(() => InputInvitationDetailsInvitation)
+  readonly invitationDetails: Omit<GTInvitationDetails, 'validTo' | 'code'>;
 }

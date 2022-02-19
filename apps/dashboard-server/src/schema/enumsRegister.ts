@@ -5,6 +5,7 @@ import {
   CTMemberType,
   CTUserModulePermission,
   CTVerifyEmailResponseStatus,
+  GTGender,
 } from '@family-dashboard/global/types';
 
 registerEnumType(CTVerifyEmailResponseStatus, {
@@ -26,4 +27,10 @@ registerEnumType(CTMemberType, {
 registerEnumType(CTUserModulePermission, {
   name: 'CTUserModulePermission',
   description: "User's modules permissions",
+});
+
+// V2
+registerEnumType(GTGender, {
+  name: 'GTGender',
+  description: "User's gender",
 });
