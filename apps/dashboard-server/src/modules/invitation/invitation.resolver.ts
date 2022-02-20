@@ -7,10 +7,10 @@ import {
 } from '../../decorators/currentLoggedInUser.decorator';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
+  InputConfirmSignUpInvitation,
+  InputCreateSignUpInvitation,
   InvitationCreateInput,
   InvitationDto,
-  InvitationSignUpConfirmInput,
-  InvitationSignUpCreateInput,
   InvitationUserConfirmInput,
   InvitationUserPersonalDetailsDto,
   LoginDto,
@@ -33,15 +33,15 @@ export class InvitationResolver {
   @Query(() => VerifyEmailDto)
   async verifySignUpEmail(@Args('email') email: string) {
     const result = await this.invitationServiceV2.verifyEmail(email);
-    console.log(result);
+
     return result;
   }
 
   @Mutation(() => Boolean)
   async createSignUpInvitation(
-    @Args('input') input: InvitationSignUpCreateInput
+    @Args('input') input: InputCreateSignUpInvitation
   ) {
-    return this.invitationService.createSignUpInvitation(input);
+    return this.invitationServiceV2.createSignUpInvitation(input);
   }
 
   @Mutation(() => InvitationDto)
@@ -69,11 +69,17 @@ export class InvitationResolver {
 
   @Mutation(() => LoginDto)
   async confirmSignUpInvitation(
-    @Args('input') input: InvitationSignUpConfirmInput
+    @Args('input') input: InputConfirmSignUpInvitation
   ) {
-    const user = await this.invitationService.confirmSignUpInvitation(input);
+    const records = await this.invitationServiceV2.confirmSignUpInvitation(
+      input
+    );
 
-    return this.authService.createToken(user.email, user.id, user.family.id);
+    return this.authService.createToken(
+      records.member.email,
+      records.member.fullKey,
+      records.family.familyId
+    );
   }
 
   @Mutation(() => LoginDto)

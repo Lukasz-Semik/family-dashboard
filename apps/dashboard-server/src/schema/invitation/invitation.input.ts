@@ -9,8 +9,10 @@ import {
   CTMemberType,
   CTUserModulePermission,
   GTGender,
+  GTInputConfirmSignUpInvitation,
   GTInputCreateSignUpInvitation,
   GTInvitationDetails,
+  GTMemberSecurity,
   GTPersonalDetails,
 } from '@family-dashboard/global/types';
 
@@ -71,10 +73,9 @@ export class InvitationUserConfirmInput
 
 // V2
 @InputType()
-export class InputPersonalDetailsInvitation
-  implements Partial<GTPersonalDetails>
+export class InputCreateSignUpInvitationPersonalDetails
+  implements GTPersonalDetails
 {
-  @Field(() => String) readonly password: string;
   @Field(() => String) readonly firstName: string;
   @Field(() => String, { nullable: true }) readonly middleName?: string;
   @Field(() => String) readonly lastName: string;
@@ -82,13 +83,18 @@ export class InputPersonalDetailsInvitation
   @Field(() => GTGender) readonly gender: GTGender;
 }
 
+type CreateSignUpInvitationInvitationDetails = Omit<
+  GTInvitationDetails,
+  'code' | 'validTo'
+>;
+
 @InputType()
-export class InputInvitationDetailsInvitation
-  implements Omit<GTInvitationDetails, 'code' | 'validTo'>
+export class InputCreateSignUpInvitationInvitationDetails
+  implements CreateSignUpInvitationInvitationDetails
 {
   @Field(() => String) readonly familyName: string;
   @Field(() => String) readonly inviterEmail: string;
-  @Field(() => String) inviterName: string;
+  @Field(() => String) readonly inviterName: string;
 }
 
 @InputType()
@@ -96,8 +102,39 @@ export class InputCreateSignUpInvitation
   implements GTInputCreateSignUpInvitation
 {
   @Field(() => String) readonly email: string;
-  @Field(() => InputPersonalDetailsInvitation)
-  readonly personalDetails: Partial<GTPersonalDetails>;
-  @Field(() => InputInvitationDetailsInvitation)
-  readonly invitationDetails: Omit<GTInvitationDetails, 'validTo' | 'code'>;
+  @Field(() => InputCreateSignUpInvitationPersonalDetails)
+  readonly personalDetails: GTPersonalDetails;
+  @Field(() => InputCreateSignUpInvitationInvitationDetails)
+  readonly invitationDetails: CreateSignUpInvitationInvitationDetails;
+}
+
+type ConfirmSignUpInvitationInvitationDetails = Omit<
+  GTInvitationDetails,
+  'validTo' | 'inviterEmail' | 'inviterName'
+>;
+
+@InputType()
+export class InputConfirmSignUpInvitationInvitationDetails
+  implements ConfirmSignUpInvitationInvitationDetails
+{
+  @Field(() => String) readonly familyName: string;
+  @Field(() => String) readonly code: string;
+}
+
+@InputType()
+export class InputConfrimSignUpInvitationSecurity implements GTMemberSecurity {
+  @Field(() => String) readonly password: string;
+}
+
+@InputType()
+export class InputConfirmSignUpInvitation
+  implements GTInputConfirmSignUpInvitation
+{
+  @Field(() => String) readonly email: string;
+  @Field(() => InputConfrimSignUpInvitationSecurity)
+  readonly security: GTMemberSecurity;
+  @Field(() => InputCreateSignUpInvitationPersonalDetails)
+  readonly personalDetails: GTPersonalDetails;
+  @Field(() => InputConfirmSignUpInvitationInvitationDetails)
+  readonly invitationDetails: ConfirmSignUpInvitationInvitationDetails;
 }

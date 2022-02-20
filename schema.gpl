@@ -98,24 +98,40 @@ type Query {
 }
 
 type Mutation {
-  createSignUpInvitation(input: InvitationSignUpCreateInput!): Boolean!
+  createSignUpInvitation(input: InputCreateSignUpInvitation!): Boolean!
   createUserInvitation(input: InvitationCreateInput!): InvitationDto!
   resendInvitation(email: String!): Boolean!
   cancelInvitation(email: String!): Boolean!
-  confirmSignUpInvitation(input: InvitationSignUpConfirmInput!): LoginDto!
+  confirmSignUpInvitation(input: InputConfirmSignUpInvitation!): LoginDto!
   confirmUserInvitation(input: InvitationUserConfirmInput!, token: String!): LoginDto!
   login(password: String!, email: String!): LoginDto!
 }
 
-input InvitationSignUpCreateInput {
+input InputCreateSignUpInvitation {
   email: String!
-  inviterName: String!
-  familyName: String!
-  firstName: String
+  personalDetails: InputCreateSignUpInvitationPersonalDetails!
+  invitationDetails: InputCreateSignUpInvitationInvitationDetails!
+}
+
+input InputCreateSignUpInvitationPersonalDetails {
+  firstName: String!
   middleName: String
-  lastName: String
-  dob: DateTime
-  gender: CTGender
+  lastName: String!
+  dob: String!
+  gender: GTGender!
+}
+
+"""User's gender"""
+enum GTGender {
+  Male
+  Female
+  Other
+}
+
+input InputCreateSignUpInvitationInvitationDetails {
+  familyName: String!
+  inviterEmail: String!
+  inviterName: String!
 }
 
 input InvitationCreateInput {
@@ -130,14 +146,19 @@ input InvitationCreateInput {
   gender: CTGender
 }
 
-input InvitationSignUpConfirmInput {
+input InputConfirmSignUpInvitation {
   email: String!
+  security: InputConfrimSignUpInvitationSecurity!
+  personalDetails: InputCreateSignUpInvitationPersonalDetails!
+  invitationDetails: InputConfirmSignUpInvitationInvitationDetails!
+}
+
+input InputConfrimSignUpInvitationSecurity {
   password: String!
-  firstName: String!
-  middleName: String
-  lastName: String!
-  dob: DateTime!
-  gender: CTGender!
+}
+
+input InputConfirmSignUpInvitationInvitationDetails {
+  familyName: String!
   code: String!
 }
 
