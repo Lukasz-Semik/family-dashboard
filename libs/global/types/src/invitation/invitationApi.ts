@@ -1,8 +1,5 @@
-import {
-  GTMemberModulePermissions,
-  GTMemberType,
-  GTPersonalDetails,
-} from '../misc/misc';
+import { GTMemberSecurity } from '../member/member';
+import { GTPersonalDetails } from '../misc/misc';
 import { CTUserPersonalDetails } from '../user/user';
 import { GTInvitationDetails } from './invitation';
 import { CTInvitationBaseData } from './invitation';
@@ -21,6 +18,7 @@ export enum CTInvitationErrors {
   EmailAlreadyInvited = 'EmailAlreadyInvited',
   EmailIsNotInvited = 'EmailIsNoteInvited',
   InvitationDeprecated = 'InvitationDeprecated',
+  NotExist = 'NotExist',
   CodeInvalid = 'CodeInvalid',
   WrongPayload = 'WrongPayload',
 }
@@ -66,12 +64,16 @@ export interface GTVerifyEmailResponse {
 
 export interface GTInputCreateSignUpInvitation {
   email: string;
-  personalDetails: Partial<GTPersonalDetails>;
+  personalDetails: GTPersonalDetails;
   invitationDetails: Omit<GTInvitationDetails, 'validTo' | 'code'>;
 }
 
-export interface GTInputCreateUserInvitation
-  extends GTInputCreateSignUpInvitation {
-  memberType: GTMemberType;
-  modulePermissions: GTMemberModulePermissions;
+export interface GTInputConfirmSignUpInvitation {
+  email: string;
+  security: GTMemberSecurity;
+  personalDetails: GTPersonalDetails;
+  invitationDetails: Omit<
+    GTInvitationDetails,
+    'validTo' | 'inviterEmail' | 'inviterName'
+  >;
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as dayjs from 'dayjs';
 
 import {
-  GTGender,
+  CTInvitationErrors,
   GTMemberType,
   GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
@@ -10,19 +10,20 @@ import {
 import { throwError } from '../../helpers/throwError';
 import { generateNumericCode } from '../../helpers/utils';
 import {
+  InputConfirmSignUpInvitation,
   InputCreateSignUpInvitation,
   VerifyEmailResponseDto,
 } from '../../schema';
-import { AuthService } from '../auth/auth.service';
 import { InvitationDB } from './invitation.db';
-import { prepareCreateInvitationDBRecord } from './invitation.utils';
+import {
+  buildFamilyAndMemberDBPayloads,
+  buildInvitationDBPayload,
+  FamilyAndMemberDBPayloads,
+} from './invitation.utils';
 
 @Injectable()
 export class InvitationServiceV2 {
-  constructor(
-    private readonly invitationDb: InvitationDB,
-    private readonly authService: AuthService
-  ) {}
+  constructor(private readonly invitationDb: InvitationDB) {}
 
   private getIsInvitationDeprecated(validTo?: string) {
     return dayjs.utc().isAfter(dayjs.utc(validTo));
@@ -30,32 +31,6 @@ export class InvitationServiceV2 {
 
   async verifyEmail(email: string): Promise<VerifyEmailResponseDto> {
     try {
-      // // TEST:
-      // const a = await this.invitationDb.createInvitation(
-      //   prepareCreateInvitationDBRecord({
-      //     familyId: undefined,
-      //     email: 'x@gmail.com',
-      //     memberType: GTMemberType.AdultUser,
-      //     modulePermissions: {
-      //       hasFamilySettings: true,
-      //       hasFinanacial: true,
-      //     },
-      //     personalDetails: {
-      //       firstName: 'Shaki',
-      //       middleName: '',
-      //       lastName: 'Semik',
-      //       dob: dayjs('2000-12-03').utc().toISOString(),
-      //       gender: GTGender.Male,
-      //     },
-      //     invitationDetails: {
-      //       familyName: 'Semik',
-      //       inviterEmail: 'djpluki@gmail.com',
-      //       inviterName: 'Łukasz',
-      //     },
-      //     code: '1234',
-      //   })
-      // );
-      // console.log(a);
       const existingMember = await this.invitationDb.getMemberByEmail(email);
 
       if (existingMember) {
@@ -104,6 +79,63 @@ export class InvitationServiceV2 {
   ): Promise<boolean> {
     const code = generateNumericCode(4);
 
+    try {
+      const response = await this.invitationDb.createInvitation(
+        buildInvitationDBPayload({
+          familyId: undefined,
+          email: input.email,
+          memberType: GTMemberType.AdultUser,
+          modulePermissions: {
+            hasFamilySettings: true,
+            hasFinanacial: true,
+          },
+          personalDetails: {
+            ...input.personalDetails,
+            dob: dayjs(input.personalDetails.dob).utc().toISOString(),
+          },
+          invitationDetails: input.invitationDetails,
+          code,
+        })
+      );
+    } catch (err) {
+      throwError(err.message);
+    }
+
     return true;
+  }
+
+  async confirmSignUpInvitation(
+    input: InputConfirmSignUpInvitation
+  ): Promise<FamilyAndMemberDBPayloads> {
+    try {
+      const existingInvitation = await this.invitationDb.getInvitationByEmail(
+        input.email
+      );
+
+      if (!existingInvitation?.email) {
+        throwError(CTInvitationErrors.InvitationDeprecated);
+      }
+
+      if (
+        existingInvitation?.invitationDetails?.code !==
+        input.invitationDetails?.code
+      ) {
+        throwError(CTInvitationErrors.CodeInvalid);
+      }
+
+      const records = await buildFamilyAndMemberDBPayloads(input);
+
+      await this.invitationDb.createFamily(records.family);
+      await this.invitationDb.createMember(records.member);
+
+      this.invitationDb.deleteInvitation(
+        existingInvitation.familyId,
+        existingInvitation.fullKey
+      );
+
+      return records;
+    } catch (err) {
+      throwError(err.message);
+    }
   }
 }

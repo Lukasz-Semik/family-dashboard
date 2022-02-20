@@ -29,24 +29,23 @@ export interface CTInvitationUserPersonalDetailsData
 // V2
 
 export interface GTInvitationDetails {
-  familyName: string;
-  validTo: string;
+  inviterEmail: string;
   code: string | 'verified';
   inviterName: string;
-  inviterEmail: string;
+  familyName: string;
+  validTo: string;
 }
 
 export interface GTInvitationDBRecord {
-  invitationId: string;
   familyId: string;
-  type: string;
+  fullKey: string;
   email: string;
   memberType: GTMemberType;
   modulePermissions: GTMemberModulePermissions;
-  personalDetails: Partial<GTPersonalDetails>;
   invitationDetails: GTInvitationDetails;
-  updatedAt: string;
+  personalDetails: GTPersonalDetails;
   createdAt: string;
+  updatedAt: string;
 }
 
 export interface GTInvitationDisplay {
@@ -54,5 +53,5 @@ export interface GTInvitationDisplay {
   familyId: string;
   email: string;
   invitationDetails: Omit<GTInvitationDetails, 'code' | 'validTo'>;
-  personalDetails: Partial<GTPersonalDetails>;
+  personalDetails: GTPersonalDetails;
 }
