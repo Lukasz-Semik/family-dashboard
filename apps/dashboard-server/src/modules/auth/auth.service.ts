@@ -1,37 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { InjectRepository } from '@nestjs/typeorm';
 import { compare } from 'bcryptjs';
-import { Repository } from 'typeorm';
 
-import { CTTokenDecoded } from '@family-dashboard/global/types';
+import {
+  CTTokenDecoded,
+  GTMemberDBRecord,
+} from '@family-dashboard/global/types';
 
 import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
+import { AuthDB } from './auth.db';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
+    private readonly authDB: AuthDB
   ) {}
 
-  async validateUser(email: string, pass: string): Promise<UserEntity> {
-    const user = await this.userRepository
-      .createQueryBuilder('user')
-      .leftJoinAndSelect('user.family', 'family.id')
-      .where('user.email = :email', { email })
-      .getOne();
+  async validateMember(email: string, pass: string): Promise<GTMemberDBRecord> {
+    const member = await this.authDB.getMemberByEmail(email);
 
-    if (!user) {
+    if (!member) {
       return null;
     }
 
-    const isMatch = await compare(pass, user.password);
+    const isMatch = await compare(pass, member.security.password);
 
     if (isMatch) {
-      return user;
+      return member;
     }
 
     return null;
@@ -52,12 +49,14 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
-    const user = await this.validateUser(email, password);
+    const member = await this.validateMember(email, password);
 
-    if (!user) {
+    if (!member) {
       throwError('invalid login');
     }
 
-    return this.createToken(user.email, user.id, user.family.id);
+    const memberId = member.fullKey.split('#')[1];
+
+    return this.createToken(member.email, memberId, member.familyId);
   }
 }

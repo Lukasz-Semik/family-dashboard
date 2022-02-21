@@ -1,14 +1,6 @@
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import {
-  DeleteCommand,
-  DynamoDBDocumentClient,
-  PutCommand,
-} from '@aws-sdk/lib-dynamodb';
 import { Injectable } from '@nestjs/common';
-import { DynamoDB } from 'aws-sdk';
-import { AttributeValue as DynamoDbData } from 'dynamodb-data-types';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { isEmpty } from 'lodash';
-import { InjectAwsService } from 'nest-aws-sdk';
 
 import {
   FD_TABLE_FAMILY,
@@ -23,25 +15,23 @@ import {
 
 @Injectable()
 export class InvitationDB {
-  constructor(
-    @InjectAwsService(DynamoDB) private readonly dynamoDb: DynamoDB
-  ) {}
+  constructor(private readonly dynamoDBClient: DocumentClient) {}
 
   async getMemberByEmail(email: string): Promise<GTMemberDBRecord | null> {
-    const response = await this.dynamoDb
+    const response = await this.dynamoDBClient
       .query({
         TableName: FD_TABLE_FAMILY,
         IndexName: GSI_EMAIL_FULL_KEY,
         KeyConditionExpression:
-          'email = :email and begins_with(fullKey, :fullKey)',
+          'email = :email AND begins_with(fullKey, :fullKey)',
         ExpressionAttributeValues: {
-          ':email': { S: email },
-          ':fullKey': { S: FDFamilyRecordType.Member },
+          ':email': email,
+          ':fullKey': FDFamilyRecordType.Member,
         },
       })
       .promise();
 
-    const member = DynamoDbData.unwrap<GTMemberDBRecord>(response.Items[0]);
+    const member = response.Items[0] as GTMemberDBRecord;
 
     if (isEmpty(member)) {
       return null;
@@ -51,20 +41,18 @@ export class InvitationDB {
   }
 
   async getInvitationByEmail(email: string): Promise<GTInvitationDBRecord> {
-    const response = await this.dynamoDb
+    const response = await this.dynamoDBClient
       .query({
         TableName: FD_TABLE_FAMILY,
         IndexName: GSI_EMAIL_FULL_KEY,
         KeyConditionExpression: 'email = :email',
         ExpressionAttributeValues: {
-          ':email': { S: email },
+          ':email': email,
         },
       })
       .promise();
 
-    const invitation = DynamoDbData.unwrap<GTInvitationDBRecord>(
-      response.Items[0]
-    );
+    const invitation = response.Items[0] as GTInvitationDBRecord;
 
     if (isEmpty(invitation)) {
       return null;
@@ -76,17 +64,13 @@ export class InvitationDB {
   async createFamilyItem<
     T = GTInvitationDBRecord | GTFamilyDBRecord | GTMemberDBRecord
   >(item: T): Promise<T> {
-    const client = new DynamoDBClient({});
-    const ddbDocClient = DynamoDBDocumentClient.from(client);
-
-    await ddbDocClient.send(
-      new PutCommand({
+    await this.dynamoDBClient
+      .put({
         TableName: FD_TABLE_FAMILY,
         Item: item,
       })
-    );
+      .promise();
 
-    client.destroy();
     return item;
   }
 
@@ -105,20 +89,16 @@ export class InvitationDB {
   }
 
   async deleteInvitation(familyId: string, fullKey: string): Promise<boolean> {
-    const client = new DynamoDBClient({});
-    const ddbDocClient = DynamoDBDocumentClient.from(client);
-
-    await ddbDocClient.send(
-      new DeleteCommand({
+    await this.dynamoDBClient
+      .delete({
         TableName: FD_TABLE_FAMILY,
         Key: {
           familyId,
           fullKey,
         },
       })
-    );
+      .promise();
 
-    client.destroy();
     return true;
   }
 }

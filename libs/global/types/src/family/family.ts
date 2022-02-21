@@ -1,3 +1,6 @@
+import { GTInvitationDisplay } from '../invitation/invitation';
+import { GTMemberDisplay } from '../member/member';
+
 export interface CTFamilyBaseData {
   name: string;
   id: string;
@@ -15,4 +18,10 @@ export interface GTFamilyDBRecord {
   familyDetails: GTFamilyDetails;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface GTFamilyDisplay extends GTFamilyDBRecord {
+  invitations: GTInvitationDisplay[];
+  members: GTMemberDisplay[];
+  currentUser: GTMemberDisplay;
 }

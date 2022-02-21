@@ -20,7 +20,4 @@ export interface GTMemberDBRecord {
   personalDetails: GTPersonalDetails;
 }
 
-export interface GTMemberDisplay
-  extends Omit<GTMemberDBRecord, 'password' | 'memberId'> {
-  id: string;
-}
+export type GTMemberDisplay = Omit<GTMemberDBRecord, 'password' | 'memberId'>;

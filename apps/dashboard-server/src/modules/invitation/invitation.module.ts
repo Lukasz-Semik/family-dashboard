@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
 import { FamilyEntity } from '../../entities/family.entity';
 import { InvitationEntity } from '../../entities/invitation.entity';
@@ -20,6 +21,7 @@ import { InvitationServiceV2 } from './invitation.servicev2';
     InvitationService,
     InvitationServiceV2,
     InvitationDB,
+    DocumentClient,
   ],
 })
 export class InvitationModule {}

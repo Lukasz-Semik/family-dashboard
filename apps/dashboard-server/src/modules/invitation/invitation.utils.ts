@@ -6,6 +6,7 @@ import {
   FAMILY_SIGNUP_ID,
   FDFamilyRecordType,
 } from '@family-dashboard/global/const';
+import { buildHashKey } from '@family-dashboard/global/sdk';
 import {
   GTFamilyDBRecord,
   GTInvitationDBRecord,
@@ -28,11 +29,6 @@ interface RawPayload {
   code: string;
 }
 
-// TODO: handle global helper
-const buildHashKey = (...values: string[]) => {
-  return `#${values.join('#')}`;
-};
-
 export const buildInvitationDBPayload = (
   rawPayload: RawPayload
 ): GTInvitationDBRecord => {
@@ -43,7 +39,7 @@ export const buildInvitationDBPayload = (
 
   const record: GTInvitationDBRecord = {
     familyId: rawPayload.familyId || FAMILY_SIGNUP_ID,
-    fullKey: `#${FDFamilyRecordType.Invitation}#${uuidv4()}`,
+    fullKey: buildHashKey(FDFamilyRecordType.Invitation, uuidv4()),
     createdAt: date,
     updatedAt: date,
     email: rawPayload.email,
@@ -90,6 +86,7 @@ export const buildFamilyAndMemberDBPayloads = async (
     FDFamilyRecordType.Member,
     dayjs().utc().toISOString()
   );
+
   const memberId = uuidv4();
 
   const member: GTMemberDBRecord = {
