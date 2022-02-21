@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { FamilyEntity } from '../../entities/family.entity';
-import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
 
 @Injectable()
