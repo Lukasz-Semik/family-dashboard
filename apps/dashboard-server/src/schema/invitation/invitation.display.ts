@@ -2,14 +2,17 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
   CTGender,
-  CTInvitationBaseData,
   CTInvitationDisplayData,
   CTInvitationUserPersonalDetailsData,
   CTVerifyEmailResponse,
   CTVerifyEmailResponseStatus,
+  GTInvitationDisplay,
+  GTPersonalDetails,
   GTVerifyEmailResponse,
   GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
+
+import { DisplayPersonalDetails } from '../misc/misc.display';
 
 @ObjectType()
 export class VerifyEmailDto implements CTVerifyEmailResponse {
@@ -41,8 +44,28 @@ export class InvitationUserPersonalDetailsDto
 
 // V2
 @ObjectType()
-export class VerifyEmailResponseDto implements GTVerifyEmailResponse {
+export class DisplayVerifyEmailResponse implements GTVerifyEmailResponse {
   @Field(() => GTVerifyEmailStatus)
   readonly status: GTVerifyEmailStatus;
   @Field(() => String, { nullable: true }) readonly inviterName?: string;
+}
+
+type InvitationDetails = GTInvitationDisplay['invitationDetails'];
+
+@ObjectType()
+export class DisplayInvitationInvitationDetails implements InvitationDetails {
+  @Field(() => String) readonly familyName: string;
+  @Field(() => String) readonly inviterEmail: string;
+  @Field(() => String) readonly inviterName: string;
+}
+
+@ObjectType()
+export class DisplayInvitation implements GTInvitationDisplay {
+  @Field(() => String) readonly fullKey: string;
+  @Field(() => String) readonly familyId: string;
+  @Field(() => String) readonly email: string;
+  @Field(() => DisplayInvitationInvitationDetails)
+  readonly invitationDetails: InvitationDetails;
+  @Field(() => DisplayPersonalDetails)
+  readonly personalDetails: GTPersonalDetails;
 }

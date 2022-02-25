@@ -7,6 +7,7 @@ import {
 } from '../../decorators/currentLoggedInUser.decorator';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
+  DisplayVerifyEmailResponse,
   InputConfirmSignUpInvitation,
   InputCreateSignUpInvitation,
   InvitationCreateInput,
@@ -14,7 +15,6 @@ import {
   InvitationUserConfirmInput,
   InvitationUserPersonalDetailsDto,
   LoginDto,
-  VerifyEmailDto,
 } from '../../schema';
 import { serilizeUserInvitation } from '../../serializators/invitation.serializator';
 import { AuthService } from '../auth/auth.service';
@@ -30,7 +30,7 @@ export class InvitationResolver {
     private readonly authService: AuthService
   ) {}
 
-  @Query(() => VerifyEmailDto)
+  @Query(() => DisplayVerifyEmailResponse)
   async verifySignUpEmail(@Args('email') email: string) {
     const result = await this.invitationServiceV2.verifyEmail(email);
 

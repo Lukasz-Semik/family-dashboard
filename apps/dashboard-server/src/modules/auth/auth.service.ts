@@ -7,7 +7,6 @@ import {
   GTMemberDBRecord,
 } from '@family-dashboard/global/types';
 
-import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
 import { AuthDB } from './auth.db';
 

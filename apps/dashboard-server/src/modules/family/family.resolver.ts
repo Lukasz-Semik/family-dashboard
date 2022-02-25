@@ -6,7 +6,7 @@ import {
   CurrentLoggedInUserData,
 } from '../../decorators/currentLoggedInUser.decorator';
 import { FamilyEntity } from '../../entities/family.entity';
-import { FamilyAllMembersDto } from '../../schema';
+import { DisplayFamily, FamilyAllMembersDto } from '../../schema';
 import { serializeInvitation } from '../../serializators/invitation.serializator';
 import { serializeUser } from '../../serializators/user.serializator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -31,5 +31,18 @@ export class FamilyResolver {
         .map(serializeUser),
       invitations: family.invitations.map(serializeInvitation),
     };
+  }
+
+  @Query(() => DisplayFamily)
+  @UseGuards(JwtAuthGuard)
+  async getFamilyDisplay(
+    @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData
+  ) {
+    const familyDisplay = await this.familyService.getFamilyDisplay(
+      currentLoggedInUser.familyId,
+      currentLoggedInUser.userId
+    );
+
+    return familyDisplay;
   }
 }

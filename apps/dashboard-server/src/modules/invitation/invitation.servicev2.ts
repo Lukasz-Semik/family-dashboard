@@ -10,9 +10,9 @@ import {
 import { throwError } from '../../helpers/throwError';
 import { generateNumericCode } from '../../helpers/utils';
 import {
+  DisplayVerifyEmailResponse,
   InputConfirmSignUpInvitation,
   InputCreateSignUpInvitation,
-  VerifyEmailResponseDto,
 } from '../../schema';
 import { InvitationDB } from './invitation.db';
 import {
@@ -29,7 +29,7 @@ export class InvitationServiceV2 {
     return dayjs.utc().isAfter(dayjs.utc(validTo));
   }
 
-  async verifyEmail(email: string): Promise<VerifyEmailResponseDto> {
+  async verifyEmail(email: string): Promise<DisplayVerifyEmailResponse> {
     try {
       const existingMember = await this.invitationDb.getMemberByEmail(email);
 
