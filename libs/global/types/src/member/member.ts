@@ -20,4 +20,4 @@ export interface GTMemberDBRecord {
   personalDetails: GTPersonalDetails;
 }
 
-export type GTMemberDisplay = Omit<GTMemberDBRecord, 'password' | 'memberId'>;
+export type GTMemberDisplay = Omit<GTMemberDBRecord, 'security'>;

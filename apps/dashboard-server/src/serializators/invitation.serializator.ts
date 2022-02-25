@@ -3,6 +3,8 @@ import {
   CTInvitationBaseData,
   CTInvitationDisplayData,
   CTInvitationUserPersonalDetailsData,
+  GTInvitationDBRecord,
+  GTInvitationDisplay,
 } from '@family-dashboard/global/types';
 
 import { InvitationEntity } from '../entities/invitation.entity';
@@ -31,3 +33,18 @@ export const serilizeUserInvitation = (
     gender: invitation.gender as CTGender,
   };
 };
+
+// V2
+export const serializeInvitationV2 = (
+  invitationDBRecord: GTInvitationDBRecord
+): GTInvitationDisplay => ({
+  familyId: invitationDBRecord.familyId,
+  fullKey: invitationDBRecord.fullKey,
+  email: invitationDBRecord.email,
+  invitationDetails: {
+    familyName: invitationDBRecord.invitationDetails.familyName,
+    inviterEmail: invitationDBRecord.invitationDetails.inviterEmail,
+    inviterName: invitationDBRecord.invitationDetails.familyName,
+  },
+  personalDetails: invitationDBRecord.personalDetails,
+});

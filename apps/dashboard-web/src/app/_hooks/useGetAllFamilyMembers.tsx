@@ -11,7 +11,7 @@ export function useGetAllFamilyMembers() {
   const { loading } = useQuery<{
     getAllFamilyMembers: CTFamilyAllMembersResponse;
   }>(GetAllFamilyMembers, {
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'network-only', // cache-first a mozemy tez uzyc cache-only
     onCompleted: (responseData) => {
       dispatch(
         webStoreFamilyActions.setFamilyMembers(responseData.getAllFamilyMembers)

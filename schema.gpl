@@ -2,20 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type VerifyEmailDto {
-  status: CTVerifyEmailResponseStatus!
-  inviterName: String
+type DisplayPersonalDetails {
+  firstName: String!
+  middleName: String
+  lastName: String!
+  dob: String!
+  gender: GTGender!
 }
 
-"""
-Status information according to existence of invitation or user during sing up
-"""
-enum CTVerifyEmailResponseStatus {
-  Success
-  Invited
-  Deprecated
-  SignUpNotFinished
-  AlreadyCreated
+"""User's gender"""
+enum GTGender {
+  Male
+  Female
+  Other
 }
 
 type InvitationDto {
@@ -45,6 +44,58 @@ enum CTGender {
   Male
   Female
   Other
+}
+
+type DisplayVerifyEmailResponse {
+  status: GTVerifyEmailStatus!
+  inviterName: String
+}
+
+"""
+Status information according to existence of invitation or user during sing up
+"""
+enum GTVerifyEmailStatus {
+  Success
+  Invited
+  Deprecated
+  SignUpNotFinished
+  AlreadyCreated
+}
+
+type DisplayInvitationInvitationDetails {
+  familyName: String!
+  inviterEmail: String!
+  inviterName: String!
+}
+
+type DisplayInvitation {
+  fullKey: String!
+  familyId: String!
+  email: String!
+  invitationDetails: DisplayInvitationInvitationDetails!
+  personalDetails: DisplayPersonalDetails!
+}
+
+type DisplayMemberModulePermissions {
+  hasFamilySettings: Boolean!
+  hasFinanacial: Boolean!
+}
+
+type DisplayMember {
+  fullKey: String!
+  familyId: String!
+  email: String!
+  updatedAt: String!
+  createdAt: String!
+  personalDetails: DisplayPersonalDetails!
+  memberType: GTMemberType!
+  modulePermissions: DisplayMemberModulePermissions!
+}
+
+"""User's and characters member type"""
+enum GTMemberType {
+  AdultUser
+  ChildUser
 }
 
 type LoginDto {
@@ -90,11 +141,23 @@ type FamilyAllMembersDto {
   invitations: [InvitationDto!]!
 }
 
+type DisplayFamily {
+  fullKey: String!
+  familyId: String!
+  createdAt: String!
+  updatedAt: String!
+  invitations: [DisplayInvitation!]!
+  members: [DisplayMember!]!
+  currentUser: DisplayMember!
+  familyDetails: DisplayFamily!
+}
+
 type Query {
-  verifySignUpEmail(email: String!): VerifyEmailDto!
+  verifySignUpEmail(email: String!): DisplayVerifyEmailResponse!
   getUserInvitation(token: String!): InvitationUserPersonalDetailsDto!
   getUserInitialAppState: InitialAppStateDto!
   getAllFamilyMembers: FamilyAllMembersDto!
+  getFamilyDisplay: DisplayFamily!
 }
 
 type Mutation {
@@ -119,13 +182,6 @@ input InputCreateSignUpInvitationPersonalDetails {
   lastName: String!
   dob: String!
   gender: GTGender!
-}
-
-"""User's gender"""
-enum GTGender {
-  Male
-  Female
-  Other
 }
 
 input InputCreateSignUpInvitationInvitationDetails {

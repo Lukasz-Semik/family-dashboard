@@ -9,7 +9,7 @@ import {
   CTUserModulePermission,
 } from '@family-dashboard/global/types';
 
-import { FamilyDto } from '../family/family.dto';
+import { FamilyDto } from '../family/family.display';
 
 @ObjectType()
 export class LoginDto implements CTLoginResponse {

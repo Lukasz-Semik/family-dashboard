@@ -5,7 +5,7 @@ import { webRoutes } from '@family-dashboard/global/const';
 
 import { FamilySettingsCreateMemberPage } from '../../modules/FamilySettings/FamilySettingsCreateMemberPage/FamilySettingsCreateMemberPage';
 import { FamilySettingsPage } from '../../modules/FamilySettings/FamilySettingsPage/FamilySettingsPage';
-import { useGetAllFamilyMembers } from '../_dataHooks/useGetAllFamilyMembers';
+import { useGetAllFamilyMembers } from '../_hooks/useGetAllFamilyMembers';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 
 export function FamilySettingsRouting() {

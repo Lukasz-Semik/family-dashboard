@@ -50,6 +50,7 @@ export interface GTInvitationDBRecord {
 
 export interface GTInvitationDisplay {
   familyId: string;
+  fullKey: string;
   email: string;
   invitationDetails: Omit<GTInvitationDetails, 'code' | 'validTo'>;
   personalDetails: GTPersonalDetails;
