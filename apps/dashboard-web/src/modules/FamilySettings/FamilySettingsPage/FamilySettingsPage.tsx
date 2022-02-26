@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { ButtonStandard } from '@family-dashboard/design-system';
 import { webRoutes } from '@family-dashboard/global/const';
 
-// import { FamilySettingsInvitationsList } from './FamilySettingsInvitationsList/FamilySettingsInvitationsList';
+import { FamilySettingsInvitationsList } from './FamilySettingsInvitationsList/FamilySettingsInvitationsList';
 import { FamilySettingsMembersList } from './FamilySettingsMembersList/FamilySettingsMembersList';
 import {
   StyledAddMemberButtonWrapper,
@@ -30,9 +30,9 @@ export function FamilySettingsPage() {
         </ButtonStandard>
       </StyledAddMemberButtonWrapper>
 
-      {/* <StyledListWrapper>
+      <StyledListWrapper>
         <FamilySettingsInvitationsList />
-      </StyledListWrapper> */}
+      </StyledListWrapper>
 
       <FamilySettingsMembersList />
     </StyledListsWrapper>

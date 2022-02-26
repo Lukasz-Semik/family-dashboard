@@ -1,7 +1,4 @@
-import { GTMemberSecurity } from '../member/member';
-import { GTPersonalDetails } from '../misc/misc';
 import { CTUserPersonalDetails } from '../user/user';
-import { GTInvitationDetails } from './invitation';
 import { CTInvitationBaseData } from './invitation';
 
 export enum CTVerifyEmailResponseStatus {
@@ -12,13 +9,11 @@ export enum CTVerifyEmailResponseStatus {
   AlreadyCreated = 'AlreadyCreated',
 }
 
-// TODODB -> verify usage
 export enum CTInvitationErrors {
   EmailAlreadyInUse = 'EmailAlreadyInUse',
   EmailAlreadyInvited = 'EmailAlreadyInvited',
   EmailIsNotInvited = 'EmailIsNoteInvited',
   InvitationDeprecated = 'InvitationDeprecated',
-  NotExist = 'NotExist',
   CodeInvalid = 'CodeInvalid',
   WrongPayload = 'WrongPayload',
 }
@@ -46,34 +41,4 @@ export type CTInvitationUserConfirmInput = Omit<
 export interface CTVerifyEmailResponse {
   status: CTVerifyEmailResponseStatus;
   inviterName?: string;
-}
-
-// V2
-export enum GTVerifyEmailStatus {
-  Success = 'Success',
-  Invited = 'Invited',
-  Deprecated = 'Deprecated',
-  SignUpNotFinished = 'SignUpNotFinished',
-  AlreadyCreated = 'AlreadyCreated',
-}
-
-export interface GTVerifyEmailResponse {
-  status: GTVerifyEmailStatus;
-  inviterName?: string;
-}
-
-export interface GTInputCreateSignUpInvitation {
-  email: string;
-  personalDetails: GTPersonalDetails;
-  invitationDetails: Omit<GTInvitationDetails, 'validTo' | 'code'>;
-}
-
-export interface GTInputConfirmSignUpInvitation {
-  email: string;
-  security: GTMemberSecurity;
-  personalDetails: GTPersonalDetails;
-  invitationDetails: Omit<
-    GTInvitationDetails,
-    'validTo' | 'inviterEmail' | 'inviterName'
-  >;
 }

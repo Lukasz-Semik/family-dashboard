@@ -1,20 +1,19 @@
 import { useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useMutation } from '@apollo/client';
+import dayjs from 'dayjs';
 
 import { showErrorToast } from '@family-dashboard/design-system';
 import { CreateSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
-import {
-  GTGender,
-  GTInputCreateSignUpInvitation,
-} from '@family-dashboard/global/types';
+import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
+import { CTInvitationSignUpCreateInput } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
 
 export function useCreateSignUpInvitation() {
   const [createSignUpInvitationMutation] = useMutation<
     { createSignUpInvitation: boolean },
-    { input: GTInputCreateSignUpInvitation }
+    { input: CTInvitationSignUpCreateInput }
   >(CreateSignUpInvitation, {
     onError: () =>
       showErrorToast(
@@ -38,20 +37,9 @@ export function useCreateSignUpInvitation() {
       createSignUpInvitationMutation({
         variables: {
           input: {
-            email: rest.email,
-            personalDetails: {
-              firstName: rest.firstName,
-              middleName: rest.middleName,
-              lastName: rest.lastName,
-              dob: rest.dob,
-              // TODODB: fix type
-              gender: rest.gender as unknown as GTGender,
-            },
-            invitationDetails: {
-              familyName: rest.familyName,
-              inviterEmail: rest.email,
-              inviterName: rest.firstName,
-            },
+            ...rest,
+            dob: dayjs(values.dob, FULL_DATE_FORMAT).toDate(),
+            inviterName: values.firstName,
           },
         },
       });

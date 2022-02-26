@@ -2,19 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type DisplayPersonalDetails {
-  firstName: String!
-  middleName: String
-  lastName: String!
-  dob: String!
-  gender: GTGender!
+type VerifyEmailDto {
+  status: CTVerifyEmailResponseStatus!
+  inviterName: String
 }
 
-"""User's gender"""
-enum GTGender {
-  Male
-  Female
-  Other
+"""
+Status information according to existence of invitation or user during sing up
+"""
+enum CTVerifyEmailResponseStatus {
+  Success
+  Invited
+  Deprecated
+  SignUpNotFinished
+  AlreadyCreated
 }
 
 type InvitationDto {
@@ -44,59 +45,6 @@ enum CTGender {
   Male
   Female
   Other
-}
-
-type DisplayVerifyEmailResponse {
-  status: GTVerifyEmailStatus!
-  inviterName: String
-}
-
-"""
-Status information according to existence of invitation or user during sing up
-"""
-enum GTVerifyEmailStatus {
-  Success
-  Invited
-  Deprecated
-  SignUpNotFinished
-  AlreadyCreated
-}
-
-type DisplayInvitationInvitationDetails {
-  familyName: String!
-  inviterEmail: String!
-  inviterName: String!
-  validTo: String!
-}
-
-type DisplayInvitation {
-  fullKey: String!
-  familyId: String!
-  email: String!
-  invitationDetails: DisplayInvitationInvitationDetails!
-  personalDetails: DisplayPersonalDetails!
-}
-
-type DisplayMemberModulePermissions {
-  hasFamilySettings: Boolean!
-  hasFinanacial: Boolean!
-}
-
-type DisplayMember {
-  fullKey: String!
-  familyId: String!
-  email: String!
-  updatedAt: String!
-  createdAt: String!
-  personalDetails: DisplayPersonalDetails!
-  memberType: GTMemberType!
-  modulePermissions: DisplayMemberModulePermissions!
-}
-
-"""User's and characters member type"""
-enum GTMemberType {
-  AdultUser
-  ChildUser
 }
 
 type LoginDto {
@@ -142,57 +90,32 @@ type FamilyAllMembersDto {
   invitations: [InvitationDto!]!
 }
 
-type DisplayFamilyFamilyDetails {
-  name: String!
-}
-
-type DisplayFamily {
-  fullKey: String!
-  familyId: String!
-  createdAt: String!
-  updatedAt: String!
-  invitations: [DisplayInvitation!]!
-  members: [DisplayMember!]!
-  currentUser: DisplayMember!
-  familyDetails: DisplayFamilyFamilyDetails!
-}
-
 type Query {
-  verifySignUpEmail(email: String!): DisplayVerifyEmailResponse!
+  verifySignUpEmail(email: String!): VerifyEmailDto!
   getUserInvitation(token: String!): InvitationUserPersonalDetailsDto!
   getUserInitialAppState: InitialAppStateDto!
   getAllFamilyMembers: FamilyAllMembersDto!
-  getFamilyDisplay: DisplayFamily!
 }
 
 type Mutation {
-  createSignUpInvitation(input: InputCreateSignUpInvitation!): Boolean!
+  createSignUpInvitation(input: InvitationSignUpCreateInput!): Boolean!
   createUserInvitation(input: InvitationCreateInput!): InvitationDto!
   resendInvitation(email: String!): Boolean!
   cancelInvitation(email: String!): Boolean!
-  confirmSignUpInvitation(input: InputConfirmSignUpInvitation!): LoginDto!
+  confirmSignUpInvitation(input: InvitationSignUpConfirmInput!): LoginDto!
   confirmUserInvitation(input: InvitationUserConfirmInput!, token: String!): LoginDto!
   login(password: String!, email: String!): LoginDto!
 }
 
-input InputCreateSignUpInvitation {
+input InvitationSignUpCreateInput {
   email: String!
-  personalDetails: InputCreateSignUpInvitationPersonalDetails!
-  invitationDetails: InputCreateSignUpInvitationInvitationDetails!
-}
-
-input InputCreateSignUpInvitationPersonalDetails {
-  firstName: String!
-  middleName: String
-  lastName: String!
-  dob: String!
-  gender: GTGender!
-}
-
-input InputCreateSignUpInvitationInvitationDetails {
-  familyName: String!
-  inviterEmail: String!
   inviterName: String!
+  familyName: String!
+  firstName: String
+  middleName: String
+  lastName: String
+  dob: DateTime
+  gender: CTGender
 }
 
 input InvitationCreateInput {
@@ -207,19 +130,14 @@ input InvitationCreateInput {
   gender: CTGender
 }
 
-input InputConfirmSignUpInvitation {
+input InvitationSignUpConfirmInput {
   email: String!
-  security: InputConfrimSignUpInvitationSecurity!
-  personalDetails: InputCreateSignUpInvitationPersonalDetails!
-  invitationDetails: InputConfirmSignUpInvitationInvitationDetails!
-}
-
-input InputConfrimSignUpInvitationSecurity {
   password: String!
-}
-
-input InputConfirmSignUpInvitationInvitationDetails {
-  familyName: String!
+  firstName: String!
+  middleName: String
+  lastName: String!
+  dob: DateTime!
+  gender: CTGender!
   code: String!
 }
 

@@ -1,30 +1,48 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { omit } from 'lodash';
 
-import { ApiWebFamilyDisplay } from '@family-dashboard/fe-libs/api-graphql';
+import {
+  CTFamilyBaseData,
+  CTInvitationDisplayData,
+  CTUserBaseData,
+} from '@family-dashboard/global/types';
 
 export interface FamilyState {
-  data: Omit<ApiWebFamilyDisplay, 'currentUser'>;
+  data: CTFamilyBaseData;
+  invitations: CTInvitationDisplayData[];
+  users: CTUserBaseData[];
 }
+
+type SetFamilyMembersActionPaylod = Pick<FamilyState, 'invitations' | 'users'>;
+type SetInvitationsActionPayload = CTInvitationDisplayData[];
 
 const initialState: FamilyState = {
   data: {
-    familyId: '',
-    fullKey: '',
-    familyDetails: {
-      name: '',
-    },
-    members: [],
-    invitations: [],
+    name: '',
+    id: '',
   },
+  invitations: [],
+  users: [],
 };
 
 export const webStoreFamily = createSlice({
   name: 'family',
   initialState,
   reducers: {
-    setFamilyData: (family, action: PayloadAction<ApiWebFamilyDisplay>) => {
-      family.data = omit(action.payload, ['currentUser']);
+    setFamilyData: (family, action: PayloadAction<CTFamilyBaseData>) => {
+      family.data = action.payload;
+    },
+    setFamilyMembers: (
+      family,
+      action: PayloadAction<SetFamilyMembersActionPaylod>
+    ) => {
+      family.invitations = action.payload.invitations;
+      family.users = action.payload.users;
+    },
+    setInvitations: (
+      family,
+      action: PayloadAction<SetInvitationsActionPayload>
+    ) => {
+      family.invitations = action.payload;
     },
   },
 });

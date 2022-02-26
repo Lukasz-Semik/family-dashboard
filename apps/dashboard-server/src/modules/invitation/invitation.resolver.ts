@@ -7,41 +7,39 @@ import {
 } from '../../decorators/currentLoggedInUser.decorator';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
-  DisplayVerifyEmailResponse,
-  InputConfirmSignUpInvitation,
-  InputCreateSignUpInvitation,
   InvitationCreateInput,
   InvitationDto,
+  InvitationSignUpConfirmInput,
+  InvitationSignUpCreateInput,
   InvitationUserConfirmInput,
   InvitationUserPersonalDetailsDto,
   LoginDto,
+  VerifyEmailDto,
 } from '../../schema';
 import { serilizeUserInvitation } from '../../serializators/invitation.serializator';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { InvitationService } from './invitation.service';
-import { InvitationServiceV2 } from './invitation.servicev2';
 
 @Resolver(() => InvitationEntity)
 export class InvitationResolver {
   constructor(
     private readonly invitationService: InvitationService,
-    private readonly invitationServiceV2: InvitationServiceV2,
     private readonly authService: AuthService
   ) {}
 
-  @Query(() => DisplayVerifyEmailResponse)
+  @Query(() => VerifyEmailDto)
   async verifySignUpEmail(@Args('email') email: string) {
-    const result = await this.invitationServiceV2.verifyEmail(email);
+    const result = await this.invitationService.verifyEmail(email);
 
     return result;
   }
 
   @Mutation(() => Boolean)
   async createSignUpInvitation(
-    @Args('input') input: InputCreateSignUpInvitation
+    @Args('input') input: InvitationSignUpCreateInput
   ) {
-    return this.invitationServiceV2.createSignUpInvitation(input);
+    return this.invitationService.createSignUpInvitation(input);
   }
 
   @Mutation(() => InvitationDto)
@@ -69,17 +67,11 @@ export class InvitationResolver {
 
   @Mutation(() => LoginDto)
   async confirmSignUpInvitation(
-    @Args('input') input: InputConfirmSignUpInvitation
+    @Args('input') input: InvitationSignUpConfirmInput
   ) {
-    const records = await this.invitationServiceV2.confirmSignUpInvitation(
-      input
-    );
+    const user = await this.invitationService.confirmSignUpInvitation(input);
 
-    return this.authService.createToken(
-      records.member.email,
-      records.member.fullKey,
-      records.family.familyId
-    );
+    return this.authService.createToken(user.email, user.id, user.family.id);
   }
 
   @Mutation(() => LoginDto)

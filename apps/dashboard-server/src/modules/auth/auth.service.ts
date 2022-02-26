@@ -1,33 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 import { compare } from 'bcryptjs';
+import { Repository } from 'typeorm';
 
-import {
-  CTTokenDecoded,
-  GTMemberDBRecord,
-} from '@family-dashboard/global/types';
+import { CTTokenDecoded } from '@family-dashboard/global/types';
 
+import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
-import { AuthDB } from './auth.db';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly jwtService: JwtService,
-    private readonly authDB: AuthDB
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+    private readonly jwtService: JwtService
   ) {}
 
-  async validateMember(email: string, pass: string): Promise<GTMemberDBRecord> {
-    const member = await this.authDB.getMemberByEmail(email);
+  async validateUser(email: string, pass: string): Promise<UserEntity> {
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.family', 'family.id')
+      .where('user.email = :email', { email })
+      .getOne();
 
-    if (!member) {
+    if (!user) {
       return null;
     }
 
-    const isMatch = await compare(pass, member.security.password);
+    const isMatch = await compare(pass, user.password);
 
     if (isMatch) {
-      return member;
+      return user;
     }
 
     return null;
@@ -48,14 +52,12 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
-    const member = await this.validateMember(email, password);
+    const user = await this.validateUser(email, password);
 
-    if (!member) {
+    if (!user) {
       throwError('invalid login');
     }
 
-    const memberId = member.fullKey.split('#')[1];
-
-    return this.createToken(member.email, memberId, member.familyId);
+    return this.createToken(user.email, user.id, user.family.id);
   }
 }

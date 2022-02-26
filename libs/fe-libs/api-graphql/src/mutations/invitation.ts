@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const CreateSignUpInvitation = gql`
-  mutation CreateSignUpInvitation($input: InputCreateSignUpInvitation!) {
+  mutation CreateSignUpInvitation($input: InvitationSignUpCreateInput!) {
     createSignUpInvitation(input: $input)
   }
 `;
@@ -17,7 +17,7 @@ export const CreateUserInvitation = gql`
 `;
 
 export const ConfirmSignUpInvitation = gql`
-  mutation ConfirmSignUpInvitation($input: InputConfirmSignUpInvitation!) {
+  mutation ConfirmSignUpInvitation($input: InvitationSignUpConfirmInput!) {
     confirmSignUpInvitation(input: $input) {
       accessToken
     }
