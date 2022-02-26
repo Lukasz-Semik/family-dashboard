@@ -8,6 +8,7 @@ TODO:
 - add story for ButtonsFormGroup
 - exctract cache (when start more advanced api)
 - Typography (parallel with designs)
+- separate constants
 
 NOTES:
 - FUTURE: for future plans
@@ -15,4 +16,3 @@ NOTES:
 ARHICTECTURE:
 - restructure according to mobile:
  - convention to _hooks and do better with _dataHooks
-- make experiment for mongo

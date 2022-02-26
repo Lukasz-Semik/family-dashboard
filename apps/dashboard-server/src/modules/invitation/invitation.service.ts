@@ -24,6 +24,7 @@ import {
   VerifyEmailDto,
 } from '../../schema';
 import { AuthService } from '../auth/auth.service';
+import { InvitationDB } from './invitation.db';
 import {
   validateConfirmInvitationInput,
   validateCreateInvitationInput,
@@ -38,7 +39,8 @@ export class InvitationService {
     private readonly invitationRepository: Repository<InvitationEntity>,
     @InjectRepository(FamilyEntity)
     private readonly familyRepository: Repository<FamilyEntity>,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly invitationDb: InvitationDB
   ) {}
 
   private findFamily = async (familyId: string) =>
