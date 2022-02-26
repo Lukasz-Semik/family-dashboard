@@ -44,5 +44,5 @@ export class DisplayFamily implements GTFamilyDisplay {
   @Field(() => [DisplayInvitation]) invitations: GTInvitationDisplay[];
   @Field(() => [DisplayMember]) members: GTMemberDisplay[];
   @Field(() => DisplayMember) currentUser: GTMemberDisplay;
-  @Field(() => DisplayFamily) familyDetails: GTFamilyDetails;
+  @Field(() => DisplayFamilyFamilyDetails) familyDetails: GTFamilyDetails;
 }
