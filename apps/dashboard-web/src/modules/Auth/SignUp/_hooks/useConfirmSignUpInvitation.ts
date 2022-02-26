@@ -11,8 +11,6 @@ import {
   CTInvitationErrors,
   CTInvitationSignUpConfirmInput,
   CTLoginResponse,
-  GTGender,
-  GTInputConfirmSignUpInvitation,
 } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
@@ -28,7 +26,7 @@ export function useConfirmSignUpInvitation({
 }: Args) {
   const [confirmSignUpInvitationMutation, { loading }] = useMutation<
     { confirmSignUpInvitation: CTLoginResponse },
-    { input: GTInputConfirmSignUpInvitation }
+    { input: CTInvitationSignUpConfirmInput }
   >(ConfirmSignUpInvitation, {
     onCompleted: (responseData) => {
       sdkSetToSessionStorage(
@@ -54,6 +52,7 @@ export function useConfirmSignUpInvitation({
         code2,
         code3,
         gender,
+        familyName,
         ...rest
       } = values;
       const code = `${code0}${code1}${code2}${code3}`;
@@ -61,22 +60,10 @@ export function useConfirmSignUpInvitation({
       confirmSignUpInvitationMutation({
         variables: {
           input: {
-            email: rest.email,
-            invitationDetails: {
-              familyName: rest.familyName,
-              code,
-            },
-            security: {
-              password: rest.password,
-            },
-            personalDetails: {
-              firstName: rest.firstName,
-              middleName: rest.middleName,
-              lastName: rest.lastName,
-              dob: rest.dob,
-              // TODODB: fix type
-              gender: gender as unknown as GTGender,
-            },
+            ...rest,
+            code,
+            gender: gender as CTGender,
+            dob: dayjs(values.dob, FULL_DATE_FORMAT).toDate(),
           },
         },
       });

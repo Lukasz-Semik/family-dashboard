@@ -12,7 +12,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async validate(email: string, password: string): Promise<any> {
-    const user = await this.authService.validateMember(email, password);
+    const user = await this.authService.validateUser(email, password);
 
     if (!user) {
       throw new UnauthorizedException();

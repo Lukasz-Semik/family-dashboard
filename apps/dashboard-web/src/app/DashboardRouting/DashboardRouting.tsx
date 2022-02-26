@@ -6,7 +6,7 @@ import { webRoutes } from '@family-dashboard/global/const';
 
 import { Layout } from '../../layout/Layout';
 import { Dashboard } from '../../modules/Dashboard/Dashboard';
-import { useInitializeDashboard } from '../_hooks/useInitializeDashboard';
+import { useInitializeDashboard } from '../_dataHooks/useInitializeDashboard';
 import { FamilySettingsRouting } from '../FamilySettingsRouting/FamilySettingsRouting';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 

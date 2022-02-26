@@ -1,16 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ApiWebMemberDisplay } from '@family-dashboard/fe-libs/api-graphql';
-
-import { memberDisplayInitialValues } from '../store.utils';
+import {
+  CTGender,
+  CTMemberType,
+  CTUserBaseData,
+} from '@family-dashboard/global/types';
 
 export interface UserState {
-  data: ApiWebMemberDisplay;
+  data: CTUserBaseData;
 }
 
 const initialState: UserState = {
   data: {
-    ...memberDisplayInitialValues,
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    dob: '' as unknown as Date,
+    gender: '' as CTGender,
+    email: '',
+    id: '',
+    modulePermissions: [],
+    memberType: '' as CTMemberType,
   },
 };
 
@@ -18,7 +28,7 @@ export const webStoreUser = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserData: (user, action: PayloadAction<ApiWebMemberDisplay>) => {
+    setUserData: (user, action: PayloadAction<CTUserBaseData>) => {
       user.data = action.payload;
     },
   },

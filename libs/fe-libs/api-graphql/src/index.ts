@@ -1,7 +1,5 @@
 export * from './clientDashboardGraphql';
 
-export * from './family';
-
 export * from './mutations/invitation';
 export * from './mutations/login';
 
