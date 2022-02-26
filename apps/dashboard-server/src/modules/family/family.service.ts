@@ -1,7 +1,8 @@
-import { GTFamilyDisplay } from '@family-dashboard/global/types';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
+import { GTFamilyDisplay } from '@family-dashboard/global/types';
 
 import { FamilyEntity } from '../../entities/family.entity';
 import { throwError } from '../../helpers/throwError';

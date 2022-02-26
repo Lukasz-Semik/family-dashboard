@@ -48,10 +48,16 @@ export interface GTInvitationDBRecord {
   updatedAt: string;
 }
 
+export type GTInvitationDetailsDisplay = Omit<GTInvitationDetails, 'code'>;
 export interface GTInvitationDisplay {
   familyId: string;
   fullKey: string;
   email: string;
-  invitationDetails: Omit<GTInvitationDetails, 'code' | 'validTo'>;
+  invitationDetails: GTInvitationDetailsDisplay;
   personalDetails: GTPersonalDetails;
+}
+
+export interface GTInvitationFamilyDisplay
+  extends Omit<GTInvitationDisplay, 'invitationDetails'> {
+  invitationDetails: GTInvitationDetailsDisplay;
 }

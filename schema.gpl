@@ -66,6 +66,7 @@ type DisplayInvitationInvitationDetails {
   familyName: String!
   inviterEmail: String!
   inviterName: String!
+  validTo: String!
 }
 
 type DisplayInvitation {
@@ -141,6 +142,10 @@ type FamilyAllMembersDto {
   invitations: [InvitationDto!]!
 }
 
+type DisplayFamilyFamilyDetails {
+  name: String!
+}
+
 type DisplayFamily {
   fullKey: String!
   familyId: String!
@@ -149,7 +154,7 @@ type DisplayFamily {
   invitations: [DisplayInvitation!]!
   members: [DisplayMember!]!
   currentUser: DisplayMember!
-  familyDetails: DisplayFamily!
+  familyDetails: DisplayFamilyFamilyDetails!
 }
 
 type Query {

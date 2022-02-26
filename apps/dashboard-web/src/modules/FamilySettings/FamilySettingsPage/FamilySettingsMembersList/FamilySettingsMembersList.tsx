@@ -11,8 +11,8 @@ import {
   ListStandardItemColumn,
   ListStandardNoItemsMessage,
 } from '@family-dashboard/design-system';
+import { ApiWebMemberDisplay } from '@family-dashboard/fe-libs/api-graphql';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
-import { CTUserBaseData } from '@family-dashboard/global/types';
 import {
   useSelectFamily,
   useSelectUser,
@@ -37,8 +37,8 @@ export function FamilySettingsMembersList() {
         <FormattedMessage id="familySettings.familyMembers" />
       </StyledListTitle>
 
-      <ListStandard<CTUserBaseData>
-        items={[user.data, ...family.users]}
+      <ListStandard<ApiWebMemberDisplay>
+        items={[user.data, ...family.data.members]}
         renderHeaders={() => (
           <ListStandardHeadersWrapper>
             <ListStandardHeaderColumn width="40%">
@@ -61,12 +61,14 @@ export function FamilySettingsMembersList() {
                     <StyledIconWrapper>
                       <IconProgress />
                     </StyledIconWrapper>
-                    {item.firstName} {item.middleName?.charAt(0)}{' '}
-                    {item.lastName}
+                    {item.personalDetails.firstName}{' '}
+                    {item.personalDetails.middleName?.charAt(0)}{' '}
+                    {item.personalDetails.lastName}
                   </StyledContentWithIconWrapper>
                 </ListStandardItemColumn>
 
                 <ListStandardItemColumn width="30%">
+                  {/* TODO: translation! */}
                   Adult user
                 </ListStandardItemColumn>
 
@@ -77,7 +79,7 @@ export function FamilySettingsMembersList() {
                     <StyledDescriptionColumnLabel>
                       <FormattedMessage id="shared.birthday" />:{' '}
                     </StyledDescriptionColumnLabel>
-                    {dayjs(item.dob).format(FULL_DATE_FORMAT)}
+                    {dayjs(item.personalDetails.dob).format(FULL_DATE_FORMAT)}
                   </StyledDescriptionColumnContent>
                 </ListStandardItemColumn>
 

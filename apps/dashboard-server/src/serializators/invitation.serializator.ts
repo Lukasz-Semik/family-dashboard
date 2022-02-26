@@ -45,6 +45,7 @@ export const serializeInvitationV2 = (
     familyName: invitationDBRecord.invitationDetails.familyName,
     inviterEmail: invitationDBRecord.invitationDetails.inviterEmail,
     inviterName: invitationDBRecord.invitationDetails.familyName,
+    validTo: invitationDBRecord.invitationDetails.validTo,
   },
   personalDetails: invitationDBRecord.personalDetails,
 });
