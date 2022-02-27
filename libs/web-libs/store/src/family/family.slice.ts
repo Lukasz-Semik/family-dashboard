@@ -26,6 +26,12 @@ export const webStoreFamily = createSlice({
     setFamilyData: (family, action: PayloadAction<ApiWebFamilyDisplay>) => {
       family.data = omit(action.payload, ['currentUser']);
     },
+    setFamilyDataInvitations: (
+      family,
+      action: PayloadAction<ApiWebFamilyDisplay['invitations']>
+    ) => {
+      family.data.invitations = action.payload;
+    },
   },
 });
 

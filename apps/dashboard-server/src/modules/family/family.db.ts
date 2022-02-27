@@ -57,7 +57,7 @@ export class FamilyDB {
     if (isEmpty(familyData)) {
       return null;
     }
-
+    console.log(currentUserId);
     familyData.forEach((item) => {
       if (item.fullKey.includes(FDFamilyRecordType.Family)) {
         const familyRecord = item as GTFamilyDBRecord;

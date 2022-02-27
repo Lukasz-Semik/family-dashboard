@@ -7,11 +7,11 @@ import {
 } from '../../decorators/currentLoggedInUser.decorator';
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
+  DisplayInvitation,
   DisplayVerifyEmailResponse,
   InputConfirmSignUpInvitation,
   InputCreateSignUpInvitation,
-  InvitationCreateInput,
-  InvitationDto,
+  InputCreateUserInvitation,
   InvitationUserConfirmInput,
   InvitationUserPersonalDetailsDto,
   LoginDto,
@@ -44,29 +44,6 @@ export class InvitationResolver {
     return this.invitationServiceV2.createSignUpInvitation(input);
   }
 
-  @Mutation(() => InvitationDto)
-  @UseGuards(JwtAuthGuard)
-  async createUserInvitation(
-    @Args('input') input: InvitationCreateInput,
-    @CurrentLoggedInUser() user: CurrentLoggedInUserData
-  ) {
-    return this.invitationService.createUserInvitation(input, user.familyId);
-  }
-
-  @Mutation(() => Boolean)
-  async resendInvitation(@Args('email') email: string) {
-    return this.invitationService.resendInvitation(email);
-  }
-
-  @Mutation(() => Boolean)
-  @UseGuards(JwtAuthGuard)
-  async cancelInvitation(
-    @Args('email') email: string,
-    @CurrentLoggedInUser() user: CurrentLoggedInUserData
-  ) {
-    return this.invitationService.cancelUserInvitation(email, user.familyId);
-  }
-
   @Mutation(() => LoginDto)
   async confirmSignUpInvitation(
     @Args('input') input: InputConfirmSignUpInvitation
@@ -80,6 +57,30 @@ export class InvitationResolver {
       records.member.fullKey,
       records.family.familyId
     );
+  }
+
+  @Mutation(() => DisplayInvitation)
+  @UseGuards(JwtAuthGuard)
+  async createUserInvitation(
+    @Args('input') input: InputCreateUserInvitation,
+    @CurrentLoggedInUser() user: CurrentLoggedInUserData
+  ) {
+    return this.invitationServiceV2.createUserInvitation(user.familyId, input);
+  }
+
+  // TODO, used on fe?
+  @Mutation(() => Boolean)
+  async resendInvitation(@Args('email') email: string) {
+    return this.invitationService.resendInvitation(email);
+  }
+
+  @Mutation(() => Boolean)
+  @UseGuards(JwtAuthGuard)
+  async cancelInvitation(
+    @Args('fullKey') fullKey: string,
+    @CurrentLoggedInUser() user: CurrentLoggedInUserData
+  ) {
+    return this.invitationServiceV2.cancelInvitation(user.familyId, fullKey);
   }
 
   @Mutation(() => LoginDto)

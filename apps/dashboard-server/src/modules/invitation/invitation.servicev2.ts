@@ -3,6 +3,7 @@ import * as dayjs from 'dayjs';
 
 import {
   CTInvitationErrors,
+  GTInvitationDisplay,
   GTMemberType,
   GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
@@ -13,7 +14,9 @@ import {
   DisplayVerifyEmailResponse,
   InputConfirmSignUpInvitation,
   InputCreateSignUpInvitation,
+  InputCreateUserInvitation,
 } from '../../schema';
+import { serializeInvitationV2 } from '../../serializators/invitation.serializator';
 import { InvitationDB } from './invitation.db';
 import {
   buildFamilyAndMemberDBPayloads,
@@ -27,6 +30,10 @@ export class InvitationServiceV2 {
 
   private getIsInvitationDeprecated(validTo?: string) {
     return dayjs.utc().isAfter(dayjs.utc(validTo));
+  }
+
+  async cancelInvitation(familyId: string, fullKey: string) {
+    return this.invitationDb.deleteInvitation(familyId, fullKey);
   }
 
   async verifyEmail(email: string): Promise<DisplayVerifyEmailResponse> {
@@ -80,7 +87,7 @@ export class InvitationServiceV2 {
     const code = generateNumericCode(4);
 
     try {
-      const response = await this.invitationDb.createInvitation(
+      await this.invitationDb.createInvitation(
         buildInvitationDBPayload({
           familyId: undefined,
           email: input.email,
@@ -138,4 +145,31 @@ export class InvitationServiceV2 {
       throwError(err.message);
     }
   }
+
+  async createUserInvitation(
+    familyId: string,
+    input: InputCreateUserInvitation
+  ): Promise<GTInvitationDisplay> {
+    const invitation = buildInvitationDBPayload({
+      familyId: familyId,
+      email: input.email,
+      memberType: input.memberType,
+      modulePermissions: input.modulePermissions,
+      personalDetails: {
+        ...input.personalDetails,
+        dob: dayjs(input.personalDetails.dob).utc().toISOString(),
+      },
+      invitationDetails: input.invitationDetails,
+      code: 'validated',
+    });
+
+    try {
+      await this.invitationDb.createInvitation(invitation);
+
+      return serializeInvitationV2(invitation);
+    } catch (err) {
+      throwError(err.message);
+    }
+  }
+  //
 }

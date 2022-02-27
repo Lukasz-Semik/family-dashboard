@@ -28,5 +28,5 @@ export interface ApiWebFamilyDisplay
   extends Pick<GTFamilyDisplay, 'fullKey' | 'familyId' | 'familyDetails'> {
   currentUser: ApiWebMemberDisplay;
   members: ApiWebMemberDisplay[];
-  invitations: ApiWebInvitationDetailsDisplay[];
+  invitations: ApiWebInvitationDisplay[];
 }
