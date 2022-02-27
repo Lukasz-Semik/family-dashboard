@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 
+import { splitHashKey } from '@family-dashboard/global/sdk';
 import {
   CTTokenDecoded,
   GTMemberDBRecord,
@@ -33,7 +34,9 @@ export class AuthService {
     return null;
   }
 
-  createToken(email: string, userId: string, familyId: string) {
+  createToken(email: string, userFullKey: string, familyId: string) {
+    const userId = splitHashKey(userFullKey).data;
+
     const payload = { email, sub: userId, familyId };
 
     return {
@@ -54,8 +57,6 @@ export class AuthService {
       throwError('invalid login');
     }
 
-    const memberId = member.fullKey.split('#')[1];
-
-    return this.createToken(member.email, memberId, member.familyId);
+    return this.createToken(member.email, member.fullKey, member.familyId);
   }
 }

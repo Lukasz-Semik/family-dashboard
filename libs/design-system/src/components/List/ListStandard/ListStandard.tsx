@@ -14,7 +14,9 @@ export function ListStandard<ItemType>({
   return (
     <StyledList>
       {renderHeaders?.()}
-      {items.map((item) => renderItem(item))}
+      {items.map((item) => (
+        <div key={String(item)}>{renderItem(item)}</div>
+      ))}
     </StyledList>
   );
 }

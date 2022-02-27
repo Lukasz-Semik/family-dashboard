@@ -167,21 +167,21 @@ type Query {
 
 type Mutation {
   createSignUpInvitation(input: InputCreateSignUpInvitation!): Boolean!
-  createUserInvitation(input: InvitationCreateInput!): InvitationDto!
-  resendInvitation(email: String!): Boolean!
-  cancelInvitation(email: String!): Boolean!
   confirmSignUpInvitation(input: InputConfirmSignUpInvitation!): LoginDto!
+  createUserInvitation(input: InputCreateUserInvitation!): DisplayInvitation!
+  resendInvitation(email: String!): Boolean!
+  cancelInvitation(fullKey: String!): Boolean!
   confirmUserInvitation(input: InvitationUserConfirmInput!, token: String!): LoginDto!
   login(password: String!, email: String!): LoginDto!
 }
 
 input InputCreateSignUpInvitation {
   email: String!
-  personalDetails: InputCreateSignUpInvitationPersonalDetails!
-  invitationDetails: InputCreateSignUpInvitationInvitationDetails!
+  personalDetails: InputCreateInvitationPersonalDetails!
+  invitationDetails: InputCreateInvitationInvitationDetails!
 }
 
-input InputCreateSignUpInvitationPersonalDetails {
+input InputCreateInvitationPersonalDetails {
   firstName: String!
   middleName: String
   lastName: String!
@@ -189,28 +189,16 @@ input InputCreateSignUpInvitationPersonalDetails {
   gender: GTGender!
 }
 
-input InputCreateSignUpInvitationInvitationDetails {
+input InputCreateInvitationInvitationDetails {
   familyName: String!
   inviterEmail: String!
   inviterName: String!
 }
 
-input InvitationCreateInput {
-  email: String!
-  inviterName: String!
-  memberType: CTMemberType!
-  modulePermissions: [CTUserModulePermission!]!
-  firstName: String
-  middleName: String
-  lastName: String
-  dob: DateTime
-  gender: CTGender
-}
-
 input InputConfirmSignUpInvitation {
   email: String!
   security: InputConfrimSignUpInvitationSecurity!
-  personalDetails: InputCreateSignUpInvitationPersonalDetails!
+  personalDetails: InputCreateInvitationPersonalDetails!
   invitationDetails: InputConfirmSignUpInvitationInvitationDetails!
 }
 
@@ -221,6 +209,19 @@ input InputConfrimSignUpInvitationSecurity {
 input InputConfirmSignUpInvitationInvitationDetails {
   familyName: String!
   code: String!
+}
+
+input InputCreateUserInvitation {
+  email: String!
+  personalDetails: InputCreateInvitationPersonalDetails!
+  invitationDetails: InputCreateInvitationInvitationDetails!
+  memberType: GTMemberType!
+  modulePermissions: InputCreateUserInvitationModulePermissions!
+}
+
+input InputCreateUserInvitationModulePermissions {
+  hasFamilySettings: Boolean!
+  hasFinanacial: Boolean!
 }
 
 input InvitationUserConfirmInput {

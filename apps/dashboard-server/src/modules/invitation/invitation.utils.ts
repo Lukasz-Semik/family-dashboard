@@ -9,17 +9,17 @@ import {
 import { buildHashKey } from '@family-dashboard/global/sdk';
 import {
   GTFamilyDBRecord,
+  GTInputConfirmSignUpInvitation,
   GTInvitationDBRecord,
   GTInvitationDetails,
   GTMemberDBRecord,
   GTMemberModulePermissions,
+  GTMemberSecurity,
   GTMemberType,
   GTPersonalDetails,
 } from '@family-dashboard/global/types';
 
-import { InputConfirmSignUpInvitation } from '../../schema';
-
-interface RawPayload {
+interface RawPayloadInvitation {
   familyId?: string;
   email: string;
   memberType: GTMemberType;
@@ -30,7 +30,7 @@ interface RawPayload {
 }
 
 export const buildInvitationDBPayload = (
-  rawPayload: RawPayload
+  rawPayload: RawPayloadInvitation
 ): GTInvitationDBRecord => {
   const date = buildHashKey(
     FDFamilyRecordType.Invitation,
@@ -56,13 +56,53 @@ export const buildInvitationDBPayload = (
   return record;
 };
 
+interface RawPaylodMember {
+  email: string;
+  security: GTMemberSecurity;
+  personalDetails: GTPersonalDetails;
+  memberType: GTMemberType;
+  modulePermissions: GTMemberModulePermissions;
+}
+
+export const buildMemberDBPayload = async (
+  familyId: string,
+  rawPayload: RawPaylodMember
+): Promise<GTMemberDBRecord> => {
+  const hashedPassword = await hash(rawPayload.security.password, 10);
+  const memberDate = buildHashKey(
+    FDFamilyRecordType.Member,
+    dayjs().utc().toISOString()
+  );
+
+  const memberId = uuidv4();
+
+  const member: GTMemberDBRecord = {
+    familyId,
+    fullKey: buildHashKey(FDFamilyRecordType.Member, memberId),
+    security: {
+      password: hashedPassword,
+    },
+    personalDetails: rawPayload.personalDetails,
+    email: rawPayload.email,
+    memberType: GTMemberType.AdultUser,
+    modulePermissions: {
+      hasFamilySettings: rawPayload.modulePermissions.hasFamilySettings,
+      hasFinanacial: rawPayload.modulePermissions.hasFinanacial,
+    },
+    updatedAt: memberDate,
+    createdAt: memberDate,
+  };
+
+  return member;
+};
+
 export interface FamilyAndMemberDBPayloads {
   family: GTFamilyDBRecord;
   member: GTMemberDBRecord;
 }
 
 export const buildFamilyAndMemberDBPayloads = async (
-  input: InputConfirmSignUpInvitation
+  input: GTInputConfirmSignUpInvitation
 ): Promise<FamilyAndMemberDBPayloads> => {
   const familyDate = buildHashKey(
     FDFamilyRecordType.Family,
@@ -81,30 +121,14 @@ export const buildFamilyAndMemberDBPayloads = async (
     updatedAt: familyDate,
   };
 
-  const hashedPassword = await hash(input.security.password, 10);
-  const memberDate = buildHashKey(
-    FDFamilyRecordType.Member,
-    dayjs().utc().toISOString()
-  );
-
-  const memberId = uuidv4();
-
-  const member: GTMemberDBRecord = {
-    familyId,
-    fullKey: buildHashKey(FDFamilyRecordType.Member, memberId),
-    security: {
-      password: hashedPassword,
-    },
-    personalDetails: input.personalDetails,
-    email: input.email,
+  const member = await buildMemberDBPayload(familyId, {
+    ...input,
     memberType: GTMemberType.AdultUser,
     modulePermissions: {
       hasFamilySettings: true,
       hasFinanacial: true,
     },
-    updatedAt: memberDate,
-    createdAt: memberDate,
-  };
+  });
 
   return {
     family,

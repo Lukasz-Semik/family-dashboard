@@ -10,6 +10,7 @@ export const GetFamilyDisplay = gql`
       }
       currentUser {
         fullKey
+        email
         memberType
         modulePermissions {
           hasFinanacial
@@ -25,6 +26,7 @@ export const GetFamilyDisplay = gql`
       }
       members {
         fullKey
+        email
         memberType
         modulePermissions {
           hasFinanacial

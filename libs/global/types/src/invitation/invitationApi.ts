@@ -1,5 +1,9 @@
 import { GTMemberSecurity } from '../member/member';
-import { GTPersonalDetails } from '../misc/misc';
+import {
+  GTMemberModulePermissions,
+  GTMemberType,
+  GTPersonalDetails,
+} from '../misc/misc';
 import { CTUserPersonalDetails } from '../user/user';
 import { GTInvitationDetails } from './invitation';
 import { CTInvitationBaseData } from './invitation';
@@ -76,4 +80,10 @@ export interface GTInputConfirmSignUpInvitation {
     GTInvitationDetails,
     'validTo' | 'inviterEmail' | 'inviterName'
   >;
+}
+
+export interface GTInputCreateUserInvitation
+  extends GTInputCreateSignUpInvitation {
+  memberType: GTMemberType;
+  modulePermissions: GTMemberModulePermissions;
 }
