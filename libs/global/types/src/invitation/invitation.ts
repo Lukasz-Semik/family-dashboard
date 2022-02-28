@@ -1,4 +1,8 @@
-import { GTMemberModulePermissions, GTMemberType, GTPersonalDetails } from '..';
+import {
+  GTMemberType,
+  GTModulePermissionsDisplay,
+  GTPersonalDetailsDisplay,
+} from '../member/member';
 import {
   CTMemberType,
   CTUserModulePermission,
@@ -28,7 +32,7 @@ export interface CTInvitationUserPersonalDetailsData
 
 // V2
 
-export interface GTInvitationDetails {
+export interface GTInvitationDetailsDBRecord {
   inviterEmail: string;
   code: string | 'verified';
   inviterName: string;
@@ -41,23 +45,22 @@ export interface GTInvitationDBRecord {
   fullKey: string;
   email: string;
   memberType: GTMemberType;
-  modulePermissions: GTMemberModulePermissions;
-  invitationDetails: GTInvitationDetails;
-  personalDetails: GTPersonalDetails;
+  modulePermissions: GTModulePermissionsDisplay;
+  invitationDetails: GTInvitationDetailsDBRecord;
+  personalDetails: GTPersonalDetailsDisplay;
   createdAt: string;
   updatedAt: string;
 }
 
-export type GTInvitationDetailsDisplay = Omit<GTInvitationDetails, 'code'>;
+export type GTInvitationDetailsDisplay = Omit<
+  GTInvitationDetailsDBRecord,
+  'code'
+>;
+
 export interface GTInvitationDisplay {
   familyId: string;
   fullKey: string;
   email: string;
   invitationDetails: GTInvitationDetailsDisplay;
-  personalDetails: GTPersonalDetails;
-}
-
-export interface GTInvitationFamilyDisplay
-  extends Omit<GTInvitationDisplay, 'invitationDetails'> {
-  invitationDetails: GTInvitationDetailsDisplay;
+  personalDetails: GTPersonalDetailsDisplay;
 }

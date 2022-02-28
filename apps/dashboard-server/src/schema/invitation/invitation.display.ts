@@ -8,7 +8,7 @@ import {
   CTVerifyEmailResponseStatus,
   GTInvitationDetailsDisplay,
   GTInvitationDisplay,
-  GTPersonalDetails,
+  GTPersonalDetailsDisplay,
   GTVerifyEmailResponse,
   GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
@@ -69,5 +69,5 @@ export class DisplayInvitation implements GTInvitationDisplay {
   @Field(() => DisplayInvitationInvitationDetails)
   readonly invitationDetails: GTInvitationDetailsDisplay;
   @Field(() => DisplayPersonalDetails)
-  readonly personalDetails: GTPersonalDetails;
+  readonly personalDetails: GTPersonalDetailsDisplay;
 }

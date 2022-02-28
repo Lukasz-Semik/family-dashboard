@@ -1,12 +1,15 @@
-import { GTMemberSecurity } from '../member/member';
 import {
-  GTMemberModulePermissions,
+  GTMemberSecurityDBRecord,
   GTMemberType,
-  GTPersonalDetails,
-} from '../misc/misc';
+  GTModulePermissionsDisplay,
+  GTPersonalDetailsDisplay,
+} from '../member/member';
 import { CTUserPersonalDetails } from '../user/user';
-import { GTInvitationDetails } from './invitation';
-import { CTInvitationBaseData } from './invitation';
+import {
+  CTInvitationBaseData,
+  GTInvitationDetailsDBRecord,
+  GTInvitationDetailsDisplay,
+} from './invitation';
 
 export enum CTVerifyEmailResponseStatus {
   Success = 'Success',
@@ -66,24 +69,24 @@ export interface GTVerifyEmailResponse {
   inviterName?: string;
 }
 
-export interface GTInputCreateSignUpInvitation {
+export interface GTCreateSignUpInvitationInput {
   email: string;
-  personalDetails: GTPersonalDetails;
-  invitationDetails: Omit<GTInvitationDetails, 'validTo' | 'code'>;
+  personalDetails: GTPersonalDetailsDisplay;
+  invitationDetails: Omit<GTInvitationDetailsDBRecord, 'validTo' | 'code'>;
 }
 
-export interface GTInputConfirmSignUpInvitation {
+export interface GTConfirmSignUpInvitationInput {
   email: string;
-  security: GTMemberSecurity;
-  personalDetails: GTPersonalDetails;
+  security: GTMemberSecurityDBRecord;
+  personalDetails: GTPersonalDetailsDisplay;
   invitationDetails: Omit<
-    GTInvitationDetails,
+    GTInvitationDetailsDisplay,
     'validTo' | 'inviterEmail' | 'inviterName'
   >;
 }
 
-export interface GTInputCreateUserInvitation
-  extends GTInputCreateSignUpInvitation {
+export interface GTCreateUserInvitationInput
+  extends GTCreateSignUpInvitationInput {
   memberType: GTMemberType;
-  modulePermissions: GTMemberModulePermissions;
+  modulePermissions: GTModulePermissionsDisplay;
 }

@@ -8,14 +8,14 @@ export interface CTFamilyBaseData {
 
 // V2
 
-export interface GTFamilyDetails {
+export interface GTFamilyDetailsDBRecord {
   name: string;
 }
 
 export interface GTFamilyDBRecord {
   familyId: string;
   fullKey: string;
-  familyDetails: GTFamilyDetails;
+  familyDetails: GTFamilyDetailsDBRecord;
   createdAt: string;
   updatedAt: string;
 }

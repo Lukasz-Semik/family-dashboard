@@ -2,16 +2,16 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
   GTMemberDisplay,
-  GTMemberModulePermissions,
+  GTModulePermissionsDisplay,
   GTMemberType,
-  GTPersonalDetails,
+  GTPersonalDetailsDisplay,
 } from '@family-dashboard/global/types';
 
 import { DisplayPersonalDetails } from '../misc/misc.display';
 
 @ObjectType()
 export class DisplayMemberModulePermissions
-  implements GTMemberModulePermissions
+  implements GTModulePermissionsDisplay
 {
   @Field(() => Boolean) readonly hasFamilySettings: boolean;
   @Field(() => Boolean) readonly hasFinanacial: boolean;
@@ -25,8 +25,8 @@ export class DisplayMember implements GTMemberDisplay {
   @Field(() => String) readonly updatedAt: string;
   @Field(() => String) readonly createdAt: string;
   @Field(() => DisplayPersonalDetails)
-  readonly personalDetails: GTPersonalDetails;
+  readonly personalDetails: GTPersonalDetailsDisplay;
   @Field(() => GTMemberType) readonly memberType: GTMemberType;
   @Field(() => DisplayMemberModulePermissions)
-  readonly modulePermissions: GTMemberModulePermissions;
+  readonly modulePermissions: GTModulePermissionsDisplay;
 }

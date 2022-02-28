@@ -11,7 +11,7 @@ import {
   ListStandardItemColumn,
   ListStandardNoItemsMessage,
 } from '@family-dashboard/design-system';
-import { ApiWebMemberDisplay } from '@family-dashboard/fe-libs/api-graphql';
+import { ApiMemberDisplay } from '@family-dashboard/fe-libs/api-graphql';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import {
   useSelectFamily,
@@ -37,7 +37,7 @@ export function FamilySettingsMembersList() {
         <FormattedMessage id="familySettings.familyMembers" />
       </StyledListTitle>
 
-      <ListStandard<ApiWebMemberDisplay>
+      <ListStandard<ApiMemberDisplay>
         items={[user.data, ...family.data.members]}
         renderHeaders={() => (
           <ListStandardHeadersWrapper>

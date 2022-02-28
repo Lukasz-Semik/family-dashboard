@@ -6,7 +6,7 @@ import { showErrorToast } from '@family-dashboard/design-system';
 import { CreateSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import {
   GTGender,
-  GTInputCreateSignUpInvitation,
+  GTCreateSignUpInvitationInput,
 } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
@@ -14,7 +14,7 @@ import { Values } from '../SignUp.types';
 export function useCreateSignUpInvitation() {
   const [createSignUpInvitationMutation] = useMutation<
     { createSignUpInvitation: boolean },
-    { input: GTInputCreateSignUpInvitation }
+    { input: GTCreateSignUpInvitationInput }
   >(CreateSignUpInvitation, {
     onError: () =>
       showErrorToast(

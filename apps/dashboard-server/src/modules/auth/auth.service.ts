@@ -4,8 +4,8 @@ import { compare } from 'bcryptjs';
 
 import { splitHashKey } from '@family-dashboard/global/sdk';
 import {
-  CTTokenDecoded,
   GTMemberDBRecord,
+  GTTokenDecoded,
 } from '@family-dashboard/global/types';
 
 import { throwError } from '../../helpers/throwError';
@@ -47,7 +47,7 @@ export class AuthService {
   decodeToken(token: string) {
     const data = this.jwtService.decode(token);
 
-    return data as CTTokenDecoded;
+    return data as GTTokenDecoded;
   }
 
   async login(email: string, password: string) {

@@ -12,7 +12,7 @@ import {
   CTInvitationSignUpConfirmInput,
   CTLoginResponse,
   GTGender,
-  GTInputConfirmSignUpInvitation,
+  GTConfirmSignUpInvitationInput,
 } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
@@ -28,7 +28,7 @@ export function useConfirmSignUpInvitation({
 }: Args) {
   const [confirmSignUpInvitationMutation, { loading }] = useMutation<
     { confirmSignUpInvitation: CTLoginResponse },
-    { input: GTInputConfirmSignUpInvitation }
+    { input: GTConfirmSignUpInvitationInput }
   >(ConfirmSignUpInvitation, {
     onCompleted: (responseData) => {
       sdkSetToSessionStorage(

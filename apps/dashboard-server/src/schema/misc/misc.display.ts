@@ -1,9 +1,12 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { GTGender, GTPersonalDetails } from '@family-dashboard/global/types';
+import {
+  GTGender,
+  GTPersonalDetailsDisplay,
+} from '@family-dashboard/global/types';
 
 @ObjectType()
-export class DisplayPersonalDetails implements GTPersonalDetails {
+export class DisplayPersonalDetails implements GTPersonalDetailsDisplay {
   @Field(() => String) readonly firstName: string;
   @Field(() => String, { nullable: true }) readonly middleName?: string;
   @Field(() => String) readonly lastName: string;
