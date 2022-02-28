@@ -6,14 +6,14 @@ import { useMutation } from '@apollo/client';
 
 import { showErrorToast } from '@family-dashboard/design-system';
 import {
-  ApiWebInvitationDisplay,
+  ApiInvitationDisplay,
   CreateUserInvitation,
 } from '@family-dashboard/fe-libs/api-graphql';
 import { webRoutes } from '@family-dashboard/global/const';
 import {
   CTInvitationErrors,
   GTGender,
-  GTInputCreateUserInvitation,
+  GTCreateUserInvitationInput,
   GTMemberType,
 } from '@family-dashboard/global/types';
 import {
@@ -36,9 +36,9 @@ export function useCreateUserInvitation({ closeModal }: Args) {
 
   const [createUserInvitationMutation, { loading }] = useMutation<
     {
-      createUserInvitation: ApiWebInvitationDisplay;
+      createUserInvitation: ApiInvitationDisplay;
     },
-    { input: GTInputCreateUserInvitation }
+    { input: GTCreateUserInvitationInput }
   >(CreateUserInvitation, {
     onCompleted: (responseData) => {
       console.log(responseData);

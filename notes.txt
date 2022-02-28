@@ -16,3 +16,10 @@ NOTES:
 ARHICTECTURE:
 - restructure according to mobile:
  - convention to _hooks and do better with _dataHooks
+
+TYPES:
+- GTNameBase -> the most base and full db record TYPES
+- GTNameDisplay -> data exposed by backend api
+- GTNameInput -> data required by backend api
+
+- ADNameDisplay -> data wanted by dashboard api

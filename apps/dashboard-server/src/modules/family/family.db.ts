@@ -9,7 +9,7 @@ import {
 import { splitHashKey } from '@family-dashboard/global/sdk';
 import {
   GTFamilyDBRecord,
-  GTFamilyDetails,
+  GTFamilyDetailsDBRecord,
   GTFamilyDisplay,
   GTInvitationDBRecord,
   GTMemberDBRecord,
@@ -43,7 +43,7 @@ export class FamilyDB {
       createdAt: '',
       updatedAt: '',
       currentUser: {} as GTMemberDisplay,
-      familyDetails: {} as GTFamilyDetails,
+      familyDetails: {} as GTFamilyDetailsDBRecord,
       invitations: [],
       members: [],
     };

@@ -3,7 +3,7 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {
   CTFamilyAllMembersResponse,
   CTFamilyBaseData,
-  GTFamilyDetails,
+  GTFamilyDetailsDBRecord,
   GTFamilyDisplay,
   GTInvitationDisplay,
   GTMemberDisplay,
@@ -31,7 +31,7 @@ export class FamilyAllMembersDto implements CTFamilyAllMembersResponse {
 
 // V2
 @ObjectType()
-export class DisplayFamilyFamilyDetails implements GTFamilyDetails {
+export class DisplayFamilyFamilyDetails implements GTFamilyDetailsDBRecord {
   @Field(() => String) name: string;
 }
 
@@ -44,5 +44,6 @@ export class DisplayFamily implements GTFamilyDisplay {
   @Field(() => [DisplayInvitation]) invitations: GTInvitationDisplay[];
   @Field(() => [DisplayMember]) members: GTMemberDisplay[];
   @Field(() => DisplayMember) currentUser: GTMemberDisplay;
-  @Field(() => DisplayFamilyFamilyDetails) familyDetails: GTFamilyDetails;
+  @Field(() => DisplayFamilyFamilyDetails)
+  familyDetails: GTFamilyDetailsDBRecord;
 }

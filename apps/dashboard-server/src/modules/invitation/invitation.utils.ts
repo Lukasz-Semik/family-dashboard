@@ -9,23 +9,23 @@ import {
 import { buildHashKey } from '@family-dashboard/global/sdk';
 import {
   GTFamilyDBRecord,
-  GTInputConfirmSignUpInvitation,
+  GTConfirmSignUpInvitationInput,
   GTInvitationDBRecord,
-  GTInvitationDetails,
+  GTInvitationDetailsDBRecord,
   GTMemberDBRecord,
-  GTMemberModulePermissions,
-  GTMemberSecurity,
+  GTModulePermissionsDisplay,
+  GTMemberSecurityDBRecord,
   GTMemberType,
-  GTPersonalDetails,
+  GTPersonalDetailsDisplay,
 } from '@family-dashboard/global/types';
 
 interface RawPayloadInvitation {
   familyId?: string;
   email: string;
   memberType: GTMemberType;
-  modulePermissions: GTMemberModulePermissions;
-  personalDetails: GTPersonalDetails;
-  invitationDetails: Omit<GTInvitationDetails, 'code' | 'validTo'>;
+  modulePermissions: GTModulePermissionsDisplay;
+  personalDetails: GTPersonalDetailsDisplay;
+  invitationDetails: Omit<GTInvitationDetailsDBRecord, 'code' | 'validTo'>;
   code: string;
 }
 
@@ -58,10 +58,10 @@ export const buildInvitationDBPayload = (
 
 interface RawPaylodMember {
   email: string;
-  security: GTMemberSecurity;
-  personalDetails: GTPersonalDetails;
+  security: GTMemberSecurityDBRecord;
+  personalDetails: GTPersonalDetailsDisplay;
   memberType: GTMemberType;
-  modulePermissions: GTMemberModulePermissions;
+  modulePermissions: GTModulePermissionsDisplay;
 }
 
 export const buildMemberDBPayload = async (
@@ -102,7 +102,7 @@ export interface FamilyAndMemberDBPayloads {
 }
 
 export const buildFamilyAndMemberDBPayloads = async (
-  input: GTInputConfirmSignUpInvitation
+  input: GTConfirmSignUpInvitationInput
 ): Promise<FamilyAndMemberDBPayloads> => {
   const familyDate = buildHashKey(
     FDFamilyRecordType.Family,

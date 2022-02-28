@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { omit } from 'lodash';
 
-import { ApiWebFamilyDisplay } from '@family-dashboard/fe-libs/api-graphql';
+import { ApiFamilyDisplay } from '@family-dashboard/fe-libs/api-graphql';
 
 export interface FamilyState {
-  data: Omit<ApiWebFamilyDisplay, 'currentUser'>;
+  data: Omit<ApiFamilyDisplay, 'currentUser'>;
 }
 
 const initialState: FamilyState = {
@@ -23,12 +23,12 @@ export const webStoreFamily = createSlice({
   name: 'family',
   initialState,
   reducers: {
-    setFamilyData: (family, action: PayloadAction<ApiWebFamilyDisplay>) => {
+    setFamilyData: (family, action: PayloadAction<ApiFamilyDisplay>) => {
       family.data = omit(action.payload, ['currentUser']);
     },
     setFamilyDataInvitations: (
       family,
-      action: PayloadAction<ApiWebFamilyDisplay['invitations']>
+      action: PayloadAction<ApiFamilyDisplay['invitations']>
     ) => {
       family.data.invitations = action.payload;
     },
