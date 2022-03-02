@@ -3,6 +3,7 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 import { isEmpty } from 'lodash';
 
 import {
+  FAMILY_SIGNUP_ID,
   FD_TABLE_FAMILY,
   FDFamilyRecordType,
   GSI_EMAIL_FULL_KEY,
@@ -86,6 +87,33 @@ export class InvitationDB {
 
   async createMember(item: GTMemberDBRecord): Promise<GTMemberDBRecord> {
     return this.createFamilyItem<GTMemberDBRecord>(item);
+  }
+
+  async recreateSignUpCode(email: string, newCode: string): Promise<boolean> {
+    const existingInvitation = await this.getInvitationByEmail(email);
+
+    if (!existingInvitation) {
+      return false;
+    }
+
+    await this.dynamoDBClient
+      .update({
+        TableName: FD_TABLE_FAMILY,
+        Key: {
+          familyId: FAMILY_SIGNUP_ID,
+          fullKey: existingInvitation.fullKey,
+        },
+        UpdateExpression: 'set invitationDetails = :invitationDetails',
+        ExpressionAttributeValues: {
+          ':invitationDetails': {
+            ...existingInvitation.invitationDetails,
+            code: newCode,
+          },
+        },
+      })
+      .promise();
+
+    return true;
   }
 
   async deleteInvitation(familyId: string, fullKey: string): Promise<boolean> {

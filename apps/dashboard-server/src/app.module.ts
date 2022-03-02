@@ -3,7 +3,6 @@ import './schema/enumsRegister';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { DatabaseOrmModule } from './database-orm.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { FamilyModule } from './modules/family/family.module';
 import { InvitationModule } from './modules/invitation/invitation.module';
@@ -13,7 +12,6 @@ import { TokenModule } from './modules/utils/token/token.module';
 
 @Module({
   imports: [
-    DatabaseOrmModule(),
     EnvModule,
     TokenModule,
     AuthModule,

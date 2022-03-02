@@ -5,7 +5,6 @@ import {
   CurrentLoggedInUser,
   CurrentLoggedInUserData,
 } from '../../decorators/currentLoggedInUser.decorator';
-import { InvitationEntity } from '../../entities/invitation.entity';
 import {
   DisplayInvitation,
   DisplayLogin,
@@ -19,7 +18,7 @@ import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { InvitationService } from './invitation.service';
 
-@Resolver(() => InvitationEntity)
+@Resolver()
 export class InvitationResolver {
   constructor(
     private readonly invitationService: InvitationService,
@@ -62,11 +61,10 @@ export class InvitationResolver {
     return this.invitationService.createUserInvitation(user.familyId, input);
   }
 
-  // // TODO, used on fe?
-  // @Mutation(() => Boolean)
-  // async resendInvitation(@Args('email') email: string) {
-  //   return this.invitationService.resendInvitation(email);
-  // }
+  @Mutation(() => Boolean)
+  async resendSignUpCode(@Args('email') email: string) {
+    return this.invitationService.resendSignUpCode(email);
+  }
 
   @Mutation(() => Boolean)
   @UseGuards(JwtAuthGuard)

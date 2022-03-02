@@ -5,12 +5,11 @@ import {
   CurrentLoggedInUser,
   CurrentLoggedInUserData,
 } from '../../decorators/currentLoggedInUser.decorator';
-import { FamilyEntity } from '../../entities/family.entity';
 import { DisplayFamily } from '../../schema';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { FamilyService } from './family.service';
 
-@Resolver(() => FamilyEntity)
+@Resolver()
 export class FamilyResolver {
   constructor(private readonly familyService: FamilyService) {}
 

@@ -93,7 +93,7 @@ export class InvitationService {
     input: InputCreateSignUpInvitation
   ): Promise<boolean> {
     const code = generateNumericCode(4);
-
+    // FUTURE: send code via email
     try {
       await this.invitationDb.createInvitation(
         buildInvitationDBPayload({
@@ -228,13 +228,33 @@ export class InvitationService {
     }
   }
 
+  async resendSignUpCode(email: string): Promise<boolean> {
+    // FUTURE: send code via email
+    const code = generateNumericCode(4);
+
+    try {
+      const result = await this.invitationDb.recreateSignUpCode(email, code);
+      if (!result) {
+        throwError('Invitation not found');
+      }
+
+      return true;
+    } catch (err) {
+      throwError(err.message);
+    }
+  }
+
   async getUserInvitation(token: string): Promise<GTInvitationDisplay> {
-    const tokenData = this.authService.decodeToken(token);
+    try {
+      const tokenData = this.authService.decodeToken(token);
 
-    const invitation = await this.invitationDb.getInvitationByEmail(
-      tokenData.email
-    );
+      const invitation = await this.invitationDb.getInvitationByEmail(
+        tokenData.email
+      );
 
-    return serializeInvitation(invitation);
+      return serializeInvitation(invitation);
+    } catch (err) {
+      throwError(err.message);
+    }
   }
 }
