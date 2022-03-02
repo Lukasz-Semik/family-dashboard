@@ -8,14 +8,14 @@ import {
 } from '@family-dashboard/global/const';
 import { buildHashKey } from '@family-dashboard/global/sdk';
 import {
-  GTFamilyDBRecord,
   GTConfirmSignUpInvitationInput,
+  GTFamilyDBRecord,
   GTInvitationDBRecord,
   GTInvitationDetailsDBRecord,
   GTMemberDBRecord,
-  GTModulePermissionsDisplay,
   GTMemberSecurityDBRecord,
   GTMemberType,
+  GTModulePermissionsDisplay,
   GTPersonalDetailsDisplay,
 } from '@family-dashboard/global/types';
 

@@ -18,7 +18,7 @@ export class FamilyService {
         familyId,
         currentUserId
       );
-      console.log(family);
+
       if (!family) {
         // TODO: fix error
         throwError('Family not exists');

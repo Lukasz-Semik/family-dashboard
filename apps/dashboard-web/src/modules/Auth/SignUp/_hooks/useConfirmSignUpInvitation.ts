@@ -5,10 +5,10 @@ import { ConfirmSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
-  GTInvitationErrors,
-  GTLoginDisplay,
   GTConfirmSignUpInvitationInput,
   GTGender,
+  GTInvitationErrors,
+  GTLoginDisplay,
 } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
@@ -70,8 +70,7 @@ export function useConfirmSignUpInvitation({
               middleName: rest.middleName,
               lastName: rest.lastName,
               dob: rest.dob,
-              // TODODB: fix type
-              gender: gender as unknown as GTGender,
+              gender: gender as GTGender,
             },
           },
         },

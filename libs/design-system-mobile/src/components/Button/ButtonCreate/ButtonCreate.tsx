@@ -1,9 +1,9 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
 
-import { IconPlusCircle } from '@family-dashboard/design-system-mobile';
 import { styledConstants } from '@family-dashboard/fe-libs/styled-constants';
 
+import { IconPlusCircle } from '../../../icons/Icons';
 import { ButtonProps } from '../Button.types';
 import { StyledText } from './ButtonCreate.styled';
 

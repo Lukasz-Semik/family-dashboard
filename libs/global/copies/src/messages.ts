@@ -1,5 +1,6 @@
 export const copies = {
   auth: {
+    signOut: 'Sign Out',
     signIn: {
       title: 'Sign In',
       description:

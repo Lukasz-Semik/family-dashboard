@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl';
+
 import { ButtonCloseAnimated } from '@family-dashboard/design-system';
 
 import { ItemsList } from '../ItemsList/ItemsList';
@@ -15,8 +17,9 @@ interface Props {
 export function SidebarMobile({ isOpen, closeSidebar }: Props) {
   return (
     <StyledWrapper isOpen={isOpen}>
-      {/* TODO: Copies! */}
-      <StyledTitle>Menu</StyledTitle>
+      <StyledTitle>
+        <FormattedMessage id="shared.menu" />
+      </StyledTitle>
       <StyledButtonWrapper>
         <ButtonCloseAnimated onClick={closeSidebar} />
       </StyledButtonWrapper>
