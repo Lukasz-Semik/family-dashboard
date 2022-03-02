@@ -11,9 +11,9 @@ import {
 } from '@family-dashboard/fe-libs/api-graphql';
 import { webRoutes } from '@family-dashboard/global/const';
 import {
-  GTInvitationErrors,
-  GTGender,
   GTCreateUserInvitationInput,
+  GTGender,
+  GTInvitationErrors,
   GTMemberType,
 } from '@family-dashboard/global/types';
 import {
@@ -41,7 +41,6 @@ export function useCreateUserInvitation({ closeModal }: Args) {
     { input: GTCreateUserInvitationInput }
   >(CreateUserInvitation, {
     onCompleted: (responseData) => {
-      console.log(responseData);
       dispatch(
         webStoreFamilyActions.setFamilyDataInvitations([
           responseData.createUserInvitation,

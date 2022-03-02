@@ -1,3 +1,4 @@
+import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 
 import { IconSignOut } from '@family-dashboard/design-system';
@@ -25,8 +26,7 @@ export function ItemSignOut() {
           <IconSignOut width="22px" height="22px" />
         </StyledIconWrapper>
         <StyledContent>
-          {/* TODO: translations */}
-          Sign Out
+          <FormattedMessage id="auth.signOut" />
         </StyledContent>
       </StyledWrapper>
     </StyledSignOutWrapper>

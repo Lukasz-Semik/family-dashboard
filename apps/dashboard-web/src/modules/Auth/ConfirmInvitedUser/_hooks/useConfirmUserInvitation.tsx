@@ -8,9 +8,9 @@ import { ConfirmUserInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
-  GTLoginDisplay,
   GTConfirmUserInvitationInput,
   GTGender,
+  GTLoginDisplay,
 } from '@family-dashboard/global/types';
 
 import { Values } from '../ConfirmInvitedUser.types';

@@ -44,8 +44,7 @@ export function useCreateSignUpInvitation() {
               middleName: rest.middleName,
               lastName: rest.lastName,
               dob: rest.dob,
-              // TODODB: fix type
-              gender: rest.gender as unknown as GTGender,
+              gender: rest.gender as GTGender,
             },
             invitationDetails: {
               familyName: rest.familyName,

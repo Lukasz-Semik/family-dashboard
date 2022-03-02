@@ -1,25 +1,12 @@
 TODO:
-- extract i118n
-- handle resend code
 - no found user error message
 - rgba colors
 - migrate to nx_envs
 - tests
 - add story for ButtonsFormGroup
 - exctract cache (when start more advanced api)
-- Typography (parallel with designs)
 - separate constants
 
 NOTES:
 - FUTURE: for future plans
 
-ARHICTECTURE:
-- restructure according to mobile:
- - convention to _hooks and do better with _dataHooks
-
-TYPES:
-- GTNameBase -> the most base and full db record TYPES
-- GTNameDisplay -> data exposed by backend api
-- GTNameInput -> data required by backend api
-
-- ADNameDisplay -> data wanted by dashboard api
