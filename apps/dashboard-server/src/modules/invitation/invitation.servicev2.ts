@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
+import { hash } from 'bcryptjs';
 import * as dayjs from 'dayjs';
 
 import {
   CTInvitationErrors,
   GTInvitationDisplay,
+  GTMemberDBRecord,
   GTMemberType,
   GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
@@ -13,20 +15,26 @@ import { generateNumericCode } from '../../helpers/utils';
 import {
   DisplayVerifyEmailResponse,
   InputConfirmSignUpInvitation,
+  InputConfirmUserInvitation,
   InputCreateSignUpInvitation,
   InputCreateUserInvitation,
 } from '../../schema';
 import { serializeInvitationV2 } from '../../serializators/invitation.serializator';
+import { AuthService } from '../auth/auth.service';
 import { InvitationDB } from './invitation.db';
 import {
   buildFamilyAndMemberDBPayloads,
   buildInvitationDBPayload,
+  buildMemberDBPayload,
   FamilyAndMemberDBPayloads,
 } from './invitation.utils';
 
 @Injectable()
 export class InvitationServiceV2 {
-  constructor(private readonly invitationDb: InvitationDB) {}
+  constructor(
+    private readonly invitationDb: InvitationDB,
+    private readonly authService: AuthService
+  ) {}
 
   private getIsInvitationDeprecated(validTo?: string) {
     return dayjs.utc().isAfter(dayjs.utc(validTo));
@@ -163,6 +171,14 @@ export class InvitationServiceV2 {
       code: 'validated',
     });
 
+    // FUTURE: Send invitation sent e-mail
+    const token = this.authService.createToken(
+      input.email,
+      invitation.fullKey,
+      familyId
+    );
+    console.log(token);
+
     try {
       await this.invitationDb.createInvitation(invitation);
 
@@ -171,5 +187,54 @@ export class InvitationServiceV2 {
       throwError(err.message);
     }
   }
-  //
+
+  async confirmUserInvitation(
+    token: string,
+    input: InputConfirmUserInvitation
+  ): Promise<GTMemberDBRecord> {
+    try {
+      const tokenData = this.authService.decodeToken(token);
+
+      const existingInvitation = await this.invitationDb.getInvitationByEmail(
+        tokenData.email
+      );
+
+      if (!existingInvitation?.email) {
+        throwError(CTInvitationErrors.InvitationDeprecated);
+      }
+
+      const hashedPassword = await hash(input.security.password, 10);
+
+      const member = await buildMemberDBPayload(tokenData.familyId, {
+        personalDetails: input.personalDetails,
+        email: input.email,
+        security: {
+          password: hashedPassword,
+        },
+        memberType: existingInvitation.memberType,
+        modulePermissions: existingInvitation.modulePermissions,
+      });
+
+      await this.invitationDb.createMember(member);
+
+      this.invitationDb.deleteInvitation(
+        existingInvitation.familyId,
+        existingInvitation.fullKey
+      );
+
+      return member;
+    } catch (err) {
+      throwError(err.message);
+    }
+  }
+
+  async getUserInvitation(token: string): Promise<GTInvitationDisplay> {
+    const tokenData = this.authService.decodeToken(token);
+
+    const invitation = await this.invitationDb.getInvitationByEmail(
+      tokenData.email
+    );
+
+    return serializeInvitationV2(invitation);
+  }
 }

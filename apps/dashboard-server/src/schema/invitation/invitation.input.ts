@@ -17,6 +17,7 @@ import {
   GTMemberSecurityDBRecord,
   GTMemberType,
   GTPersonalDetailsDisplay,
+  GTConfirmUserInvitationInput,
 } from '@family-dashboard/global/types';
 
 @InputType()
@@ -162,4 +163,15 @@ export class InputCreateUserInvitation implements GTCreateUserInvitationInput {
   @Field(() => GTMemberType) readonly memberType: GTMemberType;
   @Field(() => InputCreateUserInvitationModulePermissions)
   readonly modulePermissions: GTModulePermissionsDisplay;
+}
+
+@InputType()
+export class InputConfirmUserInvitation
+  implements GTConfirmUserInvitationInput
+{
+  @Field(() => String) readonly email: string;
+  @Field(() => InputConfrimSignUpInvitationSecurity)
+  readonly security: GTMemberSecurityDBRecord;
+  @Field(() => InputCreateInvitationPersonalDetails)
+  readonly personalDetails: GTPersonalDetailsDisplay;
 }
