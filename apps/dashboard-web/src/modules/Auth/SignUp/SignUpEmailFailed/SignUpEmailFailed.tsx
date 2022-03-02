@@ -6,8 +6,8 @@ import {
   ElementCloseAnimated,
 } from '@family-dashboard/design-system';
 import {
-  CTVerifyEmailResponse,
-  CTVerifyEmailResponseStatus,
+  GTInvitationErrors,
+  GTInvitationErrorsStatus,
 } from '@family-dashboard/global/types';
 
 import {
@@ -17,13 +17,13 @@ import {
 } from '../../Auth.styled';
 
 interface Props {
-  verifyEmailResponse?: CTVerifyEmailResponse;
+  verifyEmailResponse?: GTInvitationErrors;
 }
 
 export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
   const copies = useMemo(() => {
     if (
-      verifyEmailResponse?.status === CTVerifyEmailResponseStatus.AlreadyCreated
+      verifyEmailResponse?.status === GTInvitationErrorsStatus.AlreadyCreated
     ) {
       return {
         title: (
@@ -35,7 +35,7 @@ export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
       };
     }
 
-    if (verifyEmailResponse?.status === CTVerifyEmailResponseStatus.Invited) {
+    if (verifyEmailResponse?.status === GTInvitationErrorsStatus.Invited) {
       return {
         title: <FormattedMessage id="auth.signUp.verifyEmail.invited.title" />,
         description: (
@@ -48,8 +48,7 @@ export function SignUpEmailFailed({ verifyEmailResponse }: Props) {
     }
 
     if (
-      verifyEmailResponse?.status ===
-      CTVerifyEmailResponseStatus.SignUpNotFinished
+      verifyEmailResponse?.status === GTInvitationErrorsStatus.SignUpNotFinished
     ) {
       return {
         title: (

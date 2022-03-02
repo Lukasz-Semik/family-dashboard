@@ -8,7 +8,7 @@ import { ConfirmUserInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
-  CTLoginResponse,
+  GTLoginDisplay,
   GTConfirmUserInvitationInput,
   GTGender,
 } from '@family-dashboard/global/types';
@@ -23,7 +23,7 @@ export function useConfirmUserInvitation({ goToNextStep }: Args) {
   const match = useRouteMatch<{ token: string }>();
 
   const [confirmUserInvitationMutation, { loading }] = useMutation<
-    { confirmUserInvitation: CTLoginResponse },
+    { confirmUserInvitation: GTLoginDisplay },
     { input: GTConfirmUserInvitationInput; token: string }
   >(ConfirmUserInvitation, {
     onCompleted: (responseData) => {

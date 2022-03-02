@@ -3,8 +3,8 @@ import { useLazyQuery } from '@apollo/client';
 
 import { VerifySignUpEmail } from '@family-dashboard/fe-libs/api-graphql';
 import {
-  CTVerifyEmailResponse,
-  CTVerifyEmailResponseStatus,
+  GTVerifyEmailResponse,
+  GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
 
 interface Args {
@@ -14,13 +14,11 @@ interface Args {
 
 export function useVerifyEmail({ goToNextStep, goToErrorStep }: Args) {
   const [queryVerifyEmail, { data, loading }] = useLazyQuery<
-    { verifySignUpEmail: CTVerifyEmailResponse },
+    { verifySignUpEmail: GTVerifyEmailResponse },
     { email: string }
   >(VerifySignUpEmail, {
     onCompleted: (data) => {
-      if (
-        data?.verifySignUpEmail.status === CTVerifyEmailResponseStatus.Success
-      ) {
+      if (data?.verifySignUpEmail.status === GTVerifyEmailStatus.Success) {
         goToNextStep();
       } else {
         goToErrorStep();

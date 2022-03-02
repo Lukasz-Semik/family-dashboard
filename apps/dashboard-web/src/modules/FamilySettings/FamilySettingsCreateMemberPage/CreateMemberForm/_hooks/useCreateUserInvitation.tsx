@@ -11,7 +11,7 @@ import {
 } from '@family-dashboard/fe-libs/api-graphql';
 import { webRoutes } from '@family-dashboard/global/const';
 import {
-  CTInvitationErrors,
+  GTInvitationErrors,
   GTGender,
   GTCreateUserInvitationInput,
   GTMemberType,
@@ -53,9 +53,9 @@ export function useCreateUserInvitation({ closeModal }: Args) {
     onError: (errors) => {
       if (
         errors.graphQLErrors[0]?.message ===
-          CTInvitationErrors.EmailAlreadyInUse ||
+          GTInvitationErrors.EmailAlreadyInUse ||
         errors.graphQLErrors[0]?.message ===
-          CTInvitationErrors.EmailAlreadyInvited
+          GTInvitationErrors.EmailAlreadyInvited
       ) {
         showErrorToast(
           <FormattedMessage id="auth.signUp.verifyEmail.alreadyCreated.title" />

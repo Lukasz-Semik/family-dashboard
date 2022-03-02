@@ -6,7 +6,7 @@ import { showErrorToast } from '@family-dashboard/design-system';
 import { Login } from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY, webRoutes } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
-import { CTLoginResponse } from '@family-dashboard/global/types';
+import { GTLoginDisplay } from '@family-dashboard/global/types';
 
 interface Values {
   email: string;
@@ -16,7 +16,7 @@ interface Values {
 export function useSignIn() {
   const history = useHistory();
 
-  const [login, { loading }] = useMutation<{ login: CTLoginResponse }, Values>(
+  const [login, { loading }] = useMutation<{ login: GTLoginDisplay }, Values>(
     Login,
     {
       onCompleted: (data) => {

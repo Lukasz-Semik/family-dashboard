@@ -2,8 +2,8 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
   GTMemberDisplay,
-  GTModulePermissionsDisplay,
   GTMemberType,
+  GTModulePermissionsDisplay,
   GTPersonalDetailsDisplay,
 } from '@family-dashboard/global/types';
 

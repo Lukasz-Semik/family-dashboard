@@ -45,3 +45,9 @@ export const ConfirmUserInvitation = gql`
     }
   }
 `;
+
+export const ResendInvitation = gql`
+  mutation ResendInvitation($email: String!) {
+    resendInvitation(email: $email)
+  }
+`;

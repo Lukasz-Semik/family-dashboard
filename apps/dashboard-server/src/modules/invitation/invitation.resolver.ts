@@ -8,29 +8,27 @@ import {
 import { InvitationEntity } from '../../entities/invitation.entity';
 import {
   DisplayInvitation,
+  DisplayLogin,
   DisplayVerifyEmailResponse,
   InputConfirmSignUpInvitation,
   InputConfirmUserInvitation,
   InputCreateSignUpInvitation,
   InputCreateUserInvitation,
-  LoginDto,
 } from '../../schema';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { InvitationService } from './invitation.service';
-import { InvitationServiceV2 } from './invitation.servicev2';
 
 @Resolver(() => InvitationEntity)
 export class InvitationResolver {
   constructor(
     private readonly invitationService: InvitationService,
-    private readonly invitationServiceV2: InvitationServiceV2,
     private readonly authService: AuthService
   ) {}
 
   @Query(() => DisplayVerifyEmailResponse)
   async verifySignUpEmail(@Args('email') email: string) {
-    const result = await this.invitationServiceV2.verifyEmail(email);
+    const result = await this.invitationService.verifyEmail(email);
 
     return result;
   }
@@ -39,16 +37,14 @@ export class InvitationResolver {
   async createSignUpInvitation(
     @Args('input') input: InputCreateSignUpInvitation
   ) {
-    return this.invitationServiceV2.createSignUpInvitation(input);
+    return this.invitationService.createSignUpInvitation(input);
   }
 
-  @Mutation(() => LoginDto)
+  @Mutation(() => DisplayLogin)
   async confirmSignUpInvitation(
     @Args('input') input: InputConfirmSignUpInvitation
   ) {
-    const records = await this.invitationServiceV2.confirmSignUpInvitation(
-      input
-    );
+    const records = await this.invitationService.confirmSignUpInvitation(input);
 
     return this.authService.createToken(
       records.member.email,
@@ -63,14 +59,14 @@ export class InvitationResolver {
     @Args('input') input: InputCreateUserInvitation,
     @CurrentLoggedInUser() user: CurrentLoggedInUserData
   ) {
-    return this.invitationServiceV2.createUserInvitation(user.familyId, input);
+    return this.invitationService.createUserInvitation(user.familyId, input);
   }
 
-  // TODO, used on fe?
-  @Mutation(() => Boolean)
-  async resendInvitation(@Args('email') email: string) {
-    return this.invitationService.resendInvitation(email);
-  }
+  // // TODO, used on fe?
+  // @Mutation(() => Boolean)
+  // async resendInvitation(@Args('email') email: string) {
+  //   return this.invitationService.resendInvitation(email);
+  // }
 
   @Mutation(() => Boolean)
   @UseGuards(JwtAuthGuard)
@@ -78,15 +74,15 @@ export class InvitationResolver {
     @Args('fullKey') fullKey: string,
     @CurrentLoggedInUser() user: CurrentLoggedInUserData
   ) {
-    return this.invitationServiceV2.cancelInvitation(user.familyId, fullKey);
+    return this.invitationService.cancelInvitation(user.familyId, fullKey);
   }
 
-  @Mutation(() => LoginDto)
+  @Mutation(() => DisplayLogin)
   async confirmUserInvitation(
     @Args('token') token: string,
     @Args('input') input: InputConfirmUserInvitation
   ) {
-    const member = await this.invitationServiceV2.confirmUserInvitation(
+    const member = await this.invitationService.confirmUserInvitation(
       token,
       input
     );
@@ -100,6 +96,6 @@ export class InvitationResolver {
 
   @Query(() => DisplayInvitation)
   async getUserInvitation(@Args('token') token: string) {
-    return this.invitationServiceV2.getUserInvitation(token);
+    return this.invitationService.getUserInvitation(token);
   }
 }

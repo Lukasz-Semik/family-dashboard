@@ -9,7 +9,6 @@ import { AuthModule } from '../auth/auth.module';
 import { InvitationDB } from './invitation.db';
 import { InvitationResolver } from './invitation.resolver';
 import { InvitationService } from './invitation.service';
-import { InvitationServiceV2 } from './invitation.servicev2';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { InvitationServiceV2 } from './invitation.servicev2';
   providers: [
     InvitationResolver,
     InvitationService,
-    InvitationServiceV2,
     InvitationDB,
     DocumentClient,
   ],

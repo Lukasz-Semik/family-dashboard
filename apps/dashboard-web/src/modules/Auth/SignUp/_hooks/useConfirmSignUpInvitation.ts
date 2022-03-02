@@ -5,8 +5,8 @@ import { ConfirmSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
-  CTInvitationErrors,
-  CTLoginResponse,
+  GTInvitationErrors,
+  GTLoginDisplay,
   GTConfirmSignUpInvitationInput,
   GTGender,
 } from '@family-dashboard/global/types';
@@ -23,7 +23,7 @@ export function useConfirmSignUpInvitation({
   goToNextStep,
 }: Args) {
   const [confirmSignUpInvitationMutation, { loading }] = useMutation<
-    { confirmSignUpInvitation: CTLoginResponse },
+    { confirmSignUpInvitation: GTLoginDisplay },
     { input: GTConfirmSignUpInvitationInput }
   >(ConfirmSignUpInvitation, {
     onCompleted: (responseData) => {
@@ -34,7 +34,7 @@ export function useConfirmSignUpInvitation({
       goToNextStep();
     },
     onError: (error) => {
-      if (error.graphQLErrors[0]?.message === CTInvitationErrors.CodeInvalid) {
+      if (error.graphQLErrors[0]?.message === GTInvitationErrors.CodeInvalid) {
         setHasFailedPin();
       }
     },

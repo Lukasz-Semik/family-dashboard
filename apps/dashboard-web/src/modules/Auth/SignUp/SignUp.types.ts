@@ -1,4 +1,4 @@
-import { CTGender } from '@family-dashboard/global/types';
+import { GTGender } from '@family-dashboard/global/types';
 
 export enum SignUpStep {
   Email = 'Email',
@@ -19,7 +19,7 @@ export interface Values {
   familyName: string;
   isConsentGiven: boolean;
   isLastNameDifferent: boolean;
-  gender: CTGender | undefined;
+  gender: GTGender | undefined;
   dob: string;
   password: string;
   code0: string;

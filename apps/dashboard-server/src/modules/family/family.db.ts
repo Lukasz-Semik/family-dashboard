@@ -16,7 +16,7 @@ import {
   GTMemberDisplay,
 } from '@family-dashboard/global/types';
 
-import { serializeInvitationV2 } from '../../serializators/invitation.serializator';
+import { serializeInvitation } from '../../serializators/invitation.serializator';
 import { serializeMember } from '../../serializators/member.serializator';
 
 @Injectable()
@@ -72,9 +72,7 @@ export class FamilyDB {
       if (item.fullKey.includes(FDFamilyRecordType.Invitation)) {
         const invitationRecord = item as GTInvitationDBRecord;
 
-        resultTemplate.invitations.push(
-          serializeInvitationV2(invitationRecord)
-        );
+        resultTemplate.invitations.push(serializeInvitation(invitationRecord));
         return;
       }
 

@@ -1,16 +1,8 @@
-import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 
-import {
-  CurrentLoggedInUser,
-  CurrentLoggedInUserData,
-} from '../../decorators/currentLoggedInUser.decorator';
 import { UserEntity } from '../../entities/user.entity';
-import { InitialAppStateDto, LoginDto } from '../../schema';
-import { serializeFamily } from '../../serializators/family.serializator';
-import { serializeUser } from '../../serializators/user.serializator';
+import { DisplayLogin } from '../../schema';
 import { AuthService } from '../auth/auth.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UserService } from './user.service';
 
 @Resolver(() => UserEntity)
@@ -20,22 +12,7 @@ export class UserResolver {
     private readonly authService: AuthService
   ) {}
 
-  @Query(() => InitialAppStateDto)
-  @UseGuards(JwtAuthGuard)
-  async getUserInitialAppState(
-    @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData
-  ) {
-    const result = await this.userService.getUserInitialAppState(
-      currentLoggedInUser.userId
-    );
-
-    return {
-      currentUser: serializeUser(result.foundUser),
-      family: serializeFamily(result.foundFamily),
-    };
-  }
-
-  @Mutation(() => LoginDto)
+  @Mutation(() => DisplayLogin)
   async login(
     @Args('email') email: string,
     @Args('password') password: string

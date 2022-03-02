@@ -1,149 +1,88 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { hash } from 'bcryptjs';
 import * as dayjs from 'dayjs';
-import { Repository } from 'typeorm';
 
 import {
-  CTInvitationErrors,
-  CTMemberType,
-  CTUserModulePermission,
-  CTVerifyEmailResponseStatus,
+  GTInvitationDisplay,
+  GTInvitationErrors,
+  GTMemberDBRecord,
+  GTMemberType,
+  GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
 
-import { FamilyEntity } from '../../entities/family.entity';
-import { InvitationEntity } from '../../entities/invitation.entity';
-import { UserEntity } from '../../entities/user.entity';
 import { throwError } from '../../helpers/throwError';
 import { generateNumericCode } from '../../helpers/utils';
 import {
-  InvitationCreateInput,
-  InvitationSignUpConfirmInput,
-  InvitationSignUpCreateInput,
-  InvitationUserConfirmInput,
-  VerifyEmailDto,
+  DisplayVerifyEmailResponse,
+  InputConfirmSignUpInvitation,
+  InputConfirmUserInvitation,
+  InputCreateSignUpInvitation,
+  InputCreateUserInvitation,
 } from '../../schema';
+import { serializeInvitation } from '../../serializators/invitation.serializator';
 import { AuthService } from '../auth/auth.service';
 import { InvitationDB } from './invitation.db';
 import {
-  validateConfirmInvitationInput,
-  validateCreateInvitationInput,
-} from './validators/invitationInput.validator';
+  buildFamilyAndMemberDBPayloads,
+  buildInvitationDBPayload,
+  buildMemberDBPayload,
+  FamilyAndMemberDBPayloads,
+} from './invitation.utils';
 
 @Injectable()
 export class InvitationService {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>,
-    @InjectRepository(InvitationEntity)
-    private readonly invitationRepository: Repository<InvitationEntity>,
-    @InjectRepository(FamilyEntity)
-    private readonly familyRepository: Repository<FamilyEntity>,
-    private readonly authService: AuthService,
-    private readonly invitationDb: InvitationDB
+    private readonly invitationDb: InvitationDB,
+    private readonly authService: AuthService
   ) {}
-
-  private findFamily = async (familyId: string) =>
-    this.familyRepository
-      .createQueryBuilder('family')
-      .leftJoinAndSelect('family.invitations', 'invitations')
-      .leftJoinAndSelect('family.users', 'users')
-      .where('family.id = :id', { id: familyId })
-      .getOne();
 
   private getIsInvitationDeprecated(validTo?: string) {
     return dayjs.utc().isAfter(dayjs.utc(validTo));
   }
 
-  private async findExistingInvitation(email: string) {
-    const existingInvitation = await this.invitationRepository.findOne({
-      email,
-    });
-
-    if (!existingInvitation) {
-      throwError(CTInvitationErrors.EmailIsNotInvited);
-    }
-
-    if (this.getIsInvitationDeprecated(String(existingInvitation?.validTo))) {
-      throwError(CTInvitationErrors.InvitationDeprecated);
-    }
-
-    return existingInvitation;
+  async cancelInvitation(familyId: string, fullKey: string) {
+    return this.invitationDb.deleteInvitation(familyId, fullKey);
   }
 
-  private async createInvitationBase(
-    input: InvitationCreateInput & { familyName: string },
-    code: string
-  ): Promise<InvitationEntity> {
+  async verifyEmail(email: string): Promise<DisplayVerifyEmailResponse> {
     try {
-      if (!validateCreateInvitationInput(input)) {
-        throwError(CTInvitationErrors.WrongPayload);
-      }
-      const existingUser = await this.userRepository.findOne({
-        email: input.email,
-      });
+      const existingMember = await this.invitationDb.getMemberByEmail(email);
 
-      if (existingUser) {
-        throwError(CTInvitationErrors.EmailAlreadyInUse);
-      }
-
-      const existingInvitation = await this.invitationRepository.findOne({
-        email: input.email,
-      });
-
-      if (existingInvitation) {
-        throwError(CTInvitationErrors.EmailAlreadyInvited);
-      }
-
-      const savedInvitation = this.invitationRepository.save({
-        ...new InvitationEntity(),
-        ...input,
-        validTo: dayjs.utc().add(2, 'day').toDate(),
-        inviterName: input.inviterName,
-        code,
-      });
-
-      return savedInvitation;
-    } catch (err) {
-      throwError(err.message);
-    }
-  }
-
-  async verifyEmail(email: string): Promise<VerifyEmailDto> {
-    try {
-      const existingUser = await this.userRepository.findOne({ email });
-
-      if (existingUser) {
+      if (existingMember) {
         return {
-          status: CTVerifyEmailResponseStatus.AlreadyCreated,
+          status: GTVerifyEmailStatus.AlreadyCreated,
         };
       }
 
-      const existingInvitation = await this.invitationRepository.findOne({
-        email,
-      });
+      const existingInvitation = await this.invitationDb.getInvitationByEmail(
+        email
+      );
 
-      if (this.getIsInvitationDeprecated(String(existingInvitation?.validTo))) {
+      if (
+        this.getIsInvitationDeprecated(
+          String(existingInvitation?.invitationDetails?.validTo)
+        )
+      ) {
         return {
-          status: CTVerifyEmailResponseStatus.Deprecated,
+          status: GTVerifyEmailStatus.Deprecated,
         };
       }
 
-      if (existingInvitation?.email === email) {
+      if (existingInvitation?.invitationDetails?.inviterEmail === email) {
         return {
-          status: CTVerifyEmailResponseStatus.SignUpNotFinished,
+          status: GTVerifyEmailStatus.SignUpNotFinished,
         };
       }
 
       if (existingInvitation?.email) {
         return {
-          status: CTVerifyEmailResponseStatus.Invited,
-          inviterName: existingInvitation.inviterName,
+          status: GTVerifyEmailStatus.Invited,
+          inviterName: existingInvitation?.invitationDetails?.inviterName,
         };
       }
 
       return {
-        status: CTVerifyEmailResponseStatus.Success,
+        status: GTVerifyEmailStatus.Success,
       };
     } catch (err) {
       throwError(err.message);
@@ -151,205 +90,151 @@ export class InvitationService {
   }
 
   async createSignUpInvitation(
-    input: InvitationSignUpCreateInput
+    input: InputCreateSignUpInvitation
   ): Promise<boolean> {
     const code = generateNumericCode(4);
-    // FUTURE: Send sign up e-mail
-    await this.createInvitationBase(
-      {
-        ...input,
-        modulePermissions: [
-          CTUserModulePermission.FamilySettings,
-          CTUserModulePermission.Financial,
-        ],
-        memberType: CTMemberType.AdultUser,
-      },
-      code
-    );
+
+    try {
+      await this.invitationDb.createInvitation(
+        buildInvitationDBPayload({
+          familyId: undefined,
+          email: input.email,
+          memberType: GTMemberType.AdultUser,
+          modulePermissions: {
+            hasFamilySettings: true,
+            hasFinanacial: true,
+          },
+          personalDetails: {
+            ...input.personalDetails,
+            dob: dayjs(input.personalDetails.dob).utc().toISOString(),
+          },
+          invitationDetails: input.invitationDetails,
+          code,
+        })
+      );
+    } catch (err) {
+      throwError(err.message);
+    }
+
     return true;
   }
 
   async confirmSignUpInvitation(
-    input: InvitationSignUpConfirmInput
-  ): Promise<UserEntity> {
+    input: InputConfirmSignUpInvitation
+  ): Promise<FamilyAndMemberDBPayloads> {
     try {
-      if (!validateConfirmInvitationInput(input)) {
-        throwError(CTInvitationErrors.WrongPayload);
+      const existingInvitation = await this.invitationDb.getInvitationByEmail(
+        input.email
+      );
+
+      if (!existingInvitation?.email) {
+        throwError(GTInvitationErrors.InvitationDeprecated);
       }
 
-      const existingUser = await this.userRepository.findOne({
-        email: input.email,
-      });
-
-      if (existingUser) {
-        throwError(CTInvitationErrors.EmailAlreadyInUse);
+      if (
+        existingInvitation?.invitationDetails?.code !==
+        input.invitationDetails?.code
+      ) {
+        throwError(GTInvitationErrors.CodeInvalid);
       }
 
-      const existingInvitation = await this.findExistingInvitation(input.email);
+      const records = await buildFamilyAndMemberDBPayloads(input);
 
-      if (existingInvitation.code !== input.code) {
-        throwError(CTInvitationErrors.CodeInvalid);
-      }
+      await this.invitationDb.createFamily(records.family);
+      await this.invitationDb.createMember(records.member);
 
-      const hashedPassword = await hash(input.password, 10);
+      this.invitationDb.deleteInvitation(
+        existingInvitation.familyId,
+        existingInvitation.fullKey
+      );
 
-      const createdUser = await this.userRepository.save({
-        ...new UserEntity(),
-        ...input,
-        modulePermissions: [
-          CTUserModulePermission.FamilySettings,
-          CTUserModulePermission.Financial,
-        ],
-        memberType: CTMemberType.AdultUser,
-        dob: dayjs.utc(input.dob).toDate(),
-        password: hashedPassword,
-      });
-
-      const family = await this.familyRepository.save({
-        ...new FamilyEntity(),
-        name: existingInvitation.familyName,
-        users: [createdUser],
-      });
-
-      this.invitationRepository.delete({ email: input.email });
-
-      return { ...createdUser, family };
-    } catch (err) {
-      throwError(err.message);
-    }
-  }
-
-  async resendInvitation(email: string): Promise<boolean> {
-    const code = generateNumericCode(4);
-    // FUTURE: Send resend email
-    try {
-      const existingInvitation = await this.findExistingInvitation(email);
-
-      this.invitationRepository.save({
-        ...existingInvitation,
-        validTo: dayjs.utc().add(2, 'day').toDate(),
-        code,
-      });
-
-      return true;
+      return records;
     } catch (err) {
       throwError(err.message);
     }
   }
 
   async createUserInvitation(
-    input: InvitationCreateInput,
-    familyId: string
-  ): Promise<InvitationEntity> {
+    familyId: string,
+    input: InputCreateUserInvitation
+  ): Promise<GTInvitationDisplay> {
+    const invitation = buildInvitationDBPayload({
+      familyId: familyId,
+      email: input.email,
+      memberType: input.memberType,
+      modulePermissions: input.modulePermissions,
+      personalDetails: {
+        ...input.personalDetails,
+        dob: dayjs(input.personalDetails.dob).utc().toISOString(),
+      },
+      invitationDetails: input.invitationDetails,
+      code: 'validated',
+    });
+
+    // FUTURE: Send invitation sent e-mail
+    const token = this.authService.createToken(
+      input.email,
+      invitation.fullKey,
+      familyId
+    );
+    console.log(token);
+
     try {
-      const code = generateNumericCode(4);
-      // FUTURE: Send invitation sent e-mail
-      const foundFamily = await this.findFamily(familyId);
-      const invitation = await this.createInvitationBase(
-        {
-          ...input,
-          familyName: foundFamily.name,
-        },
-        code
-      );
+      await this.invitationDb.createInvitation(invitation);
 
-      // FUTURE: Send invitation sent e-mail
-      const token = this.authService.createToken(
-        input.email,
-        invitation.id,
-        foundFamily.id
-      );
-      console.log(token);
-      const d = this.authService.decodeToken(token.accessToken);
-      console.log(d);
-
-      if (!foundFamily) {
-        throwError('family not exists');
-      }
-
-      this.familyRepository.save({
-        ...foundFamily,
-        invitations: [invitation, ...foundFamily.invitations],
-      });
-
-      return invitation;
+      return serializeInvitation(invitation);
     } catch (err) {
       throwError(err.message);
     }
-  }
-
-  async getUserInvitation(token: string) {
-    const data = this.authService.decodeToken(token);
-
-    return this.findExistingInvitation(data.email);
   }
 
   async confirmUserInvitation(
-    input: InvitationUserConfirmInput,
-    token: string
-  ) {
+    token: string,
+    input: InputConfirmUserInvitation
+  ): Promise<GTMemberDBRecord> {
     try {
-      const data = this.authService.decodeToken(token);
+      const tokenData = this.authService.decodeToken(token);
 
-      const foundFamily = await this.findFamily(data.familyId);
+      const existingInvitation = await this.invitationDb.getInvitationByEmail(
+        tokenData.email
+      );
 
-      if (!foundFamily) {
-        throwError('family not exists');
+      if (!existingInvitation?.email) {
+        throwError(GTInvitationErrors.InvitationDeprecated);
       }
 
-      const existingInvitation = await this.findExistingInvitation(data.email);
+      const hashedPassword = await hash(input.security.password, 10);
 
-      const hashedPassword = await hash(input.password, 10);
-
-      await this.invitationRepository.delete({
-        email: existingInvitation.email,
-      });
-
-      const createdUser = await this.userRepository.save({
-        ...new UserEntity(),
-        ...input,
-        email: existingInvitation.email,
+      const member = await buildMemberDBPayload(tokenData.familyId, {
+        personalDetails: input.personalDetails,
+        email: input.email,
+        security: {
+          password: hashedPassword,
+        },
         memberType: existingInvitation.memberType,
         modulePermissions: existingInvitation.modulePermissions,
-        dob: dayjs.utc(input.dob).toDate(),
-        password: hashedPassword,
       });
 
-      const family = await this.familyRepository.save({
-        ...foundFamily,
-        users: [...foundFamily.users, createdUser],
-      });
+      await this.invitationDb.createMember(member);
 
-      return { ...createdUser, family };
+      this.invitationDb.deleteInvitation(
+        existingInvitation.familyId,
+        existingInvitation.fullKey
+      );
+
+      return member;
     } catch (err) {
       throwError(err.message);
     }
   }
 
-  async cancelUserInvitation(
-    emailToRemove: string,
-    familyId: string
-  ): Promise<boolean> {
-    try {
-      const foundFamily = await this.findFamily(familyId);
+  async getUserInvitation(token: string): Promise<GTInvitationDisplay> {
+    const tokenData = this.authService.decodeToken(token);
 
-      if (!foundFamily) {
-        throwError('family not exists');
-      }
+    const invitation = await this.invitationDb.getInvitationByEmail(
+      tokenData.email
+    );
 
-      const foundInvitation = foundFamily.invitations.find(
-        (invitation) => invitation.email === emailToRemove
-      );
-
-      if (!foundInvitation) {
-        throwError('invitation not exists');
-      }
-
-      this.invitationRepository.delete({ email: emailToRemove });
-
-      return true;
-    } catch (err) {
-      throwError(err.message);
-    }
+    return serializeInvitation(invitation);
   }
 }

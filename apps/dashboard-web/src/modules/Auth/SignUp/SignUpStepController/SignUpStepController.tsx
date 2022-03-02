@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import { useFormikContext } from 'formik';
 
-import { CTVerifyEmailResponse } from '@family-dashboard/global/types';
+import { GTInvitationErrors } from '@family-dashboard/global/types';
 
 import { AuthPassword } from '../../AuthPassword/AuthPassword';
 import { AuthPersonalDetails1 } from '../../AuthPersonalDetails/AuthPersonalDetails1';
@@ -15,7 +15,7 @@ import { SignUpFinalStep } from '../SignUpFinalStep/SignUpFinalStep';
 
 interface Props {
   currentStep: SignUpStep;
-  verifyEmailResponse?: CTVerifyEmailResponse;
+  verifyEmailResponse?: GTInvitationErrors;
   hasFailedPin: boolean;
   resetHasFailedPin: () => void;
 }
