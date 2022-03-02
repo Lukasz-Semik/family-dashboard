@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 import { useFormikContext } from 'formik';
 
-import { CTInvitationUserPersonalDetailsData } from '@family-dashboard/global/types';
+import { GTInvitationDisplay } from '@family-dashboard/global/types';
 
 import { AuthPassword } from '../../AuthPassword/AuthPassword';
 import { AuthPersonalDetails1 } from '../../AuthPersonalDetails/AuthPersonalDetails1';
@@ -12,7 +12,7 @@ import { ConfirmInvitedUserInitialStep } from '../ConfirmInvitedUserInitialStep/
 
 interface Props {
   currentStep: ConfirmInvitedUserStep;
-  invitationData: CTInvitationUserPersonalDetailsData;
+  invitationData: GTInvitationDisplay;
 }
 
 export function ConfirmInvitedUserStepController({

@@ -34,3 +34,14 @@ export const CreateUserInvitation = gql`
     }
   }
 `;
+
+export const ConfirmUserInvitation = gql`
+  mutation ConfirmUserInvitation(
+    $token: String!
+    $input: InputConfirmUserInvitation!
+  ) {
+    confirmUserInvitation(input: $input, token: $token) {
+      accessToken
+    }
+  }
+`;

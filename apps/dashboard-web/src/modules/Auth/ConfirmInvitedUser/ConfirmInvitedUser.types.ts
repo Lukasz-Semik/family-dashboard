@@ -1,4 +1,4 @@
-import { CTGender } from '@family-dashboard/global/types';
+import { GTGender } from '@family-dashboard/global/types';
 
 export enum ConfirmInvitedUserStep {
   InitialStep = 'InitialStep',
@@ -13,7 +13,8 @@ export interface Values {
   firstName: string;
   middleName: string;
   lastName: string;
-  gender: CTGender | undefined;
+  gender: GTGender | undefined;
   dob: string;
   password: string;
+  email: string;
 }

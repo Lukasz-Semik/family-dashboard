@@ -10,13 +10,11 @@ import {
   DisplayInvitation,
   DisplayVerifyEmailResponse,
   InputConfirmSignUpInvitation,
+  InputConfirmUserInvitation,
   InputCreateSignUpInvitation,
   InputCreateUserInvitation,
-  InvitationUserConfirmInput,
-  InvitationUserPersonalDetailsDto,
   LoginDto,
 } from '../../schema';
-import { serilizeUserInvitation } from '../../serializators/invitation.serializator';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { InvitationService } from './invitation.service';
@@ -86,20 +84,22 @@ export class InvitationResolver {
   @Mutation(() => LoginDto)
   async confirmUserInvitation(
     @Args('token') token: string,
-    @Args('input') input: InvitationUserConfirmInput
+    @Args('input') input: InputConfirmUserInvitation
   ) {
-    const user = await this.invitationService.confirmUserInvitation(
-      input,
-      token
+    const member = await this.invitationServiceV2.confirmUserInvitation(
+      token,
+      input
     );
 
-    return this.authService.createToken(user.email, user.id, user.family.id);
+    return this.authService.createToken(
+      member.email,
+      member.fullKey,
+      member.familyId
+    );
   }
 
-  @Query(() => InvitationUserPersonalDetailsDto)
+  @Query(() => DisplayInvitation)
   async getUserInvitation(@Args('token') token: string) {
-    const invitation = await this.invitationService.getUserInvitation(token);
-
-    return serilizeUserInvitation(invitation);
+    return this.invitationServiceV2.getUserInvitation(token);
   }
 }

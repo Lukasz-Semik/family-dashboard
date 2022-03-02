@@ -1,18 +1,14 @@
 import { useCallback } from 'react';
 import { useMutation } from '@apollo/client';
-import dayjs from 'dayjs';
 
 import { ConfirmSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
-import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
 import {
-  CTGender,
   CTInvitationErrors,
-  CTInvitationSignUpConfirmInput,
   CTLoginResponse,
-  GTGender,
   GTConfirmSignUpInvitationInput,
+  GTGender,
 } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';

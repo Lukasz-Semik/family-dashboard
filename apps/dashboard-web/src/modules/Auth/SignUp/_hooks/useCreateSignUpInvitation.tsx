@@ -5,8 +5,8 @@ import { useMutation } from '@apollo/client';
 import { showErrorToast } from '@family-dashboard/design-system';
 import { CreateSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import {
-  GTGender,
   GTCreateSignUpInvitationInput,
+  GTGender,
 } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';

@@ -28,24 +28,6 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type InvitationUserPersonalDetailsDto {
-  inviterName: String!
-  familyName: String!
-  email: String!
-  firstName: String!
-  middleName: String!
-  lastName: String!
-  dob: DateTime!
-  gender: CTGender!
-}
-
-"""User's gender"""
-enum CTGender {
-  Male
-  Female
-  Other
-}
-
 type DisplayVerifyEmailResponse {
   status: GTVerifyEmailStatus!
   inviterName: String
@@ -115,6 +97,13 @@ type UserDto {
   memberType: CTMemberType!
 }
 
+"""User's gender"""
+enum CTGender {
+  Male
+  Female
+  Other
+}
+
 """User's modules permissions"""
 enum CTUserModulePermission {
   FamilySettings
@@ -159,7 +148,7 @@ type DisplayFamily {
 
 type Query {
   verifySignUpEmail(email: String!): DisplayVerifyEmailResponse!
-  getUserInvitation(token: String!): InvitationUserPersonalDetailsDto!
+  getUserInvitation(token: String!): DisplayInvitation!
   getUserInitialAppState: InitialAppStateDto!
   getAllFamilyMembers: FamilyAllMembersDto!
   getFamilyDisplay: DisplayFamily!
@@ -171,7 +160,7 @@ type Mutation {
   createUserInvitation(input: InputCreateUserInvitation!): DisplayInvitation!
   resendInvitation(email: String!): Boolean!
   cancelInvitation(fullKey: String!): Boolean!
-  confirmUserInvitation(input: InvitationUserConfirmInput!, token: String!): LoginDto!
+  confirmUserInvitation(input: InputConfirmUserInvitation!, token: String!): LoginDto!
   login(password: String!, email: String!): LoginDto!
 }
 
@@ -224,11 +213,8 @@ input InputCreateUserInvitationModulePermissions {
   hasFinanacial: Boolean!
 }
 
-input InvitationUserConfirmInput {
-  password: String!
-  firstName: String!
-  middleName: String
-  lastName: String!
-  dob: DateTime!
-  gender: CTGender!
+input InputConfirmUserInvitation {
+  email: String!
+  security: InputConfrimSignUpInvitationSecurity!
+  personalDetails: InputCreateInvitationPersonalDetails!
 }

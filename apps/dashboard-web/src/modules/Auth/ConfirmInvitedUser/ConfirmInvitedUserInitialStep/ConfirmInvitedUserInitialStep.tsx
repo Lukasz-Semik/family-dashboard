@@ -2,13 +2,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { dsStyles } from '@family-dashboard/design-system';
 import { validateFieldRequired } from '@family-dashboard/fe-libs/field-validators';
-import { CTInvitationUserPersonalDetailsData } from '@family-dashboard/global/types';
+import { GTInvitationDisplay } from '@family-dashboard/global/types';
 import { FieldInputStandard } from '@family-dashboard/web-libs/field-controls';
 
 import { StyledDescription } from './ConfirmInvitedUserInitialStep.styled';
 
 interface Props {
-  invitationData: CTInvitationUserPersonalDetailsData;
+  invitationData: GTInvitationDisplay;
 }
 
 export function ConfirmInvitedUserInitialStep({ invitationData }: Props) {
@@ -20,8 +20,8 @@ export function ConfirmInvitedUserInitialStep({ invitationData }: Props) {
         <FormattedMessage
           id="auth.confirmInvitedUser.description"
           values={{
-            familyName: invitationData.familyName,
-            inviterName: invitationData.inviterName,
+            familyName: invitationData.invitationDetails.familyName,
+            inviterName: invitationData.invitationDetails.inviterName,
           }}
         />
       </StyledDescription>

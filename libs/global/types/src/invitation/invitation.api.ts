@@ -8,7 +8,6 @@ import { CTUserPersonalDetails } from '../user/user';
 import {
   CTInvitationBaseData,
   GTInvitationDetailsDBRecord,
-  GTInvitationDetailsDisplay,
 } from './invitation';
 
 export enum CTVerifyEmailResponseStatus {
@@ -80,7 +79,7 @@ export interface GTConfirmSignUpInvitationInput {
   security: GTMemberSecurityDBRecord;
   personalDetails: GTPersonalDetailsDisplay;
   invitationDetails: Omit<
-    GTInvitationDetailsDisplay,
+    GTInvitationDetailsDBRecord,
     'validTo' | 'inviterEmail' | 'inviterName'
   >;
 }
@@ -90,3 +89,8 @@ export interface GTCreateUserInvitationInput
   memberType: GTMemberType;
   modulePermissions: GTModulePermissionsDisplay;
 }
+
+export type GTConfirmUserInvitationInput = Omit<
+  GTConfirmSignUpInvitationInput,
+  'invitationDetails'
+>;
