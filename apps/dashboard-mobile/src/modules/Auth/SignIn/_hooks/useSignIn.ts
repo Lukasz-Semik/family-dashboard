@@ -10,7 +10,7 @@ import {
   MobileRoute,
   MobileStackParamList,
 } from '@family-dashboard/global/const';
-import { CTLoginResponse } from '@family-dashboard/global/types';
+import { GTLoginDisplay } from '@family-dashboard/global/types';
 
 export interface Values {
   email: string;
@@ -23,7 +23,7 @@ export function useSignIn() {
       NativeStackNavigationProp<MobileStackParamList, MobileRoute.SignIn>
     >();
 
-  const [login, { loading }] = useMutation<{ login: CTLoginResponse }, Values>(
+  const [login, { loading }] = useMutation<{ login: GTLoginDisplay }, Values>(
     Login,
     {
       onCompleted: async (data) => {

@@ -1,11 +1,11 @@
-import { CTGender } from '@family-dashboard/global/types';
+import { GTGender } from '@family-dashboard/global/types';
 
 export interface Values {
   email: string;
   firstName: string;
   middleName: string;
   lastName: string;
-  gender: CTGender | undefined;
+  gender: GTGender | undefined;
   dob: string;
   hasFamilySettingsModulePermission: boolean;
   hasFinancialModulePermission: boolean;

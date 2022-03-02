@@ -6,7 +6,7 @@ import {
   validateFieldDateValid,
   validateFieldRequired,
 } from '@family-dashboard/fe-libs/field-validators';
-import { CTGender } from '@family-dashboard/global/types';
+import { GTGender } from '@family-dashboard/global/types';
 import {
   FieldInputMasked,
   FieldSelect,
@@ -50,15 +50,15 @@ export function AuthPersonalDetails2({ description }: Props) {
         )}
         items={[
           {
-            value: CTGender.Male,
+            value: GTGender.Male,
             label: intl.formatMessage({ id: 'fields.gender.items.male' }),
           },
           {
-            value: CTGender.Female,
+            value: GTGender.Female,
             label: intl.formatMessage({ id: 'fields.gender.items.female' }),
           },
           {
-            value: CTGender.Other,
+            value: GTGender.Other,
             label: intl.formatMessage({ id: 'fields.gender.items.other' }),
           },
         ]}

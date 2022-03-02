@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 
 import { LoaderSimple } from '@family-dashboard/design-system';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
-import { CTInvitationUserPersonalDetailsData } from '@family-dashboard/global/types';
+import { GTInvitationDisplay } from '@family-dashboard/global/types';
 
 import { StyledFlexForm, StyledFormTitle } from '../Auth.styled';
 import { AuthLayout } from '../AuthLayout/AuthLayout';
@@ -44,11 +44,12 @@ export function ConfirmInvitedUser() {
       <Formik<Values>
         enableReinitialize
         initialValues={{
-          firstName: initialData?.firstName ?? '',
-          middleName: initialData?.middleName ?? '',
-          lastName: initialData?.lastName ?? '',
-          gender: initialData?.gender ?? undefined,
-          dob: dayjs(initialData?.dob).format(FULL_DATE_FORMAT),
+          firstName: initialData?.personalDetails.firstName ?? '',
+          middleName: initialData?.personalDetails.middleName ?? '',
+          lastName: initialData?.personalDetails.lastName ?? '',
+          gender: initialData?.personalDetails.gender ?? undefined,
+          dob: dayjs(initialData?.personalDetails.dob).format(FULL_DATE_FORMAT),
+          email: initialData?.email ?? '',
           password: '',
         }}
         onSubmit={onSubmit}
@@ -66,9 +67,7 @@ export function ConfirmInvitedUser() {
                 {isLoaded && (
                   <ConfirmInvitedUserStepController
                     currentStep={currentStep}
-                    invitationData={
-                      initialData as CTInvitationUserPersonalDetailsData
-                    }
+                    invitationData={initialData as GTInvitationDisplay}
                   />
                 )}
 

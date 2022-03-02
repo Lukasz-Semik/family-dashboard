@@ -4,8 +4,10 @@ import { useDispatch } from 'react-redux';
 import { useMutation } from '@apollo/client';
 
 import { showErrorToast } from '@family-dashboard/design-system';
-import { CancelInvitation } from '@family-dashboard/fe-libs/api-graphql';
-import { CTInvitationDisplayData } from '@family-dashboard/global/types';
+import {
+  ApiInvitationDisplay,
+  CancelInvitation,
+} from '@family-dashboard/fe-libs/api-graphql';
 import {
   useSelectFamily,
   webStoreFamilyActions,
@@ -15,10 +17,10 @@ export function useFamilySettingsInvitationsList() {
   const family = useSelectFamily();
   const dispatch = useDispatch();
   const [selectedInvitation, setSelectedInvitation] =
-    useState<CTInvitationDisplayData | null>(null);
+    useState<ApiInvitationDisplay | null>(null);
   const [cancelInvitationMutation, { loading }] = useMutation<{
     cancelInvitation: boolean;
-    email: string;
+    fullKey: string;
   }>(CancelInvitation, {
     onError: () => {
       showErrorToast(<FormattedMessage id="errors.somethingWentWrong" />);
@@ -26,27 +28,29 @@ export function useFamilySettingsInvitationsList() {
   });
 
   const cancelInvitation = useCallback(
-    async (email?: string) => {
-      if (!email) {
+    async (fullKey?: string) => {
+      if (!fullKey) {
         showErrorToast(<FormattedMessage id="errors.somethingWentWrong" />);
         return;
       }
 
       await cancelInvitationMutation({
         variables: {
-          email,
+          fullKey,
         },
       });
 
       dispatch(
-        webStoreFamilyActions.setInvitations(
-          family.invitations.filter((invitation) => invitation.email !== email)
+        webStoreFamilyActions.setFamilyDataInvitations(
+          family.data.invitations.filter(
+            (invitation) => invitation.fullKey !== fullKey
+          )
         )
       );
 
       setSelectedInvitation(null);
     },
-    [family.invitations, cancelInvitationMutation, dispatch]
+    [family.data.invitations, cancelInvitationMutation, dispatch]
   );
 
   return {

@@ -21,14 +21,14 @@ export function SidebarDesktop() {
   return (
     <StyledWrapper>
       <CurrentDate />
-      <StyledFamilyName>{family.data.name}</StyledFamilyName>
+      <StyledFamilyName>{family.data.familyDetails.name}</StyledFamilyName>
       <StyledAvatarGroupWrapper>
         <StyledAvatarWrapper>
-          <Avatar>{`${user.data.firstName.charAt(0)}${user.data.lastName.charAt(
+          <Avatar>{`${user.data.personalDetails.firstName.charAt(
             0
-          )}`}</Avatar>
+          )}${user.data.personalDetails.lastName.charAt(0)}`}</Avatar>
         </StyledAvatarWrapper>
-        <StyledName>{user.data.firstName}</StyledName>
+        <StyledName>{user.data.personalDetails.firstName}</StyledName>
       </StyledAvatarGroupWrapper>
 
       <ItemsList />

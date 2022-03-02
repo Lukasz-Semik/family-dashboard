@@ -5,31 +5,24 @@ import {
   CurrentLoggedInUser,
   CurrentLoggedInUserData,
 } from '../../decorators/currentLoggedInUser.decorator';
-import { FamilyEntity } from '../../entities/family.entity';
-import { FamilyAllMembersDto } from '../../schema';
-import { serializeInvitation } from '../../serializators/invitation.serializator';
-import { serializeUser } from '../../serializators/user.serializator';
+import { DisplayFamily } from '../../schema';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { FamilyService } from './family.service';
 
-@Resolver(() => FamilyEntity)
+@Resolver()
 export class FamilyResolver {
   constructor(private readonly familyService: FamilyService) {}
 
-  @Query(() => FamilyAllMembersDto)
+  @Query(() => DisplayFamily)
   @UseGuards(JwtAuthGuard)
-  async getAllFamilyMembers(
+  async getFamilyDisplay(
     @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData
   ) {
-    const family = await this.familyService.getFamilyWithAllMembers(
-      currentLoggedInUser.familyId
+    const familyDisplay = await this.familyService.getFamilyDisplay(
+      currentLoggedInUser.familyId,
+      currentLoggedInUser.userId
     );
 
-    return {
-      users: family.users
-        .filter((user) => user.id !== currentLoggedInUser.userId)
-        .map(serializeUser),
-      invitations: family.invitations.map(serializeInvitation),
-    };
+    return familyDisplay;
   }
 }

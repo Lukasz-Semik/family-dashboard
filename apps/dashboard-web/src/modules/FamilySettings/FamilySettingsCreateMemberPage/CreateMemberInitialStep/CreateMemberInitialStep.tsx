@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { ButtonStandard, RadioStandard } from '@family-dashboard/design-system';
-import { CTMemberType } from '@family-dashboard/global/types';
+import { GTMemberType } from '@family-dashboard/global/types';
 
 import {
   StyledButtonWrapper,
@@ -12,8 +12,8 @@ import {
 } from './CreateMemberInitialStep.styled';
 
 interface Props {
-  memberType: CTMemberType | null;
-  setMemberType: React.Dispatch<React.SetStateAction<CTMemberType | null>>;
+  memberType: GTMemberType | null;
+  setMemberType: React.Dispatch<React.SetStateAction<GTMemberType | null>>;
   startCreation: () => void;
 }
 
@@ -37,8 +37,8 @@ export function CreateMemberInitialStep({
           label={
             <FormattedMessage id="familySettings.createMember.adultUser.label" />
           }
-          checked={memberType === CTMemberType.AdultUser}
-          onClick={() => setMemberType(CTMemberType.AdultUser)}
+          checked={memberType === GTMemberType.AdultUser}
+          onClick={() => setMemberType(GTMemberType.AdultUser)}
         />
       </StyledRadioWrapper>
 
@@ -51,8 +51,8 @@ export function CreateMemberInitialStep({
           label={
             <FormattedMessage id="familySettings.createMember.childUser.label" />
           }
-          checked={memberType === CTMemberType.ChildUser}
-          onClick={() => setMemberType(CTMemberType.ChildUser)}
+          checked={memberType === GTMemberType.ChildUser}
+          onClick={() => setMemberType(GTMemberType.ChildUser)}
         />
       </StyledRadioWrapper>
 

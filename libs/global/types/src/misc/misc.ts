@@ -1,4 +1,4 @@
-export interface CTTokenDecoded {
+export interface GTTokenDecoded {
   email: string;
   sub: string;
   familyId: string;

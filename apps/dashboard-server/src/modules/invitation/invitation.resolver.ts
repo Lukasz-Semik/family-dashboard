@@ -5,30 +5,27 @@ import {
   CurrentLoggedInUser,
   CurrentLoggedInUserData,
 } from '../../decorators/currentLoggedInUser.decorator';
-import { InvitationEntity } from '../../entities/invitation.entity';
 import {
-  InvitationCreateInput,
-  InvitationDto,
-  InvitationSignUpConfirmInput,
-  InvitationSignUpCreateInput,
-  InvitationUserConfirmInput,
-  InvitationUserPersonalDetailsDto,
-  LoginDto,
-  VerifyEmailDto,
+  DisplayInvitation,
+  DisplayLogin,
+  DisplayVerifyEmailResponse,
+  InputConfirmSignUpInvitation,
+  InputConfirmUserInvitation,
+  InputCreateSignUpInvitation,
+  InputCreateUserInvitation,
 } from '../../schema';
-import { serilizeUserInvitation } from '../../serializators/invitation.serializator';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { InvitationService } from './invitation.service';
 
-@Resolver(() => InvitationEntity)
+@Resolver()
 export class InvitationResolver {
   constructor(
     private readonly invitationService: InvitationService,
     private readonly authService: AuthService
   ) {}
 
-  @Query(() => VerifyEmailDto)
+  @Query(() => DisplayVerifyEmailResponse)
   async verifySignUpEmail(@Args('email') email: string) {
     const result = await this.invitationService.verifyEmail(email);
 
@@ -37,60 +34,66 @@ export class InvitationResolver {
 
   @Mutation(() => Boolean)
   async createSignUpInvitation(
-    @Args('input') input: InvitationSignUpCreateInput
+    @Args('input') input: InputCreateSignUpInvitation
   ) {
     return this.invitationService.createSignUpInvitation(input);
   }
 
-  @Mutation(() => InvitationDto)
+  @Mutation(() => DisplayLogin)
+  async confirmSignUpInvitation(
+    @Args('input') input: InputConfirmSignUpInvitation
+  ) {
+    const records = await this.invitationService.confirmSignUpInvitation(input);
+
+    return this.authService.createToken(
+      records.member.email,
+      records.member.fullKey,
+      records.family.familyId
+    );
+  }
+
+  @Mutation(() => DisplayInvitation)
   @UseGuards(JwtAuthGuard)
   async createUserInvitation(
-    @Args('input') input: InvitationCreateInput,
+    @Args('input') input: InputCreateUserInvitation,
     @CurrentLoggedInUser() user: CurrentLoggedInUserData
   ) {
-    return this.invitationService.createUserInvitation(input, user.familyId);
+    return this.invitationService.createUserInvitation(user.familyId, input);
   }
 
   @Mutation(() => Boolean)
-  async resendInvitation(@Args('email') email: string) {
-    return this.invitationService.resendInvitation(email);
+  async resendSignUpCode(@Args('email') email: string) {
+    return this.invitationService.resendSignUpCode(email);
   }
 
   @Mutation(() => Boolean)
   @UseGuards(JwtAuthGuard)
   async cancelInvitation(
-    @Args('email') email: string,
+    @Args('fullKey') fullKey: string,
     @CurrentLoggedInUser() user: CurrentLoggedInUserData
   ) {
-    return this.invitationService.cancelUserInvitation(email, user.familyId);
+    return this.invitationService.cancelInvitation(user.familyId, fullKey);
   }
 
-  @Mutation(() => LoginDto)
-  async confirmSignUpInvitation(
-    @Args('input') input: InvitationSignUpConfirmInput
-  ) {
-    const user = await this.invitationService.confirmSignUpInvitation(input);
-
-    return this.authService.createToken(user.email, user.id, user.family.id);
-  }
-
-  @Mutation(() => LoginDto)
+  @Mutation(() => DisplayLogin)
   async confirmUserInvitation(
     @Args('token') token: string,
-    @Args('input') input: InvitationUserConfirmInput
+    @Args('input') input: InputConfirmUserInvitation
   ) {
-    const user = await this.invitationService.confirmUserInvitation(
-      input,
-      token
+    const member = await this.invitationService.confirmUserInvitation(
+      token,
+      input
     );
 
-    return this.authService.createToken(user.email, user.id, user.family.id);
+    return this.authService.createToken(
+      member.email,
+      member.fullKey,
+      member.familyId
+    );
   }
 
-  @Query(() => InvitationUserPersonalDetailsDto)
+  @Query(() => DisplayInvitation)
   async getUserInvitation(@Args('token') token: string) {
-    const invitation = await this.invitationService.getUserInvitation(token);
-
-    return serilizeUserInvitation(invitation);
+    return this.invitationService.getUserInvitation(token);
   }
 }

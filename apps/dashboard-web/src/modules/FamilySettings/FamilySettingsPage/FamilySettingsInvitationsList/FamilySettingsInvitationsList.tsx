@@ -15,8 +15,8 @@ import {
   ModalText,
   ModalTitle,
 } from '@family-dashboard/design-system';
+import { ApiInvitationDisplay } from '@family-dashboard/fe-libs/api-graphql';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
-import { CTInvitationDisplayData } from '@family-dashboard/global/types';
 
 import {
   StyledContentWithIconWrapper,
@@ -46,8 +46,8 @@ export function FamilySettingsInvitationsList() {
         <FormattedMessage id="familySettings.pendingInvitations" />
       </StyledListTitle>
 
-      <ListStandard<CTInvitationDisplayData>
-        items={family.invitations}
+      <ListStandard<ApiInvitationDisplay>
+        items={family.data.invitations}
         renderHeaders={() => (
           <ListStandardHeadersWrapper>
             <ListStandardHeaderColumn width="20%">
@@ -70,7 +70,7 @@ export function FamilySettingsInvitationsList() {
                     <StyledIconWrapper>
                       <IconProgress />
                     </StyledIconWrapper>
-                    {invitation.firstName}
+                    {invitation.personalDetails.firstName}
                   </StyledContentWithIconWrapper>
                 </ListStandardItemColumn>
 
@@ -83,7 +83,9 @@ export function FamilySettingsInvitationsList() {
                     <StyledDescriptionColumnLabel>
                       <FormattedMessage id="shared.validTo" />:{' '}
                     </StyledDescriptionColumnLabel>
-                    {dayjs(invitation.validTo).format(FULL_DATE_FORMAT)}
+                    {dayjs(invitation.invitationDetails.validTo).format(
+                      FULL_DATE_FORMAT
+                    )}
                   </StyledDescriptionColumnContent>
                 </ListStandardItemColumn>
 
@@ -122,7 +124,7 @@ export function FamilySettingsInvitationsList() {
           isDisabled={isLoading}
           onCancelButtonClick={() => setSelectedInvitation(null)}
           onConfirmButtonClick={() =>
-            cancelInvitation(selectedInvitation?.email)
+            cancelInvitation(selectedInvitation?.fullKey)
           }
           cancelContent={<FormattedMessage id="shared.cancel" />}
           confirmContent={<FormattedMessage id="shared.confirm" />}

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import { ButtonArrowBack } from '@family-dashboard/design-system';
 import { webRoutes } from '@family-dashboard/global/const';
-import { CTMemberType } from '@family-dashboard/global/types';
+import { GTMemberType } from '@family-dashboard/global/types';
 
 import { CreateMemberForm } from './CreateMemberForm/CreateMemberForm';
 import { CreateMemberInitialStep } from './CreateMemberInitialStep/CreateMemberInitialStep';
@@ -13,7 +13,7 @@ import { CreateStep } from './FamilySettingsCreateMemberPage.types';
 
 export function FamilySettingsCreateMemberPage() {
   const history = useHistory();
-  const [memberType, setMemberType] = useState<CTMemberType | null>(null);
+  const [memberType, setMemberType] = useState<GTMemberType | null>(null);
   const [createStep, setCreateStep] = useState<CreateStep>(CreateStep.Initial);
 
   return (

@@ -1,26 +1,38 @@
 import {
-  CTMemberType,
-  CTUserModulePermission,
-  CTUserPersonalDetails,
-} from '../user/user';
+  GTMemberType,
+  GTModulePermissionsDisplay,
+  GTPersonalDetailsDisplay,
+} from '../member/member';
 
-export interface CTInvitationBaseData extends Partial<CTUserPersonalDetails> {
-  modulePermissions: CTUserModulePermission[];
-  memberType: CTMemberType;
-  email: string;
-  validTo: Date;
-  familyName: string;
+export interface GTInvitationDetailsDBRecord {
+  inviterEmail: string;
+  code: string | 'verified';
   inviterName: string;
+  familyName: string;
+  validTo: string;
 }
 
-export type CTInvitationDisplayData = Pick<
-  CTInvitationBaseData,
-  'firstName' | 'email' | 'validTo'
+export interface GTInvitationDBRecord {
+  familyId: string;
+  fullKey: string;
+  email: string;
+  memberType: GTMemberType;
+  modulePermissions: GTModulePermissionsDisplay;
+  invitationDetails: GTInvitationDetailsDBRecord;
+  personalDetails: GTPersonalDetailsDisplay;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type GTInvitationDetailsDisplay = Omit<
+  GTInvitationDetailsDBRecord,
+  'code'
 >;
 
-export interface CTInvitationUserPersonalDetailsData
-  extends CTUserPersonalDetails {
+export interface GTInvitationDisplay {
+  familyId: string;
+  fullKey: string;
   email: string;
-  familyName: string;
-  inviterName: string;
+  invitationDetails: GTInvitationDetailsDisplay;
+  personalDetails: GTPersonalDetailsDisplay;
 }

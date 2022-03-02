@@ -14,7 +14,7 @@ import {
   ModalTitle,
   useModalState,
 } from '@family-dashboard/design-system';
-import { ResendInvitation } from '@family-dashboard/fe-libs/api-graphql';
+import { ResendSignUpCode } from '@family-dashboard/fe-libs/api-graphql';
 import { FieldInputsPureConnectedGroup } from '@family-dashboard/web-libs/field-controls';
 
 import { StyledCommonDescription } from '../../Auth.styled';
@@ -34,10 +34,10 @@ interface Props {
 export function SignUpConfirmEmail({ hasFailedPin, resetHasFailedPin }: Props) {
   const { values } = useFormikContext<Values>();
   const [isModalOpen, openModal, closeModal] = useModalState();
-  const [resendInvitation, { loading }] = useMutation<{
+  const [resendCode, { loading }] = useMutation<{
     resendInvitation: boolean;
     email: string;
-  }>(ResendInvitation, {
+  }>(ResendSignUpCode, {
     variables: {
       email: values.email,
     },
@@ -101,7 +101,7 @@ export function SignUpConfirmEmail({ hasFailedPin, resetHasFailedPin }: Props) {
           isConfirmLoading={loading}
           isDisabled={loading}
           onCancelButtonClick={closeModal}
-          onConfirmButtonClick={resendInvitation}
+          onConfirmButtonClick={resendCode}
           cancelContent={<FormattedMessage id="shared.cancel" />}
           confirmContent={<FormattedMessage id="shared.confirm" />}
         />

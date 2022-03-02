@@ -2,13 +2,13 @@ import { useRouteMatch } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { GetUserInvitation } from '@family-dashboard/fe-libs/api-graphql';
-import { CTInvitationUserPersonalDetailsData } from '@family-dashboard/global/types';
+import { GTInvitationDisplay } from '@family-dashboard/global/types';
 
 export function useInitialData() {
   const match = useRouteMatch<{ token: string }>();
 
   const { data, loading, error } = useQuery<
-    { getUserInvitation: CTInvitationUserPersonalDetailsData },
+    { getUserInvitation: GTInvitationDisplay },
     { token: string }
   >(GetUserInvitation, {
     variables: {

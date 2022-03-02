@@ -3,17 +3,18 @@ import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import dayjs from 'dayjs';
 
 import { showErrorToast } from '@family-dashboard/design-system';
-import { CreateUserInvitation } from '@family-dashboard/fe-libs/api-graphql';
-import { FULL_DATE_FORMAT,webRoutes } from '@family-dashboard/global/const';
 import {
-  CTInvitationCreateInput,
-  CTInvitationDisplayData,
-  CTInvitationErrors,
-  CTMemberType,
-  CTUserModulePermission,
+  ApiInvitationDisplay,
+  CreateUserInvitation,
+} from '@family-dashboard/fe-libs/api-graphql';
+import { webRoutes } from '@family-dashboard/global/const';
+import {
+  GTInvitationErrors,
+  GTGender,
+  GTCreateUserInvitationInput,
+  GTMemberType,
 } from '@family-dashboard/global/types';
 import {
   useSelectFamily,
@@ -35,25 +36,26 @@ export function useCreateUserInvitation({ closeModal }: Args) {
 
   const [createUserInvitationMutation, { loading }] = useMutation<
     {
-      createUserInvitation: CTInvitationDisplayData;
+      createUserInvitation: ApiInvitationDisplay;
     },
-    { input: CTInvitationCreateInput }
+    { input: GTCreateUserInvitationInput }
   >(CreateUserInvitation, {
     onCompleted: (responseData) => {
+      console.log(responseData);
       dispatch(
-        webStoreFamilyActions.setInvitations([
+        webStoreFamilyActions.setFamilyDataInvitations([
           responseData.createUserInvitation,
-          ...family.invitations,
+          ...family.data.invitations,
         ])
       );
       history.push(webRoutes.dashboard.familySettings.familySettingsRoute.path);
     },
     onError: (errors) => {
       if (
-        errors.graphQLErrors[0].message ===
-          CTInvitationErrors.EmailAlreadyInUse ||
-        errors.graphQLErrors[0].message ===
-          CTInvitationErrors.EmailAlreadyInvited
+        errors.graphQLErrors[0]?.message ===
+          GTInvitationErrors.EmailAlreadyInUse ||
+        errors.graphQLErrors[0]?.message ===
+          GTInvitationErrors.EmailAlreadyInvited
       ) {
         showErrorToast(
           <FormattedMessage id="auth.signUp.verifyEmail.alreadyCreated.title" />
@@ -70,28 +72,38 @@ export function useCreateUserInvitation({ closeModal }: Args) {
     ({
       hasFamilySettingsModulePermission,
       hasFinancialModulePermission,
-      ...values
+      email,
+      gender,
+      ...personalDetails
     }: Values) => {
       createUserInvitationMutation({
         variables: {
           input: {
-            ...values,
-            dob: dayjs(values.dob, FULL_DATE_FORMAT).toDate(),
-            inviterName: user.data.firstName,
-            modulePermissions: [
-              hasFamilySettingsModulePermission
-                ? CTUserModulePermission.FamilySettings
-                : undefined,
-              hasFinancialModulePermission
-                ? CTUserModulePermission.Financial
-                : undefined,
-            ].filter(Boolean) as CTUserModulePermission[],
-            memberType: CTMemberType.AdultUser,
+            email,
+            personalDetails: {
+              ...personalDetails,
+              gender: gender as GTGender,
+            },
+            invitationDetails: {
+              inviterName: user.data.personalDetails.firstName,
+              inviterEmail: user.data.email,
+              familyName: family.data.familyDetails.name,
+            },
+            modulePermissions: {
+              hasFamilySettings: hasFamilySettingsModulePermission,
+              hasFinanacial: hasFinancialModulePermission,
+            },
+            memberType: GTMemberType.AdultUser,
           },
         },
       });
     },
-    [user.data.firstName, createUserInvitationMutation]
+    [
+      user.data.personalDetails.firstName,
+      user.data.email,
+      family.data.familyDetails.name,
+      createUserInvitationMutation,
+    ]
   );
 
   return {
