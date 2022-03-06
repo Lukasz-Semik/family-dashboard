@@ -1,12 +1,18 @@
 import { FormattedMessage } from 'react-intl';
 
-import { ButtonStandard, ErrorBox } from '@family-dashboard/design-system';
+import {
+  ButtonStandard,
+  dsStyles,
+  ErrorBox,
+  useIsResolution,
+} from '@family-dashboard/design-system';
 import { webRoutes } from '@family-dashboard/global/const';
 
 import { useMembersInfo } from './_hooks/useMembersInfo';
 import { StyledWrapper } from './DashboardMembersInfo.styled';
 import {
   StyledCard,
+  StyledErrorWrapper,
   StyledHeader,
   StyledLink,
 } from './DashboardMembersInfo.styled';
@@ -17,20 +23,24 @@ export function DashboardMembersInfo() {
     shouldShowPrirityError,
     redirectToCreateMember,
   } = useMembersInfo();
+  const isMobile = useIsResolution(Number(dsStyles.breakpoints.xs));
 
   if (shouldShowPrirityError) {
     return (
-      <>
-        <StyledWrapper>
+      <StyledWrapper>
+        <StyledErrorWrapper>
           <ErrorBox>
             <FormattedMessage id="dashboard.noInvitationsMembersWarning" />
           </ErrorBox>
-        </StyledWrapper>
+        </StyledErrorWrapper>
 
-        <ButtonStandard onClick={redirectToCreateMember} maxWidth="16rem">
+        <ButtonStandard
+          onClick={redirectToCreateMember}
+          maxWidth={isMobile ? '100%' : '238px'}
+        >
           <FormattedMessage id="familySettings.addMember" />
         </ButtonStandard>
-      </>
+      </StyledWrapper>
     );
   }
 

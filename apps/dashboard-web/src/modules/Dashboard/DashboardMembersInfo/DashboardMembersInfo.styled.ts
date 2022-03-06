@@ -9,6 +9,10 @@ import {
 } from '@family-dashboard/design-system';
 
 export const StyledWrapper = styled.div`
+  margin-bottom: 24px;
+`;
+
+export const StyledErrorWrapper = styled.div`
   margin-bottom: 16px;
 `;
 
