@@ -80,9 +80,14 @@ export const copies = {
     title: 'Shop',
   },
   familySettings: {
+    userType: {
+      adultUser: 'Adult user',
+    },
     title: 'Family Settings',
     addMember: 'Add member',
     pendingInvitations: 'Pending invitations',
+    pendingInvitationsInfo: 'You have {value} pending invitation(s)',
+    goToFamilySettings: 'Go to family settings',
     familyMembers: 'Family members',
     createMember: {
       chooseMemberType: 'Choose a member type',
@@ -107,15 +112,20 @@ export const copies = {
   },
   dashboard: {
     title: 'Dashboard',
+    noInvitationsMembersWarning:
+      'You don’t have family members or pending invitations.',
   },
   calendar: {
     title: 'Calendar',
+    nothingPlannedToday: 'Nothing planned for today',
   },
   notifications: {
     title: 'Notifications',
+    allSeen: 'You’ve seen all family news',
   },
   reminders: {
     title: 'Reminders',
+    create: 'Create reminder',
   },
   todos: {
     title: 'Todos',
@@ -165,6 +175,7 @@ export const copies = {
     addFamilyMembers: 'Add family members',
   },
   shared: {
+    create: 'Create...',
     show: 'Show',
     hide: 'Hide',
     next: 'Next',
@@ -182,6 +193,11 @@ export const copies = {
     backToLists: 'Back to lists',
     loading: 'Loading',
     menu: 'Menu',
+    you: 'You',
+    view: 'View',
+  },
+  dates: {
+    today: 'Today',
   },
   errors: {
     somethingWentWrong: 'Something went wrong',

@@ -14,6 +14,7 @@ import {
   IconDashboard,
   IconDoubleChevronLeft,
   IconEmail,
+  IconExclamation,
   IconFamily,
   IconGear,
   IconHamburger,
@@ -137,6 +138,10 @@ export const Icons = () => (
     <StyledItemWrapper>
       <IconDoubleChevronLeft color={dsStyles.colors.orange4} />
       icon-double-chevron-left
+    </StyledItemWrapper>
+    <StyledItemWrapper>
+      <IconExclamation />
+      icon-exclamation
     </StyledItemWrapper>
   </StyledItemsWrapper>
 );

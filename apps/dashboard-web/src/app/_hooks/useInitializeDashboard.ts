@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/client';
 
@@ -12,25 +13,25 @@ import {
 
 export function useInitializeDashboard() {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { loading } = useQuery<{ getFamilyDisplay: ApiFamilyDisplay }>(
-    GetFamilyDisplay,
-    {
-      onCompleted: (responseData) => {
-        dispatch(
-          webStoreUserActions.setUserData(
-            responseData.getFamilyDisplay.currentUser
-          )
-        );
+  useQuery<{ getFamilyDisplay: ApiFamilyDisplay }>(GetFamilyDisplay, {
+    onCompleted: (responseData) => {
+      dispatch(
+        webStoreUserActions.setUserData(
+          responseData.getFamilyDisplay.currentUser
+        )
+      );
 
-        dispatch(
-          webStoreFamilyActions.setFamilyData(responseData.getFamilyDisplay)
-        );
-      },
-    }
-  );
+      dispatch(
+        webStoreFamilyActions.setFamilyData(responseData.getFamilyDisplay)
+      );
+
+      setIsLoading(false);
+    },
+  });
 
   return {
-    isLoading: loading,
+    isLoading,
   };
 }

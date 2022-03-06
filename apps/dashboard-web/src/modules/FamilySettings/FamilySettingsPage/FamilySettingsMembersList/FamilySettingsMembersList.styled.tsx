@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { dsStyles } from '@family-dashboard/design-system';
+import { dsStyles, Typography12Regular } from '@family-dashboard/design-system';
 
 export const StyledEditIconWrapper = styled.div<{ isMarked: boolean }>`
   position: absolute;
@@ -15,4 +15,10 @@ export const StyledEditIconWrapper = styled.div<{ isMarked: boolean }>`
   @media screen and (min-width: ${dsStyles.breakpoints.md}px) {
     position: static;
   }
+`;
+
+export const StyledUserMessage = styled.span`
+  color: ${dsStyles.colors.grey1};
+  padding-top: 4px;
+  ${Typography12Regular};
 `;

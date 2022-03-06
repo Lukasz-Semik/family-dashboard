@@ -38,3 +38,10 @@ export const StyledWrapperRoundShowAnimation = styled.span<{
       `};
   }
 `;
+
+export const StyledWrapperCard = styled.div<{ $height?: string }>`
+  background-color: ${dsStyles.colors.white};
+  border-radius: 8px;
+  padding: 1rem;
+  height: ${({ $height }) => $height || 'auto'};
+`;

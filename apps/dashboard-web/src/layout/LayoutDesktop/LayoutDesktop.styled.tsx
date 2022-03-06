@@ -24,6 +24,7 @@ export const StyledContentWrapper = styled.div`
   @media screen and (min-width: ${dsStyles.breakpoints.xs}px) {
     padding-top: 2rem;
     padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 `;
 
