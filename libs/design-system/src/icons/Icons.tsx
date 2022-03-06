@@ -6,11 +6,13 @@ import { ReactComponent as IconCartSVG } from './assets/icon-cart.svg';
 import { ReactComponent as IconCheckmarkSVG } from './assets/icon-checkmark.svg';
 import { ReactComponent as IconCheckmarkPureSVG } from './assets/icon-checkmark-pure.svg';
 import { ReactComponent as IconChevronSVG } from './assets/icon-chevron.svg';
+import { ReactComponent as IconClockSVG } from './assets/icon-clock.svg';
 import { ReactComponent as IconCrossmarkSVG } from './assets/icon-crossmark.svg';
 import { ReactComponent as IconCrossmarkCircleSVG } from './assets/icon-crossmark-circle.svg';
 import { ReactComponent as IconDashboardSVG } from './assets/icon-dashboard.svg';
 import { ReactComponent as IconDoubleChevronLeftSVG } from './assets/icon-double-chevron-left.svg';
 import { ReactComponent as IconEmailSVG } from './assets/icon-email.svg';
+import { ReactComponent as IconExclamationSVG } from './assets/icon-exclamation.svg';
 import { ReactComponent as IconFamilySVG } from './assets/icon-family.svg';
 import { ReactComponent as IconGearSVG } from './assets/icon-gear.svg';
 import { ReactComponent as IconHamburgerSVG } from './assets/icon-hamburger.svg';
@@ -226,10 +228,27 @@ export const IconDoubleChevronLeft = (props: IconProps) => {
     </IconWrapper>
   );
 };
+
 export const IconCheckmarkPure = (props: IconProps) => {
   return (
     <IconWrapper {...props}>
       <IconCheckmarkPureSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconExclamation = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconExclamationSVG />
+    </IconWrapper>
+  );
+};
+
+export const IconClock = (props: IconProps) => {
+  return (
+    <IconWrapper {...props}>
+      <IconClockSVG />
     </IconWrapper>
   );
 };

@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react';
 
 import { IconEmail } from '../../../icons/Icons';
-import { ErrorMessage } from '../../ErrorMessage/ErrorMessage';
+import { ErrorMessage } from '../../Errors/ErrorMessage/ErrorMessage';
 import { StyledWrapper } from '../../Stories.styled';
 import { WrapperIconFormControl } from '../../Wrappers/Wrappers';
 import { InputProps } from '../Input.types';

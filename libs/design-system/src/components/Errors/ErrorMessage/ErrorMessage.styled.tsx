@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { dsStyles } from '../../utils/styles';
-import { Typography12SemiBold } from '../../utils/typography';
+import { dsStyles } from '../../../utils/styles';
+import { Typography12SemiBold } from '../../../utils/typography';
 import { ErrorMessageProps } from './ErrorMessage.types';
 
 export const StyledErrorMessage = styled.div<ErrorMessageProps>`

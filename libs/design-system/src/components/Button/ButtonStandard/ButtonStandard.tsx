@@ -7,12 +7,14 @@ export const ButtonStandard = ({
   isLoading,
   disabled,
   maxWidth,
+  minHeight,
   ...restProps
 }: ButtonProps) => {
   return (
     <StyledButton
       disabled={disabled || isLoading}
       $maxWidth={maxWidth}
+      $minHeight={minHeight}
       {...restProps}
     >
       <ButtonContent isLoading={isLoading}>{children}</ButtonContent>

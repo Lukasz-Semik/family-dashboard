@@ -25,7 +25,10 @@ import {
   StyledIconWrapper,
   StyledListTitle,
 } from '../FamilySettingsPage.styled';
-import { StyledEditIconWrapper } from './FamilySettingsMembersList.styled';
+import {
+  StyledEditIconWrapper,
+  StyledUserMessage,
+} from './FamilySettingsMembersList.styled';
 
 export function FamilySettingsMembersList() {
   const family = useSelectFamily();
@@ -61,15 +64,23 @@ export function FamilySettingsMembersList() {
                     <StyledIconWrapper>
                       <IconProgress />
                     </StyledIconWrapper>
-                    {item.personalDetails.firstName}{' '}
-                    {item.personalDetails.middleName?.charAt(0)}{' '}
-                    {item.personalDetails.lastName}
+                    <div>
+                      <div>
+                        {item.personalDetails.firstName}{' '}
+                        {item.personalDetails.middleName?.charAt(0)}{' '}
+                        {item.personalDetails.lastName}
+                      </div>
+                      {item.fullKey === user.data.fullKey && (
+                        <StyledUserMessage>
+                          (<FormattedMessage id="shared.you" />)
+                        </StyledUserMessage>
+                      )}
+                    </div>
                   </StyledContentWithIconWrapper>
                 </ListStandardItemColumn>
 
                 <ListStandardItemColumn width="30%">
-                  {/* TODO: translation! */}
-                  Adult user
+                  <FormattedMessage id="familySettings.userType.adultUser" />
                 </ListStandardItemColumn>
 
                 <ListStandardItemColumn width="20%">

@@ -5,6 +5,7 @@ import { Typography20Regular } from '../../../utils/typography';
 
 interface Props {
   $maxWidth?: string;
+  $minHeight?: string;
 }
 
 export const StyledButton = styled.button<Props>`
@@ -18,7 +19,7 @@ export const StyledButton = styled.button<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 3.5rem;
+  min-height: ${({ $minHeight }) => $minHeight || '56px'};
   width: 100%;
   border: none;
   cursor: pointer;
