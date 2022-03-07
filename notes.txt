@@ -6,6 +6,7 @@ TODO:
 - add story for ButtonsFormGroup
 - exctract cache (when start more advanced api)
 - separate constants
+- always return db record in db and serialize in service
 
 NOTES:
 - FUTURE: for future plans

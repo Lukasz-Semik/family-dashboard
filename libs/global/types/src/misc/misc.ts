@@ -5,3 +5,8 @@ export interface GTTokenDecoded {
   iat: number;
   exp: number;
 }
+
+export enum GTFamilyItemType {
+  Reminder = 'Reminder',
+  Birthday = 'Birthday',
+}
