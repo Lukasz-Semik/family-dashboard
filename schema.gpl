@@ -6,6 +6,27 @@ type DisplayLogin {
   accessToken: String!
 }
 
+type DisplayReminder {
+  familyId: String!
+  fullKey: String!
+  text: String!
+  type: String!
+  date: String!
+  familyItemFullKey: String
+  familyItemType: String
+  familyItemId: String
+}
+
+type ReminderNextToken {
+  familyId: String!
+  fullKey: String!
+}
+
+type DisplayReminderConnection {
+  reminders: [DisplayReminder!]!
+  nextToken: ReminderNextToken
+}
+
 type DisplayPersonalDetails {
   firstName: String!
   middleName: String
@@ -93,6 +114,12 @@ type Query {
   verifySignUpEmail(email: String!): DisplayVerifyEmailResponse!
   getUserInvitation(token: String!): DisplayInvitation!
   getFamilyDisplay: DisplayFamily!
+  getReminders(nextToken: InputReminderNextToken, limit: Float): DisplayReminderConnection!
+}
+
+input InputReminderNextToken {
+  familyId: String!
+  fullKey: String!
 }
 
 type Mutation {
@@ -103,6 +130,7 @@ type Mutation {
   cancelInvitation(fullKey: String!): Boolean!
   confirmUserInvitation(input: InputConfirmUserInvitation!, token: String!): DisplayLogin!
   login(password: String!, email: String!): DisplayLogin!
+  createReminder(input: InputCreateReminder!): DisplayReminder!
 }
 
 input InputCreateSignUpInvitation {
@@ -158,4 +186,9 @@ input InputConfirmUserInvitation {
   email: String!
   security: InputConfrimSignUpInvitationSecurity!
   personalDetails: InputCreateInvitationPersonalDetails!
+}
+
+input InputCreateReminder {
+  text: String!
+  date: String!
 }
