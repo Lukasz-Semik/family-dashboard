@@ -90,7 +90,6 @@ export function FamilySettingsMembersList() {
                     <StyledDescriptionColumnLabel>
                       <FormattedMessage id="shared.birthday" />:{' '}
                     </StyledDescriptionColumnLabel>
-                    {console.log(item.personalDetails.dob)}
                     {dayjs(item.personalDetails.dob, FULL_DATE_FORMAT).format(
                       FULL_DATE_FORMAT
                     )}
