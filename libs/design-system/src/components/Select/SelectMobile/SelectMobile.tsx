@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { IconCheckmark, IconChevron } from '../../../icons/Icons';
 import { dsStyles } from '../../../utils/styles';
-import { ButtonCloseAnimated } from '../../Button/ButtonCloseAnimated/ButtonCloseAnimated';
+import { PopperMobileHeader } from '../../PopperMobileHeader/PopperMobileHeader';
 import {
   StyledLabelContent,
   StyledListItem,
@@ -10,11 +10,8 @@ import {
 } from '../Select.styled';
 import { SelectItemBase, SelectProps } from '../Select.types';
 import {
-  StyledHeader,
-  StyledLine,
   StyledList,
   StyledModalMobileDropdown,
-  StyledTitle,
   StyledWrapper,
 } from './SelectMobile.styled';
 
@@ -64,11 +61,7 @@ export function SelectMobile<T extends SelectItemBase>({
       </StyledTrigger>
 
       <StyledModalMobileDropdown isOpen={isOpen}>
-        <StyledHeader>
-          <StyledTitle>{label}</StyledTitle>
-          <ButtonCloseAnimated onClick={close} />
-          <StyledLine />
-        </StyledHeader>
+        <PopperMobileHeader close={close} label={label} />
 
         <StyledList>
           {items.map((item) => (

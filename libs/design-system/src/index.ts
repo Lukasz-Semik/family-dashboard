@@ -17,6 +17,8 @@ export * from './components/Button/ButtonsFormGroup/ButtonsFormGroup';
 export * from './components/Button/ButtonCloseAnimated/ButtonCloseAnimated';
 export * from './components/Checkbox/Checkbox.types';
 export * from './components/Checkbox/Checkbox';
+export * from './components/DatePicker/DatePickerInputExact/DatePickerInputExact';
+export * from './components/DatePicker/DatePickerInputExact/DatePickerInputExact.types';
 export * from './components/Elements/Elements.types';
 export * from './components/Elements/ElementCircleAnimatedBase/ElementCircleAnimatedBase';
 export * from './components/Elements/ElementCloseAnimated/ElementCloseAnimated';

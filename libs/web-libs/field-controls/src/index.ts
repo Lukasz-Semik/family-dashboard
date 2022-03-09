@@ -1,4 +1,5 @@
 export * from './fields/FieldCheckbox/FieldCheckbox';
+export * from './fields/FieldDatePickerInputExactStandard/FieldDatePickerInputExactStandard';
 export * from './fields/FieldInputMasked/FieldInputMasked';
 export * from './fields/FieldInputPure/FieldInputPure';
 export * from './fields/FieldInputsPureConnectedGroup/FieldInputsPureConnectedGroup';
