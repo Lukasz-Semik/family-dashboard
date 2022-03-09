@@ -191,4 +191,5 @@ input InputConfirmUserInvitation {
 input InputCreateReminder {
   text: String!
   date: String!
+  time: String
 }

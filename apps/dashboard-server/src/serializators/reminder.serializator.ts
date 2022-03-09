@@ -20,5 +20,6 @@ export const serializeReminder = (
     familyItemType: familyItemKeyData.type as GTFamilyItemType,
     text: calendarEntryDbRecord.text,
     date: keyData.data,
+    hasTimeSet: calendarEntryDbRecord.hasTimeSet,
   };
 };

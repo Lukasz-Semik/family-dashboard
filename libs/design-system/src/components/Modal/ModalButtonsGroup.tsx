@@ -16,6 +16,7 @@ export function ModalButtonsGroup({
     <StyledButtonsRow>
       <StyledConfirmButtonWrapper>
         <ButtonStandard
+          type="submit"
           isLoading={isConfirmLoading}
           disabled={isDisabled}
           onClick={onConfirmButtonClick}
@@ -25,6 +26,7 @@ export function ModalButtonsGroup({
       </StyledConfirmButtonWrapper>
 
       <ButtonSecondary
+        type="button"
         isLoading={isCancelLoading}
         disabled={isDisabled}
         onClick={onCancelButtonClick}

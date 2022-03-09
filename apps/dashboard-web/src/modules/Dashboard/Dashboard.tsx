@@ -29,6 +29,7 @@ export function Dashboard() {
           minHeight="40px"
         >
           <FormattedMessage id="shared.create" />
+          ...
         </ButtonSecondary>
       </StyledMarginWrapper>
 

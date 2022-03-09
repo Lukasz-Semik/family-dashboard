@@ -1,9 +1,8 @@
-import { FormattedMessage } from 'react-intl';
-
 import { IconClock } from '@family-dashboard/design-system';
 
 import { DashboardCard } from '../DashboardCard/DashboardCard';
-import { StyledButton, StyledDescription } from './DashboardReminders.styled';
+import { StyledDescription } from './DashboardReminders.styled';
+import { DashboardRemindersCreateGroup } from './DashboardRemindersCreateGroup/DashboardRemindersCreateGroup';
 
 export function DashboardReminders() {
   return (
@@ -13,9 +12,7 @@ export function DashboardReminders() {
       height="100%"
     >
       <StyledDescription>14 reminders within next 30 days</StyledDescription>
-      <StyledButton>
-        <FormattedMessage id="reminders.create" />
-      </StyledButton>
+      <DashboardRemindersCreateGroup />
     </DashboardCard>
   );
 }

@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import * as dayjs from 'dayjs';
 
+import { FULL_DATE_TIME_FORMAT } from '@family-dashboard/global/const';
 import { buildHashKey } from '@family-dashboard/global/sdk';
 import {
+  GTCalendarEntryDBRecord,
   GTCalendarEntryType,
   GTCreateReminderInput,
   GTReminderDisplay,
@@ -44,12 +46,20 @@ export class CalendarEntryService {
     input: GTCreateReminderInput
   ): Promise<GTReminderDisplay> {
     try {
-      const date = dayjs(input.date).utc().toISOString();
-      const response = await this.calendarEntryDB.createReminder({
+      const time = input.time || '23:59';
+
+      const parsedDate = dayjs(`${input.date} ${time}`, FULL_DATE_TIME_FORMAT)
+        .utc()
+        .toISOString();
+
+      const calendarEntry: GTCalendarEntryDBRecord = {
         familyId,
         text: input.text,
-        fullKey: buildHashKey(GTCalendarEntryType.Reminder, date),
-      });
+        fullKey: buildHashKey(GTCalendarEntryType.Reminder, parsedDate),
+        hasTimeSet: Boolean(input.time),
+      };
+
+      const response = await this.calendarEntryDB.createReminder(calendarEntry);
 
       return serializeReminder(response);
     } catch (err) {

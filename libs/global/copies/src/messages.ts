@@ -161,6 +161,17 @@ export const copies = {
     dateOfBirth: {
       label: 'Date of birth',
     },
+    text: {
+      label: 'Text',
+      placeholder: 'Topic to be remined',
+    },
+    date: {
+      label: 'Date',
+    },
+    time: {
+      label: 'Time',
+      hint: '24h format',
+    },
     gender: {
       label: 'Gender',
       items: {
@@ -175,7 +186,7 @@ export const copies = {
     addFamilyMembers: 'Add family members',
   },
   shared: {
-    create: 'Create...',
+    create: 'Create',
     show: 'Show',
     hide: 'Hide',
     next: 'Next',
@@ -195,6 +206,7 @@ export const copies = {
     menu: 'Menu',
     you: 'You',
     view: 'View',
+    optional: 'Optional',
   },
   dates: {
     today: 'Today',
@@ -204,6 +216,7 @@ export const copies = {
     required: 'This field is required',
     email: 'Provide valid e-mail address',
     invalidDate: 'Invalid date',
+    pastDate: 'Date has to be in future',
     wrongSignIn: 'Email or password is invalid',
   },
 };

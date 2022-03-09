@@ -10,6 +10,7 @@ export interface GTCalendarEntryDBRecord {
   fullKey: string;
   text: string;
   familyItemFullKey?: string;
+  hasTimeSet: boolean;
 }
 
 export interface GTReminderDisplay extends GTCalendarEntryDBRecord {

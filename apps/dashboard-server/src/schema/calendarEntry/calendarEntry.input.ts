@@ -15,4 +15,5 @@ export class InputReminderNextToken implements GTReminderNextToken {
 export class InputCreateReminder implements GTCreateReminderInput {
   @Field(() => String) text: string;
   @Field(() => String) date: string;
+  @Field(() => String, { nullable: true }) time?: string;
 }
