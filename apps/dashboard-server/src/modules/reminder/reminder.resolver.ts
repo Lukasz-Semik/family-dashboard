@@ -9,23 +9,23 @@ import {
   DisplayReminder,
   DisplayReminderConnection,
   InputCreateReminder,
-  InputReminderNextToken,
+  InputNextTokenReminder,
 } from '../../schema';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { CalendarEntryService } from './calendarEntry.service';
+import { ReminderService } from './reminder.service';
 
 @Resolver()
-export class CalendarEntryResolver {
-  constructor(private readonly calendarEntryService: CalendarEntryService) {}
+export class ReminderResolver {
+  constructor(private readonly reminderService: ReminderService) {}
 
   @Query(() => DisplayReminderConnection)
   @UseGuards(JwtAuthGuard)
   async getReminders(
     @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData,
     @Args('limit', { nullable: true }) limit?: number,
-    @Args('nextToken', { nullable: true }) nextToken?: InputReminderNextToken
+    @Args('nextToken', { nullable: true }) nextToken?: InputNextTokenReminder
   ) {
-    return this.calendarEntryService.getReminders(
+    return this.reminderService.getReminders(
       currentLoggedInUser.familyId,
       limit,
       nextToken
@@ -38,7 +38,7 @@ export class CalendarEntryResolver {
     @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData,
     @Args('input') input: InputCreateReminder
   ) {
-    return this.calendarEntryService.createReminder(
+    return this.reminderService.createReminder(
       currentLoggedInUser.familyId,
       input
     );

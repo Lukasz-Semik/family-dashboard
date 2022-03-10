@@ -1,24 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import * as dayjs from 'dayjs';
+import { v4 as uuidv4 } from 'uuid';
 
 import { FULL_DATE_TIME_FORMAT } from '@family-dashboard/global/const';
 import { buildHashKey } from '@family-dashboard/global/sdk';
 import {
-  GTCalendarEntryDBRecord,
-  GTCalendarEntryType,
   GTCreateReminderInput,
   GTReminderDisplay,
   GTReminderDisplayConnection,
   GTReminderNextToken,
+  GTRreminderDBRecord,
 } from '@family-dashboard/global/types';
 
 import { throwError } from '../../helpers/throwError';
 import { serializeReminder } from '../../serializators/reminder.serializator';
-import { CalendarEntryDB } from './calendarEntry.db';
+import { ReminderDB } from './reminder.db';
 
 @Injectable()
-export class CalendarEntryService {
-  constructor(private readonly calendarEntryDB: CalendarEntryDB) {}
+export class ReminderService {
+  constructor(private readonly reminderDB: ReminderDB) {}
 
   async getReminders(
     familyId: string,
@@ -26,7 +26,7 @@ export class CalendarEntryService {
     nextToken?: GTReminderNextToken
   ): Promise<GTReminderDisplayConnection> {
     try {
-      const response = await this.calendarEntryDB.getReminders(
+      const response = await this.reminderDB.getReminders(
         familyId,
         limit,
         nextToken
@@ -52,14 +52,16 @@ export class CalendarEntryService {
         .utc()
         .toISOString();
 
-      const calendarEntry: GTCalendarEntryDBRecord = {
+      const reminder: GTRreminderDBRecord = {
         familyId,
         text: input.text,
-        fullKey: buildHashKey(GTCalendarEntryType.Reminder, parsedDate),
+        // TODO: handle better approach for db prefixes
+        fullKey: buildHashKey('Reminder', uuidv4()),
         hasTimeSet: Boolean(input.time),
+        date: parsedDate,
       };
 
-      const response = await this.calendarEntryDB.createReminder(calendarEntry);
+      const response = await this.reminderDB.createReminder(reminder);
 
       return serializeReminder(response);
     } catch (err) {

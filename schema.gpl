@@ -6,27 +6,6 @@ type DisplayLogin {
   accessToken: String!
 }
 
-type DisplayReminder {
-  familyId: String!
-  fullKey: String!
-  text: String!
-  type: String!
-  date: String!
-  familyItemFullKey: String
-  familyItemType: String
-  familyItemId: String
-}
-
-type ReminderNextToken {
-  familyId: String!
-  fullKey: String!
-}
-
-type DisplayReminderConnection {
-  reminders: [DisplayReminder!]!
-  nextToken: ReminderNextToken
-}
-
 type DisplayPersonalDetails {
   firstName: String!
   middleName: String
@@ -110,14 +89,35 @@ type DisplayFamily {
   familyDetails: DisplayFamilyFamilyDetails!
 }
 
+type DisplayReminder {
+  familyId: String!
+  fullKey: String!
+  text: String!
+  date: String!
+  hasTimeSet: Boolean!
+  familyItemFullKey: String
+  familyItemType: String
+  familyItemId: String
+}
+
+type NextTokenReminder {
+  familyId: String!
+  fullKey: String!
+}
+
+type DisplayReminderConnection {
+  reminders: [DisplayReminder!]!
+  nextToken: NextTokenReminder
+}
+
 type Query {
   verifySignUpEmail(email: String!): DisplayVerifyEmailResponse!
   getUserInvitation(token: String!): DisplayInvitation!
   getFamilyDisplay: DisplayFamily!
-  getReminders(nextToken: InputReminderNextToken, limit: Float): DisplayReminderConnection!
+  getReminders(nextToken: InputNextTokenReminder, limit: Float): DisplayReminderConnection!
 }
 
-input InputReminderNextToken {
+input InputNextTokenReminder {
   familyId: String!
   fullKey: String!
 }
