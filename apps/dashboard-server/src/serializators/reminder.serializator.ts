@@ -1,25 +1,22 @@
 import { splitHashKey } from '@family-dashboard/global/sdk';
 import {
-  GTCalendarEntryDBRecord,
-  GTCalendarEntryType,
   GTFamilyItemType,
   GTReminderDisplay,
+  GTRreminderDBRecord,
 } from '@family-dashboard/global/types';
 
 export const serializeReminder = (
-  calendarEntryDbRecord: GTCalendarEntryDBRecord
+  reminderDBRecord: GTRreminderDBRecord
 ): GTReminderDisplay => {
-  const familyItemKeyData = splitHashKey(calendarEntryDbRecord.fullKey);
-  const keyData = splitHashKey(calendarEntryDbRecord.fullKey);
+  const familyItemKeyData = splitHashKey(reminderDBRecord.fullKey);
 
   return {
-    familyId: calendarEntryDbRecord.familyId,
-    fullKey: calendarEntryDbRecord.fullKey,
-    type: GTCalendarEntryType.Reminder,
+    familyId: reminderDBRecord.familyId,
+    fullKey: reminderDBRecord.fullKey,
     familyItemId: familyItemKeyData.data,
     familyItemType: familyItemKeyData.type as GTFamilyItemType,
-    text: calendarEntryDbRecord.text,
-    date: keyData.data,
-    hasTimeSet: calendarEntryDbRecord.hasTimeSet,
+    text: reminderDBRecord.text,
+    date: reminderDBRecord.date,
+    hasTimeSet: reminderDBRecord.hasTimeSet,
   };
 };

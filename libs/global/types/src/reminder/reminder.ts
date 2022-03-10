@@ -1,23 +1,17 @@
 import { GTFamilyItemType } from '../misc/misc';
 
-export enum GTCalendarEntryType {
-  Reminder = 'Reminder',
-  Simple = 'Simple',
-}
-
-export interface GTCalendarEntryDBRecord {
+export interface GTRreminderDBRecord {
   familyId: string;
   fullKey: string;
   text: string;
-  familyItemFullKey?: string;
+  date: string;
   hasTimeSet: boolean;
+  familyItemFullKey?: string;
 }
 
-export interface GTReminderDisplay extends GTCalendarEntryDBRecord {
-  type: GTCalendarEntryType.Reminder;
+export interface GTReminderDisplay extends GTRreminderDBRecord {
   familyItemId?: string;
   familyItemType?: GTFamilyItemType;
-  date: string;
 }
 
 export interface GTReminderNextToken {

@@ -7,6 +7,5 @@ export interface GTTokenDecoded {
 }
 
 export enum GTFamilyItemType {
-  Reminder = 'Reminder',
   Birthday = 'Birthday',
 }

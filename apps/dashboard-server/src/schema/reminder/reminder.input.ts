@@ -6,7 +6,7 @@ import {
 } from '@family-dashboard/global/types';
 
 @InputType()
-export class InputReminderNextToken implements GTReminderNextToken {
+export class InputNextTokenReminder implements GTReminderNextToken {
   @Field(() => String) familyId: string;
   @Field(() => String) fullKey: string;
 }

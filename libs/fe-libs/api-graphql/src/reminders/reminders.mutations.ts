@@ -6,7 +6,6 @@ export const CreateReminder = gql`
       familyId
       fullKey
       text
-      type
       date
       familyItemFullKey
       familyItemType

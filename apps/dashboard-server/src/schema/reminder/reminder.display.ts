@@ -1,7 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
-  GTCalendarEntryType,
   GTFamilyItemType,
   GTReminderDisplay,
   GTReminderDisplayConnection,
@@ -13,15 +12,15 @@ export class DisplayReminder implements GTReminderDisplay {
   @Field(() => String) familyId: string;
   @Field(() => String) fullKey: string;
   @Field(() => String) text: string;
-  @Field(() => String) type: GTCalendarEntryType.Reminder;
   @Field(() => String) date: string;
+  @Field(() => Boolean) hasTimeSet: boolean;
   @Field(() => String, { nullable: true }) familyItemFullKey?: string;
   @Field(() => String, { nullable: true }) familyItemType?: GTFamilyItemType;
   @Field(() => String, { nullable: true }) familyItemId: string;
 }
 
 @ObjectType()
-export class ReminderNextToken implements GTReminderNextToken {
+export class NextTokenReminder implements GTReminderNextToken {
   @Field(() => String) familyId: string;
   @Field(() => String) fullKey: string;
 }
@@ -29,6 +28,6 @@ export class ReminderNextToken implements GTReminderNextToken {
 @ObjectType()
 export class DisplayReminderConnection implements GTReminderDisplayConnection {
   @Field(() => [DisplayReminder]) reminders: GTReminderDisplay[];
-  @Field(() => ReminderNextToken, { nullable: true })
+  @Field(() => NextTokenReminder, { nullable: true })
   nextToken?: GTReminderNextToken;
 }
