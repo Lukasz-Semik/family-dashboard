@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 
 import { showErrorToast } from '@family-dashboard/design-system';
 import {
-  ApiInvitationDisplay,
+  APIGetFamilyDisplayInvitation,
   CancelInvitation,
 } from '@family-dashboard/fe-libs/api-graphql';
 import {
@@ -17,7 +17,7 @@ export function useFamilySettingsInvitationsList() {
   const family = useSelectFamily();
   const dispatch = useDispatch();
   const [selectedInvitation, setSelectedInvitation] =
-    useState<ApiInvitationDisplay | null>(null);
+    useState<APIGetFamilyDisplayInvitation | null>(null);
   const [cancelInvitationMutation, { loading }] = useMutation<{
     cancelInvitation: boolean;
     fullKey: string;

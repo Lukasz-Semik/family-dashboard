@@ -1,14 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ApiMemberDisplay } from '@family-dashboard/fe-libs/api-graphql';
+import { APIGetFamilyDisplayMember } from '@family-dashboard/fe-libs/api-graphql';
 
 import { memberDisplayInitialValues } from '../store.utils';
+import { WSUserState } from './user.types';
 
-export interface UserState {
-  data: ApiMemberDisplay;
-}
-
-const initialState: UserState = {
+const initialState: WSUserState = {
   data: {
     ...memberDisplayInitialValues,
   },
@@ -18,7 +15,7 @@ export const webStoreUser = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserData: (user, action: PayloadAction<ApiMemberDisplay>) => {
+    setUserData: (user, action: PayloadAction<APIGetFamilyDisplayMember>) => {
       user.data = action.payload;
     },
   },

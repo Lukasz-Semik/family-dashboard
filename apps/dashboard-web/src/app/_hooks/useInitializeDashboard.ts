@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useQuery } from '@apollo/client';
 
 import {
-  ApiFamilyDisplay,
+  APIGetFamilyDisplayResponse,
   GetFamilyDisplay,
 } from '@family-dashboard/fe-libs/api-graphql';
 import {
@@ -15,7 +15,7 @@ export function useInitializeDashboard() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
-  useQuery<{ getFamilyDisplay: ApiFamilyDisplay }>(GetFamilyDisplay, {
+  useQuery<APIGetFamilyDisplayResponse>(GetFamilyDisplay, {
     onCompleted: (responseData) => {
       dispatch(
         webStoreUserActions.setUserData(

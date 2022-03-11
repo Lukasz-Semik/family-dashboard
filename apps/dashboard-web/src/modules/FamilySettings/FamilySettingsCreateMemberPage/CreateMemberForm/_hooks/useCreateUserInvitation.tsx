@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 
 import { showErrorToast } from '@family-dashboard/design-system';
 import {
-  ApiInvitationDisplay,
+  APIGetFamilyDisplayInvitation,
   CreateUserInvitation,
 } from '@family-dashboard/fe-libs/api-graphql';
 import { webRoutes } from '@family-dashboard/global/const';
@@ -36,7 +36,7 @@ export function useCreateUserInvitation({ closeModal }: Args) {
 
   const [createUserInvitationMutation, { loading }] = useMutation<
     {
-      createUserInvitation: ApiInvitationDisplay;
+      createUserInvitation: APIGetFamilyDisplayInvitation;
     },
     { input: GTCreateUserInvitationInput }
   >(CreateUserInvitation, {

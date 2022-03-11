@@ -6,27 +6,30 @@ import {
   GTPersonalDetailsDisplay,
 } from '@family-dashboard/global/types';
 
-export type ApiMemberDisplay = Omit<GTMemberDisplay, 'familyId'>;
-
-export type ApiInvitationDetailsDisplay = Pick<
+// REFACTOR
+export type APIGetFamilyDisplayMember = Omit<GTMemberDisplay, 'familyId'>;
+export type APIGetFamilyDisplayInvitationDetails = Pick<
   GTInvitationDetailsDisplay,
   'validTo'
 >;
-
-export type ApiInvitationPersonalDetails = Pick<
+export type APIGetFamilyDisplayPersonalDetails = Pick<
   GTPersonalDetailsDisplay,
   'firstName'
 >;
 
-export interface ApiInvitationDisplay
+export interface APIGetFamilyDisplayInvitation
   extends Pick<GTInvitationDisplay, 'fullKey' | 'email'> {
-  invitationDetails: ApiInvitationDetailsDisplay;
-  personalDetails: ApiInvitationPersonalDetails;
+  invitationDetails: APIGetFamilyDisplayInvitationDetails;
+  personalDetails: APIGetFamilyDisplayPersonalDetails;
 }
 
-export interface ApiFamilyDisplay
+export interface APIGetFamilyDisplay
   extends Pick<GTFamilyDisplay, 'fullKey' | 'familyId' | 'familyDetails'> {
-  currentUser: ApiMemberDisplay;
-  members: ApiMemberDisplay[];
-  invitations: ApiInvitationDisplay[];
+  currentUser: APIGetFamilyDisplayMember;
+  members: APIGetFamilyDisplayMember[];
+  invitations: APIGetFamilyDisplayInvitation[];
+}
+
+export interface APIGetFamilyDisplayResponse {
+  getFamilyDisplay: APIGetFamilyDisplay;
 }

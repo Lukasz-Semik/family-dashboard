@@ -15,7 +15,7 @@ import {
   ModalText,
   ModalTitle,
 } from '@family-dashboard/design-system';
-import { ApiInvitationDisplay } from '@family-dashboard/fe-libs/api-graphql';
+import { APIGetFamilyDisplayInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
 
 import {
@@ -46,7 +46,7 @@ export function FamilySettingsInvitationsList() {
         <FormattedMessage id="familySettings.pendingInvitations" />
       </StyledListTitle>
 
-      <ListStandard<ApiInvitationDisplay>
+      <ListStandard<APIGetFamilyDisplayInvitation>
         items={family.data.invitations}
         renderHeaders={() => (
           <ListStandardHeadersWrapper>
