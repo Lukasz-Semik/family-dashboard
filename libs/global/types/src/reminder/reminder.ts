@@ -21,5 +21,5 @@ export interface GTReminderNextToken {
 
 export interface GTReminderDisplayConnection {
   reminders: GTReminderDisplay[];
-  nextToken?: GTReminderNextToken;
+  nextToken?: GTReminderNextToken | null;
 }

@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { DocumentClient } from 'aws-sdk/clients/dynamodb';
 
-import { FD_TABLE_REMINDERS } from '@family-dashboard/global/const';
+import {
+  FD_TABLE_REMINDERS,
+  GSI_FAMILY_ID_DATE,
+} from '@family-dashboard/global/const';
 import {
   GTReminderNextToken,
   GTRreminderDBRecord,
@@ -24,6 +27,7 @@ export class ReminderDB {
     const response = await this.dynamoDBClient
       .query({
         TableName: FD_TABLE_REMINDERS,
+        IndexName: GSI_FAMILY_ID_DATE,
         KeyConditionExpression: 'familyId = :familyId',
         ExpressionAttributeValues: {
           ':familyId': familyId,

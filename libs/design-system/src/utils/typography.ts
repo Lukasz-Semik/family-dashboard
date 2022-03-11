@@ -77,3 +77,9 @@ export const Typography12Regular = css`
   font-weight: 400;
   line-height: 1.67;
 `;
+
+export const Typograghy10SemiBold = css`
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 12px;
+`;

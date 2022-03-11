@@ -9,6 +9,7 @@ export * from './icons/Icons.types';
 
 export * from './components/Avatar/Avatar.types';
 export * from './components/Avatar/Avatar';
+export * from './components/Badge/Badge.elements';
 export * from './components/Button/Button.types';
 export * from './components/Button/ButtonArrowBack/ButtonArrowBack';
 export * from './components/Button/ButtonStandard/ButtonStandard';

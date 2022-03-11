@@ -126,6 +126,9 @@ export const copies = {
   reminders: {
     title: 'Reminders',
     create: 'Create reminder',
+    created: 'Reminder has been created',
+    createdInvisible:
+      'Reminder has been created, but it is not visible right now',
   },
   todos: {
     title: 'Todos',
@@ -207,6 +210,7 @@ export const copies = {
     you: 'You',
     view: 'View',
     optional: 'Optional',
+    new: 'New',
   },
   dates: {
     today: 'Today',

@@ -45,3 +45,10 @@ export const StyledWrapperCard = styled.div<{ $height?: string }>`
   padding: 1rem;
   height: ${({ $height }) => $height || 'auto'};
 `;
+
+export const StyledWrapperCenter = styled.div`
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+`;
