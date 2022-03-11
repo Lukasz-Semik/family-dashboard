@@ -25,10 +25,13 @@ export const StyledIconWrapper = styled.div`
   margin-right: 8px;
 `;
 
-export const StyledTitle = styled.div`
+export const StyledTitle = styled.div<{ hasBadge?: boolean }>`
   ${Typography14SemiBold};
   color: ${dsStyles.colors.grey1};
   transition: color ${dsStyles.transitions.standard};
+  max-width: ${({ hasBadge }) => (hasBadge ? '190px' : '220px')};
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 `;
 

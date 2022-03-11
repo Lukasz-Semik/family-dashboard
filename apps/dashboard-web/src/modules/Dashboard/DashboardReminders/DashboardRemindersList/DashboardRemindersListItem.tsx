@@ -34,7 +34,9 @@ export function DashboardRemindersListItem({ reminder }: Props) {
           />
         </StyledIconWrapper>
 
-        <StyledTitle>{reminder.text}</StyledTitle>
+        <StyledTitle hasBadge={Boolean(reminder.isNew)}>
+          {reminder.text}
+        </StyledTitle>
       </StyledFlexWrapper>
 
       <StyledFlexWrapper>
