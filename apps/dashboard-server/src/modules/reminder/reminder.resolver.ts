@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 
 import {
   CurrentLoggedInUser,
@@ -22,7 +22,7 @@ export class ReminderResolver {
   @UseGuards(JwtAuthGuard)
   async getReminders(
     @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData,
-    @Args('limit', { nullable: true }) limit?: number,
+    @Args({ name: 'limit', type: () => Int, nullable: true }) limit?: number,
     @Args('nextToken', { nullable: true }) nextToken?: InputNextTokenReminder
   ) {
     return this.reminderService.getReminders(

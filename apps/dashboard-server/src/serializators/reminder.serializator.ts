@@ -8,7 +8,7 @@ import {
 export const serializeReminder = (
   reminderDBRecord: GTRreminderDBRecord
 ): GTReminderDisplay => {
-  const familyItemKeyData = splitHashKey(reminderDBRecord.fullKey);
+  const familyItemKeyData = splitHashKey(reminderDBRecord.familyItemFullKey);
 
   return {
     familyId: reminderDBRecord.familyId,

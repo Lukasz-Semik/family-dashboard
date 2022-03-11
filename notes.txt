@@ -11,3 +11,5 @@ TODO:
 NOTES:
 - FUTURE: for future plans
 
+TYPES:
+- global types - DBRecord (base of record)/API types (what is fetched)/WEB or Mobile types. 

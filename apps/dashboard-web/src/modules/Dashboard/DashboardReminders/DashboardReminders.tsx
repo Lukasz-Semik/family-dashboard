@@ -1,18 +1,29 @@
-import { IconClock } from '@family-dashboard/design-system';
+import {
+  IconClock,
+  LoaderSimple,
+  WrapperCenter,
+} from '@family-dashboard/design-system';
 
 import { DashboardCard } from '../DashboardCard/DashboardCard';
-import { StyledDescription } from './DashboardReminders.styled';
-import { DashboardRemindersCreateGroup } from './DashboardRemindersCreateGroup/DashboardRemindersCreateGroup';
+import { useGetReminders } from './_hooks/useGetReminders';
+import { DashboardRemindersList } from './DashboardRemindersList/DashboardRemindersList';
 
 export function DashboardReminders() {
+  const { isLoading } = useGetReminders();
+
   return (
     <DashboardCard
       title="Reminders"
       icon={<IconClock width="20px" height="20px" />}
       height="100%"
     >
-      <StyledDescription>14 reminders within next 30 days</StyledDescription>
-      <DashboardRemindersCreateGroup />
+      {isLoading ? (
+        <WrapperCenter>
+          <LoaderSimple />
+        </WrapperCenter>
+      ) : (
+        <DashboardRemindersList />
+      )}
     </DashboardCard>
   );
 }

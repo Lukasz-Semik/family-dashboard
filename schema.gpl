@@ -114,7 +114,7 @@ type Query {
   verifySignUpEmail(email: String!): DisplayVerifyEmailResponse!
   getUserInvitation(token: String!): DisplayInvitation!
   getFamilyDisplay: DisplayFamily!
-  getReminders(nextToken: InputNextTokenReminder, limit: Float): DisplayReminderConnection!
+  getReminders(nextToken: InputNextTokenReminder, limit: Int): DisplayReminderConnection!
 }
 
 input InputNextTokenReminder {
