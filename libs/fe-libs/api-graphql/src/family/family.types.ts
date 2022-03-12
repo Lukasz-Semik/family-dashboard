@@ -6,7 +6,6 @@ import {
   GTPersonalDetailsDisplay,
 } from '@family-dashboard/global/types';
 
-// REFACTOR
 export type APIGetFamilyDisplayMember = Omit<GTMemberDisplay, 'familyId'>;
 export type APIGetFamilyDisplayInvitationDetails = Pick<
   GTInvitationDetailsDisplay,

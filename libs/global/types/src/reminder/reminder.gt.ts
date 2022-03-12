@@ -1,15 +1,12 @@
 import { GTFamilyItemType } from '../misc/misc';
 
-export interface GTRreminderDBRecord {
+export interface GTReminder {
   familyId: string;
   fullKey: string;
   text: string;
   date: string;
   hasTimeSet: boolean;
   familyItemFullKey?: string;
-}
-
-export interface GTReminderDisplay extends GTRreminderDBRecord {
   familyItemId?: string;
   familyItemType?: GTFamilyItemType;
 }
@@ -19,7 +16,13 @@ export interface GTReminderNextToken {
   familyId: string;
 }
 
-export interface GTReminderDisplayConnection {
-  reminders: GTReminderDisplay[];
+export interface GTReminderConnection {
+  reminders: GTReminder[];
   nextToken?: GTReminderNextToken | null;
+}
+
+export interface GTCreateReminderInput {
+  text: string;
+  date: string;
+  time?: string;
 }

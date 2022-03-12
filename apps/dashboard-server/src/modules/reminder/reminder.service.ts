@@ -6,12 +6,12 @@ import { FULL_DATE_TIME_FORMAT } from '@family-dashboard/global/const';
 import { buildHashKey } from '@family-dashboard/global/sdk';
 import {
   GTCreateReminderInput,
-  GTReminderDisplay,
-  GTReminderDisplayConnection,
+  GTReminder,
+  GTReminderConnection,
   GTReminderNextToken,
-  GTRreminderDBRecord,
 } from '@family-dashboard/global/types';
 
+import { ReminderDBModel } from '../../dbModels/reminder.dbModel';
 import { throwError } from '../../helpers/throwError';
 import { serializeReminder } from '../../serializators/reminder.serializator';
 import { ReminderDB } from './reminder.db';
@@ -24,7 +24,7 @@ export class ReminderService {
     familyId: string,
     limit?: number,
     nextToken?: GTReminderNextToken
-  ): Promise<GTReminderDisplayConnection> {
+  ): Promise<GTReminderConnection> {
     try {
       const response = await this.reminderDB.getReminders(
         familyId,
@@ -44,7 +44,7 @@ export class ReminderService {
   async createReminder(
     familyId: string,
     input: GTCreateReminderInput
-  ): Promise<GTReminderDisplay> {
+  ): Promise<GTReminder> {
     try {
       const time = input.time || '23:59';
 
@@ -52,7 +52,7 @@ export class ReminderService {
         .utc()
         .toISOString();
 
-      const reminder: GTRreminderDBRecord = {
+      const reminder: ReminderDBModel = {
         familyId,
         text: input.text,
         // TODO: handle better approach for db prefixes

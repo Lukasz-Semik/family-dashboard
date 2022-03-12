@@ -1,13 +1,11 @@
 import { splitHashKey } from '@family-dashboard/global/sdk';
-import {
-  GTFamilyItemType,
-  GTReminderDisplay,
-  GTRreminderDBRecord,
-} from '@family-dashboard/global/types';
+import { GTFamilyItemType, GTReminder } from '@family-dashboard/global/types';
+
+import { ReminderDBModel } from '../dbModels/reminder.dbModel';
 
 export const serializeReminder = (
-  reminderDBRecord: GTRreminderDBRecord
-): GTReminderDisplay => {
+  reminderDBRecord: ReminderDBModel
+): GTReminder => {
   const familyItemKeyData = splitHashKey(reminderDBRecord.familyItemFullKey);
 
   return {

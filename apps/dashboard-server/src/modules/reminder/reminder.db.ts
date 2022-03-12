@@ -5,12 +5,9 @@ import {
   FD_TABLE_REMINDERS,
   GSI_FAMILY_ID_DATE,
 } from '@family-dashboard/global/const';
-import {
-  GTReminderNextToken,
-  GTRreminderDBRecord,
-} from '@family-dashboard/global/types';
+import { GTReminderNextToken } from '@family-dashboard/global/types';
 
-import { NextTokenReminder } from '../../schema';
+import { ReminderDBModel } from '../../dbModels/reminder.dbModel';
 
 @Injectable()
 export class ReminderDB {
@@ -19,9 +16,9 @@ export class ReminderDB {
   async getReminders(
     familyId: string,
     limit = 20,
-    nextToken: NextTokenReminder
+    nextToken: GTReminderNextToken
   ): Promise<{
-    reminders: GTRreminderDBRecord[];
+    reminders: ReminderDBModel[];
     nextToken: GTReminderNextToken;
   }> {
     const response = await this.dynamoDBClient
@@ -38,14 +35,12 @@ export class ReminderDB {
       .promise();
 
     return {
-      reminders: response.Items as GTRreminderDBRecord[],
-      nextToken: response.LastEvaluatedKey as NextTokenReminder,
+      reminders: response.Items as ReminderDBModel[],
+      nextToken: response.LastEvaluatedKey as GTReminderNextToken,
     };
   }
 
-  async createReminder(
-    item: GTRreminderDBRecord
-  ): Promise<GTRreminderDBRecord> {
+  async createReminder(item: ReminderDBModel): Promise<ReminderDBModel> {
     await this.dynamoDBClient
       .put({
         TableName: FD_TABLE_REMINDERS,

@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/client';
 
 import { showSuccessToast } from '@family-dashboard/design-system';
 import {
-  APICreateReminderPayload,
+  APICreateReminderVariables,
   APICreateReminderResponse,
   CreateReminder,
 } from '@family-dashboard/fe-libs/api-graphql';
@@ -31,7 +31,7 @@ export function useCreateReminder({ closeModal }: Args) {
 
   const [createReminderMutation, { loading }] = useMutation<
     APICreateReminderResponse,
-    APICreateReminderPayload
+    APICreateReminderVariables
   >(CreateReminder, {
     onCompleted: (response) => {
       const newReminder = response.createReminder;
