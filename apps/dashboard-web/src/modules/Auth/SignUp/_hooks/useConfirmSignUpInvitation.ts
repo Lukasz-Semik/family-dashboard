@@ -1,15 +1,14 @@
 import { useCallback } from 'react';
 import { useMutation } from '@apollo/client';
 
-import { ConfirmSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
+import {
+  APIConfirmSignUpInvitationResponse,
+  APIConfirmSignUpInvitationVariables,
+  ConfirmSignUpInvitation,
+} from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
-import {
-  GTConfirmSignUpInvitationInput,
-  GTGender,
-  GTInvitationErrors,
-  GTLoginDisplay,
-} from '@family-dashboard/global/types';
+import { GTGender, GTInvitationErrors } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
 
@@ -23,8 +22,8 @@ export function useConfirmSignUpInvitation({
   goToNextStep,
 }: Args) {
   const [confirmSignUpInvitationMutation, { loading }] = useMutation<
-    { confirmSignUpInvitation: GTLoginDisplay },
-    { input: GTConfirmSignUpInvitationInput }
+    APIConfirmSignUpInvitationResponse,
+    APIConfirmSignUpInvitationVariables
   >(ConfirmSignUpInvitation, {
     onCompleted: (responseData) => {
       sdkSetToSessionStorage(
@@ -58,13 +57,9 @@ export function useConfirmSignUpInvitation({
         variables: {
           input: {
             email: rest.email,
-            invitationDetails: {
-              familyName: rest.familyName,
-              code,
-            },
-            security: {
-              password: rest.password,
-            },
+            familyName: rest.familyName,
+            code,
+            password: rest.password,
             personalDetails: {
               firstName: rest.firstName,
               middleName: rest.middleName,

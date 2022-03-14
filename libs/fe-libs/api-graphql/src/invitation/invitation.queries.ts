@@ -20,7 +20,7 @@ export const GetUserInvitation = gql`
         dob
         gender
       }
-      invitationDetails {
+      details {
         familyName
         inviterName
       }

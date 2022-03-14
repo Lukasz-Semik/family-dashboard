@@ -4,17 +4,17 @@ import { GTFamilyItemType, GTReminder } from '@family-dashboard/global/types';
 import { ReminderDBModel } from '../dbModels/reminder.dbModel';
 
 export const serializeReminder = (
-  reminderDBRecord: ReminderDBModel
+  reminderDBModel: ReminderDBModel
 ): GTReminder => {
-  const familyItemKeyData = splitHashKey(reminderDBRecord.familyItemFullKey);
+  const familyItemKeyData = splitHashKey(reminderDBModel.familyItemFullKey);
 
   return {
-    familyId: reminderDBRecord.familyId,
-    fullKey: reminderDBRecord.fullKey,
+    familyId: reminderDBModel.familyId,
+    fullKey: reminderDBModel.fullKey,
     familyItemId: familyItemKeyData.data,
     familyItemType: familyItemKeyData.type as GTFamilyItemType,
-    text: reminderDBRecord.text,
-    date: reminderDBRecord.date,
-    hasTimeSet: reminderDBRecord.hasTimeSet,
+    text: reminderDBModel.text,
+    date: reminderDBModel.date,
+    hasTimeSet: reminderDBModel.hasTimeSet,
   };
 };

@@ -4,14 +4,14 @@ import { useRouteMatch } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
 import { showErrorToast } from '@family-dashboard/design-system';
-import { ConfirmUserInvitation } from '@family-dashboard/fe-libs/api-graphql';
+import {
+  APIConfirmUserInvitationResponse,
+  APIConfirmUserInvitationVariables,
+  ConfirmUserInvitation,
+} from '@family-dashboard/fe-libs/api-graphql';
 import { FD_TOKEN_KEY } from '@family-dashboard/global/const';
 import { sdkSetToSessionStorage } from '@family-dashboard/global/sdk';
-import {
-  GTConfirmUserInvitationInput,
-  GTGender,
-  GTLoginDisplay,
-} from '@family-dashboard/global/types';
+import { GTGender } from '@family-dashboard/global/types';
 
 import { Values } from '../ConfirmInvitedUser.types';
 
@@ -23,8 +23,8 @@ export function useConfirmUserInvitation({ goToNextStep }: Args) {
   const match = useRouteMatch<{ token: string }>();
 
   const [confirmUserInvitationMutation, { loading }] = useMutation<
-    { confirmUserInvitation: GTLoginDisplay },
-    { input: GTConfirmUserInvitationInput; token: string }
+    APIConfirmUserInvitationResponse,
+    APIConfirmUserInvitationVariables
   >(ConfirmUserInvitation, {
     onCompleted: (responseData) => {
       sdkSetToSessionStorage(
@@ -51,9 +51,7 @@ export function useConfirmUserInvitation({ goToNextStep }: Args) {
               ...rest,
               gender: gender as GTGender,
             },
-            security: {
-              password,
-            },
+            password,
           },
         },
       });

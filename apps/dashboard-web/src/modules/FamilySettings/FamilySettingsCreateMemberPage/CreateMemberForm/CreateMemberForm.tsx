@@ -61,7 +61,7 @@ export function CreateMemberForm({ backToInitialStep }: Props) {
           email: '',
           firstName: '',
           middleName: '',
-          lastName: family.data.familyDetails.name,
+          lastName: family.data.details.name,
           gender: undefined,
           dob: '',
           hasFamilySettingsModulePermission: false,

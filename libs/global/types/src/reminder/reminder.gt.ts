@@ -1,4 +1,4 @@
-import { GTFamilyItemType } from '../misc/misc';
+import { GTFamilyItemType } from '../misc/misc.gt';
 
 export interface GTReminder {
   familyId: string;

@@ -21,7 +21,7 @@ export function SidebarDesktop() {
   return (
     <StyledWrapper>
       <CurrentDate />
-      <StyledFamilyName>{family.data.familyDetails.name}</StyledFamilyName>
+      <StyledFamilyName>{family.data.details.name}</StyledFamilyName>
       <StyledAvatarGroupWrapper>
         <StyledAvatarWrapper>
           <Avatar>{`${user.data.personalDetails.firstName.charAt(

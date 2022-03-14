@@ -6,12 +6,12 @@ import { useMutation } from '@apollo/client';
 
 import { showErrorToast } from '@family-dashboard/design-system';
 import {
-  APIGetFamilyDisplayInvitation,
+  APICreateUserInvitationResponse,
+  APICreateUserInvitationVariables,
   CreateUserInvitation,
 } from '@family-dashboard/fe-libs/api-graphql';
 import { webRoutes } from '@family-dashboard/global/const';
 import {
-  GTCreateUserInvitationInput,
   GTGender,
   GTInvitationErrors,
   GTMemberType,
@@ -35,10 +35,8 @@ export function useCreateUserInvitation({ closeModal }: Args) {
   const history = useHistory();
 
   const [createUserInvitationMutation, { loading }] = useMutation<
-    {
-      createUserInvitation: APIGetFamilyDisplayInvitation;
-    },
-    { input: GTCreateUserInvitationInput }
+    APICreateUserInvitationResponse,
+    APICreateUserInvitationVariables
   >(CreateUserInvitation, {
     onCompleted: (responseData) => {
       dispatch(
@@ -83,10 +81,10 @@ export function useCreateUserInvitation({ closeModal }: Args) {
               ...personalDetails,
               gender: gender as GTGender,
             },
-            invitationDetails: {
+            details: {
               inviterName: user.data.personalDetails.firstName,
               inviterEmail: user.data.email,
-              familyName: family.data.familyDetails.name,
+              familyName: family.data.details.name,
             },
             modulePermissions: {
               hasFamilySettings: hasFamilySettingsModulePermission,
@@ -100,7 +98,7 @@ export function useCreateUserInvitation({ closeModal }: Args) {
     [
       user.data.personalDetails.firstName,
       user.data.email,
-      family.data.familyDetails.name,
+      family.data.details.name,
       createUserInvitationMutation,
     ]
   );

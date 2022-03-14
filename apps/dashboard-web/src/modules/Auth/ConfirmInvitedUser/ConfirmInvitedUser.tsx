@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 
 import { LoaderSimple } from '@family-dashboard/design-system';
 import { FULL_DATE_FORMAT } from '@family-dashboard/global/const';
-import { GTInvitationDisplay } from '@family-dashboard/global/types';
+import { GTInvitation } from '@family-dashboard/global/types';
 
 import { StyledFlexForm, StyledFormTitle } from '../Auth.styled';
 import { AuthLayout } from '../AuthLayout/AuthLayout';
@@ -67,7 +67,7 @@ export function ConfirmInvitedUser() {
                 {isLoaded && (
                   <ConfirmInvitedUserStepController
                     currentStep={currentStep}
-                    invitationData={initialData as GTInvitationDisplay}
+                    invitationData={initialData as GTInvitation}
                   />
                 )}
 

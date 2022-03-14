@@ -9,46 +9,48 @@ import {
 import { buildHashKey } from '@family-dashboard/global/sdk';
 import {
   GTConfirmSignUpInvitationInput,
-  GTFamilyDBRecord,
-  GTInvitationDBRecord,
-  GTInvitationDetailsDBRecord,
-  GTMemberDBRecord,
-  GTMemberSecurityDBRecord,
+  GTInvitationDetails,
   GTMemberType,
-  GTModulePermissionsDisplay,
-  GTPersonalDetailsDisplay,
+  GTModulePermissions,
+  GTPersonalDetails,
 } from '@family-dashboard/global/types';
+
+import { FamilyDBModel } from '../../dbModels/family.dbModel';
+import { InvitationDBModel } from '../../dbModels/invitation.dbModel';
+import { MemberDBModel } from '../../dbModels/member.dbModel';
 
 interface RawPayloadInvitation {
   familyId?: string;
   email: string;
   memberType: GTMemberType;
-  modulePermissions: GTModulePermissionsDisplay;
-  personalDetails: GTPersonalDetailsDisplay;
-  invitationDetails: Omit<GTInvitationDetailsDBRecord, 'code' | 'validTo'>;
+  modulePermissions: GTModulePermissions;
+  personalDetails: GTPersonalDetails;
+  details: GTInvitationDetails;
   code: string;
 }
 
 export const buildInvitationDBPayload = (
   rawPayload: RawPayloadInvitation
-): GTInvitationDBRecord => {
+): InvitationDBModel => {
   const date = buildHashKey(
     FDFamilyRecordType.Invitation,
     dayjs().utc().toISOString()
   );
 
-  const record: GTInvitationDBRecord = {
+  const record: InvitationDBModel = {
     familyId: rawPayload.familyId || FAMILY_SIGNUP_ID,
     fullKey: buildHashKey(FDFamilyRecordType.Invitation, uuidv4()),
     createdAt: date,
     updatedAt: date,
     email: rawPayload.email,
     personalDetails: rawPayload.personalDetails,
-    invitationDetails: {
-      ...rawPayload.invitationDetails,
-      validTo: dayjs.utc().add(2, 'day').toISOString(),
+    details: {
+      ...rawPayload.details,
+    },
+    security: {
       code: rawPayload.code,
     },
+    validTo: dayjs.utc().add(2, 'day').toISOString(),
     memberType: rawPayload.memberType,
     modulePermissions: rawPayload.modulePermissions,
   };
@@ -58,16 +60,18 @@ export const buildInvitationDBPayload = (
 
 interface RawPaylodMember {
   email: string;
-  security: GTMemberSecurityDBRecord;
-  personalDetails: GTPersonalDetailsDisplay;
+  security: {
+    password: string;
+  };
+  personalDetails: GTPersonalDetails;
   memberType: GTMemberType;
-  modulePermissions: GTModulePermissionsDisplay;
+  modulePermissions: GTModulePermissions;
 }
 
 export const buildMemberDBPayload = async (
   familyId: string,
   rawPayload: RawPaylodMember
-): Promise<GTMemberDBRecord> => {
+): Promise<MemberDBModel> => {
   const hashedPassword = await hash(rawPayload.security.password, 10);
   const memberDate = buildHashKey(
     FDFamilyRecordType.Member,
@@ -76,7 +80,7 @@ export const buildMemberDBPayload = async (
 
   const memberId = uuidv4();
 
-  const member: GTMemberDBRecord = {
+  const member: MemberDBModel = {
     familyId,
     fullKey: buildHashKey(FDFamilyRecordType.Member, memberId),
     security: {
@@ -97,13 +101,15 @@ export const buildMemberDBPayload = async (
 };
 
 export interface FamilyAndMemberDBPayloads {
-  family: GTFamilyDBRecord;
-  member: GTMemberDBRecord;
+  family: FamilyDBModel;
+  member: MemberDBModel;
 }
 
 export const buildFamilyAndMemberDBPayloads = async (
   input: GTConfirmSignUpInvitationInput
 ): Promise<FamilyAndMemberDBPayloads> => {
+  const { password, ...restInput } = input;
+
   const familyDate = buildHashKey(
     FDFamilyRecordType.Family,
     dayjs().utc().toISOString()
@@ -111,11 +117,11 @@ export const buildFamilyAndMemberDBPayloads = async (
 
   const familyId = uuidv4();
 
-  const family: GTFamilyDBRecord = {
+  const family: FamilyDBModel = {
     familyId,
     fullKey: buildHashKey(FDFamilyRecordType.Family, familyId),
-    familyDetails: {
-      name: input.invitationDetails.familyName,
+    details: {
+      name: input.familyName,
     },
     createdAt: familyDate,
     updatedAt: familyDate,
@@ -127,6 +133,9 @@ export const buildFamilyAndMemberDBPayloads = async (
     modulePermissions: {
       hasFamilySettings: true,
       hasFinanacial: true,
+    },
+    security: {
+      password,
     },
   });
 

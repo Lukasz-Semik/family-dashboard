@@ -1,10 +1,23 @@
 import {
-  GTMemberSecurityDBRecord,
   GTMemberType,
-  GTModulePermissionsDisplay,
-  GTPersonalDetailsDisplay,
-} from '../member/member';
-import { GTInvitationDetailsDBRecord } from './invitation';
+  GTModulePermissions,
+  GTPersonalDetails,
+} from '../member/member.gt';
+
+export interface GTInvitationDetails {
+  inviterEmail: string;
+  inviterName: string;
+  familyName: string;
+}
+
+export interface GTInvitation {
+  familyId: string;
+  fullKey: string;
+  email: string;
+  details: GTInvitationDetails;
+  personalDetails: GTPersonalDetails;
+  validTo: string;
+}
 
 export enum GTInvitationErrors {
   EmailAlreadyInUse = 'EmailAlreadyInUse',
@@ -31,27 +44,25 @@ export interface GTVerifyEmailResponse {
 
 export interface GTCreateSignUpInvitationInput {
   email: string;
-  personalDetails: GTPersonalDetailsDisplay;
-  invitationDetails: Omit<GTInvitationDetailsDBRecord, 'validTo' | 'code'>;
+  personalDetails: GTPersonalDetails;
+  details: GTInvitationDetails;
 }
 
 export interface GTConfirmSignUpInvitationInput {
   email: string;
-  security: GTMemberSecurityDBRecord;
-  personalDetails: GTPersonalDetailsDisplay;
-  invitationDetails: Omit<
-    GTInvitationDetailsDBRecord,
-    'validTo' | 'inviterEmail' | 'inviterName'
-  >;
+  password: string;
+  personalDetails: GTPersonalDetails;
+  familyName: string;
+  code: string;
 }
 
 export interface GTCreateUserInvitationInput
   extends GTCreateSignUpInvitationInput {
   memberType: GTMemberType;
-  modulePermissions: GTModulePermissionsDisplay;
+  modulePermissions: GTModulePermissions;
 }
 
 export type GTConfirmUserInvitationInput = Omit<
   GTConfirmSignUpInvitationInput,
-  'invitationDetails'
+  'familyName' | 'code'
 >;

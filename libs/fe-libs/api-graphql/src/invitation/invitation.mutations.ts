@@ -28,9 +28,7 @@ export const CreateUserInvitation = gql`
       personalDetails {
         firstName
       }
-      invitationDetails {
-        validTo
-      }
+      validTo
     }
   }
 `;
