@@ -3,11 +3,9 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 
 import { splitHashKey } from '@family-dashboard/global/sdk';
-import {
-  GTMemberDBRecord,
-  GTTokenDecoded,
-} from '@family-dashboard/global/types';
+import { GTTokenDecoded } from '@family-dashboard/global/types';
 
+import { MemberDBModel } from '../../dbModels/member.dbModel';
 import { throwError } from '../../helpers/throwError';
 import { AuthDB } from './auth.db';
 
@@ -18,7 +16,7 @@ export class AuthService {
     private readonly authDB: AuthDB
   ) {}
 
-  async validateMember(email: string, pass: string): Promise<GTMemberDBRecord> {
+  async validateMember(email: string, pass: string): Promise<MemberDBModel> {
     const member = await this.authDB.getMemberByEmail(email);
 
     if (!member) {

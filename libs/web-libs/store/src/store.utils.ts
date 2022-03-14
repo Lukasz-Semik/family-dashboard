@@ -1,14 +1,14 @@
 import {
   GTGender,
-  GTMemberDisplay,
+  GTMember,
   GTMemberType,
 } from '@family-dashboard/global/types';
 
 export interface UserState {
-  data: GTMemberDisplay;
+  data: GTMember;
 }
 
-export const memberDisplayInitialValues: GTMemberDisplay = {
+export const memberDisplayInitialValues: GTMember = {
   email: '',
   familyId: '',
   fullKey: '',

@@ -9,12 +9,12 @@ export enum GTMemberType {
   ChildUser = 'ChildUser',
 }
 
-export interface GTModulePermissionsDisplay {
+export interface GTModulePermissions {
   hasFamilySettings: boolean;
   hasFinanacial: boolean;
 }
 
-export interface GTPersonalDetailsDisplay {
+export interface GTPersonalDetails {
   firstName: string;
   middleName?: string;
   lastName: string;
@@ -22,20 +22,13 @@ export interface GTPersonalDetailsDisplay {
   dob: string;
 }
 
-export interface GTMemberSecurityDBRecord {
-  password: string;
-}
-
-export interface GTMemberDBRecord {
+export interface GTMember {
   familyId: string;
   fullKey: string;
   memberType: GTMemberType;
   updatedAt: string;
-  modulePermissions: GTModulePermissionsDisplay;
-  security: GTMemberSecurityDBRecord;
+  modulePermissions: GTModulePermissions;
   email: string;
   createdAt: string;
-  personalDetails: GTPersonalDetailsDisplay;
+  personalDetails: GTPersonalDetails;
 }
-
-export type GTMemberDisplay = Omit<GTMemberDBRecord, 'security'>;

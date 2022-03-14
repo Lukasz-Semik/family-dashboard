@@ -1,9 +1,9 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
-  GTInvitationDetailsDisplay,
-  GTInvitationDisplay,
-  GTPersonalDetailsDisplay,
+  GTInvitation,
+  GTInvitationDetails,
+  GTPersonalDetails,
   GTVerifyEmailResponse,
   GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
@@ -18,22 +18,20 @@ export class DisplayVerifyEmailResponse implements GTVerifyEmailResponse {
 }
 
 @ObjectType()
-export class DisplayInvitationInvitationDetails
-  implements GTInvitationDetailsDisplay
-{
+export class DisplayInvitationInvitationDetails implements GTInvitationDetails {
   @Field(() => String) readonly familyName: string;
   @Field(() => String) readonly inviterEmail: string;
   @Field(() => String) readonly inviterName: string;
-  @Field(() => String) readonly validTo: string;
 }
 
 @ObjectType()
-export class DisplayInvitation implements GTInvitationDisplay {
+export class DisplayInvitation implements GTInvitation {
   @Field(() => String) readonly fullKey: string;
   @Field(() => String) readonly familyId: string;
   @Field(() => String) readonly email: string;
+  @Field(() => String) readonly validTo: string;
   @Field(() => DisplayInvitationInvitationDetails)
-  readonly invitationDetails: GTInvitationDetailsDisplay;
+  readonly details: GTInvitationDetails;
   @Field(() => DisplayPersonalDetails)
-  readonly personalDetails: GTPersonalDetailsDisplay;
+  readonly personalDetails: GTPersonalDetails;
 }

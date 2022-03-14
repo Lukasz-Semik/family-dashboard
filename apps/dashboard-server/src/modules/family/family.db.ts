@@ -8,14 +8,14 @@ import {
 } from '@family-dashboard/global/const';
 import { splitHashKey } from '@family-dashboard/global/sdk';
 import {
-  GTFamilyDBRecord,
-  GTFamilyDetailsDBRecord,
-  GTFamilyDisplay,
-  GTInvitationDBRecord,
-  GTMemberDBRecord,
-  GTMemberDisplay,
+  GTFamilyDetails,
+  GTFamilyFullData,
+  GTMember,
 } from '@family-dashboard/global/types';
 
+import { FamilyDBModel } from '../../dbModels/family.dbModel';
+import { InvitationDBModel } from '../../dbModels/invitation.dbModel';
+import { MemberDBModel } from '../../dbModels/member.dbModel';
 import { serializeInvitation } from '../../serializators/invitation.serializator';
 import { serializeMember } from '../../serializators/member.serializator';
 
@@ -26,7 +26,7 @@ export class FamilyDB {
   async getFamilyDisplay(
     familyId: string,
     currentUserId: string
-  ): Promise<GTFamilyDisplay | null> {
+  ): Promise<GTFamilyFullData | null> {
     const familyRawData = await this.dynamoDBClient
       .query({
         TableName: FD_TABLE_FAMILY,
@@ -37,21 +37,21 @@ export class FamilyDB {
       })
       .promise();
 
-    let resultTemplate: GTFamilyDisplay = {
+    let resultTemplate: GTFamilyFullData = {
       familyId: '',
       fullKey: '',
       createdAt: '',
       updatedAt: '',
-      currentUser: {} as GTMemberDisplay,
-      familyDetails: {} as GTFamilyDetailsDBRecord,
+      currentUser: {} as GTMember,
+      details: {} as GTFamilyDetails,
       invitations: [],
       members: [],
     };
 
     const familyData = familyRawData.Items as (
-      | GTFamilyDBRecord
-      | GTMemberDBRecord
-      | GTInvitationDBRecord
+      | FamilyDBModel
+      | MemberDBModel
+      | InvitationDBModel
     )[];
 
     if (isEmpty(familyData)) {
@@ -60,7 +60,7 @@ export class FamilyDB {
 
     familyData.forEach((item) => {
       if (item.fullKey.includes(FDFamilyRecordType.Family)) {
-        const familyRecord = item as GTFamilyDBRecord;
+        const familyRecord = item as FamilyDBModel;
 
         resultTemplate = {
           ...resultTemplate,
@@ -70,13 +70,13 @@ export class FamilyDB {
       }
 
       if (item.fullKey.includes(FDFamilyRecordType.Invitation)) {
-        const invitationRecord = item as GTInvitationDBRecord;
+        const invitationRecord = item as InvitationDBModel;
 
         resultTemplate.invitations.push(serializeInvitation(invitationRecord));
         return;
       }
 
-      const memberRecord = item as GTMemberDBRecord;
+      const memberRecord = item as MemberDBModel;
 
       const isCurrentUser = splitHashKey(item.fullKey).data === currentUserId;
 

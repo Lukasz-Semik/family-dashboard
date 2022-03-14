@@ -41,14 +41,14 @@ type DisplayInvitationInvitationDetails {
   familyName: String!
   inviterEmail: String!
   inviterName: String!
-  validTo: String!
 }
 
 type DisplayInvitation {
   fullKey: String!
   familyId: String!
   email: String!
-  invitationDetails: DisplayInvitationInvitationDetails!
+  validTo: String!
+  details: DisplayInvitationInvitationDetails!
   personalDetails: DisplayPersonalDetails!
 }
 
@@ -74,7 +74,7 @@ enum GTMemberType {
   ChildUser
 }
 
-type DisplayFamilyFamilyDetails {
+type DisplayFamilyDetails {
   name: String!
 }
 
@@ -86,7 +86,7 @@ type DisplayFamily {
   invitations: [DisplayInvitation!]!
   members: [DisplayMember!]!
   currentUser: DisplayMember!
-  familyDetails: DisplayFamilyFamilyDetails!
+  details: DisplayFamilyDetails!
 }
 
 type DisplayReminder {
@@ -136,7 +136,7 @@ type Mutation {
 input InputCreateSignUpInvitation {
   email: String!
   personalDetails: InputCreateInvitationPersonalDetails!
-  invitationDetails: InputCreateInvitationInvitationDetails!
+  details: InputCreateInvitationInvitationDetails!
 }
 
 input InputCreateInvitationPersonalDetails {
@@ -155,16 +155,8 @@ input InputCreateInvitationInvitationDetails {
 
 input InputConfirmSignUpInvitation {
   email: String!
-  security: InputConfrimSignUpInvitationSecurity!
-  personalDetails: InputCreateInvitationPersonalDetails!
-  invitationDetails: InputConfirmSignUpInvitationInvitationDetails!
-}
-
-input InputConfrimSignUpInvitationSecurity {
   password: String!
-}
-
-input InputConfirmSignUpInvitationInvitationDetails {
+  personalDetails: InputCreateInvitationPersonalDetails!
   familyName: String!
   code: String!
 }
@@ -172,7 +164,7 @@ input InputConfirmSignUpInvitationInvitationDetails {
 input InputCreateUserInvitation {
   email: String!
   personalDetails: InputCreateInvitationPersonalDetails!
-  invitationDetails: InputCreateInvitationInvitationDetails!
+  details: InputCreateInvitationInvitationDetails!
   memberType: GTMemberType!
   modulePermissions: InputCreateUserInvitationModulePermissions!
 }
@@ -184,7 +176,7 @@ input InputCreateUserInvitationModulePermissions {
 
 input InputConfirmUserInvitation {
   email: String!
-  security: InputConfrimSignUpInvitationSecurity!
+  password: String!
   personalDetails: InputCreateInvitationPersonalDetails!
 }
 

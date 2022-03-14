@@ -1,19 +1,18 @@
-import {
-  GTInvitationDBRecord,
-  GTInvitationDisplay,
-} from '@family-dashboard/global/types';
+import { GTInvitation } from '@family-dashboard/global/types';
+
+import { InvitationDBModel } from '../dbModels/invitation.dbModel';
 
 export const serializeInvitation = (
-  invitationDBRecord: GTInvitationDBRecord
-): GTInvitationDisplay => ({
-  familyId: invitationDBRecord.familyId,
-  fullKey: invitationDBRecord.fullKey,
-  email: invitationDBRecord.email,
-  invitationDetails: {
-    familyName: invitationDBRecord.invitationDetails.familyName,
-    inviterEmail: invitationDBRecord.invitationDetails.inviterEmail,
-    inviterName: invitationDBRecord.invitationDetails.familyName,
-    validTo: invitationDBRecord.invitationDetails.validTo,
+  invitationDBModel: InvitationDBModel
+): GTInvitation => ({
+  familyId: invitationDBModel.familyId,
+  fullKey: invitationDBModel.fullKey,
+  email: invitationDBModel.email,
+  details: {
+    familyName: invitationDBModel.details.familyName,
+    inviterEmail: invitationDBModel.details.inviterEmail,
+    inviterName: invitationDBModel.details.familyName,
   },
-  personalDetails: invitationDBRecord.personalDetails,
+  validTo: invitationDBModel.validTo,
+  personalDetails: invitationDBModel.personalDetails,
 });

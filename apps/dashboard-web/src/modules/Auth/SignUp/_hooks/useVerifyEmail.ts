@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
 import { useLazyQuery } from '@apollo/client';
 
-import { VerifySignUpEmail } from '@family-dashboard/fe-libs/api-graphql';
 import {
-  GTVerifyEmailResponse,
-  GTVerifyEmailStatus,
-} from '@family-dashboard/global/types';
+  APIVerifySignUpEmailResponse,
+  APIVerifySignUpEmailVariables,
+  VerifySignUpEmail,
+} from '@family-dashboard/fe-libs/api-graphql';
+import { GTVerifyEmailStatus } from '@family-dashboard/global/types';
 
 interface Args {
   goToNextStep: () => void;
@@ -14,8 +15,8 @@ interface Args {
 
 export function useVerifyEmail({ goToNextStep, goToErrorStep }: Args) {
   const [queryVerifyEmail, { data, loading }] = useLazyQuery<
-    { verifySignUpEmail: GTVerifyEmailResponse },
-    { email: string }
+    APIVerifySignUpEmailResponse,
+    APIVerifySignUpEmailVariables
   >(VerifySignUpEmail, {
     onCompleted: (data) => {
       if (data?.verifySignUpEmail.status === GTVerifyEmailStatus.Success) {

@@ -9,7 +9,7 @@ const initialState: WSFamilyState = {
   data: {
     familyId: '',
     fullKey: '',
-    familyDetails: {
+    details: {
       name: '',
     },
     members: [],

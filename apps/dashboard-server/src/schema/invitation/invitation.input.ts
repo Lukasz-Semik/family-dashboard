@@ -6,17 +6,16 @@ import {
   GTCreateSignUpInvitationInput,
   GTCreateUserInvitationInput,
   GTGender,
-  GTInvitationDetailsDBRecord,
-  GTMemberSecurityDBRecord,
+  GTInvitationDetails,
   GTMemberType,
-  GTModulePermissionsDisplay,
-  GTPersonalDetailsDisplay,
+  GTModulePermissions,
+  GTPersonalDetails,
 } from '@family-dashboard/global/types';
 
+import { MemberSecurityDBModel } from '../../dbModels/member.dbModel';
+
 @InputType()
-export class InputCreateInvitationPersonalDetails
-  implements GTPersonalDetailsDisplay
-{
+export class InputCreateInvitationPersonalDetails implements GTPersonalDetails {
   @Field(() => String) readonly firstName: string;
   @Field(() => String, { nullable: true }) readonly middleName?: string;
   @Field(() => String) readonly lastName: string;
@@ -24,14 +23,9 @@ export class InputCreateInvitationPersonalDetails
   @Field(() => GTGender) readonly gender: GTGender;
 }
 
-type CreateInvitationInvitationDetails = Omit<
-  GTInvitationDetailsDBRecord,
-  'code' | 'validTo'
->;
-
 @InputType()
 export class InputCreateInvitationInvitationDetails
-  implements CreateInvitationInvitationDetails
+  implements GTInvitationDetails
 {
   @Field(() => String) readonly familyName: string;
   @Field(() => String) readonly inviterEmail: string;
@@ -44,29 +38,9 @@ export class InputCreateSignUpInvitation
 {
   @Field(() => String) readonly email: string;
   @Field(() => InputCreateInvitationPersonalDetails)
-  readonly personalDetails: GTPersonalDetailsDisplay;
+  readonly personalDetails: GTPersonalDetails;
   @Field(() => InputCreateInvitationInvitationDetails)
-  readonly invitationDetails: CreateInvitationInvitationDetails;
-}
-
-type ConfirmSignUpInvitationInvitationDetails = Omit<
-  GTInvitationDetailsDBRecord,
-  'validTo' | 'inviterEmail' | 'inviterName'
->;
-
-@InputType()
-export class InputConfirmSignUpInvitationInvitationDetails
-  implements ConfirmSignUpInvitationInvitationDetails
-{
-  @Field(() => String) readonly familyName: string;
-  @Field(() => String) readonly code: string;
-}
-
-@InputType()
-export class InputConfrimSignUpInvitationSecurity
-  implements GTMemberSecurityDBRecord
-{
-  @Field(() => String) readonly password: string;
+  readonly details: GTInvitationDetails;
 }
 
 @InputType()
@@ -74,17 +48,16 @@ export class InputConfirmSignUpInvitation
   implements GTConfirmSignUpInvitationInput
 {
   @Field(() => String) readonly email: string;
-  @Field(() => InputConfrimSignUpInvitationSecurity)
-  readonly security: GTMemberSecurityDBRecord;
+  @Field(() => String) readonly password: string;
   @Field(() => InputCreateInvitationPersonalDetails)
-  readonly personalDetails: GTPersonalDetailsDisplay;
-  @Field(() => InputConfirmSignUpInvitationInvitationDetails)
-  readonly invitationDetails: ConfirmSignUpInvitationInvitationDetails;
+  readonly personalDetails: GTPersonalDetails;
+  @Field(() => String) readonly familyName: string;
+  @Field(() => String) readonly code: string;
 }
 
 @InputType()
 export class InputCreateUserInvitationModulePermissions
-  implements GTModulePermissionsDisplay
+  implements GTModulePermissions
 {
   @Field(() => Boolean) readonly hasFamilySettings: boolean;
   @Field(() => Boolean) readonly hasFinanacial: boolean;
@@ -94,12 +67,12 @@ export class InputCreateUserInvitationModulePermissions
 export class InputCreateUserInvitation implements GTCreateUserInvitationInput {
   @Field(() => String) readonly email: string;
   @Field(() => InputCreateInvitationPersonalDetails)
-  readonly personalDetails: GTPersonalDetailsDisplay;
+  readonly personalDetails: GTPersonalDetails;
   @Field(() => InputCreateInvitationInvitationDetails)
-  readonly invitationDetails: CreateInvitationInvitationDetails;
+  readonly details: GTInvitationDetails;
   @Field(() => GTMemberType) readonly memberType: GTMemberType;
   @Field(() => InputCreateUserInvitationModulePermissions)
-  readonly modulePermissions: GTModulePermissionsDisplay;
+  readonly modulePermissions: GTModulePermissions;
 }
 
 @InputType()
@@ -107,8 +80,7 @@ export class InputConfirmUserInvitation
   implements GTConfirmUserInvitationInput
 {
   @Field(() => String) readonly email: string;
-  @Field(() => InputConfrimSignUpInvitationSecurity)
-  readonly security: GTMemberSecurityDBRecord;
+  @Field(() => String) readonly password: string;
   @Field(() => InputCreateInvitationPersonalDetails)
-  readonly personalDetails: GTPersonalDetailsDisplay;
+  readonly personalDetails: GTPersonalDetails;
 }

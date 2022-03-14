@@ -3,18 +3,19 @@ import { FormattedMessage } from 'react-intl';
 import { useMutation } from '@apollo/client';
 
 import { showErrorToast } from '@family-dashboard/design-system';
-import { CreateSignUpInvitation } from '@family-dashboard/fe-libs/api-graphql';
 import {
-  GTCreateSignUpInvitationInput,
-  GTGender,
-} from '@family-dashboard/global/types';
+  APICreateSignUpInvitationResponse,
+  APICreateSignUpInvitationVariables,
+  CreateSignUpInvitation,
+} from '@family-dashboard/fe-libs/api-graphql';
+import { GTGender } from '@family-dashboard/global/types';
 
 import { Values } from '../SignUp.types';
 
 export function useCreateSignUpInvitation() {
   const [createSignUpInvitationMutation] = useMutation<
-    { createSignUpInvitation: boolean },
-    { input: GTCreateSignUpInvitationInput }
+    APICreateSignUpInvitationResponse,
+    APICreateSignUpInvitationVariables
   >(CreateSignUpInvitation, {
     onError: () =>
       showErrorToast(
@@ -46,7 +47,7 @@ export function useCreateSignUpInvitation() {
               dob: rest.dob,
               gender: rest.gender as GTGender,
             },
-            invitationDetails: {
+            details: {
               familyName: rest.familyName,
               inviterEmail: rest.email,
               inviterName: rest.firstName,

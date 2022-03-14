@@ -5,8 +5,8 @@ import { useMutation } from '@apollo/client';
 
 import { showSuccessToast } from '@family-dashboard/design-system';
 import {
-  APICreateReminderPayload,
   APICreateReminderResponse,
+  APICreateReminderVariables,
   CreateReminder,
 } from '@family-dashboard/fe-libs/api-graphql';
 import { sdkInsertAt } from '@family-dashboard/global/sdk';
@@ -31,10 +31,10 @@ export function useCreateReminder({ closeModal }: Args) {
 
   const [createReminderMutation, { loading }] = useMutation<
     APICreateReminderResponse,
-    APICreateReminderPayload
+    APICreateReminderVariables
   >(CreateReminder, {
     onCompleted: (response) => {
-      const newReminder = response.createReminder;
+      const newReminder = { ...response.createReminder, isNew: true };
 
       const indexForNewReminder = currentReminders.data.findIndex(
         (reminder) => {
@@ -43,16 +43,26 @@ export function useCreateReminder({ closeModal }: Args) {
       );
 
       if (indexForNewReminder > -1) {
-        showSuccessToast(<FormattedMessage id="reminders.created" />);
         const newReminders = sdkInsertAt(
           currentReminders.data,
           indexForNewReminder,
-          { ...newReminder, isNew: true }
+          newReminder
         );
 
-        newReminders.pop();
+        if (newReminders.length > 10) {
+          newReminders.pop();
+        }
 
         dispatch(webStoreRemindersActions.setRemindersData(newReminders));
+        showSuccessToast(<FormattedMessage id="reminders.created" />);
+      } else if (currentReminders.data.length < 10) {
+        dispatch(
+          webStoreRemindersActions.setRemindersData([
+            ...currentReminders.data,
+            newReminder,
+          ])
+        );
+        showSuccessToast(<FormattedMessage id="reminders.created" />);
       } else {
         showSuccessToast(<FormattedMessage id="reminders.createdInvisible" />);
       }

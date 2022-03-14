@@ -5,7 +5,7 @@ export const GetFamilyDisplay = gql`
     getFamilyDisplay {
       fullKey
       familyId
-      familyDetails {
+      details {
         name
       }
       currentUser {
@@ -43,9 +43,7 @@ export const GetFamilyDisplay = gql`
       invitations {
         fullKey
         email
-        invitationDetails {
-          validTo
-        }
+        validTo
         personalDetails {
           firstName
         }

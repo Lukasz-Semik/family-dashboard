@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { GTFamilyDisplay } from '@family-dashboard/global/types';
+import { GTFamily } from '@family-dashboard/global/types';
 
 import { throwError } from '../../helpers/throwError';
 import { FamilyDB } from './family.db';
@@ -12,7 +12,7 @@ export class FamilyService {
   async getFamilyDisplay(
     familyId: string,
     currentUserId: string
-  ): Promise<GTFamilyDisplay> {
+  ): Promise<GTFamily> {
     try {
       const family = await this.familyDB.getFamilyDisplay(
         familyId,

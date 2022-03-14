@@ -14,7 +14,11 @@ import {
   ModalTitle,
   useModalState,
 } from '@family-dashboard/design-system';
-import { ResendSignUpCode } from '@family-dashboard/fe-libs/api-graphql';
+import {
+  APIResendSignUpCodeResponse,
+  APIResendSignUpCodeVariables,
+  ResendSignUpCode,
+} from '@family-dashboard/fe-libs/api-graphql';
 import { FieldInputsPureConnectedGroup } from '@family-dashboard/web-libs/field-controls';
 
 import { StyledCommonDescription } from '../../Auth.styled';
@@ -34,10 +38,10 @@ interface Props {
 export function SignUpConfirmEmail({ hasFailedPin, resetHasFailedPin }: Props) {
   const { values } = useFormikContext<Values>();
   const [isModalOpen, openModal, closeModal] = useModalState();
-  const [resendCode, { loading }] = useMutation<{
-    resendInvitation: boolean;
-    email: string;
-  }>(ResendSignUpCode, {
+  const [resendCode, { loading }] = useMutation<
+    APIResendSignUpCodeResponse,
+    APIResendSignUpCodeVariables
+  >(ResendSignUpCode, {
     variables: {
       email: values.email,
     },

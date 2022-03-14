@@ -2,13 +2,13 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
   GTFamilyItemType,
-  GTReminderDisplay,
-  GTReminderDisplayConnection,
+  GTReminder,
+  GTReminderConnection,
   GTReminderNextToken,
 } from '@family-dashboard/global/types';
 
 @ObjectType()
-export class DisplayReminder implements GTReminderDisplay {
+export class DisplayReminder implements GTReminder {
   @Field(() => String) familyId: string;
   @Field(() => String) fullKey: string;
   @Field(() => String) text: string;
@@ -26,8 +26,8 @@ export class NextTokenReminder implements GTReminderNextToken {
 }
 
 @ObjectType()
-export class DisplayReminderConnection implements GTReminderDisplayConnection {
-  @Field(() => [DisplayReminder]) reminders: GTReminderDisplay[];
+export class DisplayReminderConnection implements GTReminderConnection {
+  @Field(() => [DisplayReminder]) reminders: GTReminder[];
   @Field(() => NextTokenReminder, { nullable: true })
   nextToken?: GTReminderNextToken;
 }

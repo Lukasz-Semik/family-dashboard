@@ -1,22 +1,23 @@
 import {
   GTCreateReminderInput,
-  GTReminderDisplay,
-  GTReminderDisplayConnection,
+  GTReminder,
+  GTReminderConnection,
+  GTReminderNextToken,
 } from '@family-dashboard/global/types';
 
 export interface APIGetRemindersResponse {
-  getReminders: GTReminderDisplayConnection;
+  getReminders: GTReminderConnection;
 }
 
 export interface APIGetRemindersVariables {
   limit?: number;
-  nextToken?: GTReminderDisplayConnection['nextToken'];
+  nextToken?: GTReminderNextToken | null;
 }
 
 export interface APICreateReminderResponse {
-  createReminder: GTReminderDisplay;
+  createReminder: GTReminder;
 }
 
-export interface APICreateReminderPayload {
+export interface APICreateReminderVariables {
   input: GTCreateReminderInput;
 }

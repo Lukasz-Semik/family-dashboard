@@ -5,6 +5,8 @@ import { useMutation } from '@apollo/client';
 
 import { showErrorToast } from '@family-dashboard/design-system';
 import {
+  APICancelInvitationResponse,
+  APICancelInvitationVariables,
   APIGetFamilyDisplayInvitation,
   CancelInvitation,
 } from '@family-dashboard/fe-libs/api-graphql';
@@ -18,10 +20,10 @@ export function useFamilySettingsInvitationsList() {
   const dispatch = useDispatch();
   const [selectedInvitation, setSelectedInvitation] =
     useState<APIGetFamilyDisplayInvitation | null>(null);
-  const [cancelInvitationMutation, { loading }] = useMutation<{
-    cancelInvitation: boolean;
-    fullKey: string;
-  }>(CancelInvitation, {
+  const [cancelInvitationMutation, { loading }] = useMutation<
+    APICancelInvitationResponse,
+    APICancelInvitationVariables
+  >(CancelInvitation, {
     onError: () => {
       showErrorToast(<FormattedMessage id="errors.somethingWentWrong" />);
     },

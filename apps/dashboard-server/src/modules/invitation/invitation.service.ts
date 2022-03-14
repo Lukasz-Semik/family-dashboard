@@ -3,13 +3,13 @@ import { hash } from 'bcryptjs';
 import * as dayjs from 'dayjs';
 
 import {
-  GTInvitationDisplay,
+  GTInvitation,
   GTInvitationErrors,
-  GTMemberDBRecord,
   GTMemberType,
   GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
 
+import { MemberDBModel } from '../../dbModels/member.dbModel';
 import { throwError } from '../../helpers/throwError';
 import { generateNumericCode } from '../../helpers/utils';
 import {
@@ -58,17 +58,13 @@ export class InvitationService {
         email
       );
 
-      if (
-        this.getIsInvitationDeprecated(
-          String(existingInvitation?.invitationDetails?.validTo)
-        )
-      ) {
+      if (this.getIsInvitationDeprecated(String(existingInvitation?.validTo))) {
         return {
           status: GTVerifyEmailStatus.Deprecated,
         };
       }
 
-      if (existingInvitation?.invitationDetails?.inviterEmail === email) {
+      if (existingInvitation?.details?.inviterEmail === email) {
         return {
           status: GTVerifyEmailStatus.SignUpNotFinished,
         };
@@ -77,7 +73,7 @@ export class InvitationService {
       if (existingInvitation?.email) {
         return {
           status: GTVerifyEmailStatus.Invited,
-          inviterName: existingInvitation?.invitationDetails?.inviterName,
+          inviterName: existingInvitation?.details?.inviterName,
         };
       }
 
@@ -108,7 +104,7 @@ export class InvitationService {
             ...input.personalDetails,
             dob: dayjs(input.personalDetails.dob).utc().toISOString(),
           },
-          invitationDetails: input.invitationDetails,
+          details: input.details,
           code,
         })
       );
@@ -131,10 +127,7 @@ export class InvitationService {
         throwError(GTInvitationErrors.InvitationDeprecated);
       }
 
-      if (
-        existingInvitation?.invitationDetails?.code !==
-        input.invitationDetails?.code
-      ) {
+      if (existingInvitation?.security?.code !== input?.code) {
         throwError(GTInvitationErrors.CodeInvalid);
       }
 
@@ -157,7 +150,7 @@ export class InvitationService {
   async createUserInvitation(
     familyId: string,
     input: InputCreateUserInvitation
-  ): Promise<GTInvitationDisplay> {
+  ): Promise<GTInvitation> {
     const invitation = buildInvitationDBPayload({
       familyId: familyId,
       email: input.email,
@@ -167,7 +160,7 @@ export class InvitationService {
         ...input.personalDetails,
         dob: dayjs(input.personalDetails.dob).utc().toISOString(),
       },
-      invitationDetails: input.invitationDetails,
+      details: input.details,
       code: 'validated',
     });
 
@@ -191,7 +184,7 @@ export class InvitationService {
   async confirmUserInvitation(
     token: string,
     input: InputConfirmUserInvitation
-  ): Promise<GTMemberDBRecord> {
+  ): Promise<MemberDBModel> {
     try {
       const tokenData = this.authService.decodeToken(token);
 
@@ -203,7 +196,7 @@ export class InvitationService {
         throwError(GTInvitationErrors.InvitationDeprecated);
       }
 
-      const hashedPassword = await hash(input.security.password, 10);
+      const hashedPassword = await hash(input.password, 10);
 
       const member = await buildMemberDBPayload(tokenData.familyId, {
         personalDetails: input.personalDetails,
@@ -244,7 +237,7 @@ export class InvitationService {
     }
   }
 
-  async getUserInvitation(token: string): Promise<GTInvitationDisplay> {
+  async getUserInvitation(token: string): Promise<GTInvitation> {
     try {
       const tokenData = this.authService.decodeToken(token);
 

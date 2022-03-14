@@ -83,9 +83,7 @@ export function FamilySettingsInvitationsList() {
                     <StyledDescriptionColumnLabel>
                       <FormattedMessage id="shared.validTo" />:{' '}
                     </StyledDescriptionColumnLabel>
-                    {dayjs(invitation.invitationDetails.validTo).format(
-                      FULL_DATE_FORMAT
-                    )}
+                    {dayjs(invitation.validTo).format(FULL_DATE_FORMAT)}
                   </StyledDescriptionColumnContent>
                 </ListStandardItemColumn>
 

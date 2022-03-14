@@ -11,5 +11,22 @@ TODO:
 NOTES:
 - FUTURE: for future plans
 
-TYPES:
-- global types - DBRecord (base of record)/API types (what is fetched)/WEB or Mobile types. 
+
+GLOBAL TYPES:
+- GTName - Base for all other query types.
+- GTMutationInput - INPUTS ARE USED ON FE AND BE IN THE SAME SHAPE!
+
+
+Backend types (private):
+- DBName (record). BE always can return GTName
+
+API (frontend global):
+- APIMutationVariables -> SUM OF INPUT AND OTHER PARAMETERS!
+- APIQUeryVariables -> VARIABLES USED ON FE AND BE IN THE SAME SHAPE!
+- APIQueryNameResponse -> Based on GTName
+- APIMutationNameResponse -> Based on GTName
+
+AND ALL PRIVATE TYPES (LIKE STORE TYPE)
+
+
+

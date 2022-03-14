@@ -8,17 +8,16 @@ import {
   FDFamilyRecordType,
   GSI_EMAIL_FULL_KEY,
 } from '@family-dashboard/global/const';
-import {
-  GTFamilyDBRecord,
-  GTInvitationDBRecord,
-  GTMemberDBRecord,
-} from '@family-dashboard/global/types';
+
+import { FamilyDBModel } from '../../dbModels/family.dbModel';
+import { InvitationDBModel } from '../../dbModels/invitation.dbModel';
+import { MemberDBModel } from '../../dbModels/member.dbModel';
 
 @Injectable()
 export class InvitationDB {
   constructor(private readonly dynamoDBClient: DocumentClient) {}
 
-  async getMemberByEmail(email: string): Promise<GTMemberDBRecord | null> {
+  async getMemberByEmail(email: string): Promise<MemberDBModel | null> {
     const response = await this.dynamoDBClient
       .query({
         TableName: FD_TABLE_FAMILY,
@@ -32,7 +31,7 @@ export class InvitationDB {
       })
       .promise();
 
-    const member = response.Items[0] as GTMemberDBRecord;
+    const member = response.Items[0] as MemberDBModel;
 
     if (isEmpty(member)) {
       return null;
@@ -41,7 +40,7 @@ export class InvitationDB {
     return member;
   }
 
-  async getInvitationByEmail(email: string): Promise<GTInvitationDBRecord> {
+  async getInvitationByEmail(email: string): Promise<InvitationDBModel> {
     const response = await this.dynamoDBClient
       .query({
         TableName: FD_TABLE_FAMILY,
@@ -53,7 +52,7 @@ export class InvitationDB {
       })
       .promise();
 
-    const invitation = response.Items[0] as GTInvitationDBRecord;
+    const invitation = response.Items[0] as InvitationDBModel;
 
     if (isEmpty(invitation)) {
       return null;
@@ -62,9 +61,9 @@ export class InvitationDB {
     return invitation;
   }
 
-  async createFamilyItem<
-    T = GTInvitationDBRecord | GTFamilyDBRecord | GTMemberDBRecord
-  >(item: T): Promise<T> {
+  async createFamilyItem<T = InvitationDBModel | FamilyDBModel | MemberDBModel>(
+    item: T
+  ): Promise<T> {
     await this.dynamoDBClient
       .put({
         TableName: FD_TABLE_FAMILY,
@@ -75,18 +74,16 @@ export class InvitationDB {
     return item;
   }
 
-  async createInvitation(
-    item: GTInvitationDBRecord
-  ): Promise<GTInvitationDBRecord> {
-    return this.createFamilyItem<GTInvitationDBRecord>(item);
+  async createInvitation(item: InvitationDBModel): Promise<InvitationDBModel> {
+    return this.createFamilyItem<InvitationDBModel>(item);
   }
 
-  async createFamily(item: GTFamilyDBRecord): Promise<GTFamilyDBRecord> {
-    return this.createFamilyItem<GTFamilyDBRecord>(item);
+  async createFamily(item: FamilyDBModel): Promise<FamilyDBModel> {
+    return this.createFamilyItem<FamilyDBModel>(item);
   }
 
-  async createMember(item: GTMemberDBRecord): Promise<GTMemberDBRecord> {
-    return this.createFamilyItem<GTMemberDBRecord>(item);
+  async createMember(item: MemberDBModel): Promise<MemberDBModel> {
+    return this.createFamilyItem<MemberDBModel>(item);
   }
 
   async recreateSignUpCode(email: string, newCode: string): Promise<boolean> {
@@ -103,10 +100,10 @@ export class InvitationDB {
           familyId: FAMILY_SIGNUP_ID,
           fullKey: existingInvitation.fullKey,
         },
-        UpdateExpression: 'set invitationDetails = :invitationDetails',
+        UpdateExpression: 'set details = :details',
         ExpressionAttributeValues: {
-          ':invitationDetails': {
-            ...existingInvitation.invitationDetails,
+          ':details': {
+            ...existingInvitation.details,
             code: newCode,
           },
         },
