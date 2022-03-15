@@ -4,6 +4,7 @@ import {
   GTFamilyItemType,
   GTGender,
   GTMemberType,
+  GTOnReminderChangeMessage,
   GTVerifyEmailStatus,
 } from '@family-dashboard/global/types';
 
@@ -26,4 +27,9 @@ registerEnumType(GTMemberType, {
 registerEnumType(GTFamilyItemType, {
   name: 'GTFamilyItemType',
   description: 'All possible family items type',
+});
+
+registerEnumType(GTOnReminderChangeMessage, {
+  name: 'GTOnReminderChangeMessage',
+  description: 'Message for onReminderChange subscription',
 });

@@ -4,12 +4,12 @@ import {
   WrapperCenter,
 } from '@family-dashboard/design-system';
 
+import { useReminders } from '../../Reminders/_hooks/useReminders';
 import { DashboardCard } from '../DashboardCard/DashboardCard';
-import { useGetReminders } from './_hooks/useGetReminders';
 import { DashboardRemindersList } from './DashboardRemindersList/DashboardRemindersList';
 
 export function DashboardReminders() {
-  const { isLoading } = useGetReminders();
+  const { isLoading } = useReminders();
 
   return (
     <DashboardCard

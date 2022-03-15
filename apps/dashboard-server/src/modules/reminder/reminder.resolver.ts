@@ -1,11 +1,27 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Int,
+  Mutation,
+  Query,
+  Resolver,
+  Subscription,
+} from '@nestjs/graphql';
+import { PubSub } from 'graphql-subscriptions';
+
+import { FDFamilyRecordType } from '@family-dashboard/global/const';
+import { buildHashKey } from '@family-dashboard/global/sdk';
+import {
+  GTOnReminderChangeData,
+  GTOnReminderChangeMessage,
+} from '@family-dashboard/global/types';
 
 import {
   CurrentLoggedInUser,
   CurrentLoggedInUserData,
 } from '../../decorators/currentLoggedInUser.decorator';
 import {
+  DisplayOnReminderChange,
   DisplayReminder,
   DisplayReminderConnection,
   InputCreateReminder,
@@ -13,6 +29,8 @@ import {
 } from '../../schema';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ReminderService } from './reminder.service';
+
+const pubSub = new PubSub();
 
 @Resolver()
 export class ReminderResolver {
@@ -38,9 +56,42 @@ export class ReminderResolver {
     @CurrentLoggedInUser() currentLoggedInUser: CurrentLoggedInUserData,
     @Args('input') input: InputCreateReminder
   ) {
-    return this.reminderService.createReminder(
+    const newReminder = await this.reminderService.createReminder(
       currentLoggedInUser.familyId,
       input
     );
+
+    const subscriptionData: GTOnReminderChangeData = {
+      authorFullKey: buildHashKey(
+        FDFamilyRecordType.Member,
+        currentLoggedInUser.userId
+      ),
+      reminder: newReminder,
+      message: GTOnReminderChangeMessage.Created,
+    };
+
+    pubSub.publish('onReminderChange', subscriptionData);
+
+    return newReminder;
+  }
+
+  @Subscription(() => DisplayOnReminderChange, {
+    nullable: true,
+    filter(
+      this: ReminderResolver,
+      payload: GTOnReminderChangeData,
+      variables: { userFullKey: string }
+    ) {
+      const { userFullKey } = variables;
+      const { authorFullKey } = payload;
+
+      return userFullKey !== authorFullKey;
+    },
+    resolve(value) {
+      return value;
+    },
+  })
+  onReminderChange(@Args('userFullKey') userFullKey: string) {
+    return pubSub.asyncIterator('onReminderChange');
   }
 }

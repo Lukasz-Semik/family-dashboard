@@ -26,3 +26,13 @@ export interface GTCreateReminderInput {
   date: string;
   time?: string;
 }
+
+export enum GTOnReminderChangeMessage {
+  Created = 'Created',
+}
+
+export interface GTOnReminderChangeData {
+  authorFullKey: string;
+  reminder: GTReminder;
+  message: GTOnReminderChangeMessage;
+}

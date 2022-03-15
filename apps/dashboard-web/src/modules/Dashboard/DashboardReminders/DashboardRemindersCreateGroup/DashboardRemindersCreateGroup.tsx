@@ -22,7 +22,10 @@ import {
   FieldInputStandard,
 } from '@family-dashboard/web-libs/field-controls';
 
-import { useCreateReminder, Values } from './_hooks/useCreateReminder';
+import {
+  useCreateReminder,
+  Values,
+} from '../../../Reminders/_hooks/useCreateReminder';
 import {
   StyledButton,
   StyledFieldsWrapper,
@@ -117,7 +120,7 @@ export function DashboardRemindersCreateGroup() {
                   confirmContent={<FormattedMessage id="shared.create" />}
                   cancelContent={<FormattedMessage id="shared.cancel" />}
                   onCancelButtonClick={closeModal}
-                  onConfirmButtonClick={submitForm}
+                  onConfirmButtonClick={() => console.log('x')}
                   isCancelLoading={isLoading}
                   isConfirmLoading={isLoading}
                   isDisabled={isLoading}

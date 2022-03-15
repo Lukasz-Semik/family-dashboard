@@ -1,5 +1,6 @@
 import {
   GTCreateReminderInput,
+  GTOnReminderChangeData,
   GTReminder,
   GTReminderConnection,
   GTReminderNextToken,
@@ -20,4 +21,12 @@ export interface APICreateReminderResponse {
 
 export interface APICreateReminderVariables {
   input: GTCreateReminderInput;
+}
+
+export interface APIOnReminderChangeVariables {
+  userFullKey: string;
+}
+
+export interface APIOnReminderChangeResponse {
+  onReminderChange: GTOnReminderChangeData;
 }
