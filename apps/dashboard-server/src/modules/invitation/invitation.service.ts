@@ -196,13 +196,11 @@ export class InvitationService {
         throwError(GTInvitationErrors.InvitationDeprecated);
       }
 
-      const hashedPassword = await hash(input.password, 10);
-
       const member = await buildMemberDBPayload(tokenData.familyId, {
         personalDetails: input.personalDetails,
         email: input.email,
         security: {
-          password: hashedPassword,
+          password: input.password,
         },
         memberType: existingInvitation.memberType,
         modulePermissions: existingInvitation.modulePermissions,

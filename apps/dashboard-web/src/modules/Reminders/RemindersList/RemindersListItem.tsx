@@ -16,15 +16,16 @@ import {
   StyledIconWrapper,
   StyledListItem,
   StyledTitle,
-} from './DashboardRemindersList.styled';
+} from './RemindersList.styled';
 
 interface Props {
   reminder: WSReminder;
+  index: number;
 }
 
-export function DashboardRemindersListItem({ reminder }: Props) {
+export function RemindersListItem({ reminder, index }: Props) {
   return (
-    <StyledListItem>
+    <StyledListItem index={index} shouldAnimateNow={reminder.isNew}>
       <StyledFlexWrapper>
         <StyledIconWrapper>
           <IconClock

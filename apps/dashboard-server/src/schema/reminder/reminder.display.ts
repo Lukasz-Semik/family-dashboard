@@ -2,6 +2,8 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 import {
   GTFamilyItemType,
+  GTOnReminderChangeData,
+  GTOnReminderChangeMessage,
   GTReminder,
   GTReminderConnection,
   GTReminderNextToken,
@@ -30,4 +32,12 @@ export class DisplayReminderConnection implements GTReminderConnection {
   @Field(() => [DisplayReminder]) reminders: GTReminder[];
   @Field(() => NextTokenReminder, { nullable: true })
   nextToken?: GTReminderNextToken;
+}
+
+@ObjectType()
+export class DisplayOnReminderChange implements GTOnReminderChangeData {
+  @Field(() => DisplayReminder) readonly reminder: GTReminder;
+  @Field(() => GTOnReminderChangeMessage)
+  readonly message: GTOnReminderChangeMessage;
+  @Field(() => String) readonly authorFullKey: string;
 }

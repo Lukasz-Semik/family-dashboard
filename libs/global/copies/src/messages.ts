@@ -129,6 +129,8 @@ export const copies = {
     created: 'Reminder has been created',
     createdInvisible:
       'Reminder has been created, but it is not visible right now',
+    reminderCreatedBy: '{userName} has created a reminder',
+    noReminders: 'No reminders. All good :)',
   },
   todos: {
     title: 'Todos',

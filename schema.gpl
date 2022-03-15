@@ -110,6 +110,17 @@ type DisplayReminderConnection {
   nextToken: NextTokenReminder
 }
 
+type DisplayOnReminderChange {
+  reminder: DisplayReminder!
+  message: GTOnReminderChangeMessage!
+  authorFullKey: String!
+}
+
+"""Message for onReminderChange subscription"""
+enum GTOnReminderChangeMessage {
+  Created
+}
+
 type Query {
   verifySignUpEmail(email: String!): DisplayVerifyEmailResponse!
   getUserInvitation(token: String!): DisplayInvitation!
@@ -184,4 +195,8 @@ input InputCreateReminder {
   text: String!
   date: String!
   time: String
+}
+
+type Subscription {
+  onReminderChange(userFullKey: String!): DisplayOnReminderChange
 }

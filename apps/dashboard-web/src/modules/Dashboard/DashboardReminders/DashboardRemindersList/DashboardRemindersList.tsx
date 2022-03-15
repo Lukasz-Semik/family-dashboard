@@ -1,26 +1,13 @@
-import { useSeclectReminders } from '@family-dashboard/web-libs/store';
-
+import { RemindersList } from '../../../Reminders/RemindersList/RemindersList';
 import { DashboardRemindersCreateGroup } from '../DashboardRemindersCreateGroup/DashboardRemindersCreateGroup';
-import { StyledDescription, StyledList } from './DashboardRemindersList.styled';
-import { DashboardRemindersListItem } from './DashboardRemindersListItem';
+import { StyledWrapper } from './DashboardRemindersList.styled';
 
 export function DashboardRemindersList() {
-  const reminders = useSeclectReminders();
-
   return (
     <>
-      {!reminders.data.length ? (
-        <StyledDescription>No reminders. All good :) </StyledDescription>
-      ) : (
-        <StyledList>
-          {reminders.data.map((reminder) => (
-            <DashboardRemindersListItem
-              reminder={reminder}
-              key={reminder.fullKey}
-            />
-          ))}
-        </StyledList>
-      )}
+      <StyledWrapper>
+        <RemindersList />
+      </StyledWrapper>
 
       <DashboardRemindersCreateGroup />
     </>
